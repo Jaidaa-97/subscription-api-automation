@@ -1,0 +1,95 @@
+{
+  "orderReferenceId": "{{order}}",
+  "customerReferenceId": "606f01f441b8fc0008529916",
+  "paymentMethod": "pm_1J3GhuJxr7zyIFb92eU5RsY3",
+  "planID": "{{planID}}",
+  "itemID": "1000011327",
+  "quantity": 1,
+  "customerEmail": "jitendra.pisal1@fabric.inc",
+  "status": "ACTIVE",
+  "shippingCost": 10,
+  "tax": 2,
+  "shipTo": {
+    "id": "60cb0959dc645c0008eb9c1a",
+    "name": {
+      "firstName": "Jitendra",
+      "middleName": "D",
+      "lastName": "Pisal"
+    },
+    "streetAddress": {
+      "street1": "27 O ST",
+      "street2": "Boston road"
+    },
+    "city": "BOSTON MA",
+    "state": "MA",
+    "zipCode": "02127",
+    "country": "US"
+  },
+  "billTo": {
+    "name": {
+      "firstName": "Jitendra",
+      "middleName": "D",
+      "lastName": "Pisal"
+    },
+    "streetAddress": {
+      "street1": "27 O ST",
+      "street2": "Boston road"
+    },
+    "city": "BOSTON MA",
+    "state": "MA",
+    "zipCode": "02127",
+    "country": "US",
+    "id": "60cb0986559fbd000816afc2"
+  },
+  "orderDetails": {
+    "channel": 12,
+    "currencyCode": "USD",
+    "items": {
+      "taxCode": "FR020000",
+      "weight": 10,
+      "weightUnit": "lb"
+    },
+    "shipTo": {
+      "taxCode": "FR020000",
+      "shipmentCarrier": "USPS",
+      "shipmentMethod": "Ground",
+      "shipmentInstructions": "Drop at my gate"
+    }
+  },
+  "payments": {
+    "billToAddress": {
+      "name": {
+        "first": "Jitendra",
+        "last": "Pisal"
+      },
+      "phone": {
+        "number": "4156529712",
+        "kind": "mobile"
+      },
+      "email": "jitendra.pisal1@fabric.inc",
+      "street1": "27 O ST",
+      "street2": "Boston road",
+      "city": "BOSTON MA",
+      "state": "MA",
+      "country": "US",
+      "zipCode": "02127"
+    },
+    "shipToId": [
+      2866
+    ],
+    "_id": "60cb0986559fbd000816afc2",
+    "paymentStatus": "succeeded",
+    "amount": 127.45,
+    "currency": "USD",
+    "paymentIdentifier": {
+      "cardIdentifier": "4242"
+    },
+    "paymentMethod": "visa",
+    "paymentKind": "CARD_PAYPAL",
+    "conversion": 1,
+    "paymentToken": {
+      "token": "pi_1J3GhrJxr7zyIFb9ooMrxEcp",
+      "type": "CARD_STRIPE"
+    }
+  }
+}

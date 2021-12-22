@@ -1,0 +1,27 @@
+{
+  "_id": "b22eef61-6f14-4fae-bfcd-b22eef61",
+  "plan": {
+    "title":"Updated Plan Name",
+    "description": "Updated plan description",
+    "shippingCost": 10,
+    "status": "ACTIVE",
+    "planGroup": "b22eef61-6f14-4fae-bfcd-b22eef61",
+    "charge": 1,
+    "discount": 30,
+    "attributes": [{
+      "title": "Min Quantity",
+      "fieldType": "NUMBER",
+      "value": "1"
+    }]
+  },
+  "frequencySettings": [{
+    "frequency": 2,
+    "frequencyType": "Monthly",
+    "discount": 30,
+    "planGroup": "b22eef61-6f14-4fae-bfcd-b22eef61",
+    "_id": "61aef7996c51880009d03511"
+  }],
+  "planProducts": [{
+    "itemId": "1000011327"
+  }]
+}

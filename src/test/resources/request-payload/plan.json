@@ -1,0 +1,21 @@
+{
+  "title": "Automation Subscription Plan",
+  "description": "Automation Subscription Plan",
+  "frequency": 1,
+  "frequencyType": "Weekly",
+  "discount": 10,
+  "charge": 1,
+  "products": [
+    {
+      "itemId": "1000000006"
+    }
+  ],
+  "isTrialAllowed": false,
+  "trialSettings": {
+    "trialFrequency": 3,
+    "trialFrequencyType": "Monthly",
+    "discount": 20
+  },
+  "status": "ACTIVE",
+  "shippingCost": 20
+}
