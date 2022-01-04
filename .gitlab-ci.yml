@@ -1,0 +1,7 @@
+image: maven:3-jdk-11
+
+test:
+  stage: test
+  script:
+    - mvn clean verify -Dtags=@sanity
+
