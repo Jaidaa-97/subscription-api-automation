@@ -109,8 +109,29 @@ public class CommonSteps extends BasePage {
         commonPage.runPutCall();
     }
 
+    @When("I run delete call")
+    public void iRunDeleteCall() {
+        commonPage.runDeleteCall();
+    }
+
+    @When("I run post call")
+    public void iRunPostCall() {
+        commonPage.runPostCall();
+    }
+
+
     @And("I have following request payload :")
     public void iHaveFollowingRequestPayload(String payload) {
         commonPage.requestPayload(payload);
+    }
+
+    @Then("I verify {int} records are present in the response against the property {string}")
+    public void iVerifyRecordsArePresentInTheResponseAgainstTheProperty(int records, String againstProperty) {
+        commonPage.verifyTotalRecordsIntTheResponse(records,againstProperty);
+    }
+
+    @Then("^I see value \"([^\"]+)\" is contains in property \"([^\"]+)\" inside the property array \"([^\"]+)\"$")
+    public void iSeeValueIsContainsInThePropertyArray(String value, String propertyName, String propertyHavingArray) {
+        commonPage.verifyPropertiesValueInArray(value,propertyName,propertyHavingArray);
     }
 }

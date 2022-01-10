@@ -201,11 +201,6 @@ public class PlansSteps extends BasePage {
         plansPage.payloadForGetByItemID(itemId);
     }
 
-    @When("I run post call")
-    public void iRunPostCall() {
-        commonPage.runPostCall();
-    }
-
     @Then("^I verify( empty)? response of getByItemId plans$")
     public void iVerifyResponseOfGetByItemIdPlans(String empty) {
         plansPage.verifyResponseOfGetByItemIDPlan(empty != null && "empty".contains(empty.trim()));

@@ -52,6 +52,12 @@ public class SubscriptionPage extends BasePage {
             case "skip subscription":
                 subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/"+APIConstants.SKIP_SUBSCRIPTION+"/"+getSubscriptionId();
                 break;
+            case "delete":
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/"+getSubscriptionId();
+                break;
+            case "get by id":
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/"+getSubscriptionId();
+                break;
             default :
                 throw new RuntimeException(endPoint +"is not added in the method getSubEndPoint(String endPoint)");
 

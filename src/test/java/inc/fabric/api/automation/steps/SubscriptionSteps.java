@@ -15,7 +15,7 @@ public class SubscriptionSteps {
         this.commonPage = commonPage;
     }
 
-    @And("^I have (create|update|skip subscription) subscription endpoint$")
+    @And("^I have (create|update|skip subscription|delete|get by id) subscription endpoint$")
     public void subEndPoint(String endPoint){
         subscriptionPage.getSubEndPoint(endPoint);
     }

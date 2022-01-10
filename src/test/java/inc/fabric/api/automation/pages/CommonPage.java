@@ -4,8 +4,10 @@ import com.google.gson.JsonObject;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
 import io.restassured.specification.RequestSpecification;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -91,6 +93,14 @@ public class CommonPage {
         basePage.setResponse(RestHttp.postCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
     }
 
+    public void runDeleteCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.deleteCall(basePage.getEndPoint(), requestSpecification));
+    }
+
     public void runPutCall() {
         RequestSpecification requestSpecification;
         requestSpecification = given().relaxedHTTPSValidation();
@@ -124,5 +134,17 @@ public class CommonPage {
 
     public void requestPayload(String payload){
         basePage.setBody(payload);
+    }
+
+    public void verifyTotalRecordsIntTheResponse(int totalRecords, String property){
+        ArrayList list = (ArrayList<T>) (basePage.getResponse().then().extract().path(property));
+        Assert.assertEquals("all records are not showing in the response for property"+property,totalRecords,list.size());
+    }
+
+    public void verifyPropertiesValueInArray(String value, String propertyName, String propertyArray){
+        ArrayList<String> list = (ArrayList<String>) (basePage.getResponse().then().extract().path(propertyArray));
+        for (int i = 0; i < list.size(); i++) {
+            Assert.assertTrue(basePage.getResponse().then().extract().path(propertyArray+"["+i+"]."+propertyName).toString().contains(value));
+        }
     }
 }

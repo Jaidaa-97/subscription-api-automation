@@ -660,3 +660,87 @@ Business Need: subscription
     """
       Invalid skip date
     """
+
+  @delete_subscription
+  Scenario: Delete subscription
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have delete subscription endpoint
+    And I run delete call
+    Then I see property value "true" is present in the response property "data.isDeleted"
+    And I have get by id subscription endpoint
+    And I run get call api
+    Then I see following value for property "message" :
+    """
+      Subscription not found.
+    """
+
+  @get_subscriptions_on_pageNumber_and_PageSize
+  Scenario: Get all the subscriptions based on page number and page size
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | pageSize | pageNumber |
+      | 10       | 1          |
+    Then I see property value 10 is present in the response property "data.count"
+    Then I verify 10 records are present in the response against the property "data.subscriptions"
+    When I run get call api with following param:
+      | pageSize | pageNumber |
+      | 6        | 3          |
+    Then I see property value 6 is present in the response property "data.count"
+    Then I verify 6 records are present in the response against the property "data.subscriptions"
+    When I run get call api with following param:
+      | pageSize | pageNumber |
+      | 4        | 4          |
+    Then I see property value 4 is present in the response property "data.count"
+    Then I verify 4 records are present in the response against the property "data.subscriptions"
+
+  @get_subscriptions_between_date_range
+  Scenario: Get all the subscription between range of the dates
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | startDate                | endDate                  | pageSize |
+      | {Date::MM-dd-uuuu:::d=0} | {Date::MM-dd-uuuu:::d=0} | 100      |
+    Then I see value "{Date::uuu-MM-dd:::d=0}" is contains in property "createdAt" inside the property array "data.subscriptions"
+
+  @get_subscriptions_for_customer
+  Scenario: Get all the subscriptions of particular customer
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    Then I have saved property "data.customerID" as "customerId"
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | customerID               | pageSize |
+      | {SavedValue::customerId} | 100      |
+    Then I see value "{SavedValue::customerId}" is contains in property "customerID._id" inside the property array "data.subscriptions"
+
+  @error_customer_not_found
+  Scenario: Verify error message if operator requesting for subscriptions which are belongs to customer which is not present or created yet
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    Then I have saved property "data.customerID" as "customerId"
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | customerID               | pageSize |
+      | 61d6978407912e00099c818b | 100      |
+    Then I see following value for property "data.message" :
+    """
+      customer doesnot exist so no subscription found
+    """
+    Then I see following value for property "data.error" :
+    """
+      subscription does not exist for this customer
+    """
