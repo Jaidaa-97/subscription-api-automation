@@ -19,6 +19,7 @@ import io.cucumber.java.DocStringType;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
@@ -35,6 +36,7 @@ import static java.util.Collections.singletonList;
 public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
     private static final Pattern parameterPattern1 = Pattern.compile("\\{([^:}]+)::([^}]+)}");
     private static final Pattern parameterPattern2 = Pattern.compile("---((?:(?!:-:).)*):-:((?:(?!---).)*)---");
+    private static final Pattern parameterPattern3 = Pattern.compile("\\{([^:}]+):::([^}]+)}");
 
 
     /*
@@ -173,6 +175,7 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
 
         fromValue = convertStringUsingPattern(fromValue, parameterPattern1);
         fromValue = convertStringUsingPattern(fromValue, parameterPattern2);
+        fromValue = convertStringUsingPattern(fromValue, parameterPattern3);
 
         return fromValue;
     }
@@ -197,7 +200,7 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
                 }
             } else if ("Date".equalsIgnoreCase(parameter1)) {
                 try {
-                    convertedValue = parseDate(parameter2);
+                    convertedValue = getDate(parameter2);
                 } catch (Error e) {
                 }
             } else {
@@ -223,6 +226,29 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
         return sb.toString();
     }
 
+    public String getDate(String dateFormatter) {
+        String dateFormat[] = dateFormatter.split(":::");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat[0]);
+        LocalDate localDate = LocalDate.now();
+        String[]dd = dateFormat[1].split(";");
+        for(String d1 : dd) {
+            if(d1.contains("d")){
+                long days = Long.parseLong(d1.split("=")[1]);
+                localDate = localDate.plusDays(days);
+            }
+            if(d1.contains("M")){
+                long days = Long.parseLong(d1.split("=")[1]);
+                localDate = localDate.plusMonths(days);
+            }
+            if(d1.contains("Y")){
+                long days = Long.parseLong(d1.split("=")[1]);
+                localDate = localDate.plusYears(days);
+            }
+        }
+
+        return localDate.format(dtf);
+    }
+
     /**
      * Necessary function to implement TypeRegistryConfigurer.
      * Can be more or less ignored.
@@ -241,7 +267,7 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
      * The two patterns that are used by the parser are {Key:Value} and ---Key:-:Value---
      *
      * @param typeRegistry Standard parameter, provided by Cucumber.
-     * @author john.philips
+     * @author jitendra.pisal
      */
     @Override
     public void configureTypeRegistry(TypeRegistry typeRegistry) {
@@ -355,7 +381,7 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
      * @return A String representation of a Date, modified as desired, and formatted as specified.
      */
     private String parseDate(String dateFormatter) {
-        String[] qwe = dateFormatter.split("::", 2);
+        String[] qwe = dateFormatter.split(":::", 2);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(qwe[0]);
         LocalDateTime ldt = LocalDateTime.now();

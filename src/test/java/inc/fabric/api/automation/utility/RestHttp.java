@@ -38,10 +38,11 @@ public class RestHttp extends BasePage {
         return response;
     }
 
-    public static void deleteCall(String endPoint,RequestSpecification requestSpecification){
+    public static Response deleteCall(String endPoint,RequestSpecification requestSpecification){
         Response response = requestSpecification.delete(endPoint);
         while(response.getStatusCode() == 502){
             response = requestSpecification.delete(endPoint);
         }
+        return response;
     }
 }
