@@ -1,0 +1,51 @@
+{
+  "success": true,
+  "responseStatus": "OK",
+  "message": "Request processed successfully.",
+  "data": {
+    "availableFrequencies": [
+
+    ],
+    "isTrialAllowed": false,
+    "_id": "61a8cf0e5c5be40008bcd9a7",
+    "isDeleted": false,
+    "deletedAt": null,
+    "title": "Automation Subscription Plan",
+    "description": "Automation Subscription Plan",
+    "products": [
+      {
+        "_id": "61a8cf0e5c5be40008bcd9a8",
+        "itemId": "1000011327",
+        "priceListId": "110116"
+      }
+    ],
+    "frequency": 1,
+    "frequencyType": "Weekly",
+    "status": "ACTIVE",
+    "discount": 10,
+    "shippingCost": 20,
+    "planGroup": "ef8e2a2d-525e-408b-ae48-ded540d0c6cb",
+    "merchantAccount": "5f689caa4216e7000750d1ef",
+    "scheduledAt": "2021-12-02T13:50:04.712Z",
+    "expireDate": null,
+    "charge": 1,
+    "attributes": null,
+    "trialSettings": {
+      "trialFrequency": 3,
+      "trialFrequencyType": "Monthly",
+      "discount": 20
+    },
+    "billingFrequencySetting": {
+      "frequency": 1,
+      "frequencyType": "Weekly"
+    },
+    "shippingFrequencySetting": {
+      "frequency": 1,
+      "frequencyType": "Weekly"
+    },
+    "lastPriceSycedAt": "2021-12-02T13:50:06.584Z",
+    "createdAt": "2021-12-02T13:50:06.585Z",
+    "updatedAt": "2021-12-02T13:50:06.585Z",
+    "__v": 0
+  }
+}
