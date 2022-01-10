@@ -12,6 +12,8 @@ import io.restassured.specification.RequestSpecification;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TimeZone;
 
 public class BasePage {
@@ -20,6 +22,7 @@ public class BasePage {
     public String body;
     private Response response;
     public String endPoint;
+    public static Map<String,String> savedValues = new HashMap<>();
 
     public String getEndPoint() {
         return endPoint;
@@ -52,6 +55,9 @@ public class BasePage {
         request.contentType(ContentType.JSON);
         request.body(getLoginRequestPayload());
         Response loginResponse = request.post(loginEndPoint);
+        while(loginResponse.getStatusCode() == 502) {
+            loginResponse = request.post(loginEndPoint);
+        }
         access_token = loginResponse.jsonPath().get("accessToken").toString();
         scenario.write("access token : "+access_token);
         return access_token;
@@ -62,7 +68,7 @@ public class BasePage {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
         dateFormat.setTimeZone(timeZone);
         String dateWithTimeInUTCZone = dateFormat.format(new Date());
-        return getEnv().equalsIgnoreCase("sandbox")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"5f689caa4216e7000750d1ef\",\"stage\":\"sandbox\"}"
+        return getEnv().equalsIgnoreCase("sandbox")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"6024fb5291bd9f0008b578ba\",\"stage\":\"sandbox\"}"
                 :getEnv().equalsIgnoreCase("staging")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"5f689caa4216e7000750d1ef\",\"stage\":\"stg02\"}"
                 :"{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12}";
     }
@@ -79,7 +85,7 @@ public class BasePage {
         String env = getEnv();
         switch (env) {
             case "SANDBOX":
-                return "ahsan@fabric.inc";
+                return "jitendra.pisal@fabric.inc";
             default:
                 return "ahmad.rauf@shopdev.co";
         }
@@ -89,7 +95,7 @@ public class BasePage {
         String env = getEnv();
         switch (env) {
             case "SANDBOX":
-                return "merafabric1";
+                return "Fabric@123";
             default:
                 return "Ahmad0306";
         }
@@ -99,7 +105,7 @@ public class BasePage {
         String env = getEnv();
         switch (env) {
             case "SANDBOX":
-                return "5827714929";
+                return "4314183759";
             default:
                 return "4781348886";
         }

@@ -3,10 +3,10 @@
   "customerReferenceId": "606f01f441b8fc0008529916",
   "paymentMethod": "pm_1J3GhuJxr7zyIFb92eU5RsY3",
   "planID": "{{planID}}",
-  "itemID": "{{itemId}}",
+  "itemID": "1000011327",
   "quantity": 1,
   "customerEmail": "jitendra.pisal1@fabric.inc",
-  "status": "ACTIVE",
+  "status": "INACTIVE",
   "shippingCost": 10,
   "tax": 2,
   "shipTo": {

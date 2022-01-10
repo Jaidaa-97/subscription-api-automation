@@ -1,4 +1,4 @@
-@plan @createPlan
+@plan @regression
 Business Need: Create Plan
 
   @create_plan
@@ -99,7 +99,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed title from payload
+    And I have removed "title" from payload
     When I run the create plan api
     Then I see error message for missing property title
 
@@ -108,7 +108,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed description from payload
+    And I have removed "description" from payload
     When I run the create plan api
     Then I see error message for missing property description
 
@@ -117,7 +117,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed frequency from payload
+    And I have removed "frequency" from payload
     When I run the create plan api
     Then I see error message for missing property frequency
 
@@ -126,7 +126,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed frequencyType from payload
+    And I have removed "frequencyType" from payload
     When I run the create plan api
     Then I see error message for missing property frequencyType
 
@@ -135,7 +135,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed products from payload
+    And I have removed "products" from payload
     When I run the create plan api
     Then I see error message for missing property products
 
@@ -144,7 +144,7 @@ Business Need: Create Plan
     Given I have create plan endpoint
     And I have access token
     And I have request payload for create plan api
-    And I have removed status from payload
+    And I have removed "status" from payload
     When I run the create plan api
     Then I see error message for missing property status
 

@@ -122,9 +122,9 @@ public class PlansSteps extends BasePage {
         plansPage.verifyErrorMessageForTitleAndDescriptionLength(titleOrDescription.equalsIgnoreCase("title"), length);
     }
 
-    @And("^I have removed (title|description|frequency|frequencyType|products|status) from payload$")
+    @And("^I have removed \"([^\"]+)\" from payload$")
     public void iHaveRemovedTitleFromPayload(String property) {
-        plansPage.removeParentPropertyFromPlan(property);
+        commonPage.removeParentProperty(property);
     }
 
     @Then("^I see error message for missing property (title|description|frequency|frequencyType|products|status)$")
@@ -240,6 +240,14 @@ public class PlansSteps extends BasePage {
     public void iHaveCreateActivePlan() {
         plansPage.getPlanEndPoint("create plan");
         plansPage.requestBodyForCreatePlanAPI();
+        commonPage.runPostCall();
+        plansPage.verifyPlanCreation("ACTIVE");
+    }
+
+    @Given("I have created active plan with multiple products")
+    public void iHaveCreateActivePlanWithMultipleProduct() {
+        plansPage.getPlanEndPoint("create plan");
+        plansPage.requestBodyWithMultipleProductsForCreatePlanAPI();
         commonPage.runPostCall();
         plansPage.verifyPlanCreation("ACTIVE");
     }
