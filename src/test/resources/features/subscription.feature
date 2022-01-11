@@ -744,3 +744,85 @@ Business Need: subscription
     """
       subscription does not exist for this customer
     """
+
+  @get_all_subscription_of_itemId
+  Scenario: Get subscriptions using itemId
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    When I run get call api with following param:
+      | itemID                        | pageSize |
+      | ---data:-:env_productItem2--- | 100      |
+    Then I see value "---data:-:env_productItem2---" is contains in property "itemID" inside the property array "data.subscriptions"
+
+  @get_all_subscription_of_itemId_with_no_subscription
+  Scenario: Verify response if particular product is not part of any subscription
+    Given I have created active plan
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | itemID                        | pageSize |
+      | ---data:-:env_productItem2--- | 100      |
+    Then I see property value 0 is present in the response property "data.count"
+
+  @noRecords_endDate_less_than_start_date
+  Scenario: Verify that we should not get subscriptions in the response if end date is less that start date in the query parameter
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have create subscription endpoint
+    When I run get call api with following param:
+      | startDate                | endDate                  | pageSize |
+      | {Date::MM-dd-uuuu:::d=0} | {Date::MM-dd-uuuu:::d=-1} | 100      |
+    Then I see property value 0 is present in the response property "data.count"
+
+  @get_single_subscription
+  Scenario: Get single subscription
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have saved property "data._id" as "subId"
+    And I have get by id subscription endpoint
+    And I have added path parameter "{SavedValue::subId}"
+    And I run get call api
+    Then I see property value 1 is present in the response property "data.subscription.frequency"
+    Then I see property value "Weekly" is present in the response property "data.subscription.frequencyType"
+    Then I see property value "---data:-:env_productItem1---" is present in the response property "data.subscription.itemId"
+    # TO DO Validate entire response once removed duplicate fields
+
+  @error_invalid_sub_id
+  Scenario: Verify error message in the repsonse if we pass the invalid subscription id as a path parameter
+    And I have get by id subscription endpoint
+    And I have added path parameter "6149b314d0ec4b001183des3"
+    And I run get call api
+    Then I see following value for property "message" :
+    """
+      Invalid Subscription ID. Please provide the valid one!
+    """
+
+  @get_order_by_id
+  Scenario: Get single order by its id
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have saved property "data.lastOrderReferenceId" as "orderId"
+    And I have get by order id subscription endpoint
+    And I have added path parameter "{SavedValue::orderId}"
+    And I run get call api
+    Then I see property value 1 is present in the response property "data.order.frequency"
+    Then I see property value "Weekly" is present in the response property "data.order.frequencyType"
+    Then I see property value "---data:-:env_productItem1---" is present in the response property "data.order.itemId"
+
+  @get_orders_for_incorrect_orderId
+  Scenario: Verify response for invalid order id
+    And I have get by order id subscription endpoint
+    And I have added path parameter "0000-0000-00"
+    And I run get call api
+    Then I see property value "null" is present in the response property "data.order"

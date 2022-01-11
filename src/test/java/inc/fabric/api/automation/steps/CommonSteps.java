@@ -13,7 +13,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
-import org.junit.jupiter.api.BeforeAll;
 
 import java.util.List;
 import java.util.Map;
@@ -40,6 +39,7 @@ public class CommonSteps extends BasePage {
         RequestSpecification requestSpecification = given().relaxedHTTPSValidation();
         requestSpecification.header("Authorization", getAccessToken());
         Response response = RestHttp.getCall(endPoint, requestSpecification);
+        scenario.write(response.prettyPrint());
         response.then().assertThat().statusCode(200);
         List<Map<String, String>> listOfSubs = response.jsonPath().get("data.subscriptions");
         for (Map<String, String> map : listOfSubs) {
@@ -59,6 +59,7 @@ public class CommonSteps extends BasePage {
         requestSpecification.header("Authorization", getAccessToken());
         requestSpecification.header("x-site-context", get_xSiteContext());
         Response response = RestHttp.postCall(getBaseURL() + "/data-subscription/plans/get-by-itemIds", payload.toString(), requestSpecification);
+        scenario.write(response.prettyPrint());
         response.then().assertThat().statusCode(200);
         for (int i = 0; i < jsonArray.size(); i++) {
             List<Map<String, String>> obj = response.jsonPath().get("data." + jsonArray.get(i).getAsString() + "");
@@ -133,5 +134,10 @@ public class CommonSteps extends BasePage {
     @Then("^I see value \"([^\"]+)\" is contains in property \"([^\"]+)\" inside the property array \"([^\"]+)\"$")
     public void iSeeValueIsContainsInThePropertyArray(String value, String propertyName, String propertyHavingArray) {
         commonPage.verifyPropertiesValueInArray(value,propertyName,propertyHavingArray);
+    }
+
+    @And("I have added path parameter {string}")
+    public void iHaveAddedPathParameter(String pathParam) {
+        basePage.setEndPoint(basePage.getEndPoint()+pathParam);
     }
 }

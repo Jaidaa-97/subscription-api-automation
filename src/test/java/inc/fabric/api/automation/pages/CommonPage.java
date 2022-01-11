@@ -25,7 +25,9 @@ public class CommonPage {
         if (!isContains) {
             if (propertyValue.contains("true") || propertyValue.contains("false")) {
                 Assert.assertEquals(Boolean.parseBoolean(propertyValue), basePage.getResponse().then().extract().path(property));
-            } else {
+            } else if(propertyValue.equals("null")){
+                Assert.assertTrue(basePage.getResponse().then().extract().path(property) == null);
+            }else {
                 Assert.assertEquals(propertyValue, basePage.getResponse().then().extract().path(property));
             }
         } else {
@@ -129,6 +131,7 @@ public class CommonPage {
                 });
             }
         }
+
         basePage.setResponse(RestHttp.getCall(basePage.getEndPoint(), requestSpecification));
     }
 

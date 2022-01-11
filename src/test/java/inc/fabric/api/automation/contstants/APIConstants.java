@@ -10,4 +10,5 @@ public class APIConstants {
 
     public static final String CREATE_SUBSCRIPTION = "subscriptions";
     public static final String SKIP_SUBSCRIPTION = "skip";
+    public static final String ORDERS = "orders";
 }
