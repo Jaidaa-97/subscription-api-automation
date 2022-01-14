@@ -86,8 +86,15 @@ public class PlansPage extends BasePage {
 
     public void requestBodyWithMultipleProductsForCreatePlanAPI() {
         JsonObject requestPayload = FileHandler.getDataFromJson("request-payload/plan.json");
-        requestPayload = updatePropertyValueInArray(requestPayload, "products", "itemId", FileHandler.getDataFromPropertyFile("productItem1"));
-        requestPayload = updatePropertyValueInArray(requestPayload, "products", "itemId", FileHandler.getDataFromPropertyFile("productItem2"));
+        JsonObject jsonObject1 = new JsonObject();
+        JsonObject jsonObject2 = new JsonObject();
+        jsonObject1.addProperty("itemId",FileHandler.getDataFromPropertyFile("productItem1"));
+        jsonObject2.addProperty("itemId",FileHandler.getDataFromPropertyFile("productItem2"));
+        JsonArray ja = new JsonArray();
+        ja.add(jsonObject1);
+        ja.add(jsonObject2);
+
+        requestPayload.add("products",ja);
         basePage.setBody(requestPayload.toString());
     }
 

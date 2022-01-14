@@ -3,6 +3,7 @@ package inc.fabric.api.automation.pages;
 import com.google.gson.JsonObject;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
@@ -149,5 +150,9 @@ public class CommonPage {
         for (int i = 0; i < list.size(); i++) {
             Assert.assertTrue(basePage.getResponse().then().extract().path(propertyArray+"["+i+"]."+propertyName).toString().contains(value));
         }
+    }
+
+    public void validateSchema(String path){
+        basePage.getResponse().then().body(JsonSchemaValidator.matchesJsonSchema(this.getClass().getResource("/schema/"+path+"")));
     }
 }

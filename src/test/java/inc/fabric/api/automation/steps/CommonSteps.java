@@ -140,4 +140,9 @@ public class CommonSteps extends BasePage {
     public void iHaveAddedPathParameter(String pathParam) {
         basePage.setEndPoint(basePage.getEndPoint()+pathParam);
     }
+
+    @Then("validate schema {string}")
+    public void validateSchema(String path) {
+        commonPage.validateSchema(path);
+    }
 }
