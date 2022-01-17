@@ -163,6 +163,20 @@ Business Need: Create Plan
     And I run the update plan api
     Then I see that the plan gets updated with new product
 
+  @add_new_frequency_in_plan @sanity
+  Scenario: Create Plan
+    Given I have create plan endpoint
+    And I have access token
+    And I have request payload for create plan api
+    When I run the create plan api
+    Then I see that the plan is created with status ACTIVE
+    When I have update plan endpoint
+    And I have request payload to add new frequency plan api
+    And I run the update plan api
+    Then I see property value 1 is present in the response property "data.plans[1].frequency"
+    Then I see property value "Monthly" is present in the response property "data.plans[1].frequencyType"
+    Then I see property value "---data:-:env_productItem1---" is present in the response property "data.plans[1].products[0].itemId"
+
   @update_all_properties @sanity
   Scenario: Update title,description,shippingCost,frequency,discount and frequencyType of plan
     Given I have create plan endpoint

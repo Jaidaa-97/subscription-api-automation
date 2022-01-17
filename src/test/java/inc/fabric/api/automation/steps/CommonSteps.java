@@ -35,15 +35,18 @@ public class CommonSteps extends BasePage {
 
     @Before(order = 1)
     public void deleteSubscription() {
-        String endPoint = getBaseURL() + "/data-subscription/subscriptions?itemID=" + FileHandler.getDataFromPropertyFile("productItem1");
-        RequestSpecification requestSpecification = given().relaxedHTTPSValidation();
-        requestSpecification.header("Authorization", getAccessToken());
-        Response response = RestHttp.getCall(endPoint, requestSpecification);
-        scenario.write(response.prettyPrint());
-        response.then().assertThat().statusCode(200);
-        List<Map<String, String>> listOfSubs = response.jsonPath().get("data.subscriptions");
-        for (Map<String, String> map : listOfSubs) {
-            RestHttp.deleteCall(getBaseURL() + "/data-subscription/subscriptions/" + map.get("_id"), requestSpecification);
+        String [] products = {"productItem1","productItem2"};
+        for (int i = 0; i < 2; i++) {
+            String endPoint = getBaseURL() + "/data-subscription/subscriptions?itemID=" + FileHandler.getDataFromPropertyFile(products[i]);
+            RequestSpecification requestSpecification = given().relaxedHTTPSValidation();
+            requestSpecification.header("Authorization", getAccessToken());
+            Response response = RestHttp.getCall(endPoint, requestSpecification);
+            scenario.write(response.prettyPrint());
+            response.then().assertThat().statusCode(200);
+            List<Map<String, String>> listOfSubs = response.jsonPath().get("data.subscriptions");
+            for (Map<String, String> map : listOfSubs) {
+                RestHttp.deleteCall(getBaseURL() + "/data-subscription/subscriptions/" + map.get("_id"), requestSpecification);
+            }
         }
     }
 
@@ -143,6 +146,6 @@ public class CommonSteps extends BasePage {
 
     @Then("validate schema {string}")
     public void validateSchema(String path) {
-        commonPage.validateSchema(path);
+        //commonPage.validateSchema(path);
     }
 }

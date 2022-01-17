@@ -98,11 +98,21 @@ public class PlansPage extends BasePage {
         basePage.setBody(requestPayload.toString());
     }
 
-    public void requestBodyForUpdatePlanAPI() {
-        JsonObject requestPayload = FileHandler.getDataFromJson("request-payload/updatePlan.json");
-        requestPayload = updatePropertyValueInArray(requestPayload, "frequencySettings", "_id", getPlanId());
-        requestPayload = updatePropertyValueInArray(requestPayload,"frequencySettings","planGroup",getPlanGroup());
-        requestPayload = updateParentProperty(requestPayload,"_id",getPlanGroup());
+    public void requestBodyForUpdatePlanAPI(boolean isFrequency) {
+        JsonObject requestPayload = null;
+        if (isFrequency){
+            requestPayload = FileHandler.getDataFromJson("request-payload/addNewFrequencyPlan.json");
+            requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{planGroupUnderFrequencySettings}}",getPlanGroup()));
+            requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{_id}}",getPlanId()));
+
+        } else {
+            requestPayload = FileHandler.getDataFromJson("request-payload/updatePlan.json");
+            requestPayload = updatePropertyValueInArray(requestPayload, "frequencySettings", "_id", getPlanId());
+            requestPayload = updatePropertyValueInArray(requestPayload,"frequencySettings","planGroup",getPlanGroup());
+            requestPayload = updateParentProperty(requestPayload,"_id",getPlanGroup());
+        }
+
+
         requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{itemId}}",FileHandler.getDataFromPropertyFile("productItem1")));
         basePage.setBody(requestPayload.toString().replace("{{planGroupUnderPlan}}",getPlanGroup()));
 

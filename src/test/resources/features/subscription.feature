@@ -297,6 +297,21 @@ Business Need: subscription
     "quantity" must be greater than -1
     """
 
+  @update_payment_method @update_sub
+  Scenario: Update product quantity with negative value
+    Given I have created active plan
+    And I have create subscription endpoint
+    And I have request payload for create ACTIVE subscription api
+    And I run post call
+    Then I verify ACTIVE subscription is created
+    And I have update subscription endpoint
+    And I have following request payload for update subscription api :
+    """
+    { "paymentMethod": "master card" }
+    """
+    When I run put call
+    Then I see property value "master card" is present in the response property "data.paymentMethod"
+
   @update_frequency_and_frequencyType_weekly @update_sub @sanity
   Scenario: Update frequency and frequencyType weekly and daily
     Given I have created active plan
@@ -903,7 +918,7 @@ Business Need: subscription
       Provided merchant account ID doesnot associate with the requested Subscription
     """
 
-  @get_schedules_by_customerRefId @get_sub @sanity
+  @get_schedules_by_customerRefId @get_sub @sanity @wip
   Scenario: Get all orders by customer reference id
     Given I have created active plan
     And I have create subscription endpoint
