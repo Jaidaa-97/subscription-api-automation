@@ -1,0 +1,33 @@
+{
+  "_id": "{{planGroupUnderPlan}}",
+  "plan": {
+    "title":"Updated Plan Name",
+    "description": "Updated plan description",
+    "shippingCost": 10,
+    "status": "ACTIVE",
+    "planGroup": "{{planGroupUnderPlan}}",
+    "charge": 1,
+    "attributes": [{
+      "title": "Min Quantity",
+      "fieldType": "NUMBER",
+      "value": "1"
+    }]
+  },
+  "frequencySettings": [{
+    "frequency": 1,
+    "frequencyType": "Weekly",
+    "discount": 10,
+    "planGroup": "{{planGroupUnderFrequencySettings}}",
+    "_id": "{{_id}}"
+  },
+    {
+      "action": "NEW",
+      "frequency": 1,
+      "frequencyType": "Monthly",
+      "discount": 0
+    }
+  ],
+  "planProducts": [{
+    "itemId": "{{itemId}}"
+  }]
+}
