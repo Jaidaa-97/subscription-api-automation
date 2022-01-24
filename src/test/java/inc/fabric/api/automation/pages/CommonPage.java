@@ -113,6 +113,15 @@ public class CommonPage {
         basePage.getResponse().prettyPrint();
     }
 
+    public void runPatchCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        //requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.patchCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
+        basePage.getResponse().prettyPrint();
+    }
+
     public void runUpdatePlanApi() {
         RequestSpecification requestSpecification;
         requestSpecification = given().relaxedHTTPSValidation();
@@ -154,5 +163,11 @@ public class CommonPage {
 
     public void validateSchema(String path){
         basePage.getResponse().then().body(JsonSchemaValidator.matchesJsonSchema(this.getClass().getResource("/schema/"+path+"")));
+    }
+
+    public void getEndPoint(String endPoint){
+        String baseUrl = basePage.getBaseURL();
+        endPoint = baseUrl + endPoint;
+        basePage.setEndPoint(endPoint);
     }
 }

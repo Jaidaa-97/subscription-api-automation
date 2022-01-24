@@ -635,7 +635,7 @@ Business Need: subscription
       "status" must be one of [INACTIVE, ACTIVE, CANCEL]
     """
 
-  @issue @skipNextSubscription
+  @skipNextSubscription
   # in the response of subscription api, expireDate is set on what basis?
   Scenario: Skip next delivery
     Given I have created active plan
@@ -657,12 +657,12 @@ Business Need: subscription
     Then validate schema "skipSubscription.json"
     Then I see response code 200
     Then I see property value "{SavedValue::nextShipDate}" is present in the response property "data.skipDate"
-    Then I see property value "{SavedValue::nextShipDate}" is contains in the response property "data.createdAt"
-    Then I see property value "{SavedValue::nextShipDate}" is contains in the response property "data.updatedAt"
+    Then I see property value "{Date::uuu-MM-dd:::d=0}" is contains in the response property "data.createdAt"
+    Then I see property value "{Date::uuu-MM-dd:::d=0}" is contains in the response property "data.updatedAt"
     Then I see property value "{SavedValue::subscriptionId}" is contains in the response property "data.subscriptionId"
 
 
-  @error_skipNextSubscription @skipNextSubscription
+  @error_skipNextSubscription
   Scenario: Skip delivery by passing the past skipDate
     Given I have created active plan
     And I have create subscription endpoint
@@ -685,7 +685,7 @@ Business Need: subscription
       Invalid skip date
     """
 
-  @error_skipNextSubscription_paid_date @skipNextSubscription
+  @error_skipNextSubscription_paid_date
   Scenario: Skip delivery by passing the paid date
     Given I have created active plan
     And I have create subscription endpoint

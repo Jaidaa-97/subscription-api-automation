@@ -195,12 +195,14 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
             if ("SavedValue".equalsIgnoreCase(parameter1)) {
                 if (BasePage.savedValues.get(parameter2) != null) {
                     convertedValue = BasePage.savedValues.get(parameter2);
+                    BasePage.scenario.write("Converted value :" + convertedValue);
                 } else {
 
                 }
             } else if ("Date".equalsIgnoreCase(parameter1)) {
                 try {
                     convertedValue = getDate(parameter2);
+                    BasePage.scenario.write("Converted value :" + convertedValue);
                 } catch (Error e) {
                 }
             } else {

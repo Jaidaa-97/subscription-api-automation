@@ -2,18 +2,24 @@ package inc.fabric.api.automation.steps;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import inc.fabric.api.automation.config.ScenarioController;
 import inc.fabric.api.automation.pages.BasePage;
 import inc.fabric.api.automation.pages.CommonPage;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.junit.Assert;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +36,14 @@ public class CommonSteps extends BasePage {
 
     @Before(order = 0)
     public void init(Scenario scenario) {
+        ScenarioController.setScenario(scenario);
+        ScenarioController.printInitialLogs();
         this.scenario = scenario;
+    }
+
+    @After(order = 0)
+    public void unRegisterSetup() throws IOException {
+        ScenarioController.printFinalLogs();
     }
 
     @Before(order = 1)
@@ -113,6 +126,11 @@ public class CommonSteps extends BasePage {
         commonPage.runPutCall();
     }
 
+    @When("I run patch call")
+    public void iRunPatchCall() {
+        commonPage.runPatchCall();
+    }
+
     @When("I run delete call")
     public void iRunDeleteCall() {
         commonPage.runDeleteCall();
@@ -146,6 +164,34 @@ public class CommonSteps extends BasePage {
 
     @Then("validate schema {string}")
     public void validateSchema(String path) {
-        //commonPage.validateSchema(path);
+        commonPage.validateSchema(path);
+    }
+
+    @Given("I have endpoint {string}")
+    public void iHaveEndpoint(String endPoint) {
+        commonPage.getEndPoint(endPoint);
+    }
+
+
+    @Given("I delete all the webhooks")
+    public void iDeleteAllTheWebhooks() {
+        commonPage.getEndPoint("/data-subscription/webhooks?limit=25&page=1");
+        commonPage.runGetCall(false, null);
+        ArrayList<String> list = ((ArrayList<String>) (basePage.getResponse().then().extract().path("data.docs")));
+        List<String> _ids = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            String _id = basePage.getResponse().then().extract().path("data.docs["+i+"]._id");
+            _ids.add(_id);
+        }
+        for (String id : _ids) {
+            commonPage.getEndPoint("/data-subscription/webhooks/"+id);
+            commonPage.runDeleteCall();
+        }
+    }
+
+    @Then("I see {string} value inside property array {string}")
+    public void iSeeValueInsidePropertyArray(String value, String propertyNameArr) {
+        List<String> list = ((ArrayList<String>) basePage.getResponse().then().extract().path(propertyNameArr));
+        Assert.assertTrue(list.contains(value));
     }
 }
