@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "type": "object",
+          "properties": {
+            "retries": {
+              "type": "integer"
+            },
+            "days": {
+              "type": "integer"
+            },
+            "notifyBeforeDays": {
+              "type": "integer"
+            },
+            "notifyBeforeTrialExpiry": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "retries",
+            "days",
+            "notifyBeforeDays",
+            "notifyBeforeTrialExpiry"
+          ]
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "deletedAt": {
+          "type": "null"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "merchantAccount": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "settings",
+        "isDeleted",
+        "deletedAt",
+        "_id",
+        "merchantAccount",
+        "createdAt",
+        "updatedAt",
+        "__v"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}

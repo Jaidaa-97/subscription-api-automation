@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "settings": {
+          "type": "object",
+          "properties": {
+            "docs": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string"
+                    },
+                    "settings": {
+                      "type": "object",
+                      "properties": {
+                        "retries": {
+                          "type": "integer"
+                        },
+                        "days": {
+                          "type": "integer"
+                        },
+                        "notifyBeforeDays": {
+                          "type": "integer"
+                        },
+                        "notifyBeforeTrialExpiry": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "retries",
+                        "days",
+                        "notifyBeforeDays",
+                        "notifyBeforeTrialExpiry"
+                      ]
+                    },
+                    "isDeleted": {
+                      "type": "boolean"
+                    },
+                    "deletedAt": {
+                      "type": "null"
+                    },
+                    "merchantAccount": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string"
+                    },
+                    "updatedAt": {
+                      "type": "string"
+                    },
+                    "__v": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "_id",
+                    "settings",
+                    "isDeleted",
+                    "deletedAt",
+                    "merchantAccount",
+                    "createdAt",
+                    "updatedAt",
+                    "__v"
+                  ]
+                }
+              ]
+            },
+            "totalDocs": {
+              "type": "integer"
+            },
+            "limit": {
+              "type": "integer"
+            },
+            "page": {
+              "type": "integer"
+            },
+            "totalPages": {
+              "type": "integer"
+            },
+            "pagingCounter": {
+              "type": "integer"
+            },
+            "hasPrevPage": {
+              "type": "boolean"
+            },
+            "hasNextPage": {
+              "type": "boolean"
+            },
+            "offset": {
+              "type": "integer"
+            },
+            "prevPage": {
+              "type": "null"
+            },
+            "nextPage": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "docs",
+            "totalDocs",
+            "limit",
+            "page",
+            "totalPages",
+            "pagingCounter",
+            "hasPrevPage",
+            "hasNextPage",
+            "offset",
+            "prevPage",
+            "nextPage"
+          ]
+        }
+      },
+      "required": [
+        "settings"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}
