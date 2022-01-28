@@ -151,3 +151,30 @@ Business Need: Notification and orchestration settings
     Then I see property value 3 is present in the response property "data.settings.docs[0].settings.days"
     Then I see property value 5 is present in the response property "data.settings.docs[0].settings.notifyBeforeDays"
     Then I see property value 1 is present in the response property "data.settings.docs[0].settings.notifyBeforeTrialExpiry"
+
+  @delete_settings
+  Scenario: Delete settings
+      # Create Settings
+    Given I have endpoint "/data-subscription/orchestration/settings"
+    And I have following request payload :
+    """
+        {
+            "retries": 2,
+            "days": 3,
+            "notifyBeforeDays": 5,
+            "notifyBeforeTrialExpiry":1
+        }
+    """
+    When I run post call
+    Then I see response code 200
+    Then validate schema "createSettings.json"
+    And I have saved property "data._id" as "settingID"
+      # Delete settings
+    Given I have endpoint "/data-subscription/orchestration/settings/{SavedValue::settingID}"
+    When I run delete call
+    Then I see response code 200
+    Then I see property value "true" is present in the response property "data.isDeleted"
+    Given I have endpoint "/data-subscription/orchestration/settings"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "empty" is present in the response property "data.settings.docs"

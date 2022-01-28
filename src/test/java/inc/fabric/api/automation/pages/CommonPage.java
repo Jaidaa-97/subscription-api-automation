@@ -28,6 +28,9 @@ public class CommonPage {
                 Assert.assertEquals(Boolean.parseBoolean(propertyValue), basePage.getResponse().then().extract().path(property));
             } else if(propertyValue.equals("null")){
                 Assert.assertTrue(basePage.getResponse().then().extract().path(property) == null);
+            } else if(propertyValue.equals("empty")){
+                int size = ((ArrayList<Integer>)(basePage.getResponse().then().extract().path(property))).size();
+                Assert.assertEquals(0,size);
             }else {
                 Assert.assertEquals(propertyValue, basePage.getResponse().then().extract().path(property));
             }
