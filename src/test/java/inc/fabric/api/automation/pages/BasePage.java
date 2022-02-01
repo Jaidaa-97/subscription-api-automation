@@ -69,6 +69,8 @@ public class BasePage {
         dateFormat.setTimeZone(timeZone);
         String dateWithTimeInUTCZone = dateFormat.format(new Date());
         return getEnv().equalsIgnoreCase("sandbox")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"6024fb5291bd9f0008b578ba\",\"stage\":\"sandbox\"}"
+                :getEnv().equalsIgnoreCase("prod02")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"5f59f2856833e20008850ea4\",\"stage\":\"prod02\"}"
+                :getEnv().equalsIgnoreCase("dev02")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"5f328bf0b7c15700071233b9\",\"stage\":\"dev02\"}"
                 :getEnv().equalsIgnoreCase("staging")? "{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12,\"account\":\"5f689caa4216e7000750d1ef\",\"stage\":\"stg02\"}"
                 :"{\"date\":\""+dateWithTimeInUTCZone+"\",\"channel\":12}";
     }
@@ -86,6 +88,10 @@ public class BasePage {
         switch (env) {
             case "SANDBOX":
                 return "jitendra.pisal@fabric.inc";
+            case "PROD02":
+                return "jitendra.pisal@fabric.inc";
+            case "DEV02":
+                return "jitendra.pisal@fabric.inc";
             default:
                 return "ahmad.rauf@shopdev.co";
         }
@@ -95,6 +101,10 @@ public class BasePage {
         String env = getEnv();
         switch (env) {
             case "SANDBOX":
+                return "Fabric@123";
+            case "PROD02":
+                return "Fabric@123";
+            case "DEV02":
                 return "Fabric@123";
             default:
                 return "Ahmad0306";
@@ -106,6 +116,10 @@ public class BasePage {
         switch (env) {
             case "SANDBOX":
                 return "4314183759";
+            case "PROD02":
+                return "5122871551";
+            case "DEV02":
+                return "8739392294";
             default:
                 return "4781348886";
         }
