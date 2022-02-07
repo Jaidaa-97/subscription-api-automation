@@ -6,25 +6,43 @@ stages:
   - test-sandbox
   - test-prod02
 
+
+before_script:
+    - echo "********* $ENV ************"
+
 test-dev02:
   stage: test-dev02
   script:
     - mvn clean verify -Dtags=@sanity -Denv=dev02
+  only:
+    variables:
+      $ENV == "develop"
 
 test-stg02:
   stage: test-stg02
   script:
     - mvn clean verify -Dtags=@sanity
+  only:
+    variables:
+      $ENV == "staging"
 
 test-sandbox:
   stage: test-sandbox
   script:
     - mvn clean verify -Dtags=@sanity -Denv=sandbox
+  only:
+    variables:
+      $ENV == "main"
+      $MERGE_ENV == "main"
 
 test-prod02:
   stage: test-prod02
   script:
     - mvn clean verify -Dtags=@sanity -Denv=prod02
+  only:
+    variables:
+      $ENV == "main"
+      $MERGE_ENV == "main"
 
 
 
