@@ -18,6 +18,7 @@ test-dev02:
   only:
     variables:
       - $ENV == "develop"
+      - $MERGE_ENV == "develop"
 
 test-stg02:
   stage: test-stg02
