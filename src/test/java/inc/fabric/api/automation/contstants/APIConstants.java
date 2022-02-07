@@ -9,4 +9,6 @@ public class APIConstants {
     public static final String LOGIN_ENDPOINT_RESOURCE = "/api-identity/auth/local/login";
 
     public static final String CREATE_SUBSCRIPTION = "subscriptions";
+    public static final String SKIP_SUBSCRIPTION = "skip";
+    public static final String ORDERS = "orders";
 }

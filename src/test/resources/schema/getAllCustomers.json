@@ -1,0 +1,170 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "customers": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string"
+                },
+                "isDeleted": {
+                  "type": "boolean"
+                },
+                "deletedAt": {
+                  "type": "null"
+                },
+                "paymentId": {
+                  "type": "object",
+                  "properties": {
+                    "stripe": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "stripe"
+                  ]
+                },
+                "customerEmail": {
+                  "type": "string"
+                },
+                "merchantAccount": {
+                  "type": "string"
+                },
+                "customerReferenceId": {
+                  "type": "string"
+                },
+                "paymentMethodId": {
+                  "type": "array",
+                  "items": {}
+                },
+                "paymentMethodIds": {
+                  "type": "array",
+                  "items": {}
+                },
+                "createdAt": {
+                  "type": "string"
+                },
+                "updatedAt": {
+                  "type": "string"
+                },
+                "__v": {
+                  "type": "integer"
+                },
+                "customerFullName": {
+                  "type": "string"
+                },
+                "subscriptions": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "status_with_count": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string"
+                                },
+                                "count": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "status",
+                                "count"
+                              ]
+                            }
+                          ]
+                        },
+                        "status_with_counts": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string"
+                                },
+                                "count": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "status",
+                                "count"
+                              ]
+                            }
+                          ]
+                        },
+                        "count": {
+                          "type": "integer"
+                        }
+                      },
+                      "required": [
+                        "_id",
+                        "status_with_count",
+                        "status_with_counts",
+                        "count"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "_id",
+                "isDeleted",
+                "deletedAt",
+                "paymentId",
+                "customerEmail",
+                "merchantAccount",
+                "customerReferenceId",
+                "paymentMethodId",
+                "paymentMethodIds",
+                "createdAt",
+                "updatedAt",
+                "__v",
+                "customerFullName",
+                "subscriptions"
+              ]
+            }
+          ]
+        },
+        "count": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "customers",
+        "count"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}

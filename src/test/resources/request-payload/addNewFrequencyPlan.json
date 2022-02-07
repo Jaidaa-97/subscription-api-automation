@@ -14,12 +14,19 @@
     }]
   },
   "frequencySettings": [{
-    "frequency": 2,
-    "frequencyType": "Monthly",
-    "discount": 30,
+    "frequency": 1,
+    "frequencyType": "Weekly",
+    "discount": 10,
     "planGroup": "{{planGroupUnderFrequencySettings}}",
-    "_id": "61aef7996c51880009d03511"
-  }],
+    "_id": "{{_id}}"
+  },
+    {
+      "action": "NEW",
+      "frequency": 1,
+      "frequencyType": "Monthly",
+      "discount": 0
+    }
+  ],
   "planProducts": [{
     "itemId": "{{itemId}}"
   }]

@@ -37,9 +37,9 @@ public class PlansSteps extends BasePage {
         plansPage.requestBodyForCreatePlanAPI();
     }
 
-    @And("I have request payload for update plan api")
-    public void iHaveRequestPayloadForUpdatePlanApi() {
-        plansPage.requestBodyForUpdatePlanAPI();
+    @And("^I have request payload (for update|to add new frequency) plan api$")
+    public void iHaveRequestPayloadForUpdatePlanApi(String isFrequency) {
+        plansPage.requestBodyForUpdatePlanAPI(isFrequency.contains("frequency"));
     }
 
     @When("^I run the create plan api( again)?$")
@@ -122,9 +122,9 @@ public class PlansSteps extends BasePage {
         plansPage.verifyErrorMessageForTitleAndDescriptionLength(titleOrDescription.equalsIgnoreCase("title"), length);
     }
 
-    @And("^I have removed (title|description|frequency|frequencyType|products|status) from payload$")
+    @And("^I have removed \"([^\"]+)\" from payload$")
     public void iHaveRemovedTitleFromPayload(String property) {
-        plansPage.removeParentPropertyFromPlan(property);
+        commonPage.removeParentProperty(property);
     }
 
     @Then("^I see error message for missing property (title|description|frequency|frequencyType|products|status)$")
@@ -201,11 +201,6 @@ public class PlansSteps extends BasePage {
         plansPage.payloadForGetByItemID(itemId);
     }
 
-    @When("I run post call")
-    public void iRunPostCall() {
-        commonPage.runPostCall();
-    }
-
     @Then("^I verify( empty)? response of getByItemId plans$")
     public void iVerifyResponseOfGetByItemIdPlans(String empty) {
         plansPage.verifyResponseOfGetByItemIDPlan(empty != null && "empty".contains(empty.trim()));
@@ -240,6 +235,14 @@ public class PlansSteps extends BasePage {
     public void iHaveCreateActivePlan() {
         plansPage.getPlanEndPoint("create plan");
         plansPage.requestBodyForCreatePlanAPI();
+        commonPage.runPostCall();
+        plansPage.verifyPlanCreation("ACTIVE");
+    }
+
+    @Given("I have created active plan with multiple products")
+    public void iHaveCreateActivePlanWithMultipleProduct() {
+        plansPage.getPlanEndPoint("create plan");
+        plansPage.requestBodyWithMultipleProductsForCreatePlanAPI();
         commonPage.runPostCall();
         plansPage.verifyPlanCreation("ACTIVE");
     }

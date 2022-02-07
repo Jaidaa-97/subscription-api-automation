@@ -22,11 +22,22 @@ public class FileHandler {
         } catch (Exception e) {
             try {
                 OR.load(new InputStreamReader(FileHandler.class.getResourceAsStream("/properties/" + fileName), StandardCharsets.UTF_8));
-            } catch (Exception io){
-                throw  new RuntimeException("File is not present in /resources/properties file");
+            } catch (Exception io) {
+                throw new RuntimeException("File is not present in /resources/properties file");
             }
         }
         return OR.getProperty(parameter);
+    }
+
+    public static String getDataFromPropertyFile(String key) {
+        String env = System.getProperty("env");
+        if (null == env || env.equals("")) {
+            env = "staging";
+        } else {
+            env = env.toLowerCase();
+        }
+
+        return readPropertyFile("data.properties",env+"_"+key);
     }
 
     private static void setUpReadStream(String fileName) {

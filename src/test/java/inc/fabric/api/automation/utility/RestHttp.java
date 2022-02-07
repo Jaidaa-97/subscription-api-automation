@@ -11,6 +11,7 @@ public class RestHttp extends BasePage {
         scenario.write("Request Payload : "+ body);
         Response response = requestSpecification.post(endPoint);
         scenario.write("Response : "+ response.asString());
+        response.prettyPrint();
         return response;
     }
 
@@ -22,13 +23,23 @@ public class RestHttp extends BasePage {
         return response;
     }
 
+    public static Response patchCall(String endPoint, String body, RequestSpecification requestSpecification){
+        requestSpecification.body(body);
+        scenario.write("Request Payload : "+ body);
+        Response response = requestSpecification.patch(endPoint);
+        scenario.write("Response : "+ response.asString());
+        return response;
+    }
+
     public static Response getCall(String endPoint, RequestSpecification requestSpecification){
         Response response = requestSpecification.get(endPoint);
         scenario.write("Response : "+ response.asString());
         return response;
     }
 
-    public static void deleteCall(String endPoint,RequestSpecification requestSpecification){
-        requestSpecification.delete(endPoint);
+    public static Response deleteCall(String endPoint,RequestSpecification requestSpecification){
+        Response response = requestSpecification.delete(endPoint);
+        scenario.write("Response : "+ response.asString());
+        return response;
     }
 }

@@ -80,14 +80,42 @@ public class PlansPage extends BasePage {
 
     public void requestBodyForCreatePlanAPI() {
         JsonObject requestPayload = FileHandler.getDataFromJson("request-payload/plan.json");
-        requestPayload = updatePropertyValueInArray(requestPayload, "products", "itemId", FileHandler.readPropertyFile("data.properties", "productItem1"));
+        requestPayload = updatePropertyValueInArray(requestPayload, "products", "itemId", FileHandler.getDataFromPropertyFile("productItem1"));
         basePage.setBody(requestPayload.toString());
     }
 
-    public void requestBodyForUpdatePlanAPI() {
-        JsonObject requestPayload = FileHandler.getDataFromJson("request-payload/updatePlan.json");
-        requestPayload = updatePropertyValueInArray(requestPayload, "frequencySettings", "_id", getPlanId());
+    public void requestBodyWithMultipleProductsForCreatePlanAPI() {
+        JsonObject requestPayload = FileHandler.getDataFromJson("request-payload/plan.json");
+        JsonObject jsonObject1 = new JsonObject();
+        JsonObject jsonObject2 = new JsonObject();
+        jsonObject1.addProperty("itemId",FileHandler.getDataFromPropertyFile("productItem1"));
+        jsonObject2.addProperty("itemId",FileHandler.getDataFromPropertyFile("productItem2"));
+        JsonArray ja = new JsonArray();
+        ja.add(jsonObject1);
+        ja.add(jsonObject2);
+
+        requestPayload.add("products",ja);
         basePage.setBody(requestPayload.toString());
+    }
+
+    public void requestBodyForUpdatePlanAPI(boolean isFrequency) {
+        JsonObject requestPayload = null;
+        if (isFrequency){
+            requestPayload = FileHandler.getDataFromJson("request-payload/addNewFrequencyPlan.json");
+            requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{planGroupUnderFrequencySettings}}",getPlanGroup()));
+            requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{_id}}",getPlanId()));
+
+        } else {
+            requestPayload = FileHandler.getDataFromJson("request-payload/updatePlan.json");
+            requestPayload = updatePropertyValueInArray(requestPayload, "frequencySettings", "_id", getPlanId());
+            requestPayload = updatePropertyValueInArray(requestPayload,"frequencySettings","planGroup",getPlanGroup());
+            requestPayload = updateParentProperty(requestPayload,"_id",getPlanGroup());
+        }
+
+
+        requestPayload = FileHandler.getJsonObject(requestPayload.toString().replace("{{itemId}}",FileHandler.getDataFromPropertyFile("productItem1")));
+        basePage.setBody(requestPayload.toString().replace("{{planGroupUnderPlan}}",getPlanGroup()));
+
     }
 
     public void updateShippingCost(int cost) {
@@ -110,7 +138,7 @@ public class PlansPage extends BasePage {
 
     public void payloadForGetByItemID(String itemId) {
         String body = "{\n" +
-                "    \"itemIds\":[\"" + FileHandler.readPropertyFile("data.properties", itemId) + "\"]\n" +
+                "    \"itemIds\":[\"" + FileHandler.getDataFromPropertyFile(itemId) + "\"]\n" +
                 "}";
         basePage.setBody(body);
     }
@@ -141,7 +169,7 @@ public class PlansPage extends BasePage {
 
     public void updateProductInUpdatePlanPayload() {
         JsonObject requestPayload = FileHandler.getJsonObject(basePage.getBody());
-        requestPayload = updatePropertyValueInArray(requestPayload, "planProducts", "itemId", FileHandler.readPropertyFile("data.properties", "productItem2"));
+        requestPayload = updatePropertyValueInArray(requestPayload, "planProducts", "itemId", FileHandler.getDataFromPropertyFile("productItem2"));
         basePage.setBody(requestPayload.toString());
     }
 
@@ -179,13 +207,6 @@ public class PlansPage extends BasePage {
     private JsonObject removeProperty(JsonObject jsonObject, String propertyName) {
         jsonObject.remove(propertyName);
         return jsonObject;
-    }
-
-    public void removeParentPropertyFromPlan(String parentPropertyName) {
-        JsonObject jsonObject = FileHandler.getJsonObject(basePage.getBody());
-        jsonObject = removeProperty(jsonObject, parentPropertyName);
-        basePage.setBody(jsonObject.toString());
-
     }
 
     //*********************************************** Validation methods *************************************************************//
@@ -270,7 +291,7 @@ public class PlansPage extends BasePage {
 
     public void verifyPlanUpdateWithNewProduct() {
         Assert.assertEquals(200, basePage.getResponse().getStatusCode());
-        Assert.assertEquals(basePage.getResponse().then().extract().path("data.plans[0].products[0].itemId"), FileHandler.readPropertyFile("data.properties", "productItem2"));
+        Assert.assertEquals(basePage.getResponse().then().extract().path("data.plans[0].products[0].itemId"), FileHandler.getDataFromPropertyFile("productItem2"));
     }
 
     public void verifyPlanUpdatesProperty(String property, String value) {
@@ -305,7 +326,7 @@ public class PlansPage extends BasePage {
 
     public void verifyResponseOfGetByItemIDPlan(boolean isEmpty) {
         Assert.assertEquals(200, basePage.getResponse().getStatusCode());
-        List<Object> ll = basePage.getResponse().jsonPath().get("data." + FileHandler.readPropertyFile("data.properties", "productItem1") + "");
+        List<Object> ll = basePage.getResponse().jsonPath().get("data." + FileHandler.getDataFromPropertyFile("productItem1") + "");
         if (isEmpty) {
             Assert.assertEquals(ll, null);
         } else {
