@@ -9,7 +9,7 @@ stages:
 test-dev02:
   stage: test-dev02
   script:
-     mvn clean verify -Dtags=@sanity -Denv=dev02
+    - mvn clean verify -Dtags=@sanity -Denv=dev02
 
 test-stg02:
   stage: test-stg02
@@ -19,12 +19,12 @@ test-stg02:
 test-sandbox:
   stage: test-sandbox
   script:
-     mvn clean verify -Dtags=@sanity -Denv=sandbox
+    - mvn clean verify -Dtags=@sanity -Denv=sandbox
 
 test-prod02:
   stage: test-prod02
   script:
-     mvn clean verify -Dtags=@sanity -Denv=prod02
+    - mvn clean verify -Dtags=@sanity -Denv=prod02
 
 
 
