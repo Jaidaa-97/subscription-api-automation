@@ -117,7 +117,7 @@ Business Need: subscription
     "quantity" must be greater than -1
     """
 
-  @error_negative_quantity @create_sub
+  @error_negative_quantity1 @create_sub
   Scenario: Verify error message if try to create a subscription for invalid plan
     Given I have created active plan
     And I have create subscription endpoint
@@ -729,7 +729,7 @@ Business Need: subscription
       Invalid Subscription ID. Please provide the valid one!
     """
 
-  @get_subscriptions_on_pageNumber_and_PageSize @sanity
+  @get_subscriptions_on_pageNumber_and_PageSize @sanity @wip
   Scenario: Get all the subscriptions based on page number and page size
     And I have create subscription endpoint
     When I run get call api with following param:
@@ -894,7 +894,7 @@ Business Need: subscription
     Then I see property value 1 is present in the response property "data.subscription.frequency"
     Then I see property value "---data:-:env_productItem1---" is present in the response property "data.subscription.itemId"
 
-  @get_order_by_customer_ref_id @get_sub @sanity
+  @get_order_by_customer_ref_id @get_sub @sanity @wip
   Scenario: Get all orders by customer reference id
     Given I have created active plan
     And I have create subscription endpoint

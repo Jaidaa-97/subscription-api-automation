@@ -91,7 +91,7 @@ public class BasePage {
             case "PROD02":
                 return "jitendra.pisal@fabric.inc";
             case "DEV02":
-                return "jitendra.pisal@fabric.inc";
+                return "ahmad.rouf@fabric.inc";
             default:
                 return "ahmad.rauf@shopdev.co";
         }
@@ -105,7 +105,7 @@ public class BasePage {
             case "PROD02":
                 return "Fabric@123";
             case "DEV02":
-                return "Fabric@123";
+                return "Ahmad0306";
             default:
                 return "Ahmad0306";
         }
