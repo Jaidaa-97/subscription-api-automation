@@ -195,12 +195,14 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
             if ("SavedValue".equalsIgnoreCase(parameter1)) {
                 if (BasePage.savedValues.get(parameter2) != null) {
                     convertedValue = BasePage.savedValues.get(parameter2);
+                    BasePage.scenario.write("Converted value :" + convertedValue);
                 } else {
 
                 }
             } else if ("Date".equalsIgnoreCase(parameter1)) {
                 try {
                     convertedValue = getDate(parameter2);
+                    BasePage.scenario.write("Converted value :" + convertedValue);
                 } catch (Error e) {
                 }
             } else {
@@ -210,6 +212,7 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
                     }
                     if (FileHandler.readPropertyFile(parameter1 + ".properties", parameter2) != null) {
                         convertedValue = FileHandler.readPropertyFile(parameter1 + ".properties", parameter2);
+                        BasePage.scenario.write("Converted value :" + convertedValue);
                     } else {
 
                     }
@@ -245,6 +248,8 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
                 localDate = localDate.plusYears(days);
             }
         }
+
+        BasePage.scenario.write("Date :" + localDate.format(dtf));
 
         return localDate.format(dtf);
     }
@@ -347,90 +352,4 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
 
         typeRegistry.defineDocStringType(new io.cucumber.docstring.DocStringType(String.class, "", this::convertString));
     }
-
-    /**
-     * This method parses a String in the format DateFormatPattern::DateModifiers, or simply DateformatPattern,
-     * and returns a String which represents a Date in the desired format.
-     *
-     * <br>The DateFormatPattern is any pattern that could be passed as an argument to {@link DateTimeFormatter#ofPattern(String)}
-     * <br>The DateModifiers is a semi-colon (;) separated list of values that specifies how the the returned date should be adjusted
-     * relative to the current date
-     * <br><br>Each modifier must be the format "ModifierChar ModfierAction Integer"
-     * <br>The following characters may be used as ModifierChars:
-     * <ul>
-     *     <li>n - Changes the nanosecond of the returned date</li>
-     *     <li>s - Changes the second of the returned date</li>
-     *     <li>m - Changes the minute of the returned date</li>
-     *     <li>H or h - Changes the hour of the returned date</li>
-     *     <li>D or d - Changes the day of the returned date</li>
-     *     <li>M or L - Changes the month of the returned date</li>
-     *     <li>Y, y, or u - Changes the year of the returned date</li>
-     * </ul>
-     * The following characters can be used as ModifierActions:
-     * <ul>
-     *     <li>'+': Adds the given number to the specified ModifierChar</li>
-     *     <li>'-': Subtrats the given number from the specified ModifierChar</li>
-     *     <li>'=': Sets the specified ModifierChar to the given number</li>
-     * </ul>
-     *
-     * <br>The date is modified using the current date as the initial date, and modifiers are applied from left to right.
-     * <br>Thus, "D=1;M+1;D-1" will set the day to the first of the month, add one to the month, and subtract 1
-     * from the day, resulting in the last day of the current month.
-     *
-     * @param dateFormatter The String that will be used to format the date.
-     * @return A String representation of a Date, modified as desired, and formatted as specified.
-     */
-    private String parseDate(String dateFormatter) {
-        String[] qwe = dateFormatter.split(":::", 2);
-
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern(qwe[0]);
-        LocalDateTime ldt = LocalDateTime.now();
-        if (qwe.length > 1) {
-            for (String modifier : qwe[1].split(";")) {
-                modifier = modifier.replaceAll(" ", "");
-
-                if (!CHRONO_FIELDS.containsKey(modifier.substring(0, 1))) {
-                    throw new Error(String.format("'%s' is not a valid format specifier.%nValid specifiers are %s", modifier.substring(0, 1), CHRONO_FIELDS.keySet().toString()));
-                }
-
-                if (modifier.substring(1, 2).contentEquals("=")) {
-                    ldt = ldt.with(CHRONO_FIELDS.get(modifier.substring(0, 1)), Long.parseLong(modifier.substring(2)));
-                } else if (modifier.substring(1, 2).contentEquals("+") || modifier.substring(1, 2).contentEquals("-")) {
-                    ldt = ldt.plus(Long.parseLong(modifier.substring(1)), CHRONO_UNITS.get(modifier.substring(0, 1)));
-                } else {
-                    throw new Error(String.format("'%s' is not formatted correctly.%nSecond character must be '=', '-', or '+'.", modifier));
-                }
-            }
-        }
-        return ldt.format(dtf);
-    }
-
-    private static final Map<String, ChronoField> CHRONO_FIELDS = Map.ofEntries(
-            Map.entry("n", ChronoField.NANO_OF_SECOND),
-            Map.entry("s", ChronoField.SECOND_OF_MINUTE),
-            Map.entry("m", ChronoField.MINUTE_OF_HOUR),
-            Map.entry("H", ChronoField.HOUR_OF_DAY),
-            Map.entry("h", ChronoField.HOUR_OF_DAY),
-            Map.entry("D", ChronoField.DAY_OF_MONTH),
-            Map.entry("d", ChronoField.DAY_OF_MONTH),
-            Map.entry("M", ChronoField.MONTH_OF_YEAR),
-            Map.entry("L", ChronoField.MONTH_OF_YEAR),
-            Map.entry("Y", ChronoField.YEAR),
-            Map.entry("y", ChronoField.YEAR),
-            Map.entry("u", ChronoField.YEAR)
-    );
-    private static final Map<String, ChronoUnit> CHRONO_UNITS = Map.ofEntries(
-            Map.entry("n", ChronoUnit.NANOS),
-            Map.entry("s", ChronoUnit.SECONDS),
-            Map.entry("m", ChronoUnit.MINUTES),
-            Map.entry("H", ChronoUnit.HOURS),
-            Map.entry("h", ChronoUnit.HOURS),
-            Map.entry("D", ChronoUnit.DAYS),
-            Map.entry("d", ChronoUnit.DAYS),
-            Map.entry("M", ChronoUnit.MONTHS),
-            Map.entry("L", ChronoUnit.MONTHS),
-            Map.entry("Y", ChronoUnit.YEARS),
-            Map.entry("y", ChronoUnit.YEARS),
-            Map.entry("u", ChronoUnit.YEARS)
-    );
 }

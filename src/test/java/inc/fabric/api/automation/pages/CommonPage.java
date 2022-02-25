@@ -3,6 +3,7 @@ package inc.fabric.api.automation.pages;
 import com.google.gson.JsonObject;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
@@ -25,7 +26,12 @@ public class CommonPage {
         if (!isContains) {
             if (propertyValue.contains("true") || propertyValue.contains("false")) {
                 Assert.assertEquals(Boolean.parseBoolean(propertyValue), basePage.getResponse().then().extract().path(property));
-            } else {
+            } else if(propertyValue.equals("null")){
+                Assert.assertTrue(basePage.getResponse().then().extract().path(property) == null);
+            } else if(propertyValue.equals("empty")){
+                int size = ((ArrayList<Integer>)(basePage.getResponse().then().extract().path(property))).size();
+                Assert.assertEquals(0,size);
+            }else {
                 Assert.assertEquals(propertyValue, basePage.getResponse().then().extract().path(property));
             }
         } else {
@@ -110,6 +116,15 @@ public class CommonPage {
         basePage.getResponse().prettyPrint();
     }
 
+    public void runPatchCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        //requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.patchCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
+        basePage.getResponse().prettyPrint();
+    }
+
     public void runUpdatePlanApi() {
         RequestSpecification requestSpecification;
         requestSpecification = given().relaxedHTTPSValidation();
@@ -129,6 +144,7 @@ public class CommonPage {
                 });
             }
         }
+
         basePage.setResponse(RestHttp.getCall(basePage.getEndPoint(), requestSpecification));
     }
 
@@ -146,5 +162,15 @@ public class CommonPage {
         for (int i = 0; i < list.size(); i++) {
             Assert.assertTrue(basePage.getResponse().then().extract().path(propertyArray+"["+i+"]."+propertyName).toString().contains(value));
         }
+    }
+
+    public void validateSchema(String path){
+        basePage.getResponse().then().body(JsonSchemaValidator.matchesJsonSchema(this.getClass().getResource("/schema/"+path+"")));
+    }
+
+    public void getEndPoint(String endPoint){
+        String baseUrl = basePage.getBaseURL();
+        endPoint = baseUrl + endPoint;
+        basePage.setEndPoint(endPoint);
     }
 }

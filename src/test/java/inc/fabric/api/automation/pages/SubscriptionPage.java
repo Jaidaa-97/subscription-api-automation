@@ -56,7 +56,16 @@ public class SubscriptionPage extends BasePage {
                 subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/"+getSubscriptionId();
                 break;
             case "get by id":
-                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/"+getSubscriptionId();
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.CREATE_SUBSCRIPTION+"/";
+                break;
+            case "get by order id":
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.ORDERS+"/";
+                break;
+            case "get order by subid":
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.ORDERS+"/get-by-subscriptionId/";
+                break;
+            case "get order by customerid":
+                subEndPoint = getBaseURL() + "/data-subscription/" + APIConstants.ORDERS+"/get-by-customer/";
                 break;
             default :
                 throw new RuntimeException(endPoint +"is not added in the method getSubEndPoint(String endPoint)");
@@ -120,16 +129,12 @@ public class SubscriptionPage extends BasePage {
     public void addChildItems() {
         JsonObject jsonObject = FileHandler.getJsonObject(basePage.getBody());
         JsonObject quantity1 = new JsonObject();
-        JsonObject quantity2 = new JsonObject();
         JsonArray childItems = new JsonArray();
 
-        quantity1.addProperty("itemID", "1000000047");
+        quantity1.addProperty("itemID", FileHandler.getDataFromPropertyFile("productItem2"));
         quantity1.addProperty("quantity", 3);
-        quantity2.addProperty("itemID", "1000000094");
-        quantity2.addProperty("quantity", 4);
 
         childItems.add(quantity1);
-        childItems.add(quantity2);
 
         jsonObject.add("childItems", childItems);
         basePage.setBody(jsonObject.toString());

@@ -37,9 +37,9 @@ public class PlansSteps extends BasePage {
         plansPage.requestBodyForCreatePlanAPI();
     }
 
-    @And("I have request payload for update plan api")
-    public void iHaveRequestPayloadForUpdatePlanApi() {
-        plansPage.requestBodyForUpdatePlanAPI();
+    @And("^I have request payload (for update|to add new frequency) plan api$")
+    public void iHaveRequestPayloadForUpdatePlanApi(String isFrequency) {
+        plansPage.requestBodyForUpdatePlanAPI(isFrequency.contains("frequency"));
     }
 
     @When("^I run the create plan api( again)?$")

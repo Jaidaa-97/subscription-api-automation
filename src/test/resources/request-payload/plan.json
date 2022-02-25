@@ -4,7 +4,8 @@
   "frequency": 1,
   "frequencyType": "Weekly",
   "discount": 10,
-  "charge": 1,
+  "charge": 10,
+  "expireDate": "2024-12-22T15:46:39.675Z",
   "products": [
     {
       "itemId": "1000000006"

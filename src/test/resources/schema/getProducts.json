@@ -1,0 +1,292 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "totalSize": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        },
+        "pages": {
+          "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "sku": {
+                  "type": "string"
+                },
+                "itemId": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "boolean"
+                },
+                "children": {
+                  "type": "array",
+                  "items": {}
+                },
+                "variants": {
+                  "type": "array",
+                  "items": {}
+                },
+                "bundles": {
+                  "type": "array",
+                  "items": {}
+                },
+                "images": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "order": {
+                          "type": "integer"
+                        },
+                        "label": {
+                          "type": "null"
+                        },
+                        "source": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "_id": {
+                                  "type": "string"
+                                },
+                                "url": {
+                                  "type": "string"
+                                }
+                              },
+                              "required": [
+                                "_id",
+                                "url"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "_id",
+                        "order",
+                        "label",
+                        "source"
+                      ]
+                    }
+                  ]
+                },
+                "updatedAt": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "array",
+                  "items": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string"
+                        },
+                        "isSoftDeleted": {
+                          "type": "boolean"
+                        },
+                        "priceListId": {
+                          "type": "integer"
+                        },
+                        "itemId": {
+                          "type": "integer"
+                        },
+                        "itemSku": {
+                          "type": "string"
+                        },
+                        "offers": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "price": {
+                                  "type": "object",
+                                  "properties": {
+                                    "sale": {
+                                      "type": "integer"
+                                    },
+                                    "base": {
+                                      "type": "integer"
+                                    },
+                                    "currency": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "required": [
+                                    "sale",
+                                    "base",
+                                    "currency"
+                                  ]
+                                },
+                                "priceAttributes": {
+                                  "type": "array",
+                                  "items": {}
+                                },
+                                "_id": {
+                                  "type": "string"
+                                },
+                                "kind": {
+                                  "type": "string"
+                                },
+                                "channel": {
+                                  "type": "integer"
+                                },
+                                "startDate": {
+                                  "type": "string"
+                                },
+                                "endDate": {
+                                  "type": "string"
+                                },
+                                "range": {
+                                  "type": "array",
+                                  "items": [
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "_id": {
+                                          "type": "string"
+                                        },
+                                        "minQuantity": {
+                                          "type": "integer"
+                                        },
+                                        "price": {
+                                          "type": "integer"
+                                        },
+                                        "width": {
+                                          "type": "array",
+                                          "items": {}
+                                        }
+                                      },
+                                      "required": [
+                                        "_id",
+                                        "minQuantity",
+                                        "price",
+                                        "width"
+                                      ]
+                                    }
+                                  ]
+                                },
+                                "offerCode": {
+                                  "type": "integer"
+                                }
+                              },
+                              "required": [
+                                "price",
+                                "priceAttributes",
+                                "_id",
+                                "kind",
+                                "channel",
+                                "startDate",
+                                "endDate",
+                                "range",
+                                "offerCode"
+                              ]
+                            }
+                          ]
+                        },
+                        "discountAmountDetails": {
+                          "type": "array",
+                          "items": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "promoId": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "type": "string"
+                                },
+                                "promoTitle": {
+                                  "type": "string"
+                                },
+                                "individualDiscount": {
+                                  "type": "null"
+                                }
+                              },
+                              "required": [
+                                "promoId",
+                                "type",
+                                "promoTitle",
+                                "individualDiscount"
+                              ]
+                            }
+                          ]
+                        }
+                      },
+                      "required": [
+                        "_id",
+                        "isSoftDeleted",
+                        "priceListId",
+                        "itemId",
+                        "itemSku",
+                        "offers",
+                        "discountAmountDetails"
+                      ]
+                    }
+                  ]
+                }
+              },
+              "required": [
+                "sku",
+                "itemId",
+                "title",
+                "description",
+                "status",
+                "children",
+                "variants",
+                "bundles",
+                "images",
+                "updatedAt",
+                "price"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "totalSize",
+        "pageSize",
+        "pages",
+        "results"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}
