@@ -18,7 +18,7 @@ test-dev02:
   only:
     variables:
       - $ENV == "develop"
-      - $MERGE_ENV == "develop"
+      - $MERGE_ENV == "develop" || $MERGE_ENV == "SUB-develop"
 
 test-stg02:
   stage: test-stg02
@@ -27,6 +27,7 @@ test-stg02:
   only:
     variables:
       - $ENV == "staging"
+      - $MERGE_ENV == "staging" || $MERGE_ENV == "SUB-staging"
 
 test-sandbox:
   stage: test-sandbox
