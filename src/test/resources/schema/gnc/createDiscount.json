@@ -1,0 +1,178 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "validity": {
+          "type": "object",
+          "properties": {
+            "applyOnOrders": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            },
+            "startDate": {
+              "type": "string"
+            },
+            "endDate": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "applyOnOrders",
+            "startDate",
+            "endDate"
+          ]
+        },
+        "itemIds": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "categories": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "customerSegment": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "_id": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        },
+        "deletedAt": {
+          "type": "null"
+        },
+        "message": {
+          "type": "string"
+        },
+        "discount": {
+          "type": "object",
+          "properties": {
+            "amount": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "amount"
+          ]
+        },
+        "frequency": {
+          "type": "object",
+          "properties": {
+            "shippingFrequency": {
+              "type": "integer"
+            },
+            "shippingFrequencyType": {
+              "type": "string"
+            },
+            "billingFrequency": {
+              "type": "integer"
+            },
+            "billingFrequencyType": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "shippingFrequency",
+            "shippingFrequencyType",
+            "billingFrequency",
+            "billingFrequencyType"
+          ]
+        },
+        "itemQuantity": {
+          "type": "integer"
+        },
+        "channel": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "offerCode": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "__v": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "validity",
+        "itemIds",
+        "categories",
+        "customerSegment",
+        "_id",
+        "isDeleted",
+        "deletedAt",
+        "message",
+        "discount",
+        "frequency",
+        "itemQuantity",
+        "channel",
+        "target",
+        "offerCode",
+        "createdAt",
+        "updatedAt",
+        "__v"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}
