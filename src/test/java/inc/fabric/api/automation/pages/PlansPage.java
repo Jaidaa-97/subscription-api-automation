@@ -370,6 +370,10 @@ public class PlansPage extends BasePage {
     }
 
     public String getCountOf(String status) {
+        int count = basePage.getResponse().jsonPath().get("data.plansCount");
+        if (count == 0) {
+            return "0";
+        }
         List<HashMap<String, String>> ll1 = basePage.getResponse().jsonPath().get("data.statusCount");
         for (Map<String, String> map :
                 ll1) {
