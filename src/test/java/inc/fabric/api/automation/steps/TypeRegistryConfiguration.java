@@ -205,6 +205,9 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
                     BasePage.scenario.write("Converted value :" + convertedValue);
                 } catch (Error e) {
                 }
+            } else if ("RandomNumber".equalsIgnoreCase(parameter1)) {
+                convertedValue = String.valueOf(CommonUtils.getRandomNumberFourDigit());
+                BasePage.scenario.write("Converted value :" + convertedValue);
             } else {
                 try {
                     if (parameter2.contains("env_")) {
@@ -233,17 +236,17 @@ public class TypeRegistryConfiguration implements TypeRegistryConfigurer {
         String dateFormat[] = dateFormatter.split(":::");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern(dateFormat[0]);
         LocalDate localDate = LocalDate.now();
-        String[]dd = dateFormat[1].split(";");
-        for(String d1 : dd) {
-            if(d1.contains("d")){
+        String[] dd = dateFormat[1].split(";");
+        for (String d1 : dd) {
+            if (d1.contains("d")) {
                 long days = Long.parseLong(d1.split("=")[1]);
                 localDate = localDate.plusDays(days);
             }
-            if(d1.contains("M")){
+            if (d1.contains("M")) {
                 long days = Long.parseLong(d1.split("=")[1]);
                 localDate = localDate.plusMonths(days);
             }
-            if(d1.contains("Y")){
+            if (d1.contains("Y")) {
                 long days = Long.parseLong(d1.split("=")[1]);
                 localDate = localDate.plusYears(days);
             }

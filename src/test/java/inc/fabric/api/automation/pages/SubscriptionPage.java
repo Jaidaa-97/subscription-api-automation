@@ -5,9 +5,11 @@ import com.google.gson.JsonObject;
 import inc.fabric.api.automation.contstants.APIConstants;
 import inc.fabric.api.automation.utility.CommonUtils;
 import inc.fabric.api.automation.utility.FileHandler;
+import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -178,5 +180,389 @@ public class SubscriptionPage extends BasePage {
     public void setNextPaymentDate(String name, int days){
         LocalDate ld = CommonUtils.getLocalDate(savedValues.get("nextPaymentDate"));
         savedValues.put(name,ld.plusDays(days).toString());
+    }
+
+    public void createCustomer() {
+        commonPage.getEndPoint("/data-subscription/v1/customer");
+        String payload = "{\n" +
+                "        \"customerReferenceId\": \"606f01f441b8fc0008529919\",\n" +
+                "          \"locale\": \"fr_CAB\",\n" +
+                "          \"email\": \"jitendra@mail.com\",\n" +
+                "          \"contactNumber\": \"+92 3333709569\",\n" +
+                "          \"firstName\": \"Jitendra\",\n" +
+                "          \"lastName\": \"Pisal\",\n" +
+                "          \"middleName\":\"Dilip\",\n" +
+                "          \"segment\": [ \"employee\"],\n" +
+                "          \"employeeId\": \"108A\",\n" +
+                "          \"communicationPreference\": {\n" +
+                "            \"SMS\": true,\n" +
+                "            \"email\":true\n" +
+                "        }\n" +
+                "    }";
+        commonPage.requestPayload(payload);
+        commonPage.runPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
+    public void createBulkSubscription(int noOfSubscriptions) {
+        commonPage.getEndPoint("/data-subscription/subscriptions/bulk");
+        String payload = "{\n" +
+                "            \"channel\": \"WEBSITE\",\n" +
+                "            \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "            \"customer\": {\n" +
+                "                \"customerReferenceId\": \"606f01f441b8fc000852"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "                \"locale\": \"en_US\",\n" +
+                "                \"email\": \"jitendra.pisal@mail.com\",\n" +
+                "                \"contactNumber\": \"+92 3333709568\",\n" +
+                "                \"firstName\": \"John\",\n" +
+                "                \"lastName\": \"Doe\",\n" +
+                "                \"segment\": [\"employee\"],\n" +
+                "                \"employeeId\": \"1\"\n" +
+                "            },\n" +
+                "            \"items\": [\n" +
+                "                {\n" +
+                "                    \"sku\":\"SHOES1\",\n" +
+                "                    \"quantity\": 1,\n" +
+                "                    \"weight\": 10,\n" +
+                "                    \"weightUnit\": \"lb\",\n" +
+                "                    \"itemPrice\": {\n" +
+                "                        \"price\": 100.00,\n" +
+                "                        \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"tax\": {\n" +
+                "                        \"taxCode\": \"FR020000\",\n" +
+                "                        \"taxAmount\": 10.00,    \n" +
+                "                        \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"plan\": {\n" +
+                "                        \"frequency\": 5,\n" +
+                "                        \"frequencyType\": \"Daily\"\n" +
+                "                    },\n" +
+                "                    \"offsetDays\": 10,\n" +
+                "                    \"offer\": {\n" +
+                "                        \"id\": \"SUB-065710\",\n" +
+                "                        \"source\": \"PDP\"\n" +
+                "                    },\n" +
+                "                    \"shipping\": {\n" +
+                "                      \"shipmentCarrier\": \"USPS\",\n" +
+                "                      \"shipmentMethod\": \"Ground\",\n" +
+                "                      \"shipmentInstructions\": \"\",\n" +
+                "                      \"taxCode\": \"SHP020000\",\n" +
+                "                      \"shippingAmount\": 10.00,\n" +
+                "                      \"taxAmount\": 1.00,\n" +
+                "                      \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"expiry\": {\n" +
+                "                        \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
+                "                        \"billingCycles\": 10\n" +
+                "                    }\n" +
+                "                },\n" +
+                "                {\n" +
+                "                    \"sku\": \"SHOES2\",\n" +
+                "                    \"quantity\": 1,\n" +
+                "                    \"weight\": 10,\n" +
+                "                    \"weightUnit\": \"lb\",\n" +
+                "                    \"itemPrice\": {\n" +
+                "                        \"price\": 100.00,\n" +
+                "                        \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"tax\": {\n" +
+                "                        \"taxCode\": \"FR020000\",\n" +
+                "                        \"taxAmount\": 10.00,    \n" +
+                "                        \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"plan\": {\n" +
+                "                        \"frequency\": 6,\n" +
+                "                        \"frequencyType\": \"Weekly\"\n" +
+                "                    },\n" +
+                "                    \"offsetDays\": 10,\n" +
+                "                    \"offer\": {\n" +
+                "                        \"id\": \"SUB-065710\",\n" +
+                "                        \"source\": \"PDP\"\n" +
+                "                    },\n" +
+                "                    \"shipping\": {\n" +
+                "                      \"shipmentCarrier\": \"USPS\",\n" +
+                "                      \"shipmentMethod\": \"Ground\",\n" +
+                "                      \"shipmentInstructions\": \"\",\n" +
+                "                      \"taxCode\": \"SHP020000\",\n" +
+                "                      \"shippingAmount\": 10.00,\n" +
+                "                      \"taxAmount\": 1.00,\n" +
+                "                      \"currencyCode\": \"USD\"\n" +
+                "                    },\n" +
+                "                    \"expiry\": {\n" +
+                "                        \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
+                "                        \"billingCycles\": 10\n" +
+                "                    }\n" +
+                "                }\n" +
+                "                \n" +
+                "            ],\n" +
+                "            \"shipTo\": {\n" +
+                "                \"name\": {\n" +
+                "                    \"firstName\": \"Roger\",\n" +
+                "                    \"middleName\": \"\",\n" +
+                "                    \"lastName\": \"Fang\"\n" +
+                "                },\n" +
+                "                \"streetAddress\": {\n" +
+                "                    \"street1\": \"27 O ST\",\n" +
+                "                    \"street2\": \"\"\n" +
+                "                },\n" +
+                "                \"phone\": {\n" +
+                "                    \"number\": \"03323370957\",\n" +
+                "                    \"kind\": \"mobile\"\n" +
+                "                },\n" +
+                "                \"city\": \"BOSTON MA\",\n" +
+                "                \"state\": \"MA\",\n" +
+                "                \"postalCode\": 2127,\n" +
+                "                \"country\": \"US\"\n" +
+                "            },\n" +
+                "            \"billTo\": {\n" +
+                "                \"name\": {\n" +
+                "                    \"firstName\": \"Roger\",\n" +
+                "                    \"middleName\": \"\",\n" +
+                "                    \"lastName\": \"Fang\"\n" +
+                "                },\n" +
+                "                \"streetAddress\": {\n" +
+                "                    \"street1\": \"27 O ST\",\n" +
+                "                    \"street2\": \"\"\n" +
+                "                },\n" +
+                "                \"phone\": {\n" +
+                "                    \"number\": \"012323370957\",\n" +
+                "                    \"kind\": \"mobile\"\n" +
+                "                },\n" +
+                "                \"city\": \"BOSTON MA\",\n" +
+                "                \"state\": \"MA\",\n" +
+                "                \"postalCode\": 2127,\n" +
+                "                \"country\": \"US\"\n" +
+                "            },\n" +
+                "            \"paymentDetails\": {\n" +
+                "                \"paymentIdentifier\": {\n" +
+                "                    \"cardIdentifier\": \"1234\",\n" +
+                "                    \"expiryDate\": \"04/24\"\n" +
+                "                },\n" +
+                "                \"paymentMethod\": \"visa\", \n" +
+                "                \"paymentKind\": \"CARD_PAYPAL\"\n" +
+                "            }\n" +
+                "      }";
+
+        if (noOfSubscriptions == 1) {
+            payload = "{\n" +
+                    "    \"channel\": \"WEBSITE\",\n" +
+                    "    \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                    "    \"customer\": {\n" +
+                    "        \"customerReferenceId\": \"606f01f441b8fc000852"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                    "        \"locale\": \"en_US\",\n" +
+                    "        \"email\": \"shubham@mail.com\",\n" +
+                    "        \"contactNumber\": \"+91 3333709568\",\n" +
+                    "        \"firstName\": \"shubham\",\n" +
+                    "        \"lastName\": \"Pisal\",\n" +
+                    "        \"segment\": [\"employee\"],\n" +
+                    "        \"employeeId\": \"1\"\n" +
+                    "    },\n" +
+                    "    \"items\": [\n" +
+                    "        {\n" +
+                    "            \"sku\":\"SHOES1\",\n" +
+                    "            \"quantity\": 10,\n" +
+                    "            \"weight\": 10,\n" +
+                    "            \"weightUnit\": \"lb\",\n" +
+                    "            \"itemPrice\": {\n" +
+                    "                \"price\": 100.00,\n" +
+                    "                \"currencyCode\": \"USD\"\n" +
+                    "            },\n" +
+                    "            \"tax\": {\n" +
+                    "                \"taxCode\": \"FR020000\",\n" +
+                    "                \"taxAmount\": 10.00,    \n" +
+                    "                \"currencyCode\": \"USD\"\n" +
+                    "            },\n" +
+                    "            \"plan\": {\n" +
+                    "                \"id\": \"1000000002\",\n" +
+                    "                \"frequency\": 30,\n" +
+                    "                \"frequencyType\": \"Daily\"\n" +
+                    "            },\n" +
+                    "            \"offsetDays\": 10,\n" +
+                    "            \"offer\": {\n" +
+                    "                \"id\": \"SUB-065710\",\n" +
+                    "                \"source\": \"PDP\"\n" +
+                    "            },\n" +
+                    "            \"shipping\": {\n" +
+                    "              \"shipmentCarrier\": \"USPS\",\n" +
+                    "              \"shipmentMethod\": \"Ground\",\n" +
+                    "              \"shipmentInstructions\": \"\",\n" +
+                    "              \"taxCode\": \"SHP020000\",\n" +
+                    "              \"shippingAmount\": 10.00,\n" +
+                    "              \"taxAmount\": 1.00,\n" +
+                    "              \"currencyCode\": \"USD\"\n" +
+                    "            },\n" +
+                    "            \"expiry\": {\n" +
+                    "                \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
+                    "                \"billingCycles\": 10\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    ],\n" +
+                    "    \"shipTo\": {\n" +
+                    "        \"name\": {\n" +
+                    "            \"firstName\": \"Roger\",\n" +
+                    "            \"middleName\": \"\",\n" +
+                    "            \"lastName\": \"Fang\"\n" +
+                    "        },\n" +
+                    "        \"streetAddress\": {\n" +
+                    "            \"street1\": \"27 O ST\",\n" +
+                    "            \"street2\": \"\"\n" +
+                    "        },\n" +
+                    "        \"phone\": {\n" +
+                    "            \"number\": \"03323370957\",\n" +
+                    "            \"kind\": \"mobile\"\n" +
+                    "        },\n" +
+                    "        \"city\": \"BOSTON MA\",\n" +
+                    "        \"state\": \"MA\",\n" +
+                    "        \"postalCode\": 2127,\n" +
+                    "        \"country\": \"US\"\n" +
+                    "    },\n" +
+                    "    \"billTo\": {\n" +
+                    "        \"name\": {\n" +
+                    "            \"firstName\": \"Roger\",\n" +
+                    "            \"middleName\": \"\",\n" +
+                    "            \"lastName\": \"Fang\"\n" +
+                    "        },\n" +
+                    "        \"streetAddress\": {\n" +
+                    "            \"street1\": \"27 O ST\",\n" +
+                    "            \"street2\": \"\"\n" +
+                    "        },\n" +
+                    "        \"phone\": {\n" +
+                    "            \"number\": \"012323370957\",\n" +
+                    "            \"kind\": \"mobile\"\n" +
+                    "        },\n" +
+                    "        \"city\": \"BOSTON MA\",\n" +
+                    "        \"state\": \"MA\",\n" +
+                    "        \"postalCode\": 2127,\n" +
+                    "        \"country\": \"US\"\n" +
+                    "    },\n" +
+                    "    \"paymentDetails\": {\n" +
+                    "        \"paymentIdentifier\": {\n" +
+                    "            \"cardIdentifier\": \"1234\",\n" +
+                    "            \"expiryDate\": \"04/24\"\n" +
+                    "        },\n" +
+                    "        \"paymentMethod\": \"visa\", \n" +
+                    "        \"paymentKind\": \"CARD_PAYPAL\"\n" +
+                    "    },\n" +
+                    "    \"customAttributes\": {\n" +
+                    "        \"storeId\": \"1234567890\",\n" +
+                    "        \"storeAssociateId\": \"jitu\",\n" +
+                    "        \"trackingUrl\": \"http://google.com\"\n" +
+                    "    }\n" +
+                    "}";
+        }
+
+        commonPage.requestPayload(payload);
+        commonPage.runPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
+    public void getIndexOfSubscriptionInOrder(String subscription, String key) {
+        ArrayList list = (ArrayList<T>) (basePage.getResponse().then().extract().path("data.orders"));
+        int size = list.size();
+        int index = 0;
+
+        while (size > index) {
+            String sub = basePage.getResponse().then().extract().path("data.orders["+index+"].lineItems[0].subscription.id");
+            if (subscription.equalsIgnoreCase(sub)) {
+                break;
+            }
+            index++;
+        }
+        savedValues.put(key,String.valueOf(index));
+    }
+
+    public void saveOrderId(String index, String key) {
+        String orderId = basePage.getResponse().then().extract().path("data.orders["+index+"]._id");
+        savedValues.put(key,orderId);
+    }
+
+    public void removeLineItemFromOrder(int lineItem, String orderId) {
+        commonPage.getEndPoint("/data-subscription/v1/orders/"+orderId+"/remove-items");
+        String payload = "{\n" +
+                "    \"lineItemIds\": ["+lineItem+"]\n" +
+                "}";
+        commonPage.requestPayload(payload);
+        commonPage.runPostCall();
+    }
+
+    public void getSubscriptionById(String subId) {
+        commonPage.getEndPoint("/data-subscription/v1/subscriptions/"+subId+"");
+        commonPage.runGetCall(false,null);
+    }
+
+    public void discontinueItem(String sku) {
+        commonPage.getEndPoint("/data-subscription/v1/subscriptions/discontinued-items");
+        String payload = "{\n" +
+                "    \"sku\": [\""+sku+"\"]\n" +
+                "}";
+        commonPage.requestPayload(payload);
+        commonPage.runPostCall();
+    }
+
+    public void getAllSubscriptionOfSKU(String sku) {
+        commonPage.getEndPoint("/data-subscription/v1/subscriptions?limit=10&offset=0&sku="+sku+"");
+        commonPage.runGetCall(false,null);
+    }
+
+    public void verifyAllSubsGetDiactivatedForDiscItem() {
+        ArrayList list = basePage.getResponse().then().extract().path("data.subscriptions");
+
+        for (int i = 0; i < list.size(); i++) {
+            String status = basePage.getResponse().then().extract().path("data.subscriptions["+i+"].status");
+            Assert.assertEquals(status,"INACTIVE");
+        }
+    }
+
+    public void getAllOrdersPlacedByCustomer(String customerId) {
+        commonPage.getEndPoint("/data-subscription/v1/customers/"+customerId+"/orders");
+        commonPage.runGetCall(false,null);
+    }
+
+    public void getOrderById(String orderId) {
+        commonPage.getEndPoint("/data-subscription/v1/orders/"+orderId+"");
+        commonPage.runGetCall(false,null);
+    }
+
+    public void addItemInOrder(String item, String orderId) {
+        commonPage.getEndPoint("/data-subscription/v1/orders/"+orderId+"/add-items");
+        String payload = "{\n" +
+                "    \"lineItems\": [\n" +
+                "        {\n" +
+                "            \n" +
+                "            \"item\": {\n" +
+                "                \"sku\": \""+item+"\",\n" +
+                "                \"quantity\": 2,\n" +
+                "                \"weight\": 10,\n" +
+                "                \"weightUnit\": \"lb\",\n" +
+                "                \"itemPrice\": {\n" +
+                "                    \"price\": 100.00,\n" +
+                "                    \"currencyCode\": \"USD\"\n" +
+                "                },\n" +
+                "                \"tax\": {\n" +
+                "                    \"taxCode\": \"FR020000\",\n" +
+                "                    \"taxAmount\": 10.00,\n" +
+                "                    \"currencyCode\": \"USD\"\n" +
+                "                }\n" +
+                "            },\n" +
+                "            \"shipping\": {\n" +
+                "                \"shipmentCarrier\": \"USPS\",\n" +
+                "                \"shipmentMethod\": \"Ground\",\n" +
+                "                \"shipmentInstructions\": \"\",\n" +
+                "                \"taxCode\": \"SHP020000\",\n" +
+                "                \"shippingAmount\": 10.00,\n" +
+                "                \"taxAmount\": 1.00,\n" +
+                "                \"currencyCode\": \"USD\"\n" +
+                "            },\n" +
+                "            \"customAttributes\": {\n" +
+                "                \"storeId\": \"60cb07fc20387b000821c5c3\",\n" +
+                "                \"associateId\": 1,\n" +
+                "                \"trackingUrl\": \"609436d21baded0008945b05\"\n" +
+                "            }\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+        commonPage.requestPayload(payload);
+        commonPage.runPostCall();
     }
 }

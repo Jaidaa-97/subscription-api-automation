@@ -15,6 +15,10 @@ public class CommonUtils {
         return (int) getRandomNumberInRange(1000, 50000) + (int) getRandomNumberInRange(51000, 90000);
     }
 
+    public static int getRandomNumberFourDigit() {
+        return (int) (int) getRandomNumberInRange(0000, 9999);
+    }
+
     private static synchronized  <T extends Number> Number getRandomNumberInRange(T minimum, T maximum) {
         if (minimum instanceof Double) {
             return ThreadLocalRandom.current().nextDouble(minimum.doubleValue(), maximum.doubleValue());
