@@ -1,5 +1,9 @@
-@plan @regression
+@plan @regression @wip
 Business Need: Create Plan
+
+  Background:
+    Given Delete subscriptions
+    Given Delete plans
 
   @create_plan @sanity
   Scenario: Create Plan

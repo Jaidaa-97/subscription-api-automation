@@ -55,6 +55,7 @@ public class BasePage {
         request.contentType(ContentType.JSON);
         request.body(getLoginRequestPayload());
         Response loginResponse = request.post(loginEndPoint);
+        scenario.write("Response : "+ loginResponse.prettyPrint());
         while(loginResponse.getStatusCode() == 502) {
             loginResponse = request.post(loginEndPoint);
         }
