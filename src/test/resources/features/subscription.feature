@@ -1,6 +1,9 @@
-@sub @regression
+@sub @regression @wip
 Business Need: subscription
 
+  Background:
+    Given Delete subscriptions
+    Given Delete plans
 
   @create_active_subscription @create_sub @sanity
   Scenario: Create active subscription

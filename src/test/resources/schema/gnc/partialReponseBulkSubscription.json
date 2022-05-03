@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "responseStatus": {
+      "type": "string"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "subscriptions": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "item": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "required": [
+                "id",
+                "item"
+              ]
+            }
+          ]
+        },
+        "errors": {
+          "type": "array",
+          "items": [
+            {
+              "type": "object",
+              "properties": {
+                "errorCode": {
+                  "type": "string"
+                },
+                "errorMessage": {
+                  "type": "string"
+                },
+                "item": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "id"
+                  ]
+                }
+              },
+              "required": [
+                "errorCode",
+                "errorMessage",
+                "item"
+              ]
+            }
+          ]
+        }
+      },
+      "required": [
+        "subscriptions",
+        "errors"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "responseStatus",
+    "message",
+    "data"
+  ]
+}

@@ -1,4 +1,4 @@
-@discount
+@discount @v2
 Business Need: Discount
 
   @SUB-716 @createDiscount @getDiscountById
@@ -8,7 +8,7 @@ Business Need: Discount
     """
       {
           "validity":{
-            "startDate":"2022-04-04T10:18:49.120Z",
+            "startDate":"{Date::uuu-MM-dd:::d=0}T10:18:49.120Z",
             "endDate":"2030-04-04T10:18:49.120Z",
             "applyOnOrders":[
                2,
@@ -130,7 +130,7 @@ Business Need: Discount
     """
       {
           "validity":{
-            "startDate":"2022-04-04T10:18:49.120Z",
+            "startDate":"{Date::uuu-MM-dd:::d=0}T10:18:49.120Z",
             "endDate":"2030-04-04T10:18:49.120Z",
             "applyOnOrders":[
                2,
@@ -262,7 +262,7 @@ Business Need: Discount
     """
         {
             "validity":{
-                "startDate":"2022-05-04T10:18:49.120Z",
+                "startDate":"{Date::uuu-MM-dd:::d=2}T10:18:49.120Z",
                 "endDate":"2031-04-04T10:18:49.120Z",
                 "applyOnOrders":[
                    20,
@@ -278,4 +278,4 @@ Business Need: Discount
     Then I see property value 30 is present in the response property "data.validity.applyOnOrders[1]"
     Then I see property value 100 is present in the response property "data.validity.applyOnOrders[2]"
     Then I see property value "2031-04-04T10:18:49.120Z" is present in the response property "data.validity.endDate"
-    Then I see property value "2022-05-04T10:18:49.120Z" is present in the response property "data.validity.startDate"
+    Then I see property value "{Date::uuu-MM-dd:::d=2}T10:18:49.120Z" is present in the response property "data.validity.startDate"

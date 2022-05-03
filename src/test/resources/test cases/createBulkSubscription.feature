@@ -1236,6 +1236,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
     And I see that error message is showing for invalid offer
 
     # Get Subscriptions by its id
+
   @get_subscription_by_id
   Scenario: Get Subscriptions by its id
     Given I have endpoint "subscriptions/:id"
@@ -1366,3 +1367,47 @@ Business Need: As a merchant, I should be able to create multiple subscription a
                 "message": "Subscription not found",
             }
         """
+
+  Scenario: Different customers should be able to create a subscription for same product
+    Given customer A has created a subscription for product 12345
+    When customer B has try to create a subscription for 12345
+    Then customer B also allowed to create subscription for product 1234
+
+  # V2 get all the subscriptions
+
+
+  @get_all_subscriptions
+  Scenario: Get all subscriptions
+    Given I have endpoint "/subscriptions"
+    When I run get call api
+    Then I should see all the subscriptions in new v2 response format
+
+  @get_subscription_pagination
+  Scenario: Get all subscriptions based on offset and limit
+    Given I have endpoint "/v1/subscriptions?offset=1&limit=10"
+    When I run get call api
+    Then Pagination should work as per offset and limit
+
+  @get_subscription_customerReferenceId
+  Scenario: Get all subscriptions based on customer referenceId
+    Given I have endpoint "/v1/subscriptions?customerReferenceId=623ab4d0bcfaaa00097f825a"
+    When I run get call api
+    Then subscriptions should be returned based on customer reference id
+
+  @get_subscription_itemId
+  Scenario: Get all subscriptions based on itemId
+    Given I have endpoint "/v1/subscriptions?itemId=1000011327"
+    When I run get call api
+    Then subscriptions should be returned based on item id
+
+  @get_subscription_sku
+  Scenario: Get all subscriptions
+    Given I have endpoint "/v1/subscriptions?sku=qws12"
+    When I run get call api
+    Then subscriptions should be returned based on sku id
+
+  @get_subscription_status
+  Scenario: Get all subscriptions based on status
+    Given I have endpoint "/v1/subscriptions?status=ACTIVE"
+    When I run get call api
+    Then subscriptions should be returned based on subscription status
