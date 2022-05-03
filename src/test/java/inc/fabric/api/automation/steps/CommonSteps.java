@@ -46,7 +46,7 @@ public class CommonSteps extends BasePage {
         ScenarioController.printFinalLogs();
     }
 
-    @Before(order = 1)
+    @Given("Delete subscriptions")
     public void deleteSubscription() {
         String [] products = {"productItem1","productItem2"};
         for (int i = 0; i < 2; i++) {
@@ -63,7 +63,7 @@ public class CommonSteps extends BasePage {
         }
     }
 
-    @Before(order = 2)
+    @Given("Delete plans")
     public void deletePlans() {
         JsonObject payload = new JsonObject();
         JsonArray jsonArray = new JsonArray();
@@ -87,14 +87,14 @@ public class CommonSteps extends BasePage {
         }
     }
 
-    @Then("^I see property value \"([^\"]+)\" is (present|contains) in the response property \"([^\"]+)\"$")
-    public void iSeePlanIsPresentInTheResponse(String propertyValue, String contains, String property) {
-        commonPage.verifyPropertyValueIn(propertyValue, contains.equalsIgnoreCase("contains"),property);
+    @Then("^I (do not see|see) property value \"([^\"]+)\" is (present|contains) in the response property \"([^\"]+)\"$")
+    public void iSeePlanIsPresentInTheResponse(String doNotCheck, String propertyValue, String contains, String property) {
+        commonPage.verifyPropertyValueIn(doNotCheck.contains("not"),propertyValue, contains.equalsIgnoreCase("contains"),property);
     }
 
-    @Then("I see property value {int} is present in the response property {string}")
-    public void iSeePlanIsPresentInTheResponse(int propertyValue, String property) {
-        commonPage.verifyPropertyValueIn(propertyValue, property);
+    @Then("^I (do not see|see) property value (\\d+) is present in the response property \"([^\"]+)\"$")
+    public void iSeePlanIsPresentInTheResponse(String doNotCheck, int propertyValue, String property) {
+        commonPage.verifyPropertyValueIn(doNotCheck.contains("not"), propertyValue, property);
     }
 
     @And("I see response code {int}")
@@ -104,7 +104,7 @@ public class CommonSteps extends BasePage {
 
     @Then("^I see following value for property \"([^\"]*)\" :$")
     public void iSeeFollowingValueForProperty(String property, String propertyValue) {
-        commonPage.verifyPropertyValueIn(propertyValue, false, property);
+        commonPage.verifyPropertyValueIn(false,propertyValue, false, property);
     }
 
     @And("I have added property {string} as {string} value in payload")

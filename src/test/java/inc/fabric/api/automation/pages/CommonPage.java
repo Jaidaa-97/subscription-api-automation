@@ -21,26 +21,48 @@ public class CommonPage {
         this.basePage = basePage;
     }
 
-    public void verifyPropertyValueIn(String propertyValue, boolean isContains, String property) {
+    public void verifyPropertyValueIn(boolean doNotCheck, String propertyValue, boolean isContains, String property) {
         propertyValue = propertyValue.trim();
-        if (!isContains) {
-            if (propertyValue.contains("true") || propertyValue.contains("false")) {
-                Assert.assertEquals(Boolean.parseBoolean(propertyValue), basePage.getResponse().then().extract().path(property));
-            } else if(propertyValue.equals("null")){
-                Assert.assertTrue(basePage.getResponse().then().extract().path(property) == null);
-            } else if(propertyValue.equals("empty")){
-                int size = ((ArrayList<Integer>)(basePage.getResponse().then().extract().path(property))).size();
-                Assert.assertEquals(0,size);
-            }else {
-                Assert.assertEquals(propertyValue, basePage.getResponse().then().extract().path(property));
+
+        if (doNotCheck) {
+            if (!isContains) {
+                if (propertyValue.contains("true") || propertyValue.contains("false")) {
+                    Assert.assertFalse(basePage.getResponse().then().extract().path(property).equals(propertyValue));
+                } else if(propertyValue.equals("null")){
+                    Assert.assertFalse(basePage.getResponse().then().extract().path(property) == null);
+                } else if(propertyValue.equals("empty")){
+                    int size = ((ArrayList<Integer>)(basePage.getResponse().then().extract().path(property))).size();
+                    Assert.assertNotEquals(0,size);
+                }else {
+                    Assert.assertNotEquals(propertyValue, basePage.getResponse().then().extract().path(property));
+                }
+            } else {
+                Assert.assertFalse(basePage.getResponse().then().extract().path(property).toString().contains(propertyValue));
             }
         } else {
-            Assert.assertTrue(basePage.getResponse().then().extract().path(property).toString().contains(propertyValue));
+            if (!isContains) {
+                if (propertyValue.contains("true") || propertyValue.contains("false")) {
+                    Assert.assertEquals(Boolean.parseBoolean(propertyValue), basePage.getResponse().then().extract().path(property));
+                } else if (propertyValue.equals("null")) {
+                    Assert.assertTrue(basePage.getResponse().then().extract().path(property) == null);
+                } else if (propertyValue.equals("empty")) {
+                    int size = ((ArrayList<Integer>) (basePage.getResponse().then().extract().path(property))).size();
+                    Assert.assertEquals(0, size);
+                } else {
+                    Assert.assertEquals(propertyValue, basePage.getResponse().then().extract().path(property));
+                }
+            } else {
+                Assert.assertTrue(basePage.getResponse().then().extract().path(property).toString().contains(propertyValue));
+            }
         }
     }
 
-    public void verifyPropertyValueIn(int propertyValue, String property) {
-        Assert.assertEquals(propertyValue, (int) basePage.getResponse().then().extract().path(property));
+    public void verifyPropertyValueIn(boolean doNotCheck, int propertyValue, String property) {
+        if (doNotCheck){
+            Assert.assertNotEquals(propertyValue, (int) basePage.getResponse().then().extract().path(property));
+        } else {
+            Assert.assertEquals(propertyValue, (int) basePage.getResponse().then().extract().path(property));
+        }
     }
 
     public JsonObject updateParentProperty(JsonObject jsonObject, String fieldName, String fieldValue) {
