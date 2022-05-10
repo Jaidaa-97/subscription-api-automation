@@ -25,6 +25,12 @@ main-stg02:
   stage: main-stg02
   script:
     - mvn clean verify -Dtags=@sanity
+  after_script:
+    - mvn allure:report
+    - env="stg02"
+    - test_type="Sanity"
+    - sh report.sh ${CI_PROJECT_NAME} ${CI_JOB_ID} ${CI_PAGES_URL} ${env} ${test_type} ${CI_PIPELINE_URL}
+
 #  only:
 #    variables:
 #      - $ENV == "staging"
