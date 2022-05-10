@@ -2,7 +2,7 @@ image: maven:3-jdk-11
 
 stages:
   - test-dev02
-  - test-stg02
+  - main-stg02
   - test-sandbox
   - test-prod02
 
@@ -21,8 +21,8 @@ test-dev02:
       - $MERGE_ENV == "develop"
       - $ENV == "SUB-develop"
 
-test-stg02:
-  stage: test-stg02
+main-stg02:
+  stage: main-stg02
   script:
     - mvn clean verify -Dtags=@sanity
   only:
