@@ -221,7 +221,7 @@ public class SubscriptionPage extends BasePage {
                 "            },\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\":\"SHOES1\",\n" +
+                "                    \"sku\":\"SHIRT1\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -258,7 +258,7 @@ public class SubscriptionPage extends BasePage {
                 "                    }\n" +
                 "                },\n" +
                 "                {\n" +
-                "                    \"sku\": \"SHOES2\",\n" +
+                "                    \"sku\": \"SHIRT2\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -360,7 +360,7 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\"SHOES1\",\n" +
+                    "            \"sku\":\"SHIRT1\",\n" +
                     "            \"quantity\": 10,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +

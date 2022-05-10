@@ -18,7 +18,7 @@ import java.util.TimeZone;
 
 public class BasePage {
     public static Scenario scenario;
-    public String access_token;
+    public static String access_token;
     public String body;
     private Response response;
     public String endPoint;
@@ -54,13 +54,17 @@ public class BasePage {
         request = RestAssured.given().relaxedHTTPSValidation().header("x-site-context",get_xSiteContext());
         request.contentType(ContentType.JSON);
         request.body(getLoginRequestPayload());
-        Response loginResponse = request.post(loginEndPoint);
-        scenario.write("Response : "+ loginResponse.prettyPrint());
-        while(loginResponse.getStatusCode() == 502) {
+        Response loginResponse=null;
+        if (access_token == null) {
             loginResponse = request.post(loginEndPoint);
+            scenario.write("Response : "+ loginResponse.prettyPrint());
+            while(loginResponse.getStatusCode() == 502) {
+                loginResponse = request.post(loginEndPoint);
+            }
+            access_token = loginResponse.jsonPath().get("accessToken").toString();
+            scenario.write("access token : "+access_token);
         }
-        access_token = loginResponse.jsonPath().get("accessToken").toString();
-        scenario.write("access token : "+access_token);
+
         return access_token;
     }
 

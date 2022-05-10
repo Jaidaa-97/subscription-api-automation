@@ -1,4 +1,4 @@
-@bulK_subscription @v2
+@subscription_v2 @v2
 Business Need: Create Bulk Subscription
 
   @can_not_create_duplicate_subscription
@@ -21,7 +21,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "id":1000000161,
+                        "sku":"---data:-:env_sku1---",
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -59,8 +59,7 @@ Business Need: Create Bulk Subscription
                         }
                     },
                     {
-                        "id": 1000000161,
-                        "sku": "SHOES1",
+                        "sku":"---data:-:env_sku1---",
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -168,7 +167,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "id":1000000161,
+                        "id":---data:-:env_item1---,
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -206,7 +205,7 @@ Business Need: Create Bulk Subscription
                         }
                     },
                     {
-                        "id": 1000000162,
+                        "id":---data:-:env_item1---,
                         "sku": "ABC123",
                         "quantity": 1,
                         "weight": 10,
@@ -317,7 +316,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "id":1000000161,
+                         "id":---data:-:env_item1---,
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -355,7 +354,7 @@ Business Need: Create Bulk Subscription
                         }
                     },
                     {
-                        "id": 1000000162,
+                         "id":---data:-:env_item2---,
                         "sku": "ABC123",
                         "quantity": 1,
                         "weight": 10,
@@ -466,7 +465,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1000000161,
+             "id":---data:-:env_item1---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -503,7 +502,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id": 1000000162,
+             "id":---data:-:env_item2---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -612,7 +611,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1000000161,
+             "id":---data:-:env_item1---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -649,7 +648,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id": 1000000162,
+             "id":---data:-:env_item2---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -758,7 +757,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1000000161,
+             "id":---data:-:env_item1---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -795,7 +794,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id": 1000000162,
+             "id":---data:-:env_item2---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -908,7 +907,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -945,7 +944,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                    "id":---data:-:env_item2---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1055,7 +1054,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"SHOES1",
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1092,7 +1091,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1205,7 +1204,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1242,7 +1241,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                    "id":---data:-:env_item2---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1390,7 +1389,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id": 1000000162,
+            "id":---data:-:env_item2---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -1497,7 +1496,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id": 1000000161,
+            "id":---data:-:env_item1---,
             "quantity": 1,
             "itemPrice": {
                 "price": 100.00,
@@ -1617,7 +1616,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                    "id":---data:-:env_item2---,
                     "sku": "ABC123",
                     "quantity": 1,
                     "weight": 10,
@@ -1732,7 +1731,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1000000161,
+            "id":---data:-:env_item1---,
             "quantity": 10000000099,
             "weight": 10,
             "weightUnit": "lb",
@@ -1860,7 +1859,7 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 200
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000161 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
       # Invalid offer code
     And I have following request payload :
       """
@@ -1879,7 +1878,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1000000161,
+           "id":---data:-:env_item1---,
             "quantity": 10000000099,
             "weight": 10,
             "weightUnit": "lb",
@@ -1917,7 +1916,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id": 1000000162,
+           "id":---data:-:env_item2---,
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -2008,7 +2007,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000161 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
 
   @getSingleSubscriptionById @sanity
   Scenario: Get single subscription by id
@@ -2030,7 +2029,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                  "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2067,7 +2066,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                   "id":---data:-:env_item2---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2189,7 +2188,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2226,7 +2225,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                   "id":---data:-:env_item2---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2318,9 +2317,9 @@ Business Need: Create Bulk Subscription
       """
           Request processed with partial success
       """
-    Then I see property value 1000000161 is present in the response property "data.subscriptions[0].item.id"
+    Then I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
-    Then I see property value 1000000162 is present in the response property "data.errors[0].item.id"
+    Then I see property value 1000000076 is present in the response property "data.errors[0].item.id"
 
   @partial_response_expiryDate_past
   Scenario: Verify partial response when one of the expiry date of a subscription is in the past
@@ -2342,7 +2341,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2379,7 +2378,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id": 1000000162,
+                   "id":---data:-:env_item2---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2469,7 +2468,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "expiryDate cannot be in past" is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000162 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value 1000000076 is present in the response property "data.subscriptions[0].item.id"
 
   @partial_response_skuId_not_allowed_to_subscription
   Scenario: Verify partial response when skuId is not allowed for subscription
@@ -2491,7 +2490,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2618,7 +2617,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000161 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
 
   @partial_response_skuId_not_valid
   Scenario: Verify partial response when skuId is not valid
@@ -2640,7 +2639,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":1000000161,
+                    "id":---data:-:env_item1---,
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2767,7 +2766,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000161 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
 
   @deactivate_subscription @reactivate_subscription @sanity
   Scenario: Deactivate subscription and all the future orders should be canceled.| Reactivate the subscription again
@@ -3217,7 +3216,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "sku":"BANANA_CHIPS",
+                        "sku":"---data:-:env_discontinuedSKU---",
                         "quantity": 10000000099,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -3313,6 +3312,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorCode"
 
+  @subscription_not_allowed
   Scenario: Subscription should not be created for a product which is not available to subscribe
     Given I have endpoint "/data-subscription/subscriptions/bulk"
     And I have following request payload :
@@ -3332,7 +3332,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "sku":"BANANA_CHIPS",
+                        "sku":"---data:-:env_notAvailableSubscription---",
                         "quantity": 10000000099,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -3426,7 +3426,7 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 400
-    And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorCode"
+    And I see property value "subscriptions not allowed on this sku" is present in the response property "data.errors[0].errorMessage"
 
   @update_sku
   Scenario: Swap the product in subscription with another product which is present in the list of swappable
@@ -3439,7 +3439,7 @@ Business Need: Create Bulk Subscription
           """
                 {
                     "item":{
-                        "sku":"SHOES3"
+                        "sku":"---data:-:env_sku3---"
                     }
                 }
           """
@@ -3458,13 +3458,13 @@ Business Need: Create Bulk Subscription
           """
                 {
                     "item":{
-                        "sku":"SHOES2"
+                        "sku":"---data:-:env_sku2---"
                     }
                 }
           """
     When I run patch call
     Then I see response code 400
-    And I see property value "SHOES2 is not a apart of the swappable SKU list of SHOES1" is present in the response property "message"
+    And I see property value "---data:-:env_sku2--- is not a apart of the swappable SKU list of ---data:-:env_sku1---" is present in the response property "message"
 
   @upsell_order @remove_item_from_order @error_message_for_invalidLineItem
   Scenario: Add item to an Order for onetime sell/upsell | Remove item from an Order | Verify error message if invalid line item is removed
@@ -3486,7 +3486,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"SHOES1",
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -3593,7 +3593,7 @@ Business Need: Create Bulk Subscription
                 "lineItems": [
                     {
                         "item": {
-                            "sku": "SHOES2",
+                            "sku": "---data:-:env_sku2---",
                             "quantity": 2,
                             "weight": 10,
                             "weightUnit": "lb",
@@ -3655,7 +3655,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"SHOES1",
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -3764,7 +3764,7 @@ Business Need: Create Bulk Subscription
         {
             "subscriptionId": "{SavedValue::subId}",
             "item": {
-                "sku": "SHOES2",
+                "sku": "---data:-:env_sku2---",
                 "quantity": 10,
                 "weight": 10,
                 "weightUnit": "lb",
@@ -3803,9 +3803,9 @@ Business Need: Create Bulk Subscription
   @discontinue_item
   Scenario: All subscription should get inactive if the sku/item is discontinued
     Given I have created 1 bulk subscription
-    When I discontinued item "SHOES1"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
-    When I get all the subscription of an item "SHOES1"
+    When I get all the subscription of an item "---data:-:env_sku1---"
     Then I see response code 200
     And I see all the subscription of discontinued item gets deactivated
 
@@ -3819,7 +3819,7 @@ Business Need: Create Bulk Subscription
     When I get all the orders placed by customer "{SavedValue::customerId}"
     Then I see response code 200
     And I have saved property "data.orders[0]._id" as "orderId"
-    When I discontinued item "SHOES1"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     When I get the order by id "{SavedValue::orderId}"
     Then I see response code 200
@@ -3836,12 +3836,12 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I have saved property "data.orders[0]._id" as "orderId"
     # Add item in order
-    When add item "SHOES2" in order "{SavedValue::orderId}"
-    When I discontinued item "SHOES1"
+    When add item "---data:-:env_sku2---" in order "{SavedValue::orderId}"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     # get order by id
     When I get the order by id "{SavedValue::orderId}"
     Then I see response code 200
     And I do not see property value "CANCELED" is present in the response property "data.order.status"
     And I verify 1 records are present in the response against the property "data.order.lineItems"
-    And I see property value "SHOES2" is present in the response property "data.order.lineItems[0].item.sku"
+    And I see property value "---data:-:env_sku2---" is present in the response property "data.order.lineItems[0].item.sku"
