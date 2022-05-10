@@ -8,7 +8,8 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         glue = {"inc.fabric.api.automation.steps"},
         features = {"src/test/resources/features"},
-        plugin = {"json:target/cucumber-report/cucumber.json","html:target/cucumber-html"},
+        plugin = {"json:target/cucumber-report/cucumber.json","pretty","html:target/cucumber-html",
+                "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"},
         tags = "@a",
         monochrome = true
 )
