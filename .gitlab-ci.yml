@@ -1,0 +1,53 @@
+image: maven:3-jdk-11
+
+stages:
+  - test-dev02
+  - test-stg02
+  - test-sandbox
+  - test-prod02
+
+
+before_script:
+    - echo "********* $ENV ************"
+    - echo "********* $MERGE_ENV ************"
+
+test-dev02:
+  stage: test-dev02
+  script:
+    - mvn clean verify -Dtags=@sanity -Denv=dev02
+  only:
+    variables:
+      - $ENV == "develop"
+      - $MERGE_ENV == "develop"
+      - $ENV == "SUB-develop"
+
+test-stg02:
+  stage: test-stg02
+  script:
+    - mvn clean verify -Dtags=@sanity
+  only:
+    variables:
+      - $ENV == "staging"
+      - $MERGE_ENV == "staging"
+      - $ENV == "SUB-staging"
+
+test-sandbox:
+  stage: test-sandbox
+  script:
+    - mvn clean verify -Dtags=@sanity -Denv=sandbox
+  only:
+    variables:
+      - $ENV == "main"
+      - $MERGE_ENV == "main"
+
+test-prod02:
+  stage: test-prod02
+  script:
+    - mvn clean verify -Dtags=@sanity -Denv=prod02
+  only:
+    variables:
+      - $ENV == "main"
+      - $MERGE_ENV == "main"
+
+
+
