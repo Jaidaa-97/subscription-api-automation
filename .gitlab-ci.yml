@@ -33,7 +33,7 @@ main-stg02:
   artifacts:
     when: always
     paths:
-      - target/allure-results
+      - target/site
 
 #  only:
 #    variables:
