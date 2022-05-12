@@ -29,7 +29,12 @@ main-stg02:
     - mvn allure:report
     - env="stg02"
     - test_type="Sanity"
-    - sh report.sh ${CI_PROJECT_NAME} ${CI_JOB_ID} ${CI_PAGES_URL} ${env} ${test_type} ${CI_PIPELINE_URL}
+    - echo "https://fabric2.gitlab.io/-/subscriptions/subscription-api-automation/-/jobs/${CI_JOB_ID}/artifacts/target/site/allure-maven-plugin/index.html"
+    - message="In ${CI_PROJECT_NAME} for pipeline-${CI_PIPELINE_URL} environment-stg02, sanity test results are https://fabric2.gitlab.io/-/subscriptions/subscription-api-automation/-/jobs/${CI_JOB_ID}/artifacts/target/site/allure-maven-plugin/index.html"
+      curl --location --request POST 'https://hooks.slack.com/services/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' \
+      --header 'Content-Type: application/json' \
+      --data-raw "{ \"text\":
+        \"$message\", \"channel\": \"qa-subscription-automation-report\"}"
   artifacts:
     when: always
     paths:
