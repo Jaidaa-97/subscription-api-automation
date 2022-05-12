@@ -19,7 +19,7 @@ before_script:
 
 
 main-sanity:
-  stage: main-sanity
+  stage: main-stg02
 
   script:
     - mvn clean verify -Dtags=$TAG
