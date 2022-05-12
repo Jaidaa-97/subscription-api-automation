@@ -3,7 +3,7 @@ Business Need: Create Bulk Subscription
 
   @can_not_create_duplicate_subscription
   Scenario: Duplicate subscription with same order id should not be created
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
     """
           {
@@ -167,7 +167,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                        "id":---data:-:env_item1---,
+                        "sku":"---data:-:env_sku1---",
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -205,7 +205,7 @@ Business Need: Create Bulk Subscription
                         }
                     },
                     {
-                        "id":---data:-:env_item1---,
+                        "sku":"---data:-:env_sku1---",
                         "sku": "ABC123",
                         "quantity": 1,
                         "weight": 10,
@@ -297,7 +297,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see following value for property "message" :
     """
-        "customerReferenceId" is required
+        "customer.customerReferenceId" is required
     """
     # missing locale in customer
     And I have following request payload :
@@ -316,7 +316,7 @@ Business Need: Create Bulk Subscription
                 },
                 "items": [
                     {
-                         "id":---data:-:env_item1---,
+                         "sku":"---data:-:env_sku1---",
                         "quantity": 1,
                         "weight": 10,
                         "weightUnit": "lb",
@@ -354,7 +354,7 @@ Business Need: Create Bulk Subscription
                         }
                     },
                     {
-                         "id":---data:-:env_item2---,
+                         "sku":"---data:-:env_sku2---",
                         "sku": "ABC123",
                         "quantity": 1,
                         "weight": 10,
@@ -446,7 +446,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see following value for property "message" :
     """
-        "locale" is required
+        "customer.locale" is required
     """
     # missing email in customer
     When I have following request payload :
@@ -465,7 +465,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-             "id":---data:-:env_item1---,
+             "sku":"---data:-:env_sku1---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -502,7 +502,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-             "id":---data:-:env_item2---,
+             "sku":"---data:-:env_sku2---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -592,7 +592,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see following value for property "message" :
     """
-        "email" is required
+        "customer.email" is required
     """
     # missing firstName
     Given I have following request payload :
@@ -611,7 +611,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-             "id":---data:-:env_item1---,
+             "sku":"---data:-:env_sku1---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -648,7 +648,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-             "id":---data:-:env_item2---,
+             "sku":"---data:-:env_sku2---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -738,7 +738,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see following value for property "message" :
     """
-        "firstName" is required
+        "customer.firstName" is required
     """
     # missing lastName
     Given I have following request payload :
@@ -757,7 +757,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-             "id":---data:-:env_item1---,
+             "sku":"---data:-:env_sku1---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -794,7 +794,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-             "id":---data:-:env_item2---,
+             "sku":"---data:-:env_sku2---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -884,12 +884,12 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see following value for property "message" :
     """
-        "lastName" is required
+        "customer.lastName" is required
     """
 
   @create_multiple_subscriptions @create_subscriptions_without_fabric_plan @sanity
   Scenario: Create multiple subscriptions
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -907,7 +907,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -944,7 +944,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id":---data:-:env_item2---,
+                    "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1032,11 +1032,11 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 200
-    And validate schema "gnc/bulkSubscription.json"
+    And validate schema "gnc/bulkSubscriptionWithSKUId.json"
 
   @create_multiple_subscriptions_withSkuId
   Scenario: Create multiple subscriptions with sku id
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -1091,7 +1091,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1183,7 +1183,7 @@ Business Need: Create Bulk Subscription
 
   @invalid_offer_id
   Scenario: Subscription should not be created for invalid offer id
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
         """
         {
@@ -1204,7 +1204,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1241,7 +1241,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id":---data:-:env_item2---,
+                    "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1334,7 +1334,7 @@ Business Need: Create Bulk Subscription
 
   @can_not_create_subscription_if_expiryDate_in_past
   Scenario: Subscription should not be allowed to create if the expiry date is before today
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -1389,7 +1389,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-            "id":---data:-:env_item2---,
+            "sku":"---data:-:env_sku2---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -1482,7 +1482,7 @@ Business Need: Create Bulk Subscription
 
   @create_subscription_without_optional_fields
   Scenario: Create Subscription without optional fields
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -1496,7 +1496,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":---data:-:env_item1---,
+            "sku":"---data:-:env_sku1---",
             "quantity": 1,
             "itemPrice": {
                 "price": 100.00,
@@ -1555,11 +1555,11 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 200
-    And validate schema "gnc/bulkSubscription.json"
+    And validate schema "gnc/bulkSubscriptionWithSKUId.json"
 
   @can_not_create_subscription_with_status
   Scenario: Subscription can not be create with status
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
                 {
@@ -1616,7 +1616,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id":---data:-:env_item2---,
+                    "sku":"---data:-:env_sku2---",
                     "sku": "ABC123",
                     "quantity": 1,
                     "weight": 10,
@@ -1713,7 +1713,7 @@ Business Need: Create Bulk Subscription
 
   @partial_reponse_no_skuID @sanity
   Scenario: Verify partial response if skuid is not present
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -1731,7 +1731,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":---data:-:env_item1---,
+            "sku":"---data:-:env_sku1---",
             "quantity": 10000000099,
             "weight": 10,
             "weightUnit": "lb",
@@ -1859,7 +1859,7 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 200
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
       # Invalid offer code
     And I have following request payload :
       """
@@ -1878,7 +1878,7 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-           "id":---data:-:env_item1---,
+           "sku":"---data:-:env_sku1---",
             "quantity": 10000000099,
             "weight": 10,
             "weightUnit": "lb",
@@ -1916,7 +1916,7 @@ Business Need: Create Bulk Subscription
             }
         },
         {
-           "id":---data:-:env_item2---,
+           "sku":"---data:-:env_sku2---",
             "quantity": 1,
             "weight": 10,
             "weightUnit": "lb",
@@ -2007,11 +2007,11 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @getSingleSubscriptionById @sanity
   Scenario: Get single subscription by id
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -2029,7 +2029,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                  "id":---data:-:env_item1---,
+                  "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2066,7 +2066,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                   "id":---data:-:env_item2---,
+                   "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2154,7 +2154,7 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 200
-    And validate schema "gnc/bulkSubscription.json"
+    And validate schema "gnc/bulkSubscriptionWithSKUId.json"
     Given I have saved property "data.subscriptions[0].id" as "subId"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
@@ -2170,7 +2170,7 @@ Business Need: Create Bulk Subscription
 
   @partial_response_invalid_offer_id
   Scenario: Partial Response if one of the subscription has invalid offer id
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -2188,7 +2188,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2225,7 +2225,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                   "id":---data:-:env_item2---,
+                   "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2317,13 +2317,13 @@ Business Need: Create Bulk Subscription
       """
           Request processed with partial success
       """
-    Then I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
+    Then I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
-    Then I see property value 1000000076 is present in the response property "data.errors[0].item.id"
+    Then I see property value "---data:-:env_sku2---" is present in the response property "data.errors[0].item.sku"
 
   @partial_response_expiryDate_past
   Scenario: Verify partial response when one of the expiry date of a subscription is in the past
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -2341,7 +2341,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2378,7 +2378,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                   "id":---data:-:env_item2---,
+                   "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2468,11 +2468,11 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "expiryDate cannot be in past" is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000076 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_skuId_not_allowed_to_subscription
   Scenario: Verify partial response when skuId is not allowed for subscription
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -2490,7 +2490,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2617,11 +2617,11 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_skuId_not_valid
   Scenario: Verify partial response when skuId is not valid
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -2639,7 +2639,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":---data:-:env_item1---,
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2766,7 +2766,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value 1000000075 is present in the response property "data.subscriptions[0].item.id"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @deactivate_subscription @reactivate_subscription @sanity
   Scenario: Deactivate subscription and all the future orders should be canceled.| Reactivate the subscription again
@@ -3198,7 +3198,7 @@ Business Need: Create Bulk Subscription
 
   @no_subscription_discontinued_sku
   Scenario: Subscription should not be created for discontinued sku
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -3314,7 +3314,7 @@ Business Need: Create Bulk Subscription
 
   @subscription_not_allowed
   Scenario: Subscription should not be created for a product which is not available to subscribe
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -3445,7 +3445,7 @@ Business Need: Create Bulk Subscription
           """
     When I run patch call
     Then I see response code 200
-    And I see property value "SHOES3" is present in the response property "data.subscription.item.sku"
+    And I see property value "---data:-:env_sku3---" is present in the response property "data.subscription.item.sku"
 
   @swap_incorrect_product
   Scenario: Product should not be swapped/updated in the subscription if the swapping product is not a part of swappable list of the product
@@ -3468,7 +3468,7 @@ Business Need: Create Bulk Subscription
 
   @upsell_order @remove_item_from_order @error_message_for_invalidLineItem
   Scenario: Add item to an Order for onetime sell/upsell | Remove item from an Order | Verify error message if invalid line item is removed
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
@@ -3637,7 +3637,7 @@ Business Need: Create Bulk Subscription
 
   @add_item_in_subscription
   Scenario: Add items to an order as a part of subscription
-    Given I have endpoint "/data-subscription/subscriptions/bulk"
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {

@@ -49,12 +49,12 @@
                 "item": {
                   "type": "object",
                   "properties": {
-                    "id": {
-                      "type": "integer"
+                    "sku": {
+                      "type": "string"
                     }
                   },
                   "required": [
-                    "id"
+                    "sku"
                   ]
                 }
               },

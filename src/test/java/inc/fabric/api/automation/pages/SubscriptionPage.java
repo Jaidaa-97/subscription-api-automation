@@ -205,7 +205,7 @@ public class SubscriptionPage extends BasePage {
     }
 
     public void createBulkSubscription(int noOfSubscriptions) {
-        commonPage.getEndPoint("/data-subscription/subscriptions/bulk");
+        commonPage.getEndPoint("/data-subscription/v1/subscriptions/bulk");
         String payload = "{\n" +
                 "            \"channel\": \"WEBSITE\",\n" +
                 "            \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
@@ -221,7 +221,7 @@ public class SubscriptionPage extends BasePage {
                 "            },\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\":\"SHIRT1\",\n" +
+                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -258,7 +258,7 @@ public class SubscriptionPage extends BasePage {
                 "                    }\n" +
                 "                },\n" +
                 "                {\n" +
-                "                    \"sku\": \"SHIRT2\",\n" +
+                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -360,7 +360,7 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\"SHIRT1\",\n" +
+                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
                     "            \"quantity\": 10,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
