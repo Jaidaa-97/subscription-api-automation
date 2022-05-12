@@ -8,7 +8,7 @@ Business Need: Discount
     """
       {
           "validity":{
-            "startDate":"{Date::uuu-MM-dd:::d=0}T10:18:49.120Z",
+            "startDate":"{Date::uuu-MM-dd:::d=1}T10:18:49.120Z",
             "endDate":"2030-04-04T10:18:49.120Z",
             "applyOnOrders":[
                2,
@@ -130,7 +130,7 @@ Business Need: Discount
     """
       {
           "validity":{
-            "startDate":"{Date::uuu-MM-dd:::d=0}T10:18:49.120Z",
+            "startDate":"{Date::uuu-MM-dd:::d=1}T10:18:49.120Z",
             "endDate":"2030-04-04T10:18:49.120Z",
             "applyOnOrders":[
                2,
