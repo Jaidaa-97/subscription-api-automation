@@ -13,7 +13,7 @@ replaceWith=".io\/-"
 newUrl=$(echo "$PAGES_URL" | sed "s/$find/$replaceWith/")
 newUrl="$newUrl/-/jobs/$JOB_ID/artifacts/target/site/allure-maven-plugin/index.html"
 
-message="In $PROJECT_NAME for pipeline-$pipeline_URL environment-$env, service-$service, $test_type test results are $newUrl"
-curl --location --request POST 'https://hooks.slack.com/services/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' \
+message="In $PROJECT_NAME for pipeline-$pipeline_URL environment-$env, service-$service, sanity test results are $newUrl"
+curl --location --request POST 'https://hooks.slack.com/services/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' \
 --header 'Content-Type: application/json' \
 --data-raw "{ \"text\": \"$message\", \"channel\": \"qa-subscription-automation-report\"}"
