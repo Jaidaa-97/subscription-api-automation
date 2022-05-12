@@ -37,15 +37,15 @@ main-sanity:
     variables:
       - $TEST == "manual"
 
-test-dev02:
-  stage: test-dev02
-  script:
-    - mvn clean verify -Dtags=@sanity -Denv=dev02
-  only:
-    variables:
-      - $ENV == "develop"
-      - $MERGE_ENV == "develop"
-      - $ENV == "SUB-develop"
+#test-dev02:
+#  stage: test-dev02
+#  script:
+#    - mvn clean verify -Dtags=@sanity -Denv=dev02
+#  only:
+#    variables:
+#      - $ENV == "develop"
+#      - $MERGE_ENV == "develop"
+#      - $ENV == "SUB-develop"
 
 main-stg02:
   stage: main-stg02
@@ -67,23 +67,23 @@ main-stg02:
 #      - $MERGE_ENV == "staging"
 #      - $ENV == "SUB-staging"
 
-test-sandbox:
-  stage: test-sandbox
-  script:
-    - mvn clean verify -Dtags=@sanity -Denv=sandbox
-  only:
-    variables:
-      - $ENV == "main"
-      - $MERGE_ENV == "main"
-
-test-prod02:
-  stage: test-prod02
-  script:
-    - mvn clean verify -Dtags=@sanity -Denv=prod02
-  only:
-    variables:
-      - $ENV == "main"
-      - $MERGE_ENV == "main"
-
+#test-sandbox:
+#  stage: test-sandbox
+#  script:
+#    - mvn clean verify -Dtags=@sanity -Denv=sandbox
+#  only:
+#    variables:
+#      - $ENV == "main"
+#      - $MERGE_ENV == "main"
+#
+#test-prod02:
+#  stage: test-prod02
+#  script:
+#    - mvn clean verify -Dtags=@sanity -Denv=prod02
+#  only:
+#    variables:
+#      - $ENV == "main"
+#      - $MERGE_ENV == "main"
+#
 
 
