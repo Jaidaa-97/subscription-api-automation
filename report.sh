@@ -16,4 +16,4 @@ newUrl="$newUrl/-/jobs/$JOB_ID/artifacts/target/site/allure-maven-plugin/index.h
 message="In $PROJECT_NAME for pipeline-$pipeline_URL environment-$env, service-$service, $test_type test results are $newUrl"
 curl --location --request POST 'https://hooks.slack.com/services/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' \
 --header 'Content-Type: application/json' \
---data-raw "{ \"text\": \"$message\", \"channel\": \"oms-qa-allure-reports\"}"
+--data-raw "{ \"text\": \"$message\", \"channel\": \"qa-subscription-automation-report\"}"
