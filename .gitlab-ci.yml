@@ -25,10 +25,10 @@ sanity-test:
     - mvn clean verify -Dtags=$TAG
   after_script:
     - mvn allure:report
-      - env="stg02"
-      - test_type="Sanity"
-      - echo "https://fabric2.gitlab.io/-/subscriptions/subscription-api-automation/-/jobs/${CI_JOB_ID}/artifacts/target/site/allure-maven-plugin/index.html"
-      - sh report.sh ${CI_PROJECT_NAME} ${CI_JOB_ID} ${CI_PAGES_URL} ${env} ${service} ${test_type} ${CI_PIPELINE_URL}
+    - env="stg02"
+    - test_type="Sanity"
+    - echo "https://fabric2.gitlab.io/-/subscriptions/subscription-api-automation/-/jobs/${CI_JOB_ID}/artifacts/target/site/allure-maven-plugin/index.html"
+    - sh report.sh ${CI_PROJECT_NAME} ${CI_JOB_ID} ${CI_PAGES_URL} ${env} ${service} ${test_type} ${CI_PIPELINE_URL}
   artifacts:
     when: always
     paths:
