@@ -18,7 +18,7 @@ before_script:
   - echo "********* $MERGE_ENV ************"
 
 
-sanity-test:
+main-sanity:
   stage: sanity-test
 
   script:
