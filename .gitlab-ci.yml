@@ -35,12 +35,11 @@ main-stg02:
     when: always
     paths:
       - target/site
-
-#  only:
-#    variables:
-#      - $ENV == "staging"
-#      - $MERGE_ENV == "staging"
-#      - $ENV == "SUB-staging"
+  only:
+    variables:
+      - $ENV == "staging"
+      - $MERGE_ENV == "staging"
+      - $ENV == "SUB-staging"
 
 test-sandbox:
   stage: test-sandbox
