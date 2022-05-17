@@ -1034,6 +1034,153 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And validate schema "gnc/bulkSubscriptionWithSKUId.json"
 
+  @no_multiple_sub_for_same_item_id
+  Scenario: Multiple subscription should not be created for same item id
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+      """
+      {
+            "channel": "WEBSITE",
+            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+            "customer": {
+                "customerReferenceId": "606f01f441b8fc0008529954",
+                "locale": "en_US",
+                "email": "jitendra.pisal@mail.com",
+                "contactNumber": "+92 3333709568",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee"],
+                "employeeId": "1"
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 1,
+                    "weight": 10,
+                    "weightUnit": "lb",
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "tax": {
+                        "taxCode": "FR020000",
+                        "taxAmount": 10.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offsetDays": 10,
+                    "offer": {
+                        "id": "SUB-065710",
+                        "source": "PDP"
+                    },
+                    "shipping": {
+                      "shipmentCarrier": "USPS",
+                      "shipmentMethod": "Ground",
+                      "shipmentInstructions": "",
+                      "taxCode": "SHP020000",
+                      "shippingAmount": 10.00,
+                      "taxAmount": 1.00,
+                      "currencyCode": "USD"
+                    },
+                    "expiry": {
+                        "expiryDate": "2026-07-22T00:00:00.199Z",
+                        "billingCycles": 10
+                    }
+                },
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 1,
+                    "weight": 10,
+                    "weightUnit": "lb",
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "tax": {
+                        "taxCode": "FR020000",
+                        "taxAmount": 10.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 6,
+                        "frequencyType": "Weekly"
+                    },
+                    "offsetDays": 10,
+                    "offer": {
+                        "id": "SUB-065710",
+                        "source": "PDP"
+                    },
+                    "shipping": {
+                      "shipmentCarrier": "USPS",
+                      "shipmentMethod": "Ground",
+                      "shipmentInstructions": "",
+                      "taxCode": "SHP020000",
+                      "shippingAmount": 10.00,
+                      "taxAmount": 1.00,
+                      "currencyCode": "USD"
+                    },
+                    "expiry": {
+                        "expiryDate": "2026-07-22T00:00:00.199Z",
+                        "billingCycles": 10
+                    }
+                }
+
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "middleName": "",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST",
+                    "street2": ""
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": 2127,
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "middleName": "",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST",
+                    "street2": ""
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": 2127,
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                },
+                "paymentMethod": "visa",
+                "paymentKind": "CARD_PAYPAL"
+            }
+      }
+      """
+    When I run post call
+    Then I see response code 200
+    And I see property value "Request processed with partial success" is present in the response property "message"
+
   @create_multiple_subscriptions_withSkuId
   Scenario: Create multiple subscriptions with sku id
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
@@ -1091,7 +1238,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2802,7 +2949,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     Then I verify 3 records are present in the response against the property "data.orders"
 
-  @add-order-validation-please @bulk_update_subscription_of_customer
+  @bulk_update_subscription_of_customer
   Scenario: Bulk update shipping,billing,paymentDetails and offer in subscription of customer
     Given I have created bulk subscription
     And I have saved property "data.subscriptions[0].id" as "subId1"
@@ -2834,6 +2981,15 @@ Business Need: Create Bulk Subscription
                   "state": "MH",
                   "postalCode": 411001,
                   "country": "US"
+              },
+              "paymentDetails": {
+                  "currencyCode": "USD",
+                  "paymentIdentifier": {
+                    "cardIdentifier": "5555",
+                    "expiryDate": "03/26"
+                   },
+                   "paymentMethod": "rupay",
+                   "paymentKind": "CARD_PAYPAL11"
               }
             }
         """
@@ -2852,6 +3008,13 @@ Business Need: Create Bulk Subscription
     And I see property value "MH" is present in the response property "data.subscription.shipTo.state"
     And I see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.shipTo.country"
+
+    # validate payment details
+    And I see property value "5555" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.cardIdentifier"
+    And I see property value "03/26" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.expiryDate"
+    And I see property value "rupay" is present in the response property "data.subscription.paymentDetails.paymentMethod"
+    And I see property value "CARD_PAYPAL11" is present in the response property "data.subscription.paymentDetails.paymentKind"
+
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId2}"
     When I run get call api
     Then I see response code 200
@@ -2865,6 +3028,11 @@ Business Need: Create Bulk Subscription
     And I see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.shipTo.country"
 
+    # validate payment details
+    And I see property value "5555" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.cardIdentifier"
+    And I see property value "03/26" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.expiryDate"
+    And I see property value "rupay" is present in the response property "data.subscription.paymentDetails.paymentMethod"
+    And I see property value "CARD_PAYPAL11" is present in the response property "data.subscription.paymentDetails.paymentKind"
 
 # Get order id from get orders by customer id api
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
@@ -2887,8 +3055,34 @@ Business Need: Create Bulk Subscription
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
     And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
-    And I see property value "IN" is present in the response property "data.order.shipTo.country"
+    And I see property value "US" is present in the response property "data.order.shipTo.country"
 
+     # validate payment details in order 1
+    And I see property value "5555" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
+    And I see property value "03/26" is present in the response property "data.order.paymentDetails.paymentIdentifier.expiryDate"
+    And I see property value "rupay" is present in the response property "data.order.paymentDetails.paymentMethod"
+    And I see property value "CARD_PAYPAL11" is present in the response property "data.order.paymentDetails.paymentKind"
+
+    # Verify order 2 gets updated or not
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId2}"
+    And I run get call api
+    Then I see response code 200
+    # verify shipTo gets updated on order
+    And I see property value "Jitendra" is present in the response property "data.order.shipTo.name.firstName"
+    And I see property value "Dilip" is present in the response property "data.order.shipTo.name.middleName"
+    And I see property value "Pisal" is present in the response property "data.order.shipTo.name.lastName"
+    And I see property value "kOREGAON PARK" is present in the response property "data.order.shipTo.streetAddress.street1"
+    And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
+    And I see property value "Pune" is present in the response property "data.order.shipTo.city"
+    And I see property value "MH" is present in the response property "data.order.shipTo.state"
+    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "US" is present in the response property "data.order.shipTo.country"
+
+    # validate payment details in order 2
+    And I see property value "5555" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
+    And I see property value "03/26" is present in the response property "data.order.paymentDetails.paymentIdentifier.expiryDate"
+    And I see property value "rupay" is present in the response property "data.order.paymentDetails.paymentMethod"
+    And I see property value "CARD_PAYPAL11" is present in the response property "data.order.paymentDetails.paymentKind"
 
         # customer updates the billTo
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
@@ -2957,9 +3151,22 @@ Business Need: Create Bulk Subscription
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
     And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
-    And I see property value "IN" is present in the response property "data.order.shipTo.country"
+    And I see property value "US" is present in the response property "data.order.shipTo.country"
 
-
+    # Verify order 2 gets updated or not
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId2}"
+    And I run get call api
+    Then I see response code 200
+    # verify shipTo gets updated on order
+    And I see property value "Jitendra" is present in the response property "data.order.shipTo.name.firstName"
+    And I see property value "Dilip" is present in the response property "data.order.shipTo.name.middleName"
+    And I see property value "Pisal" is present in the response property "data.order.shipTo.name.lastName"
+    And I see property value "kOREGAON PARK" is present in the response property "data.order.shipTo.streetAddress.street1"
+    And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
+    And I see property value "Pune" is present in the response property "data.order.shipTo.city"
+    And I see property value "MH" is present in the response property "data.order.shipTo.state"
+    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "US" is present in the response property "data.order.shipTo.country"
 
         # Update Offer
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
@@ -2983,6 +3190,18 @@ Business Need: Create Bulk Subscription
     When I run get call api
     Then I see response code 200
     And I see property value "SUB-969193" is present in the response property "data.subscription.offer.id"
+
+    # validate offer applied in order 1
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId1}"
+    And I run get call api
+    Then I see response code 200
+    And I see property value "SUB-969193" is present in the response property "data.order.lineItems[0].offer.id"
+
+    # validate offer applied in order 2
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId2}"
+    And I run get call api
+    Then I see response code 200
+    And I see property value "SUB-969193" is present in the response property "data.order.lineItems[0].offer.id"
 
   @v2_update_subscription
   Scenario: Update customer details, shipping and billing address, payment details by updating subscription and verify
@@ -3195,6 +3414,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "5674" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
     And I do not see property value "04/25" is present in the response property "data.order.paymentDetails.paymentIdentifier.expiryDate"
     And I do not see property value "rupay" is present in the response property "data.order.paymentDetails.paymentMethod"
+    # TO DO - update frequency, item quantity
 
   @no_subscription_discontinued_sku
   Scenario: Subscription should not be created for discontinued sku
@@ -3845,3 +4065,72 @@ Business Need: Create Bulk Subscription
     And I do not see property value "CANCELED" is present in the response property "data.order.status"
     And I verify 1 records are present in the response against the property "data.order.lineItems"
     And I see property value "---data:-:env_sku2---" is present in the response property "data.order.lineItems[0].item.sku"
+
+    # add more validation to it such as see if item is replaced in all the subscription and orders
+  @replace_item
+  Scenario: Replace item
+    Given I have created 1 bulk subscription
+      # Replace item
+    Given I have endpoint "/data-subscription/v1/subscriptions/replace-items"
+    And I have following request payload :
+    """
+          {
+          "item": {
+              "sku": "---data:-:env_sku1---"
+          },
+          "replacementItem": {
+              "item": {
+                  "sku": "---data:-:env_sku3---",
+                  "quantity": 1,
+                  "weight": 10,
+                  "weightUnit": "lb",
+                  "itemPrice": {
+                      "price": 100.00,
+                      "currencyCode": "USD"
+                  }
+              }
+          }
+      }
+    """
+    When I run post call
+    Then I see response code 200
+
+
+  @error_unknown_error
+  Scenario: sku should not be replace if it is not present in the system
+    Given I have endpoint "/data-subscription/v1/subscriptions/replace-items"
+    And I have following request payload :
+    """
+          {
+          "item": {
+              "sku": "1dfe"
+          },
+          "replacementItem": {
+              "item": {
+                  "sku": "1dddd",
+                  "quantity": 1,
+                  "weight": 10,
+                  "weightUnit": "lb",
+                  "itemPrice": {
+                      "price": 100.00,
+                      "currencyCode": "USD"
+                  }
+              }
+          }
+      }
+    """
+    When I run post call
+    Then I see response code 400
+
+  @error_no_sku_exist
+  Scenario: Should allow to discontinue item which is not even exist
+    Given I have endpoint "/data-subscription/v1/subscriptions/discontinued-items"
+    And I have following request payload :
+      """
+            {
+          "sku": ["s"]
+            }
+      """
+    When I run post call
+    Then I see response code 400
+
