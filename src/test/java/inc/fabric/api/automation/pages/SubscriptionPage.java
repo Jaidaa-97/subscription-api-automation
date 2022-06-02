@@ -240,7 +240,7 @@ public class SubscriptionPage extends BasePage {
                 "                    },\n" +
                 "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \"SUB-065710\",\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
                 "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
@@ -277,7 +277,7 @@ public class SubscriptionPage extends BasePage {
                 "                    },\n" +
                 "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \"SUB-065710\",\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
                 "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
@@ -380,7 +380,7 @@ public class SubscriptionPage extends BasePage {
                     "            },\n" +
                     "            \"offsetDays\": 10,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \"SUB-065710\",\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
                     "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +

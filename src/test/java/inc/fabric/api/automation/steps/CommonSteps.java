@@ -194,4 +194,9 @@ public class CommonSteps extends BasePage {
         List<String> list = ((ArrayList<String>) basePage.getResponse().then().extract().path(propertyNameArr));
         Assert.assertTrue(list.contains(value));
     }
+
+    @And("I wait for {int} sec")
+    public void iWaitForSec(int sec) throws InterruptedException {
+        Thread.sleep(sec * 1000);
+    }
 }

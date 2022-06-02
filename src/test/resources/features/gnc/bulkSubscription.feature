@@ -41,7 +41,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -79,7 +79,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -187,7 +187,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -226,7 +226,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -336,7 +336,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -375,7 +375,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -484,7 +484,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -521,7 +521,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -630,7 +630,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -667,7 +667,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -776,7 +776,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -813,7 +813,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -926,7 +926,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -963,7 +963,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1034,153 +1034,6 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And validate schema "gnc/bulkSubscriptionWithSKUId.json"
 
-  @no_multiple_sub_for_same_item_id
-  Scenario: Multiple subscription should not be created for same item id
-    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
-    And I have following request payload :
-      """
-      {
-            "channel": "WEBSITE",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-            "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
-                "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
-                "firstName": "John",
-                "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
-            },
-            "items": [
-                {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "frequency": 5,
-                        "frequencyType": "Daily"
-                    },
-                    "offsetDays": 10,
-                    "offer": {
-                        "id": "SUB-065710",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
-                    }
-                },
-                {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
-                    },
-                    "offsetDays": 10,
-                    "offer": {
-                        "id": "SUB-065710",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
-                    }
-                }
-
-            ],
-            "shipTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "03323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": 2127,
-                "country": "US"
-            },
-            "billTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "012323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": 2127,
-                "country": "US"
-            },
-            "paymentDetails": {
-                "paymentIdentifier": {
-                    "cardIdentifier": "1234",
-                    "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
-            }
-      }
-      """
-    When I run post call
-    Then I see response code 200
-    And I see property value "Request processed with partial success" is present in the response property "message"
-
   @create_multiple_subscriptions_withSkuId
   Scenario: Create multiple subscriptions with sku id
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
@@ -1220,7 +1073,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1257,7 +1110,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1518,7 +1371,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -1556,7 +1409,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -1654,7 +1507,7 @@ Business Need: Create Bulk Subscription
                 "frequencyType": "Daily"
             },
             "offer": {
-                "id": "SUB-065710"
+                "id": "---data:-:env_offercode---"
             }
         }
     ],
@@ -1745,7 +1598,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1784,7 +1637,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1898,7 +1751,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -1936,7 +1789,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -2045,7 +1898,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-065710",
+                "id": "---data:-:env_offercode---",
                 "source": "PDP"
             },
             "shipping": {
@@ -2083,7 +1936,7 @@ Business Need: Create Bulk Subscription
             },
             "offsetDays": 10,
             "offer": {
-                "id": "SUB-0657101",
+                "id": "SUB-3106421",
                 "source": "PDP"
             },
             "shipping": {
@@ -2195,7 +2048,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2232,7 +2085,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2354,7 +2207,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2391,7 +2244,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-06571011",
+                        "id": "SUB-31064211",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2507,7 +2360,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2544,7 +2397,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2656,7 +2509,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2693,7 +2546,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2805,7 +2658,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2842,7 +2695,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -2929,6 +2782,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I have saved property "data.subscription.customer._id" as "customerId"
       # Get order id from get orders by customer id api
+    And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -2944,6 +2798,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "ACTIVE" is present in the response property "data.status"
     # verify if new order gets created
+    And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -3035,6 +2890,7 @@ Business Need: Create Bulk Subscription
     And I see property value "CARD_PAYPAL11" is present in the response property "data.subscription.paymentDetails.paymentKind"
 
 # Get order id from get orders by customer id api
+    And I wait for 5 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -3174,7 +3030,7 @@ Business Need: Create Bulk Subscription
         """
             {
               "offer": {
-                 "id": "SUB-969193",
+                 "id": "---data:-:env_updateOfferCode---",
                  "source": "PDP" 
                }
             }
@@ -3185,23 +3041,23 @@ Business Need: Create Bulk Subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId1}"
     When I run get call api
     Then I see response code 200
-    And I see property value "SUB-969193" is present in the response property "data.subscription.offer.id"
+    And I see property value "---data:-:env_updateOfferCode---" is present in the response property "data.subscription.offer.id"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId2}"
     When I run get call api
     Then I see response code 200
-    And I see property value "SUB-969193" is present in the response property "data.subscription.offer.id"
+    And I see property value "---data:-:env_updateOfferCode---" is present in the response property "data.subscription.offer.id"
 
     # validate offer applied in order 1
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId1}"
     And I run get call api
     Then I see response code 200
-    And I see property value "SUB-969193" is present in the response property "data.order.lineItems[0].offer.id"
+    And I see property value "---data:-:env_updateOfferCode---" is present in the response property "data.order.lineItems[0].offer.id"
 
     # validate offer applied in order 2
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId2}"
     And I run get call api
     Then I see response code 200
-    And I see property value "SUB-969193" is present in the response property "data.order.lineItems[0].offer.id"
+    And I see property value "---data:-:env_updateOfferCode---" is present in the response property "data.order.lineItems[0].offer.id"
 
   @v2_update_subscription
   Scenario: Update customer details, shipping and billing address, payment details by updating subscription and verify
@@ -3354,6 +3210,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "04/25" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.expiryDate"
     And I do not see property value "rupay" is present in the response property "data.subscription.paymentDetails.paymentMethod"
     # Get order id from get orders by customer id api
+    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -3456,7 +3313,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -3572,7 +3429,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "SUB-065710",
+                            "id": "---data:-:env_offercode---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -3725,7 +3582,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -3800,6 +3657,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I have saved property "data.subscription.customer._id" as "customerId"
       # Get order id from get orders by customer id api
+    And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -3894,7 +3752,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-065710",
+                        "id": "---data:-:env_offercode---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -3970,6 +3828,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I have saved property "data.subscription.customer._id" as "customerId"
       # Get order id from get orders by customer id api
+    And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
@@ -4017,7 +3876,8 @@ Business Need: Create Bulk Subscription
 }
       """
     When I run post call
-    Then I see response code 200
+    Then I see response code 400
+    And I see property value "SKU is not allowed with this subscription" is present in the response property "message[0].errorMessage"
     # When we call the get subscription by id then the subscription does not contains newly added quanity of a product
 
   @discontinue_item
@@ -4120,7 +3980,7 @@ Business Need: Create Bulk Subscription
       }
     """
     When I run post call
-    Then I see response code 400
+    Then I see response code 404
 
   @error_no_sku_exist
   Scenario: Should allow to discontinue item which is not even exist
@@ -4132,5 +3992,5 @@ Business Need: Create Bulk Subscription
             }
       """
     When I run post call
-    Then I see response code 400
+    Then I see response code 404
 
