@@ -2025,7 +2025,6 @@ Business Need: Orchestration Response
                 "sku": "SHOES10",
                 "quantity": 3,
                 "weight": 10,
-                "id": 1000000023
             },
             "shipping": {
                 "shipmentCarrier": "USPS",
@@ -2110,7 +2109,6 @@ Business Need: Orchestration Response
                 "sku": "SHOES10",
                 "quantity": 3,
                 "weight": 10,
-                "id": 1000000023
             },
             "shipping": {
                 "shipmentCarrier": "USPS",
