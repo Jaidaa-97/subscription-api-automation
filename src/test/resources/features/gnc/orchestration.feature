@@ -2106,9 +2106,9 @@ Business Need: Orchestration Response
                     "taxAmount": 10,
                     "currencyCode": "USD"
                 },
-                "sku": "SHOES10",
+                "sku": "MOT3",
                 "quantity": 3,
-                "weight": 10,
+                "weight": 10
             },
             "shipping": {
                 "shipmentCarrier": "USPS",
