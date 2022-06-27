@@ -646,7 +646,7 @@ Business Need: subscription
     And I have request payload for create ACTIVE subscription api
     And I run post call
     Then I verify ACTIVE subscription is created
-    When I have saved property "data._id" as "subscriptionId"
+    When I have saved property "data.id" as "subscriptionId"
     When I have saved property "data.nextShipDate" as "nextShipDate"
     And I have skip subscription subscription endpoint
     And I have following request payload :
@@ -719,7 +719,7 @@ Business Need: subscription
     And I have request payload for create ACTIVE subscription api
     And I run post call
     Then I verify ACTIVE subscription is created
-    And I have saved property "data._id" as "subId"
+    And I have saved property "data.id" as "subId"
     And I have delete subscription endpoint
     And I run delete call
     Then validate schema "deleteSubscription.json"
@@ -776,7 +776,7 @@ Business Need: subscription
     When I run get call api with following param:
       | customerID               | pageSize |
       | {SavedValue::customerId} | 100      |
-    Then I see value "{SavedValue::customerId}" is contains in property "customerID._id" inside the property array "data.subscriptions"
+    Then I see value "{SavedValue::customerId}" is contains in property "customerID.id" inside the property array "data.subscriptions"
 
   @error_customer_not_found @get_sub
   Scenario: Verify error message if operator requesting for subscriptions which are belongs to customer which is not present or created yet
@@ -840,7 +840,7 @@ Business Need: subscription
     And I have request payload for create ACTIVE subscription api
     And I run post call
     Then I verify ACTIVE subscription is created
-    And I have saved property "data._id" as "subId"
+    And I have saved property "data.id" as "subId"
     And I have get by id subscription endpoint
     And I have added path parameter "{SavedValue::subId}"
     And I run get call api
@@ -888,11 +888,11 @@ Business Need: subscription
     And I have request payload for create ACTIVE subscription api
     And I run post call
     Then I verify ACTIVE subscription is created
-    And I have saved property "data._id" as "subId"
+    And I have saved property "data.id" as "subId"
     And I have get order by subId subscription endpoint
     And I have added path parameter "{SavedValue::subId}"
     And I run get call api
-    Then I see property value "{SavedValue::subId}" is present in the response property "data.subscription._id"
+    Then I see property value "{SavedValue::subId}" is present in the response property "data.subscription.id"
     Then I see property value "Weekly" is present in the response property "data.subscription.frequencyType"
     Then I see property value 1 is present in the response property "data.subscription.frequency"
     Then I see property value "---data:-:env_productItem1---" is present in the response property "data.subscription.itemId"
@@ -904,7 +904,7 @@ Business Need: subscription
     And I have request payload for create ACTIVE subscription api
     And I run post call
     Then I verify ACTIVE subscription is created
-    And I have saved property "data._id" as "subId"
+    And I have saved property "data.id" as "subId"
     And I have get order by customerId subscription endpoint
     And I have added path parameter "606f01f441b8fc8208049255"
     And I run get call api

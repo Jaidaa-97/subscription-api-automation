@@ -5,11 +5,11 @@ Business Need: Orchestration Response
   Scenario: Success Scenario
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -41,11 +41,11 @@ Business Need: Orchestration Response
   Scenario: Enter Invalid code
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -73,11 +73,11 @@ Business Need: Orchestration Response
   Scenario: Enter Invalid message
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -105,11 +105,11 @@ Business Need: Orchestration Response
   Scenario: Enter Invalid length OrderId
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -137,11 +137,11 @@ Business Need: Orchestration Response
   Scenario: Enter Invalid OrderId
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -169,11 +169,11 @@ Business Need: Orchestration Response
   Scenario: Customer Not Found
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -210,11 +210,11 @@ Business Need: Orchestration Response
   Scenario: Agent login failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -320,11 +320,11 @@ Business Need: Orchestration Response
   Scenario: Aurus payment token not available
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -430,11 +430,11 @@ Business Need: Orchestration Response
   Scenario: Customer wallet has no saved CC
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -540,11 +540,11 @@ Business Need: Orchestration Response
   Scenario: Customer walle does not have default card
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -650,11 +650,11 @@ Business Need: Orchestration Response
   Scenario: Could not build cart or shipment is empty
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -760,11 +760,11 @@ Business Need: Orchestration Response
   Scenario: Coud not build cart due to invalid billing address
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -871,11 +871,11 @@ Business Need: Orchestration Response
   Scenario: Coud not build cart
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -977,11 +977,11 @@ Business Need: Orchestration Response
   Scenario: Could not build cart, received null product from OG POST
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1087,11 +1087,11 @@ Business Need: Orchestration Response
   Scenario: Basket is empty
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1197,11 +1197,11 @@ Business Need: Orchestration Response
   Scenario: Gift certificate is the only payment method available
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer." as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1307,11 +1307,11 @@ Business Need: Orchestration Response
   Scenario: Invalid payment amount during order placement.
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1417,11 +1417,11 @@ Business Need: Orchestration Response
   Scenario: Payment Auth Failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1527,11 +1527,11 @@ Business Need: Orchestration Response
   Scenario: Payment processor issue
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1637,11 +1637,11 @@ Business Need: Orchestration Response
   Scenario: Payment declined
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1747,11 +1747,11 @@ Business Need: Orchestration Response
   Scenario: Order creation failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1857,11 +1857,11 @@ Business Need: Orchestration Response
   Scenario: Order placement failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -1890,11 +1890,11 @@ Business Need: Orchestration Response
   Scenario: Generic error
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
@@ -2000,11 +2000,11 @@ Business Need: Orchestration Response
   Scenario: out of stuck
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/add-items"
     And I have following request payload :
     """
@@ -2084,11 +2084,11 @@ Business Need: Orchestration Response
   Scenario: Low Inventory
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/add-items"
     And I have following request payload :
     """

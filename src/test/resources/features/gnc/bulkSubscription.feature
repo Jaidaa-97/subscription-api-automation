@@ -2172,7 +2172,7 @@ Business Need: Create Bulk Subscription
   Scenario: Partial Response if one of the subscription has invalid offer id
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
-      """
+      """s
       {
             "channel": "WEBSITE",
             "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
@@ -2780,7 +2780,7 @@ Business Need: Create Bulk Subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
       # Get order id from get orders by customer id api
     And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
@@ -2813,7 +2813,7 @@ Business Need: Create Bulk Subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId1}"
     When I run get call api
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
         # customer updates the shipTo
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
     And I have following request payload :
@@ -3158,7 +3158,7 @@ Business Need: Create Bulk Subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId1}"
     When I run get call api
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
     And I see property value "Jitendra" is present in the response property "data.subscription.billTo.name.firstName"
     And I see property value "Dilip" is present in the response property "data.subscription.billTo.name.middleName"
     And I see property value "Pisal" is present in the response property "data.subscription.billTo.name.lastName"
@@ -3655,7 +3655,7 @@ Business Need: Create Bulk Subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
       # Get order id from get orders by customer id api
     And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
@@ -3826,7 +3826,7 @@ Business Need: Create Bulk Subscription
 #      Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
 #      When I run get call api
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
       # Get order id from get orders by customer id api
     And I wait for 2 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
@@ -3895,10 +3895,10 @@ Business Need: Create Bulk Subscription
     And I have saved property "data.subscriptions[0].id" as "subId"
     When I get the subscription by id "{SavedValue::subId}"
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
     When I get all the orders placed by customer "{SavedValue::customerId}"
     Then I see response code 200
-    And I have saved property "data.orders[0]._id" as "orderId"
+    And I have saved property "data.orders[0].id" as "orderId"
     When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     When I get the order by id "{SavedValue::orderId}"
@@ -3911,10 +3911,10 @@ Business Need: Create Bulk Subscription
     And I have saved property "data.subscriptions[0].id" as "subId"
     When I get the subscription by id "{SavedValue::subId}"
     Then I see response code 200
-    And I have saved property "data.subscription.customer._id" as "customerId"
+    And I have saved property "data.subscription.customer.id" as "customerId"
     When I get all the orders placed by customer "{SavedValue::customerId}"
     Then I see response code 200
-    And I have saved property "data.orders[0]._id" as "orderId"
+    And I have saved property "data.orders[0].id" as "orderId"
     # Add item in order
     When add item "---data:-:env_sku2---" in order "{SavedValue::orderId}"
     When I discontinued item "---data:-:env_sku1---"

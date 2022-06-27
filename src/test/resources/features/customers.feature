@@ -34,7 +34,7 @@ Business Need: Customers
     When I run get call api
     Then validate schema "getAllCustomers.json"
     Then I see response code 200
-    Then I have saved property "data.customers[0]._id" as "customerId"
+    Then I have saved property "data.customers[0].id" as "customerId"
     Given I have endpoint "/data-subscription/customers/{SavedValue::customerId}"
     When I run get call api
     Then validate schema "getSingleCustomer.json"
