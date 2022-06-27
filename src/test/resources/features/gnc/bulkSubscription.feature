@@ -114,7 +114,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "billTo": {
@@ -133,7 +133,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "paymentDetails": {
@@ -261,7 +261,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "billTo": {
@@ -280,7 +280,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "paymentDetails": {
@@ -410,7 +410,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "billTo": {
@@ -429,7 +429,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "paymentDetails": {
@@ -556,7 +556,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -575,7 +575,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -702,7 +702,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -721,7 +721,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -848,7 +848,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -867,7 +867,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -998,7 +998,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -1017,7 +1017,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -1145,7 +1145,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -1164,7 +1164,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -1295,7 +1295,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -1314,7 +1314,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -1444,7 +1444,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -1463,7 +1463,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -1525,7 +1525,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -1542,7 +1542,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -1672,7 +1672,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -1691,7 +1691,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -1824,7 +1824,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -1843,7 +1843,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -1971,7 +1971,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "billTo": {
@@ -1990,7 +1990,7 @@ Business Need: Create Bulk Subscription
         },
         "city": "BOSTON MA",
         "state": "MA",
-        "postalCode": 2127,
+        "postalCode": "2127",
         "country": "US"
     },
     "paymentDetails": {
@@ -2120,7 +2120,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -2139,7 +2139,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -2279,7 +2279,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -2298,7 +2298,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -2432,7 +2432,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -2451,7 +2451,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -2581,7 +2581,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -2600,7 +2600,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -2730,7 +2730,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -2749,7 +2749,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -2834,7 +2834,7 @@ Business Need: Create Bulk Subscription
                   },
                   "city": "Pune",
                   "state": "MH",
-                  "postalCode": 411001,
+                  "postalCode": "411001",
                   "country": "US"
               },
               "paymentDetails": {
@@ -2861,7 +2861,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.shipTo.city"
     And I see property value "MH" is present in the response property "data.subscription.shipTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.shipTo.country"
 
     # validate payment details
@@ -2880,7 +2880,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.shipTo.city"
     And I see property value "MH" is present in the response property "data.subscription.shipTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.shipTo.country"
 
     # validate payment details
@@ -2910,7 +2910,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.order.shipTo.country"
 
      # validate payment details in order 1
@@ -2931,7 +2931,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.order.shipTo.country"
 
     # validate payment details in order 2
@@ -2960,7 +2960,7 @@ Business Need: Create Bulk Subscription
                   },
                   "city": "Pune",
                   "state": "MH",
-                  "postalCode": 411001,
+                  "postalCode": "411001",
                   "country": "US"
               }
             }
@@ -2978,7 +2978,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.billTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.billTo.city"
     And I see property value "MH" is present in the response property "data.subscription.billTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.billTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.billTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.billTo.country"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId2}"
     When I run get call api
@@ -2990,7 +2990,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.billTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.billTo.city"
     And I see property value "MH" is present in the response property "data.subscription.billTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.billTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.billTo.postalCode"
     And I see property value "US" is present in the response property "data.subscription.billTo.country"
 
 
@@ -3006,7 +3006,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.order.shipTo.country"
 
     # Verify order 2 gets updated or not
@@ -3021,7 +3021,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I see property value "US" is present in the response property "data.order.shipTo.country"
 
         # Update Offer
@@ -3121,7 +3121,7 @@ Business Need: Create Bulk Subscription
                       },
                       "city": "Pune",
                       "state": "MH",
-                      "postalCode": 411001,
+                      "postalCode": "411001",
                       "country": "IN"
                   },
                   "billTo": {
@@ -3139,7 +3139,7 @@ Business Need: Create Bulk Subscription
                   },
                   "city": "Pune",
                   "state": "MH",
-                  "postalCode": 411001,
+                  "postalCode": "411001",
                   "country": "IN"
                   },
                   "paymentDetails": {
@@ -3166,7 +3166,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.billTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.billTo.city"
     And I see property value "MH" is present in the response property "data.subscription.billTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.billTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.billTo.postalCode"
     And I see property value "IN" is present in the response property "data.subscription.billTo.country"
     # validate shipTo details
     And I see property value "Jitendra" is present in the response property "data.subscription.shipTo.name.firstName"
@@ -3176,7 +3176,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.subscription.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.subscription.shipTo.city"
     And I see property value "MH" is present in the response property "data.subscription.shipTo.state"
-    And I see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.subscription.shipTo.postalCode"
     And I see property value "IN" is present in the response property "data.subscription.shipTo.country"
     # Validate if payment details gets updated or not
     And I see property value "5674" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.cardIdentifier"
@@ -3193,7 +3193,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "Hindu sena marg" is present in the response property "data.subscription.billTo.streetAddress.street2"
     And I do not see property value "Pune" is present in the response property "data.subscription.billTo.city"
     And I do not see property value "MH" is present in the response property "data.subscription.billTo.state"
-    And I do not see property value 411001 is present in the response property "data.subscription.billTo.postalCode"
+    And I do not see property value "411001" is present in the response property "data.subscription.billTo.postalCode"
     And I do not see property value "IN" is present in the response property "data.subscription.billTo.country"
     #validate shipTo
     And I do not see property value "Jitendra" is present in the response property "data.subscription.shipTo.name.firstName"
@@ -3203,7 +3203,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "Hindu sena marg" is present in the response property "data.subscription.shipTo.streetAddress.street2"
     And I do not see property value "Pune" is present in the response property "data.subscription.shipTo.city"
     And I do not see property value "MH" is present in the response property "data.subscription.shipTo.state"
-    And I do not see property value 411001 is present in the response property "data.subscription.shipTo.postalCode"
+    And I do not see property value "411001" is present in the response property "data.subscription.shipTo.postalCode"
     And I do not see property value "IN" is present in the response property "data.subscription.shipTo.country"
     # Verify paymentDetails should not be updated in another subscription
     And I do not see property value "5674" is present in the response property "data.subscription.paymentDetails.paymentIdentifier.cardIdentifier"
@@ -3229,7 +3229,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.billTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.billTo.city"
     And I see property value "MH" is present in the response property "data.order.billTo.state"
-    And I see property value 411001 is present in the response property "data.order.billTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.billTo.postalCode"
     And I see property value "IN" is present in the response property "data.order.billTo.country"
     # verify shipTo gets updated on order
     And I see property value "Jitendra" is present in the response property "data.order.shipTo.name.firstName"
@@ -3239,7 +3239,7 @@ Business Need: Create Bulk Subscription
     And I see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I see property value "IN" is present in the response property "data.order.shipTo.country"
     # Verify payment details gets updated in Order
     And I see property value "5674" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
@@ -3256,7 +3256,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "Hindu sena marg" is present in the response property "data.order.billTo.streetAddress.street2"
     And I do not see property value "Pune" is present in the response property "data.order.billTo.city"
     And I do not see property value "MH" is present in the response property "data.order.billTo.state"
-    And I do not see property value 411001 is present in the response property "data.order.billTo.postalCode"
+    And I do not see property value "411001" is present in the response property "data.order.billTo.postalCode"
     And I do not see property value "IN" is present in the response property "data.order.billTo.country"
     And I do not see property value "Jitendra" is present in the response property "data.order.shipTo.name.firstName"
     And I do not see property value "Dilip" is present in the response property "data.order.shipTo.name.middleName"
@@ -3265,7 +3265,7 @@ Business Need: Create Bulk Subscription
     And I do not see property value "Hindu sena marg" is present in the response property "data.order.shipTo.streetAddress.street2"
     And I do not see property value "Pune" is present in the response property "data.order.shipTo.city"
     And I do not see property value "MH" is present in the response property "data.order.shipTo.state"
-    And I do not see property value 411001 is present in the response property "data.order.shipTo.postalCode"
+    And I do not see property value "411001" is present in the response property "data.order.shipTo.postalCode"
     And I do not see property value "IN" is present in the response property "data.order.shipTo.country"
     # Verify payment details should not get updated in Order 2
     And I do not see property value "5674" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
@@ -3348,7 +3348,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "billTo": {
@@ -3367,7 +3367,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "paymentDetails": {
@@ -3464,7 +3464,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "billTo": {
@@ -3483,7 +3483,7 @@ Business Need: Create Bulk Subscription
                     },
                     "city": "BOSTON MA",
                     "state": "MA",
-                    "postalCode": 2127,
+                    "postalCode": "2127",
                     "country": "US"
                 },
                 "paymentDetails": {
@@ -3616,7 +3616,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -3635,7 +3635,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
@@ -3786,7 +3786,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "billTo": {
@@ -3805,7 +3805,7 @@ Business Need: Create Bulk Subscription
                 },
                 "city": "BOSTON MA",
                 "state": "MA",
-                "postalCode": 2127,
+                "postalCode": "2127",
                 "country": "US"
             },
             "paymentDetails": {
