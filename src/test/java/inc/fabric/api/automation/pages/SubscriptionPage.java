@@ -312,7 +312,7 @@ public class SubscriptionPage extends BasePage {
                 "                },\n" +
                 "                \"city\": \"BOSTON MA\",\n" +
                 "                \"state\": \"MA\",\n" +
-                "                \"postalCode\": 2127,\n" +
+                "                \"postalCode\": \"2127\",\n" +
                 "                \"country\": \"US\"\n" +
                 "            },\n" +
                 "            \"billTo\": {\n" +
@@ -331,7 +331,7 @@ public class SubscriptionPage extends BasePage {
                 "                },\n" +
                 "                \"city\": \"BOSTON MA\",\n" +
                 "                \"state\": \"MA\",\n" +
-                "                \"postalCode\": 2127,\n" +
+                "                \"postalCode\": \"2127\",\n" +
                 "                \"country\": \"US\"\n" +
                 "            },\n" +
                 "            \"paymentDetails\": {\n" +
@@ -414,7 +414,7 @@ public class SubscriptionPage extends BasePage {
                     "        },\n" +
                     "        \"city\": \"BOSTON MA\",\n" +
                     "        \"state\": \"MA\",\n" +
-                    "        \"postalCode\": 2127,\n" +
+                    "        \"postalCode\": \"2127\",\n" +
                     "        \"country\": \"US\"\n" +
                     "    },\n" +
                     "    \"billTo\": {\n" +
@@ -433,7 +433,7 @@ public class SubscriptionPage extends BasePage {
                     "        },\n" +
                     "        \"city\": \"BOSTON MA\",\n" +
                     "        \"state\": \"MA\",\n" +
-                    "        \"postalCode\": 2127,\n" +
+                    "        \"postalCode\": \"2127\",\n" +
                     "        \"country\": \"US\"\n" +
                     "    },\n" +
                     "    \"paymentDetails\": {\n" +

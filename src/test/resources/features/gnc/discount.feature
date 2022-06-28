@@ -169,7 +169,7 @@ Business Need: Discount
     And I run post call
     Then I see response code 200
     Then validate schema "/gnc/createDiscount.json"
-    And I have saved property "data._id" as "discountId"
+    And I have saved property "data.id" as "discountId"
     # Update message
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount/{SavedValue::discountId}"
     And I have following request payload :

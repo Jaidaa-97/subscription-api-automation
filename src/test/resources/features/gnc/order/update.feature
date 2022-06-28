@@ -3,12 +3,12 @@ Business Need: Update order
 
   Scenario: Update Shipping and Billing address
     Given I have created 1 bulk subscription
-    And I have saved property "data.subscriptions[0].customer._id" as "customerId"
+    And I have saved property "data.subscriptions[0].customer.id" as "customerId"
     And I wait for 15 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
-    And I have saved property "data.orders[0]._id" as "orderId"
+    And I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     And I have following request payload :
     """
@@ -59,11 +59,11 @@ Business Need: Update order
   @update_order_quantity
   Scenario: Update order quantity
     Given I have created 1 bulk subscription
-    When I have saved property "data.subscriptions[0].customer._id" as "motasem"
+    When I have saved property "data.subscriptions[0].customer.id" as "motasem"
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::motasem}/orders"
     When I run get call api
     Then I see response code 200
-    When I have saved property "data.orders[0]._id" as "orderId"
+    When I have saved property "data.orders[0].id" as "orderId"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     And I have following request payload :
       """
