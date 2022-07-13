@@ -210,7 +210,7 @@ public class SubscriptionPage extends BasePage {
                 "            \"channel\": \"WEBSITE\",\n" +
                 "            \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "            \"customer\": {\n" +
-                "                \"customerReferenceId\": \"606f01f441b8fc000852"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "                \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "                \"locale\": \"en_US\",\n" +
                 "                \"email\": \"jitendra.pisal@mail.com\",\n" +
                 "                \"contactNumber\": \"+92 3333709568\",\n" +
@@ -235,7 +235,7 @@ public class SubscriptionPage extends BasePage {
                 "                        \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"plan\": {\n" +
-                "                        \"frequency\": 5,\n" +
+                "                        \"frequency\": 1,\n" +
                 "                        \"frequencyType\": \"Daily\"\n" +
                 "                    },\n" +
                 "                    \"offsetDays\": 10,\n" +
@@ -272,12 +272,12 @@ public class SubscriptionPage extends BasePage {
                 "                        \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"plan\": {\n" +
-                "                        \"frequency\": 6,\n" +
+                "                        \"frequency\": 1,\n" +
                 "                        \"frequencyType\": \"Weekly\"\n" +
                 "                    },\n" +
                 "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\",\n" +
                 "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
@@ -349,7 +349,7 @@ public class SubscriptionPage extends BasePage {
                     "    \"channel\": \"WEBSITE\",\n" +
                     "    \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                     "    \"customer\": {\n" +
-                    "        \"customerReferenceId\": \"606f01f441b8fc000852"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                    "        \"customerReferenceId\": \"606f01f441b8fc00"+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                     "        \"locale\": \"en_US\",\n" +
                     "        \"email\": \"shubham@mail.com\",\n" +
                     "        \"contactNumber\": \"+91 3333709568\",\n" +
@@ -361,7 +361,7 @@ public class SubscriptionPage extends BasePage {
                     "    \"items\": [\n" +
                     "        {\n" +
                     "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
-                    "            \"quantity\": 10,\n" +
+                    "            \"quantity\": 1,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
                     "            \"itemPrice\": {\n" +
@@ -473,7 +473,7 @@ public class SubscriptionPage extends BasePage {
     }
 
     public void saveOrderId(String index, String key) {
-        String orderId = basePage.getResponse().then().extract().path("data.orders["+index+"]._id");
+        String orderId = basePage.getResponse().then().extract().path("data.orders["+index+"].id");
         savedValues.put(key,orderId);
     }
 
