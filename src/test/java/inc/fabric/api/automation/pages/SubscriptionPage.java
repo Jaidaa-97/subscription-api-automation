@@ -221,7 +221,7 @@ public class SubscriptionPage extends BasePage {
                 "            },\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
+                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +

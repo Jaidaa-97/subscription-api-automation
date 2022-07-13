@@ -14,7 +14,8 @@ Business Need: Skip Order
     When I run put call
     Then I see response code 200
     Then I see property value "SKIPPED" is present in the response property "data.Order.status"
-    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
+    And I have saved property "data.nextScheduledOrders.newOrders[0]" as "newOrderID"
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::newOrderID}"
     When I run get call api
     Then I see response code 200
     Then I see property value "{Date::uuu-MM-dd:::M=1}" is contains in the response property "data.order.scheduledDate"
@@ -29,4 +30,7 @@ Business Need: Skip Order
       When I run put call
       Then I see response code 400
       Then I see property value "Invalid order id" is present in the response property "message"
+
+
+      
 
