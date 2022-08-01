@@ -7,6 +7,15 @@ Business Need: Inactive Subscription
     And I wait for 10 sec
     And I have saved property "data.subscriptions[0].id" as "subId"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}/inactive"
+    And I have following request payload :
+    """
+             {
+             "cancelationReason": {
+                 "reason": "reason 12",
+                 "code": 10
+             }
+         }
+    """
     When I run put call
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.status"
