@@ -1,4 +1,4 @@
-@subscription_v2 @v2
+@subscription_v2 @v2 @InactiveSubscription_Test
 Business Need: Inactive Subscription
   @v2_inactive_subscription
   @inactivate_subscription @subscriptions_success

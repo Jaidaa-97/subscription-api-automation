@@ -1,4 +1,4 @@
-@subscription_v2 @v2
+@subscription_v2 @v2 @Subscriptions_Create_Test
 Business Need: Create Bulk Subscription
 
 

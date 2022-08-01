@@ -510,6 +510,11 @@ public class SubscriptionPage extends BasePage {
 
         for (int i = 0; i < list.size(); i++) {
             String status = basePage.getResponse().then().extract().path("data.subscriptions["+i+"].status");
+            String id = basePage.getResponse().then().extract().path("data.subscriptions["+i+"].id");
+            System.out.println("status --------->");
+            System.out.println(status);
+            System.out.println("id --------->");
+            System.out.println(id);
             Assert.assertEquals(status,"INACTIVE");
         }
     }
