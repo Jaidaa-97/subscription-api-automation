@@ -18,7 +18,7 @@ Scenario: remove upsell Item
             {
 
                 "item": {
-                    "sku": "MOT44",
+                    "sku": "VITAMIN-A",
                     "quantity": 3,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -82,7 +82,7 @@ Scenario: remove subscription item
             {
                "subscriptionId": "{SavedValue::subId}",
                "item": {
-                    "sku": "MOT44",
+                    "sku": "VITAMIN-A",
                     "quantity": 3,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -128,7 +128,7 @@ Scenario: remove subscription item
     Then I see response code 200
 
     @remove_item_not_exist
-    Scenario: remove upsell Item
+    Scenario: remove item not exist
         Given I have created 1 bulk subscription
         And I have saved property "data.subscriptions[0].customer.id" as "customerId"
         And I wait for 10 sec

@@ -18,7 +18,7 @@ Business Need: Add Item To Order
         {
 
             "item": {
-                "sku": "MOT44",
+                "sku": "VITAMIN-A",
                 "quantity": 3,
                 "weight": 10,
                 "weightUnit": "lb",
@@ -73,7 +73,7 @@ Business Need: Add Item To Order
         {
            "subscriptionId": "{SavedValue::subId}",
            "item": {
-                "sku": "MOT44",
+                "sku": "VITAMIN-A",
                 "quantity": 3,
                 "weight": 10,
                 "weightUnit": "lb",

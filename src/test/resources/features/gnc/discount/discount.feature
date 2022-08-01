@@ -45,7 +45,6 @@ Business Need: Create Sub Discount
     """
     And I run post call
     Then I see response code 200
-    Then validate schema "/gnc/createDiscount.json"
     And I have saved property "data.offerCode" as "offerCode"
     Then I see property value "MOT44" is contains in the response property "data.skus[0]"
     Then I see property value 1 is present in the response property "data.discount.amount"
@@ -149,7 +148,7 @@ Business Need: Create Sub Discount
     """
     And I run post call
     Then I see response code 400
-    Then I see following value for property "message" :
+
     """
 
     """
