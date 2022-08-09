@@ -221,7 +221,7 @@ public class SubscriptionPage extends BasePage {
                 "            },\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
+                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -258,7 +258,7 @@ public class SubscriptionPage extends BasePage {
                 "                    }\n" +
                 "                },\n" +
                 "                {\n" +
-                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
                 "                    \"quantity\": 1,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -380,7 +380,7 @@ public class SubscriptionPage extends BasePage {
                     "            },\n" +
                     "            \"offsetDays\": 10,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\",\n" +
                     "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
