@@ -98,7 +98,7 @@ public class BasePage {
             case "DEV02":
                 return "ahmad.rouf@fabric.inc";
             default:
-                return "ahmad.rauf@shopdev.co";
+                return "sohail.iqbal@fabric.inc";
         }
     }
 
@@ -112,7 +112,7 @@ public class BasePage {
             case "DEV02":
                 return "Ahmad0306";
             default:
-                return "Ahmad0306";
+                return "estrenstar";
         }
     }
 
