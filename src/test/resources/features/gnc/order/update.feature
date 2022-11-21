@@ -1,6 +1,6 @@
 @v2 @update_order
 Business Need: Update order
-@Update_Shipping_and_Billing_address
+  @Update_Shipping_and_Billing_address @regression_
   Scenario: Update Shipping and Billing address
     Given I have created 1 bulk subscription
     And I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -58,13 +58,11 @@ Business Need: Update order
     Then I see property value "Nirali" is present in the response property "data.order.shipTo.name.firstName"
     Then I see property value "Cust" is present in the response property "data.order.billTo.name.firstName"
 
-
-
-
-  @update_order_quantity
+  @update_order_quantity @regression_
   Scenario: Update order quantity
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
+    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerID}/orders"
     When I run get call api
     Then I see response code 200
@@ -80,10 +78,6 @@ Business Need: Update order
                             "quantity": 100,
                             "weight": 100,
                             "weightUnit": "l1b",
-                            "itemPrice": {
-                                "price": 13400.00,
-                                "currencyCode": "USD"
-                            },
                             "tax": {
                                 "taxCode": "FR020000",
                                 "taxAmount": 4566.00,
@@ -98,11 +92,11 @@ Business Need: Update order
     Then I see response code 200
     Then I see property value 100 is present in the response property "data.order.lineItems[0].item.quantity"
 
-
-  @Update_payment_details
+  @Update_payment_details @regression_
   Scenario:Update payment details
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
+    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerID}/orders"
     When I run get call api
     Then I see response code 200
@@ -121,14 +115,13 @@ Business Need: Update order
     """
     When I run patch call
     Then I see response code 200
-    Then I see property value "1234" is present in the response property "data.order.paymentDetails.cardIdentifier"
+    Then I see property value "1234" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
 
-
-
-  @Update_customer_attribute
+  @Update_customer_attribute @regression_
   Scenario: Update customer attribute
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
+    And I wait for 15 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerID}/orders"
     When I run get call api
     Then I see response code 200
@@ -143,7 +136,7 @@ Business Need: Update order
             "customAttributes": {
                 "storeId": "60cb07fdc20387b000821c5c3",
                 "associateId": 1,
-                "trackingUrl": "609436d21baded0008945b05"
+                "trackingUrl": "http://google.com"
             }
         }
     ]
@@ -154,12 +147,11 @@ Business Need: Update order
     Then I see response code 200
     Then I see property value "60cb07fdc20387b000821c5c3" is present in the response property "data.order.lineItems[0].customAttributes.storeId"
 
-
-
-  @update_scheduledDate
+  @update_scheduledDate @regression_
   Scenario: update scheduledDate
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
+    And I wait for 15 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerID}/orders"
     When I run get call api
     Then I see response code 200
@@ -168,10 +160,9 @@ Business Need: Update order
     And I have following request payload :
     """
     {
-    "scheduledDate": "2022-08-07T10:00:01.199Z"
-
+      "scheduledDate": "{Date::uuu-MM-dd:::d=5}T13:40:01.199Z"
     }
     """
     When I run patch call
     Then I see response code 200
-    Then I see property value "2022-08-07T10:00:01.199Z" is present in the response property "data.order.scheduledDate"
+    Then I see property value "{Date::uuu-MM-dd:::d=5}T13:40:01.199Z" is present in the response property "data.order.scheduledDate"

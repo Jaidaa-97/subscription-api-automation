@@ -2,7 +2,7 @@
   Business Need: Update Customer
 
 
-    @update_customer_details
+    @update_customer_details @regression_
     Scenario: Update Customer details
       Given I have created customer for gnc
       And I have saved property "data.id" as "customerID"
@@ -27,7 +27,7 @@
       """
       When I run put call
       Then I see response code 200
-      And I see property value "234nffg428a3kbe4" is present in the response property "data.customerReferenceId"
+#      And I see property value "234nffg428a3kbe4" is present in the response property "data.customerReferenceId"
     # update locale
       And I have following request payload :
       """
@@ -42,12 +42,12 @@
       And I have following request payload :
       """
           {
-            "email": "shubham@mail.com"
+            "email": "tempcustomer{RandomNumber::4}@mail.com"
           }
       """
       When I run put call
       Then I see response code 200
-      And I see property value "shubham@mail.com" is present in the response property "data.email"
+      And I see property value "tempcustomer" is contains in the response property "data.email"
     # update contact number
       And I have following request payload :
       """

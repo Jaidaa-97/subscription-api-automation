@@ -1,7 +1,7 @@
 @v2 @Update_Bulk_via_customerID
   Business Need: Update bulk via customer ID
 
-    @update_shipping
+    @update_shipping @regression_
     Scenario: update shipping
       Given I have created 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -20,7 +20,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "+91 3333709512"
+                    "number": "913333709512"
                 },
                 "city": "Pune",
                 "state": "MH",
@@ -33,7 +33,7 @@
       Then I see response code 200
 
 
-    @update_billing
+    @update_billing @regression_
     Scenario: update billing
       Given I have created 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -52,7 +52,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "+91 3333709512"
+                    "number": "913333709512"
                 },
                 "city": "Pune",
                 "state": "MH",
@@ -82,7 +82,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "+91 3333709512"
+                    "number": "913333709512"
                 },
                 "city": "Pune",
                 "state": "MH",
@@ -92,6 +92,9 @@
         }
       """
       And I run patch call
-      Then I see response code 200
-
+      Then I see response code 400
+      Then I see following value for property "message" :
+      """
+        Customer id required.
+      """
 

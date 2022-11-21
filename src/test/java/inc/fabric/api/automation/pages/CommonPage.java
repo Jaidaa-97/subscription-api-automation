@@ -1,6 +1,7 @@
 package inc.fabric.api.automation.pages;
 
 import com.google.gson.JsonObject;
+import inc.fabric.api.automation.utility.CommonUtils;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
 import io.restassured.module.jsv.JsonSchemaValidator;
@@ -120,6 +121,23 @@ public class CommonPage {
         requestSpecification.header("x-site-context", basePage.get_xSiteContext());
         basePage.setResponse(RestHttp.postCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
     }
+    public void runPimPostCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase()+"_XAPIKEY"));
+        requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.postCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
+    }
+
+    public void runPricingPostCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase()+"_PRICING_XAPIKEY"));
+        requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.postCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
+    }
 
     public void runDeleteCall() {
         RequestSpecification requestSpecification;
@@ -195,4 +213,17 @@ public class CommonPage {
         endPoint = baseUrl + endPoint;
         basePage.setEndPoint(endPoint);
     }
+
+    public void getPimEndPoint(String endPoint){
+        String baseUrl = basePage.getPimBaseURL();
+        endPoint = baseUrl + endPoint;
+        basePage.setEndPoint(endPoint);
+    }
+
+    public void getPricingEndPoint(String endPoint){
+        String baseUrl = basePage.getPricingBaseURL();
+        endPoint = baseUrl + endPoint;
+        basePage.setEndPoint(endPoint);
+    }
+
 }

@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/features"},
         plugin = {"json:target/cucumber-report/cucumber.json","pretty","html:target/cucumber-html",
                 "io.qameta.allure.cucumber5jvm.AllureCucumber5Jvm"},
-        tags = "@a",
+        tags = {"@regression_"},
         monochrome = true
 )
 public class TestRunner {

@@ -437,7 +437,6 @@
                       },
                       "required": [
                         "id",
-                        "source",
                         "discount"
                       ]
                     },
@@ -473,8 +472,7 @@
                     "shipping",
                     "offer",
                     "lineItemId",
-                    "customAttributes",
-                    "id"
+                    "customAttributes"
                   ]
                 },
                 {
@@ -503,7 +501,6 @@
                         }
                       },
                       "required": [
-                        "plan",
                         "id"
                       ]
                     },
@@ -608,7 +605,7 @@
                           "type": "string"
                         },
                         "associateId": {
-                          "type": "integer"
+                          "type": "string"
                         },
                         "trackingUrl": {
                           "type": "string"
@@ -632,8 +629,7 @@
                     "item",
                     "shipping",
                     "customAttributes",
-                    "lineItemId",
-                    "id"
+                    "lineItemId"
                   ]
                 }
               ]

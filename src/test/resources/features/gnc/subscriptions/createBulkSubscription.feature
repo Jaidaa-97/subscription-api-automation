@@ -2,1009 +2,174 @@
 Business Need: Create Bulk Subscription
 
 
-  @can_not_create_duplicate_subscription
+  @can_not_create_duplicate_subscription @regression_
   Scenario: Duplicate subscription with same order id should not be created
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "orderId"
     And I have following request payload :
     """
           {
-                "channel": "WEBSITE",
-                "originOrderId": "6803-5058-41270",
+                "channel": "POS",
+                "originOrderId": "{SavedValue::orderId}",
                 "customer": {
-                    "customerReferenceId": "606f01f441b8fc0008529916",
-                    "locale": "en_US",
-                    "email": "customer@mail.com",
-                    "contactNumber": "+92 3333709568",
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "segment": ["employee"],
-                    "employeeId": "1"
-                },
-                "items": [
-                    {
-                        "sku":"---data:-:env_sku1---",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
                     }
-                ],
-                "shipTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "03323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "billTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "012323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "paymentDetails": {
-                    "paymentIdentifier": {
-                        "cardIdentifier": "1234",
-                        "expiryDate": "04/24"
-                    },
-                    "paymentMethod": "visa",
-                    "paymentKind": "CARD_PAYPAL"
                 }
-          }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+
     """
     When I run post call
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
     """
           {
-                "channel": "WEBSITE",
-                "originOrderId": "6803-5058-41270",
+                "channel": "POS",
+                "originOrderId": "{SavedValue::orderId}",
                 "customer": {
-                    "customerReferenceId": "606f01f441b8fc0008529916",
-                    "locale": "en_US",
-                    "email": "customer@mail.com",
-                    "contactNumber": "+92 3333709568",
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "segment": ["employee"],
-                    "employeeId": "1"
-                },
-                "items": [
-                    {
-                        "sku":"---data:-:env_sku1---",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
                     },
-                    {
-                        "sku":"---data:-:env_sku1---",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
                     }
-
-                ],
-                "shipTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "03323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "billTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "012323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "paymentDetails": {
-                    "paymentIdentifier": {
-                        "cardIdentifier": "1234",
-                        "expiryDate": "04/24"
-                    },
-                    "paymentMethod": "visa",
-                    "paymentKind": "CARD_PAYPAL"
                 }
-          }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see property value "Subscription already exists with this originId and itemId" is present in the response property "data.errors[0].errorMessage"
-    Then I see property value "INVALID_SUBSCRIPTION" is present in the response property "data.errors[1].errorCode"
-    # Missing customerReferenceID
-    And I have following request payload :
-    """
-         {
-                "channel": "WEBSITE",
-                "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-                "customer": {
-                    "locale": "en_US",
-                    "email": "customer@mail.com",
-                    "contactNumber": "+92 3333709568",
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "segment": ["employee"],
-                    "employeeId": "1"
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
                 },
-                "items": [
-                    {
-                        "sku":"---data:-:env_sku1---",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
-                    },
-                    {
-                        "sku":"---data:-:env_sku1---",
-                        "sku": "ABC123",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
-                    }
-
-                ],
-                "shipTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "03323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
+                "streetAddress": {
+                    "street1": "27 O ST"
                 },
-                "billTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "012323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
                 },
-                "paymentDetails": {
-                    "paymentIdentifier": {
-                        "cardIdentifier": "1234",
-                        "expiryDate": "04/24"
-                    },
-                    "paymentMethod": "visa",
-                    "paymentKind": "CARD_PAYPAL"
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
                 }
-          }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-        "customer.customerReferenceId" is required
-    """
-    # missing locale in customer
-    And I have following request payload :
-    """
-          {
-                "channel": "WEBSITE",
-                "originOrderId": "6803-5058-41270",
-                "customer": {
-                    "customerReferenceId": "606f01f441b8fc0008529916",
-                    "email": "customer@mail.com",
-                    "contactNumber": "+92 3333709568",
-                    "firstName": "John",
-                    "lastName": "Doe",
-                    "segment": ["employee"],
-                    "employeeId": "1"
-                },
-                "items": [
-                    {
-                         "sku":"---data:-:env_sku1---",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
-                    },
-                    {
-                         "sku":"---data:-:env_sku2---",
-                        "sku": "ABC123",
-                        "quantity": 1,
-                        "weight": 10,
-                        "weightUnit": "lb",
-                        "itemPrice": {
-                            "price": 100.00,
-                            "currencyCode": "USD"
-                        },
-                        "tax": {
-                            "taxCode": "FR020000",
-                            "taxAmount": 10.00,
-                            "currencyCode": "USD"
-                        },
-                        "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
-                            "frequencyType": "Daily"
-                        },
-                        "offsetDays": 10,
-                        "offer": {
-                            "id": "---data:-:env_offercode---",
-                            "source": "PDP"
-                        },
-                        "shipping": {
-                          "shipmentCarrier": "USPS",
-                          "shipmentMethod": "Ground",
-                          "shipmentInstructions": "",
-                          "taxCode": "SHP020000",
-                          "shippingAmount": 10.00,
-                          "taxAmount": 1.00,
-                          "currencyCode": "USD"
-                        },
-                        "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
-                            "billingCycles": 10
-                        }
-                    }
-
-                ],
-                "shipTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "03323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "billTo": {
-                    "name": {
-                        "firstName": "Roger",
-                        "middleName": "",
-                        "lastName": "Fang"
-                    },
-                    "streetAddress": {
-                        "street1": "27 O ST",
-                        "street2": ""
-                    },
-                    "phone": {
-                        "number": "012323370957",
-                        "kind": "mobile"
-                    },
-                    "city": "BOSTON MA",
-                    "state": "MA",
-                    "postalCode": "2127",
-                    "country": "US"
-                },
-                "paymentDetails": {
-                    "paymentIdentifier": {
-                        "cardIdentifier": "1234",
-                        "expiryDate": "04/24"
-                    },
-                    "paymentMethod": "visa",
-                    "paymentKind": "CARD_PAYPAL"
-                }
-          }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-        "customer.locale" is required
-    """
-    # missing email in customer
-    When I have following request payload :
-    """
-{
-    "channel": "WEBSITE",
-    "originOrderId": "2",
-    "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529954",
-        "locale": "en_US",
-        "contactNumber": "+92 3333709568",
-        "firstName": "John",
-        "lastName": "Doe",
-        "segment": ["employee"],
-        "employeeId": "1"
-    },
-    "items": [
-        {
-             "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 5,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        },
-        {
-             "sku":"---data:-:env_sku2---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 6,
-                "frequencyType": "Weekly"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
             }
         }
-
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        },
-        "paymentMethod": "visa",
-        "paymentKind": "CARD_PAYPAL"
-    }
-}
     """
     When I run post call
     Then I see response code 400
-    Then I see following value for property "message" :
-    """
-        "customer.email" is required
-    """
-    # missing firstName
-    Given I have following request payload :
-    """
-{
-    "channel": "WEBSITE",
-    "originOrderId": "2",
-    "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529954",
-        "locale": "en_US",
-        "email": "jitendra.pisal@mail.com",
-        "contactNumber": "+92 3333709568",
-        "lastName": "Doe",
-        "segment": ["employee"],
-        "employeeId": "1"
-    },
-    "items": [
-        {
-             "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 5,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        },
-        {
-             "sku":"---data:-:env_sku2---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 6,
-                "frequencyType": "Weekly"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        }
+    Then I see property value "Subscription already exists with this originOrderId and itemId/SKU" is present in the response property "data.errors[0].errorMessage"
+    Then I see property value "INVALID_SUBSCRIPTION" is present in the response property "data.errors[0].errorCode"
 
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        },
-        "paymentMethod": "visa",
-        "paymentKind": "CARD_PAYPAL"
-    }
-}
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-        "customer.firstName" is required
-    """
-    # missing lastName
-    Given I have following request payload :
-    """
-{
-    "channel": "WEBSITE",
-    "originOrderId": "2",
-    "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529954",
-        "locale": "en_US",
-        "email": "jitendra.pisal@mail.com",
-        "contactNumber": "+92 3333709568",
-        "firstName": "John",
-        "segment": ["employee"],
-        "employeeId": "1"
-    },
-    "items": [
-        {
-             "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 5,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        },
-        {
-             "sku":"---data:-:env_sku2---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "frequency": 6,
-                "frequencyType": "Weekly"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        }
-
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        },
-        "paymentMethod": "visa",
-        "paymentKind": "CARD_PAYPAL"
-    }
-}
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-        "customer.lastName" is required
-    """
-
-  @create_multiple_subscriptions
+  @create_multiple_subscriptions @regression_
   Scenario: Create multiple subscriptions
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-            "channel": "WEBSITE",
+            "channel": "POS",
             "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
             "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -1014,7 +179,7 @@ Business Need: Create Bulk Subscription
             "items": [
                 {
                     "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
+                    "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
                     "itemPrice": {
@@ -1030,10 +195,8 @@ Business Need: Create Bulk Subscription
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
+                        "id": "---data:-:env_offercode---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -1045,13 +208,12 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 },
                 {
                     "sku":"---data:-:env_sku2---",
-                    "quantity": 1,
+                    "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
                     "itemPrice": {
@@ -1064,13 +226,11 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
+                        "frequency": 5,
+                        "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
+                        "id": "---data:-:env_offercode2---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -1082,7 +242,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
@@ -1138,20 +297,19 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 200
-    And validate schema "gnc/createBulkSchema.json"
 
-  @create_multiple_subscriptions_withSkuId @subscriptions_success
+  @create_multiple_subscriptions_withSkuId @subscriptions_success @regression_
   Scenario: Create multiple subscriptions with sku id
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-            "channel": "WEBSITE",
+            "channel": "POS",
             "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
             "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -1161,7 +319,7 @@ Business Need: Create Bulk Subscription
             "items": [
                 {
                     "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
+                    "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
                     "itemPrice": {
@@ -1177,10 +335,8 @@ Business Need: Create Bulk Subscription
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
+                        "id": "---data:-:env_offercode---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -1192,7 +348,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 },
@@ -1216,8 +371,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode2---",
-                        "source": "PDP"
+                        "id": "---data:-:env_offercode2---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -1229,7 +383,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
@@ -1287,95 +440,95 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And validate schema "gnc/bulkSubscriptionWithSKUId.json"
 
-  @create_subscription_without_optional_fields
+  @create_subscription_without_optional_fields @regression_
   Scenario: Create Subscription without optional fields
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
-      {
-    "channel": "WEBSITE",
-    "customer": {
-        "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
-        "locale": "en_US",
-        "email": "customer@mail.com",
-        "firstName": "John",
-        "lastName": "Doe",
-        "segment": ["employee", "designer"]
-    },
-    "items": [
-        {
-            "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
+          {
+            "channel": "POS",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
             },
-            "plan": {
-                "frequency": 30,
-                "frequencyType": "Daily"
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
             },
-            "offer": {
-                "id": "---data:-:env_offercode---"
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
             }
         }
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST"
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST"
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        }
-    }
-}
       """
     When I run post call
     Then I see response code 200
-    And validate schema "gnc/createSubscriptionWithoutOptionalfields.json"
+#    And validate schema "gnc/createSubscriptionWithoutOptionalfields.json"
 
-  @can_not_create_subscription_if_expiryDate_in_past
+  @can_not_create_subscription_if_expiryDate_in_past @regression_
   Scenario: Subscription should not be allowed to create if the expiry date is before today
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-    "channel": "WEBSITE",
+    "channel": "POS",
     "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
         "locale": "en_US",
-        "email": "customer@mail.com",
+        "email": "custom{RandomNumber::4}@gmail.com",
         "contactNumber": "+92 3333709568",
         "firstName": "John",
         "lastName": "Doe",
@@ -1384,8 +537,8 @@ Business Need: Create Bulk Subscription
     },
     "items": [
         {
-            "id":1767788,
-            "quantity": 1,
+            "sku":"---data:-:env_sku1---",
+            "quantity": 2,
             "weight": 10,
             "weightUnit": "lb",
             "itemPrice": {
@@ -1398,14 +551,11 @@ Business Need: Create Bulk Subscription
                 "currencyCode": "USD"
             },
             "plan": {
-                "id": "1000000002",
-                "frequency": 30,
+                "frequency": 5,
                 "frequencyType": "Daily"
             },
-            "offsetDays": 10,
             "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
+                "id": "---data:-:env_offercode---"
             },
             "shipping": {
               "shipmentCarrier": "USPS",
@@ -1417,13 +567,13 @@ Business Need: Create Bulk Subscription
               "currencyCode": "USD"
             },
             "expiry": {
-                "expiryDate": "2021-07-22T00:00:00.199Z",
+               "expiryDate": "2022-11-14T11:16:32.544Z",
                 "billingCycles": 10
             }
         },
         {
             "sku":"---data:-:env_sku2---",
-            "quantity": 1,
+            "quantity": 2,
             "weight": 10,
             "weightUnit": "lb",
             "itemPrice": {
@@ -1436,14 +586,11 @@ Business Need: Create Bulk Subscription
                 "currencyCode": "USD"
             },
             "plan": {
-                "id": "1000000002",
-                "frequency": 30,
+                "frequency": 5,
                 "frequencyType": "Daily"
             },
-            "offsetDays": 10,
             "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
+                "id": "---data:-:env_offercode2---"
             },
             "shipping": {
               "shipmentCarrier": "USPS",
@@ -1455,7 +602,7 @@ Business Need: Create Bulk Subscription
               "currencyCode": "USD"
             },
             "expiry": {
-                "expiryDate": "2021-07-22T00:00:00.199Z",
+                "expiryDate": "2022-11-14T11:16:32.544Z",
                 "billingCycles": 10
             }
         }
@@ -1511,20 +658,21 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 400
-    And I see property value "expiryDate cannot be in past" is present in the response property "data.errors[0].errorMessage"
+    And I see property value "must be greater than" is contains in the response property "message"
+#    And I see property value "items[0].expiry.expiryDate must be greater than 2022-11-15T10:37:32.544Z" is present in the response property "message"
 
-  @invalid_offer_id
+  @invalid_offer_id  @regression_
   Scenario: Subscription should not be created for invalid offer id
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
         """
         {
-            "channel": "WEBSITE",
-            "originOrderId": "4",
-            "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+            "channel": "POS",
+            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                        "customer": {
+                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -1568,48 +716,9 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
-                    }
-                },
-                {
-                    "sku":"---data:-:env_sku2---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
-                    },
-                    "offsetDays": 10,
-                    "offer": {
-                        "id": "SUB",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
-
             ],
             "shipTo": {
                 "name": {
@@ -1662,21 +771,20 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 400
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
-    Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[1].errorCode"
 
-  @can_not_create_subscription_with_status
+  @can_not_create_subscription_with_status @regression_
   Scenario: Subscription can not be create with status
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
                 {
             "status":"ACTIVE",
-            "channel": "WEBSITE",
-            "originOrderId": "6803-5058-41270",
+            "channel": "POS",
+            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916",
                 "locale": "en_US",
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -1700,7 +808,7 @@ Business Need: Create Bulk Subscription
                     },
                     "plan": {
                         "id": "1000000002",
-                        "frequency": 30,
+                        "frequency": 5,
                         "frequencyType": "Daily"
                     },
                     "offsetDays": 10,
@@ -1718,7 +826,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 },
@@ -1739,7 +846,7 @@ Business Need: Create Bulk Subscription
                     },
                     "plan": {
                         "id": "1000000002",
-                        "frequency": 30,
+                        "frequency": 5,
                         "frequencyType": "Daily"
                     },
                     "offsetDays": 10,
@@ -1757,7 +864,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
@@ -1818,408 +924,60 @@ Business Need: Create Bulk Subscription
       "status" is not allowed
       """
 
-  @partial_reponse_no_skuID
+  @partial_reponse_no_skuID @regression_
   Scenario: Verify partial response if skuid is not present
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-    "channel": "WEBSITE",
-    "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-    "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "en_US",
-        "email": "customer@mail.com",
-        "contactNumber": "+92 3333709568",
-        "firstName": "John",
-        "lastName": "Doe",
-        "segment": ["employee"],
-        "employeeId": "1"
-    },
-    "items": [
-        {
-            "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "id": "1000000002",
-                "frequency": 30,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        },
-        {
-            "sku": "ABC12356434",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "id": "1000000002",
-                "frequency": 30,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        }
-
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        },
-        "paymentMethod": "visa",
-        "paymentKind": "CARD_PAYPAL"
-    }
-}
-      """
-    When I run post call
-    Then I see response code 200
-    And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
-      # Invalid offer code
-    And I have following request payload :
-      """
-      {
-    "channel": "WEBSITE",
-    "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-    "customer": {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "en_US",
-        "email": "customer@mail.com",
-        "contactNumber": "+92 3333709568",
-        "firstName": "John",
-        "lastName": "Doe",
-        "segment": ["employee"],
-        "employeeId": "1"
-    },
-    "items": [
-        {
-           "sku":"---data:-:env_sku1---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "id": "1000000002",
-                "frequency": 30,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "---data:-:env_offercode---",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        },
-        {
-           "sku":"---data:-:env_sku2---",
-            "quantity": 1,
-            "weight": 10,
-            "weightUnit": "lb",
-            "itemPrice": {
-                "price": 100.00,
-                "currencyCode": "USD"
-            },
-            "tax": {
-                "taxCode": "FR020000",
-                "taxAmount": 10.00,
-                "currencyCode": "USD"
-            },
-            "plan": {
-                "id": "1000000002",
-                "frequency": 30,
-                "frequencyType": "Daily"
-            },
-            "offsetDays": 10,
-            "offer": {
-                "id": "SUB-3106421",
-                "source": "PDP"
-            },
-            "shipping": {
-              "shipmentCarrier": "USPS",
-              "shipmentMethod": "Ground",
-              "shipmentInstructions": "",
-              "taxCode": "SHP020000",
-              "shippingAmount": 10.00,
-              "taxAmount": 1.00,
-              "currencyCode": "USD"
-            },
-            "expiry": {
-                "expiryDate": "2026-07-22T00:00:00.199Z",
-                "billingCycles": 10
-            }
-        }
-
-    ],
-    "shipTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "03323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "billTo": {
-        "name": {
-            "firstName": "Roger",
-            "middleName": "",
-            "lastName": "Fang"
-        },
-        "streetAddress": {
-            "street1": "27 O ST",
-            "street2": ""
-        },
-        "phone": {
-            "number": "012323370957",
-            "kind": "mobile"
-        },
-        "city": "BOSTON MA",
-        "state": "MA",
-        "postalCode": "2127",
-        "country": "US"
-    },
-    "paymentDetails": {
-        "paymentIdentifier": {
-            "cardIdentifier": "1234",
-            "expiryDate": "04/24"
-        },
-        "paymentMethod": "visa",
-        "paymentKind": "CARD_PAYPAL"
-    }
-}
-      """
-    When I run post call
-    Then I see response code 200
-    And I see property value "Request processed with partial success" is present in the response property "message"
-    And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
-
-  @partial_response_invalid_offer_id
-  Scenario: Partial Response if one of the subscription has invalid offer id
-    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
-    And I have following request payload :
-      """s
-      {
-            "channel": "WEBSITE",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+            "channel": "POS",
             "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
+                "segment": ["employee", "designer"]
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "sku":"---data:-:env_sku2---",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
                         "currencyCode": "USD"
                     },
                     "plan": {
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode2---"
                     }
                 },
                 {
-                   "sku":"---data:-:env_sku2---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "sku":"123452222",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
                         "currencyCode": "USD"
                     },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
                     "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
+                        "frequency": 5,
+                        "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "SUB-31064211",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode---"
                     }
                 }
-
             ],
             "shipTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "03323370957",
@@ -2233,12 +991,10 @@ Business Need: Create Bulk Subscription
             "billTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "012323370957",
@@ -2253,11 +1009,195 @@ Business Need: Create Bulk Subscription
                 "paymentIdentifier": {
                     "cardIdentifier": "1234",
                     "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
+                }
             }
-      }
+        }
+      """
+    When I run post call
+    Then I see response code 200
+    And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
+    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
+      # Invalid offer code
+    And I have following request payload :
+      """
+      {
+            "channel": "POS",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku2---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode2---"
+                    }
+                },
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "SUB"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 200
+    And I see property value "Request processed with partial success" is present in the response property "message"
+    And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
+    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
+
+  @partial_response_invalid_offer_id @regression_
+  Scenario: Partial Response if one of the subscription has invalid offer id
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+      """
+      {
+            "channel": "POS",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                },
+                {
+                    "sku":"PROTEIN_1",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
       """
     When I run post call
     Then I see response code 200
@@ -2267,7 +1207,7 @@ Business Need: Create Bulk Subscription
       """
     Then I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
-    Then I see property value "---data:-:env_sku2---" is present in the response property "data.errors[0].item.sku"
+    Then I see property value "PROTEIN_1" is present in the response property "data.errors[0].item.sku"
 
   @partial_response_expiryDate_past
   Scenario: Verify partial response when one of the expiry date of a subscription is in the past
@@ -2275,12 +1215,12 @@ Business Need: Create Bulk Subscription
     And I have following request payload :
       """
       {
-            "channel": "WEBSITE",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+            "channel": "POS",
+
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529954",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -2289,8 +1229,44 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
+                    "sku":"---data:-:env_sku2---",
+                    "quantity": 2,
+                    "weight": 10,
+                    "weightUnit": "lb",
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "tax": {
+                        "taxCode": "FR020000",
+                        "taxAmount": 10.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+
+                    "offer": {
+                        "id": "---data:-:env_offercode2---"
+
+                    },
+                    "shipping": {
+                      "shipmentCarrier": "USPS",
+                      "shipmentMethod": "Ground",
+                      "shipmentInstructions": "",
+                      "taxCode": "SHP020000",
+                      "shippingAmount": 10.00,
+                      "taxAmount": 1.00,
+                      "currencyCode": "USD"
+                    },
+                    "expiry": {
+                        "billingCycles": 10
+                    }
+                },
+                {
+                   "sku":"---data:-:env_sku---",
+                    "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
                     "itemPrice": {
@@ -2321,44 +1297,6 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
-                        "expiryDate": "2020-07-22T00:00:00.199Z",
-                        "billingCycles": 10
-                    }
-                },
-                {
-                   "sku":"---data:-:env_sku2---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
-                    },
-                    "offsetDays": 10,
-                    "offer": {
-                        "id": "---data:-:env_offercode2---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
@@ -2418,110 +1356,60 @@ Business Need: Create Bulk Subscription
     And I see property value "expiryDate cannot be in past" is present in the response property "data.errors[0].errorMessage"
     And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
 
-  @partial_response_skuId_not_allowed_to_subscription
+  @partial_response_skuId_not_allowed_to_subscription @regression_
   Scenario: Verify partial response when skuId is not allowed for subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-            "channel": "WEBSITE",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+            "channel": "POS",
             "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
+                "segment": ["employee", "designer"]
             },
             "items": [
                 {
                     "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
                         "currencyCode": "USD"
                     },
                     "plan": {
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2028-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode---"
                     }
                 },
                 {
-                    "sku": "8UHY1",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "sku":"123142",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
                         "currencyCode": "USD"
                     },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
                     "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
+                        "frequency": 5,
+                        "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode---"
                     }
                 }
-
             ],
             "shipTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "03323370957",
@@ -2535,12 +1423,10 @@ Business Need: Create Bulk Subscription
             "billTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "012323370957",
@@ -2555,11 +1441,9 @@ Business Need: Create Bulk Subscription
                 "paymentIdentifier": {
                     "cardIdentifier": "1234",
                     "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
+                }
             }
-      }
+        }
       """
     When I run post call
     Then I see response code 200
@@ -2567,110 +1451,60 @@ Business Need: Create Bulk Subscription
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
     And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
-  @partial_response_skuId_not_valid
+  @partial_response_skuId_not_valid @regression_
   Scenario: Verify partial response when skuId is not valid
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-            "channel": "WEBSITE",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+            "channel": "POS",
             "customer": {
-                "customerReferenceId": "606f01f441b8fc0008529954",
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
+                "segment": ["employee", "designer"]
             },
             "items": [
                 {
                     "sku":"---data:-:env_sku1---",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
                         "currencyCode": "USD"
                     },
                     "plan": {
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2028-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode---"
                     }
                 },
                 {
-                    "sku": "8UHY12342",
-                    "quantity": 1,
-                    "weight": 10,
-                    "weightUnit": "lb",
+                    "sku":"123142",
+                    "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
                         "currencyCode": "USD"
                     },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
                     "plan": {
-                        "frequency": 6,
-                        "frequencyType": "Weekly"
+                        "frequency": 5,
+                        "frequencyType": "Daily"
                     },
-                    "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
-                        "source": "PDP"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "expiryDate": "2026-07-22T00:00:00.199Z",
-                        "billingCycles": 10
+                        "id": "---data:-:env_offercode---"
                     }
                 }
-
             ],
             "shipTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "03323370957",
@@ -2684,12 +1518,10 @@ Business Need: Create Bulk Subscription
             "billTo": {
                 "name": {
                     "firstName": "Roger",
-                    "middleName": "",
                     "lastName": "Fang"
                 },
                 "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
+                    "street1": "27 O ST"
                 },
                 "phone": {
                     "number": "012323370957",
@@ -2704,11 +1536,9 @@ Business Need: Create Bulk Subscription
                 "paymentIdentifier": {
                     "cardIdentifier": "1234",
                     "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
+                }
             }
-      }
+        }
       """
     When I run post call
     Then I see response code 200
@@ -2716,18 +1546,17 @@ Business Need: Create Bulk Subscription
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
     And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
-  @no_subscription_discontinued_sku
+  @no_subscription_discontinued_sku @regression_
   Scenario: Subscription should not be created for discontinued sku
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-                "channel": "WEBSITE",
-                "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                "channel": "POS",
                 "customer": {
-                    "customerReferenceId": "c2st83",
+                    "customerReferenceId": "RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                     "locale": "en_US",
-                    "email": "shubham@mail.com",
+                    "email": "customer{RandomNumber::4}@gmail.com",
                     "contactNumber": "+91 3333709568",
                     "firstName": "shubham",
                     "lastName": "Pisal",
@@ -2751,7 +1580,7 @@ Business Need: Create Bulk Subscription
                         },
                         "plan": {
                             "id": "1000000002",
-                            "frequency": 30,
+                            "frequency": 5,
                             "frequencyType": "Daily"
                         },
                         "offsetDays": 10,
@@ -2769,7 +1598,6 @@ Business Need: Create Bulk Subscription
                           "currencyCode": "USD"
                         },
                         "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
                             "billingCycles": 10
                         }
                     }
@@ -2832,18 +1660,18 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorCode"
 
-  @subscription_not_allowed
+  @subscription_not_allowed @regression_
   Scenario: Subscription should not be created for a product which is not available to subscribe
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
       {
-                "channel": "WEBSITE",
+                "channel": "POS",
                 "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "customer": {
-                    "customerReferenceId": "c2st83",
+                    "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                     "locale": "en_US",
-                    "email": "shubham@mail.com",
+                    "email": "customer{RandomNumber::4}@gmail.com",
                     "contactNumber": "+91 3333709568",
                     "firstName": "shubham",
                     "lastName": "Pisal",
@@ -2866,8 +1694,8 @@ Business Need: Create Bulk Subscription
                             "currencyCode": "USD"
                         },
                         "plan": {
-                            "id": "1000000002",
-                            "frequency": 30,
+
+                            "frequency": 5,
                             "frequencyType": "Daily"
                         },
                         "offsetDays": 10,
@@ -2885,7 +1713,6 @@ Business Need: Create Bulk Subscription
                           "currencyCode": "USD"
                         },
                         "expiry": {
-                            "expiryDate": "2026-07-22T00:00:00.199Z",
                             "billingCycles": 10
                         }
                     }

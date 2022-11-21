@@ -9,11 +9,14 @@ import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import java.time.Instant;
 
 public class SubscriptionPage extends BasePage {
     private String subEndPoint;
@@ -160,6 +163,17 @@ public class SubscriptionPage extends BasePage {
         savedValues.put(key,basePage.getResponse().then().extract().path(property));
     }
 
+    public void saveDatePropertyValue(String key){
+        Instant instant = Instant.now();
+        Instant t2 = instant.plus(15, ChronoUnit.MINUTES);
+        String updatedDate = t2.toString();
+        savedValues.put(key,updatedDate);
+    }
+
+    public void saveStaticPropertyValue(String property, String key){
+        savedValues.put(key,property);
+    }
+
     public void verifyDatesOf(String propertyPath, String noOf, String type){
         String[] date = savedValues.get("lastPaymentDate").split("T");
         int day = Integer.parseInt(date[0].split("-")[2]);
@@ -185,9 +199,9 @@ public class SubscriptionPage extends BasePage {
     public void createCustomer() {
         commonPage.getEndPoint("/data-subscription/v1/customer");
         String payload = "{\n" +
-                "        \"customerReferenceId\": \"606f01f441b8fc0008529919\",\n" +
+                "           \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "          \"locale\": \"fr_CAB\",\n" +
-                "          \"email\": \"jitendra@mail.com\",\n" +
+                "          \"email\": \"customer"+CommonUtils.getRandomNumberFourDigit()+"@gmail.com\",\n"+
                 "          \"contactNumber\": \"+92 3333709569\",\n" +
                 "          \"firstName\": \"Jitendra\",\n" +
                 "          \"lastName\": \"Pisal\",\n" +
@@ -204,16 +218,53 @@ public class SubscriptionPage extends BasePage {
         basePage.getResponse().then().assertThat().statusCode(200);
     }
 
+    public void createSKU(){
+        commonPage.getPimEndPoint("/api-pim-external/product");
+        String payload = "{\n" +
+                "   \"productSku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku4")+"\",\n" +
+                "   \"itemType\": \"Item\",\n" +
+                "   \"title\": \"test\",\n" +
+                "    \"attributes\": {\n" +
+                "       \"isSubscription\": \"true\",\n" +
+                "       \"isDiscontinued\": \"false\",\n" +
+                "       \"skuSwap\": [\n" +
+                "           \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_swapproduct")+"\"\n" +
+                "       ]\n" +
+                "       }\n" +
+                "      }";
+        commonPage.requestPayload(payload);
+        commonPage.runPimPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
+    public void createDisSKU(){
+        commonPage.getPimEndPoint("/api-pim-external/product");
+        String payload = "{\n" +
+                "   \"productSku\": \"VITAMIN_"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "   \"itemType\": \"Item\",\n" +
+                "   \"title\": \"test\",\n" +
+                "    \"attributes\": {\n" +
+                "       \"isSubscription\": \"true\",\n" +
+                "       \"isDiscontinued\": \"false\",\n" +
+                "       \"skuSwap\": [\n" +
+                "           \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_swapproduct")+"\"\n" +
+                "       ]\n" +
+                "       }\n" +
+                "      }";
+        commonPage.requestPayload(payload);
+        commonPage.runPimPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
     public void createBulkSubscription(int noOfSubscriptions) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/bulk");
         String payload = "{\n" +
-                "            \"channel\": \"WEBSITE\",\n" +
-                "            \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "            \"channel\": \"POS\",\n" +
                 "            \"customer\": {\n" +
-                "                \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                "                \"customerReferenceId\": \""+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "                \"locale\": \"en_US\",\n" +
-                "                \"email\": \"jitendra.pisal@mail.com\",\n" +
-                "                \"contactNumber\": \"+92 3333709568\",\n" +
+                "                \"email\": \""+CommonUtils.getRandomEmail()+"\",\n" +
+                "                \"contactNumber\": \"923333709568\",\n" +
                 "                \"firstName\": \"John\",\n" +
                 "                \"lastName\": \"Doe\",\n" +
                 "                \"segment\": [\"employee\"],\n" +
@@ -221,8 +272,8 @@ public class SubscriptionPage extends BasePage {
                 "            },\n" +
                 "            \"items\": [\n" +
                 "                {\n" +
-                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
-                "                    \"quantity\": 1,\n" +
+                "                    \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
+                "                    \"quantity\": 2,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
                 "                    \"itemPrice\": {\n" +
@@ -235,13 +286,13 @@ public class SubscriptionPage extends BasePage {
                 "                        \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"plan\": {\n" +
-                "                        \"frequency\": 1,\n" +
+                "                        \"frequency\": 5,\n" +
                 "                        \"frequencyType\": \"Daily\"\n" +
                 "                    },\n" +
-                "                    \"offsetDays\": 10,\n" +
+//                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\",\n" +
-                "                        \"source\": \"PDP\"\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\"\n" +
+//                "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
                 "                      \"shipmentCarrier\": \"USPS\",\n" +
@@ -253,13 +304,12 @@ public class SubscriptionPage extends BasePage {
                 "                      \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"expiry\": {\n" +
-                "                        \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
                 "                        \"billingCycles\": 10\n" +
                 "                    }\n" +
                 "                },\n" +
                 "                {\n" +
-                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
-                "                    \"quantity\": 1,\n" +
+                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                "                    \"quantity\": 2,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
                 "                    \"itemPrice\": {\n" +
@@ -272,13 +322,13 @@ public class SubscriptionPage extends BasePage {
                 "                        \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"plan\": {\n" +
-                "                        \"frequency\": 1,\n" +
-                "                        \"frequencyType\": \"Weekly\"\n" +
+                "                        \"frequency\": 5,\n" +
+                "                        \"frequencyType\": \"Daily\"\n" +
                 "                    },\n" +
-                "                    \"offsetDays\": 10,\n" +
+//                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\",\n" +
-                "                        \"source\": \"PDP\"\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
+//                "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
                 "                      \"shipmentCarrier\": \"USPS\",\n" +
@@ -290,7 +340,6 @@ public class SubscriptionPage extends BasePage {
                 "                      \"currencyCode\": \"USD\"\n" +
                 "                    },\n" +
                 "                    \"expiry\": {\n" +
-                "                        \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
                 "                        \"billingCycles\": 10\n" +
                 "                    }\n" +
                 "                }\n" +
@@ -346,12 +395,12 @@ public class SubscriptionPage extends BasePage {
 
         if (noOfSubscriptions == 1) {
             payload = "{\n" +
-                    "    \"channel\": \"WEBSITE\",\n" +
-                    "    \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
+                    "    \"channel\": \"POS\",\n" +
+//                    "    \"originOrderId\": \""+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                     "    \"customer\": {\n" +
                     "        \"customerReferenceId\": \"606f01f441b8fc00"+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                     "        \"locale\": \"en_US\",\n" +
-                    "        \"email\": \"shubham@mail.com\",\n" +
+                    "        \"email\": \""+CommonUtils.getRandomEmail()+"\",\n" +
                     "        \"contactNumber\": \"+91 3333709568\",\n" +
                     "        \"firstName\": \"shubham\",\n" +
                     "        \"lastName\": \"Pisal\",\n" +
@@ -360,8 +409,8 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
-                    "            \"quantity\": 1,\n" +
+                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                    "            \"quantity\": 2,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
                     "            \"itemPrice\": {\n" +
@@ -374,14 +423,14 @@ public class SubscriptionPage extends BasePage {
                     "                \"currencyCode\": \"USD\"\n" +
                     "            },\n" +
                     "            \"plan\": {\n" +
-                    "                \"id\": \"1000000002\",\n" +
-                    "                \"frequency\": 30,\n" +
+//                    "                \"id\": \"637359fe13c6ba00087a5c0f\",\n" +
+                    "                \"frequency\": 5,\n" +
                     "                \"frequencyType\": \"Daily\"\n" +
                     "            },\n" +
-                    "            \"offsetDays\": 10,\n" +
+             //       "            \"offsetDays\": 2,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\",\n" +
-                    "                \"source\": \"PDP\"\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
+             //       "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
                     "              \"shipmentCarrier\": \"USPS\",\n" +
@@ -393,8 +442,7 @@ public class SubscriptionPage extends BasePage {
                     "              \"currencyCode\": \"USD\"\n" +
                     "            },\n" +
                     "            \"expiry\": {\n" +
-                    "                \"expiryDate\": \"2026-07-22T00:00:00.199Z\",\n" +
-                    "                \"billingCycles\": 10\n" +
+                    "                \"billingCycles\": 2\n" +
                     "            }\n" +
                     "        }\n" +
                     "    ],\n" +

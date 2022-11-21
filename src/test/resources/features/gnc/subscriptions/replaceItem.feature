@@ -1,7 +1,7 @@
 @subscription_v2 @v2
 Business Need: Replace Item in Subscription
     @v2_replace_item
-    @replace_item @subscriptions_success
+    @replace_item @subscriptions_success @after_regression_
     Scenario: Replace item
     Given I have created 1 bulk subscription
       # Replace item
@@ -10,12 +10,12 @@ Business Need: Replace Item in Subscription
     """
               {
               "item": {
-                  "sku": "---data:-:env_sku1---"
+                  "sku": "PROTEIN_60"
               },
               "replacementItem": {
                   "item": {
-                      "sku": "---data:-:env_sku3---",
-                      "quantity": 1,
+                      "sku": "PROTEIN_SHAKE",
+                      "quantity": 2,
                       "weight": 10,
                       "weightUnit": "lb",
                       "itemPrice": {
@@ -28,8 +28,33 @@ Business Need: Replace Item in Subscription
         """
     When I run post call
     Then I see response code 200
+    And I wait for 30 sec
+    # sawp again
+    Given I have endpoint "/data-subscription/v1/subscriptions/replace-items"
+    And I have following request payload :
+    """
+              {
+              "item": {
+                  "sku": "PROTEIN_SHAKE"
+              },
+              "replacementItem": {
+                  "item": {
+                      "sku": "PROTEIN_60",
+                      "quantity": 2,
+                      "weight": 10,
+                      "weightUnit": "lb",
+                      "itemPrice": {
+                          "price": 100.00,
+                          "currencyCode": "USD"
+                      }
+                  }
+              }
+          }
+        """
+        When I run post call
+        Then I see response code 200
 
-    @error_unknown_error
+    @error_unknown_error @regression_
     Scenario: sku should not be replace if it is not present in the system
         Given I have endpoint "/data-subscription/v1/subscriptions/replace-items"
         And I have following request payload :

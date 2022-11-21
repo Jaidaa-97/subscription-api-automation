@@ -21,19 +21,16 @@
             "amount":1
          },
          "skus":[
-            "MOT44"
+            "PROTEIN_20"
          ],
          "categories":[
-            "product category 1",
-            "product category 2",
-            "product category 3"
+            "product category 1"
+
          ],
-         "frequency":{
-            "shippingFrequency":1,
-            "shippingFrequencyType":"daily",
-            "billingFrequency":3,
-            "billingFrequencyType":"daily"
-         },
+        "frequency": {
+            "frequency": 10,
+            "frequencyType": "Daily"
+        },
           "itemQuantity": 2,
               "channel": "POS",
               "target": "PDP",
@@ -78,10 +75,8 @@
             "product category 3"
          ],
          "frequency":{
-            "shippingFrequency":1,
-            "shippingFrequencyType":"daily",
-            "billingFrequency":3,
-            "billingFrequencyType":"daily"
+            "frequency": 5,
+            "frequencyType": "Daily"
          },
           "itemQuantity": 2,
               "channel": "POS",

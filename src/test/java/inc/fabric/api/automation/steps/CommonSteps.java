@@ -141,6 +141,15 @@ public class CommonSteps extends BasePage {
         commonPage.runPostCall();
     }
 
+    @When("I run pim post call")
+    public void iRunPimPostCall() {
+        commonPage.runPimPostCall();
+    }
+
+    @When("I run pricing post call")
+    public void iRunPricingPostCall() {
+        commonPage.runPricingPostCall();
+    }
 
     @And("I have following request payload :")
     public void iHaveFollowingRequestPayload(String payload) {
@@ -172,6 +181,15 @@ public class CommonSteps extends BasePage {
         commonPage.getEndPoint(endPoint);
     }
 
+    @Given("I have pim endpoint {string}")
+    public void iHavePimEndpoint(String endPoint) {
+        commonPage.getPimEndPoint(endPoint);
+    }
+
+    @Given("I have pricing endpoint {string}")
+    public void iHavePricingEndpoint(String endPoint) {
+        commonPage.getPricingEndPoint(endPoint);
+    }
 
     @Given("I delete all the webhooks")
     public void iDeleteAllTheWebhooks() {

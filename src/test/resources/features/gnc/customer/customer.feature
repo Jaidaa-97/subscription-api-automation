@@ -1,131 +1,133 @@
 @create_customer_v2 @v2
 Business Need: Create Customer
 
-  @create_customer
+  @create_customer @regression_
   Scenario: Create Customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-          "locale": "fr_CAB",
-          "email": "customer@mail.com",
-          "contactNumber": "+92 3333709568",
-          "firstName": "John",
-          "lastName": "Doe",
-          "middleName":"JJ",
-          "segment": [ "employee"],
-          "employeeId": "345",
-          "communicationPreference": {
-            "SMS": true,
-            "email":true
+      {
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+        "locale": "fr_CAB",
+        "email": "custom{RandomNumber::4}@gmail.com",
+        "contactNumber": "+92 3333709568",
+        "firstName": "Customer1F",
+        "lastName": "Customer1L",
+        "middleName":"JJ",
+        "segment": [ "employee"],
+        "employeeId": "345",
+        "communicationPreference":{
+            "email":true,
+            "SMS":true
         }
-    }
+      }
     """
     When I run post call
     Then I see response code 200
-    Then I see property value "customer@mail.com" is present in the response property "data.email"
+    Then I see property value "custom" is contains in the response property "data.email"
+#
+#  Scenario: Verify error response if we don't pass locale while creating customer
+#    Given I have endpoint "/data-subscription/v1/customer"
+#    And I have following request payload :
+#    """
+#    {
+#        "customerReferenceId": "606f01f441b8fc0008529916"
+#    }
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#      "locale" is required
+#    """
+#
+#  Scenario: Verify error response if we don't pass email while creating customer
+#    Given I have endpoint "/data-subscription/v1/customer"
+#    And I have following request payload :
+#    """
+#    {
+#        "customerReferenceId": "606f01f441b8fc0008529916",
+#        "locale": "fr_CAB"
+#    }
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#      "email" is required
+#    """
+#
+#  Scenario: Verify error response if we don't pass firstName while creating customer
+#    Given I have endpoint "/data-subscription/v1/customer"
+#    And I have following request payload :
+#    """
+#    {
+#        "customerReferenceId": "606f01f441b8fc0008529916",
+#        "locale": "fr_CAB",
+#        "email": "customer@mail.com"
+#    }
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#      "firstName" is required
+#    """
+#
+#  Scenario: Verify error response if we don't pass lastName while creating customer
+#    Given I have endpoint "/data-subscription/v1/customer"
+#    And I have following request payload :
+#    """
+#    {
+#        "customerReferenceId": "606f01f441b8fc0008529916",
+#        "locale": "fr_CAB",
+#        "email": "custom{RandomNumber::4}@gmail.com",
+#        "firstName": "John"
+#    }
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#      "lastName" is required
+#    """
+#
+#  Scenario: Verify error response if we don't pass lastName while creating customer
+#    Given I have endpoint "/data-subscription/v1/customer"
+#    And I have following request payload :
+#    """
+#    {
+#        "customerReferenceId": "606f01f441b8fc0008529916",
+#        "locale": "fr_CAB",
+#        "email": "custom{RandomNumber::4}@gmail.com",
+#        "firstName": "John"
+#    }
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#      "lastName" is required
+#    """
 
-  Scenario: Verify error response if we don't pass locale while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
-    And I have following request payload :
-    """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916"
-    }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-      "locale" is required
-    """
-
-  Scenario: Verify error response if we don't pass email while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
-    And I have following request payload :
-    """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "fr_CAB"
-    }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-      "email" is required
-    """
-
-  Scenario: Verify error response if we don't pass firstName while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
-    And I have following request payload :
-    """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "fr_CAB",
-        "email": "customer@mail.com"
-    }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-      "firstName" is required
-    """
-
-  Scenario: Verify error response if we don't pass lastName while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
-    And I have following request payload :
-    """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "fr_CAB",
-        "email": "customer@mail.com",
-        "firstName": "John"
-    }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-      "lastName" is required
-    """
-
-  Scenario: Verify error response if we don't pass lastName while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
-    And I have following request payload :
-    """
-    {
-        "customerReferenceId": "606f01f441b8fc0008529916",
-        "locale": "fr_CAB",
-        "email": "customer@mail.com",
-        "firstName": "John"
-    }
-    """
-    When I run post call
-    Then I see response code 400
-    Then I see following value for property "message" :
-    """
-      "lastName" is required
-    """
-
+  @regression_
   Scenario: Create customer without passing  optional fields
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
         "locale": "fr_CAB",
-        "email": "customer@mail.com",
+        "email": "custom{RandomNumber::4}@gmail.com",
         "firstName": "John",
         "lastName": "Pisal"
     }
     """
     When I run post call
     Then I see response code 200
-    Then I see property value "customer@mail.com" is present in the response property "data.email"
+    Then I see property value "custom" is contains in the response property "data.email"
 
+  @regression_
   Scenario: Verify max length error for customerReferenceId
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -133,7 +135,7 @@ Business Need: Create Customer
       {
           "customerReferenceId": "606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916606f01f441b8fc0008529916",
           "locale": "fr_CAB",
-          "email": "customer@mail.com",
+          "email": "custom{RandomNumber::4}@gmail.com",
           "firstName": "John",
           "lastName": "Pisal"
       }
@@ -142,17 +144,18 @@ Business Need: Create Customer
     Then I see response code 400
     Then I see following value for property "message" :
       """
-      "customerReferenceId" length must be less than or equal to 50 characters long
+        "customerReferenceId" length must be less than or equal to 50 characters long
       """
 
+  @regression_
   Scenario: Verify max length error message for firstName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
-          "email": "customer@mail.com",
+          "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
           "firstName": "JohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohn",
           "lastName": "Doe",
@@ -168,14 +171,15 @@ Business Need: Create Customer
         "firstName" length must be less than or equal to 150 characters long
       """
 
+  @regression_
   Scenario: Verify max length error message for lastName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
-          "email": "customer@mail.com",
+          "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
           "lastName": "JohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohn",
           "firstName": "Doe",
@@ -191,12 +195,13 @@ Business Need: Create Customer
         "lastName" length must be less than or equal to 150 characters long
       """
 
+  @regression_
   Scenario: Verify max length error message for email
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "customercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomer@mail.com",
           "contactNumber": "+92 3333709568",
@@ -214,12 +219,13 @@ Business Need: Create Customer
         "email" must be a valid email
       """
 
+  @regression_
   Scenario: Verify max length error message for phone
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "omer@mail.com",
           "contactNumber": "+92 333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568",
@@ -237,12 +243,13 @@ Business Need: Create Customer
         "contactNumber" length must be less than or equal to 50 characters long
       """
 
+  @regression_
   Scenario: Verify max length error message for segment
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
     {
-        "customerReferenceId": "606f01f441b8fc0008529916",
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "cmer@mail.com",
           "contactNumber": "+92 234342342424",
@@ -260,7 +267,7 @@ Business Need: Create Customer
         "employeeId" length must be less than or equal to 50 characters long
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of customerReferenceId
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -268,7 +275,7 @@ Business Need: Create Customer
     {
         "customerReferenceId": 12,
           "locale": "fr_CAB",
-          "email": "customer@mail.com",
+          "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
           "firstName": "John",
           "lastName": "Doe",
@@ -288,7 +295,7 @@ Business Need: Create Customer
         "customerReferenceId" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of locale
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -296,7 +303,7 @@ Business Need: Create Customer
     {
         "customerReferenceId": "dzdc434345",
           "locale": 11,
-          "email": "customer@mail.com",
+          "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
           "firstName": "John",
           "lastName": "Doe",
@@ -316,7 +323,7 @@ Business Need: Create Customer
         "locale" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of email
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -344,7 +351,7 @@ Business Need: Create Customer
         "email" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of contactNumber
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -372,7 +379,7 @@ Business Need: Create Customer
         "contactNumber" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of firstName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -400,7 +407,7 @@ Business Need: Create Customer
         "firstName" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of lastName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -428,7 +435,7 @@ Business Need: Create Customer
         "lastName" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of middleName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -456,7 +463,7 @@ Business Need: Create Customer
         "middleName" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of segment
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -484,7 +491,7 @@ Business Need: Create Customer
         "segment[0]" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of employeeId
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -512,7 +519,7 @@ Business Need: Create Customer
         "employeeId" must be a string
       """
 
-  @data_error
+  @data_error @regression_
   Scenario: verify schema error message for invalid data type of communicationPreference
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :

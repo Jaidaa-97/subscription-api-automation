@@ -1,7 +1,7 @@
 @v2 @add_item_to_order
 Business Need: Add Item To Order
 
-  @add_item_to_order_as_upsell
+  @add_item_to_order_as_upsell @regression_
   Scenario: add item as upsell to order
     Given I have created 1 bulk subscription
     And I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -18,7 +18,7 @@ Business Need: Add Item To Order
         {
 
             "item": {
-                "sku": "VITAMIN-A",
+                "sku": "---data:-:env_sku1---",
                 "quantity": 3,
                 "weight": 10,
                 "weightUnit": "lb",
@@ -53,9 +53,7 @@ Business Need: Add Item To Order
     When I run post call
     Then I see response code 200
 
-
-
-  @add_item_to_order_as_subscription
+  @add_item_to_order_as_subscription @regression_
   Scenario: add item to order as subscription
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -73,8 +71,8 @@ Business Need: Add Item To Order
         {
            "subscriptionId": "{SavedValue::subId}",
            "item": {
-                "sku": "VITAMIN-A",
-                "quantity": 3,
+                "sku": "---data:-:env_sku2---",
+                "quantity": 2,
                 "weight": 10,
                 "weightUnit": "lb",
                 "itemPrice": {
@@ -97,9 +95,9 @@ Business Need: Add Item To Order
                 "currencyCode": "USD"
             },
             "customAttributes": {
-                "storeId": "60cb07fc20387b000821c5c3",
-                "associateId": 1,
-                "trackingUrl": "609436d21baded0008945b05"
+                "storeId": "1234567890",
+                "associateId": "jitu",
+                "trackingUrl": "http://google.com"
             }
         }
     ]
@@ -109,7 +107,6 @@ Business Need: Add Item To Order
     When I run post call
     Then I see response code 200
     And validate schema "/gnc/addItemAsSubscription.json"
-
 
   @add_item_to_order_not_exist
     Scenario: add item to order not exist
@@ -155,7 +152,6 @@ Business Need: Add Item To Order
     """
     When I run post call
     Then I see response code 400
-
 
   @add_item_to_order_as_subscription_not_found
   Scenario: add item to order as subscription not found

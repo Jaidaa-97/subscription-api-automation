@@ -139,7 +139,33 @@ public class BasePage {
         }
     }
 
+    private String getPimEnv() {
+        String env = System.getProperty("env");
+        if(null == env || env.equals("")) {
+            return "STAGING_PIM";
+        }else{
+            return env.toUpperCase() + "_PIM";
+        }
+    }
+
+    private String getPricingEnv() {
+        String env = System.getProperty("env");
+        if(null == env || env.equals("")) {
+            return "STAGING_PRICING";
+        }else{
+            return env.toUpperCase() + "_PRICING";
+        }
+    }
+
     public String getBaseURL() {
         return FileHandler.readPropertyFile("environment.properties",getEnv());
+    }
+
+    public String getPimBaseURL() {
+        return FileHandler.readPropertyFile("environment.properties",getPimEnv());
+    }
+
+    public String getPricingBaseURL() {
+        return FileHandler.readPropertyFile("environment.properties",getPricingEnv());
     }
 }

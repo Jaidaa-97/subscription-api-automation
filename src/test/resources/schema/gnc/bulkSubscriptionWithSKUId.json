@@ -107,9 +107,7 @@
                     "contactNumber",
                     "firstName",
                     "lastName",
-                    "middleName",
                     "employeeId",
-                    "communicationPreference",
                     "createdAt",
                     "updatedAt",
                     "id"

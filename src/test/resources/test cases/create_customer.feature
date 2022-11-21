@@ -17,7 +17,7 @@ Business Need: Create/Update Customer
           {
             "customerReferenceId": "606f01f441b8fc0008529916", // GNC customer id
               "locale": "en_US", // possible values: fr_ca, en_US
-              "email": "customer@mail.com",
+              "email": "custom{RandomNumber::4}@gmail.com",
               "contactNumber": "+92 3333709568", // optional
               "firstName": "John",
               "lastName": "Doe",
@@ -36,7 +36,7 @@ Business Need: Create/Update Customer
         """
               {
               "locale": "en_US", // possible values: fr_ca, en_US
-              "email": "customer@mail.com",
+              "email": "custom{RandomNumber::4}@gmail.com",
               "contactNumber": "+92 3333709568", // optional
               "firstName": "John",
               "lastName": "Doe",

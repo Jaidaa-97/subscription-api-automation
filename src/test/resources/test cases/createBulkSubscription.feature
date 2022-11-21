@@ -14,7 +14,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -117,7 +117,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -259,7 +259,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -362,7 +362,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -612,7 +612,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
                         "customer": {
                             "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                             "locale": "en_US",                      // possible values: fr_ca, en_US
-                            "email": "customer@mail.com",
+                            "email": "custom{RandomNumber::4}@gmail.com",
                             "contactNumber": "+92 3333709568"       // optional
                             "firstName": "John",
                             "middleName": "",                       // optional
@@ -730,7 +730,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
                       "customer": {
                           "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                           "locale": "en_US",                      // possible values: fr_ca, en_US
-                          "email": "customer@mail.com",
+                          "email": "custom{RandomNumber::4}@gmail.com",
                           "contactNumber": "+92 3333709568",       // optional
                           "firstName": "John",
                           "middleName": "",                       // optional
@@ -832,7 +832,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
                       "customer": {
                           "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                           "locale": "en_US",                      // possible values: fr_ca, en_US
-                          "email": "customer@mail.com",
+                          "email": "custom{RandomNumber::4}@gmail.com",
                           "contactNumber": "+92 3333709568"       // optional
                           "firstName": "John",
                           "middleName": "",                       // optional
@@ -1022,7 +1022,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -1125,7 +1125,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
             "customer": {
                 "customerReferenceId": "606f01f441b8fc0008529916", // GNC customerId
                 "locale": "en_US",                      // possible values: fr_ca, en_US
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568"       // optional
                 "firstName": "John",
                 "middleName": "",                       // optional
@@ -1257,7 +1257,7 @@ Business Need: As a merchant, I should be able to create multiple subscription a
                 "id": "606f01f441b8fc0008529916",
                 "customerReferenceId": 446f01f441b8fc0008529912",
                 "locale": "en_US",
-                "email": "customer@mail.com",
+                "email": "custom{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": "employee",

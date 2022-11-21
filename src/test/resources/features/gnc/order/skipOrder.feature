@@ -18,7 +18,7 @@ Business Need: Skip Order
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::newOrderID}"
     When I run get call api
     Then I see response code 200
-    Then I see property value "{Date::uuu-MM-dd:::M=1}" is contains in the response property "data.order.scheduledDate"
+    Then I see property value "{Date::uuu-MM-dd:::d=10}" is contains in the response property "data.order.scheduledDate"
 
     @invalid_order_id
     Scenario: Invalid order id

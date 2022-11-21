@@ -1,7 +1,7 @@
 @v2 @Create_sub_discount
 Business Need: Create Sub Discount
 
-  @SUB-716 @createDiscount @getDiscountById
+  @SUB-716 @createDiscount @getDiscountById @regression_
   Scenario: Create a subscription discount || Get discount by its id
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :
@@ -18,21 +18,20 @@ Business Need: Create Sub Discount
          },
          "message":"terms and conditions of the offer",
          "discount":{
-            "amount":1
+            "percentage":1
+
          },
          "skus":[
-            "MOT44"
+            "---data:-:env_sku1---"
          ],
          "categories":[
             "product category 1",
             "product category 2",
             "product category 3"
          ],
-         "frequency":{
-            "shippingFrequency":1,
-            "shippingFrequencyType":"daily",
-            "billingFrequency":3,
-            "billingFrequencyType":"daily"
+         "frequency": {
+        "frequency": 5,
+        "frequencyType": "Daily"
          },
           "itemQuantity": 2,
               "channel": "POS",
@@ -45,9 +44,10 @@ Business Need: Create Sub Discount
     """
     And I run post call
     Then I see response code 200
-    And I have saved property "data.offerCode" as "offerCode"
-    Then I see property value "MOT44" is contains in the response property "data.skus[0]"
-    Then I see property value 1 is present in the response property "data.discount.amount"
+
+     And I have saved property "data.offerCode" as "offerCode"
+     Then I see property value "---data:-:env_sku1---" is contains in the response property "data.skus[0]"
+    Then I see property value 1 is present in the response property "data.discount.percentage"
     Then I see property value 2 is present in the response property "data.itemQuantity"
     Then I see property value "POS" is present in the response property "data.channel"
     Then I see property value "PDP" is present in the response property "data.target"
@@ -57,24 +57,22 @@ Business Need: Create Sub Discount
     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts/{SavedValue::offerCode}"
     When I run get call api
     Then I see response code 200
-    Then validate schema "/gnc/createDiscount.json"
-    Then I see property value "item1234561" is contains in the response property "data.itemIds[0]"
-    Then I see property value "itemI2345678" is contains in the response property "data.itemIds[1]"
-    Then I see property value 1 is present in the response property "data.discount.amount"
+#    Then validate schema "/gnc/createDiscount.json"
+    Then I see property value 1 is present in the response property "data.discount.percentage"
     Then I see property value 2 is present in the response property "data.itemQuantity"
     Then I see property value "POS" is present in the response property "data.channel"
     Then I see property value "PDP" is present in the response property "data.target"
     Then I see property value "employee" is present in the response property "data.customerSegment[0]"
     Then I see property value "designer" is present in the response property "data.customerSegment[1]"
 
-  @SUB-716 @required_discount_field
+  @SUB-716 @required_discount_field @regression_
   Scenario: Verify error message if discount field is not passed
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :
     """
     {
       "skus":[
-              "MOT44"
+              "---data:-:env_sku1---"
            ]
     }
     """
@@ -85,7 +83,7 @@ Business Need: Create Sub Discount
       "discount" is required
     """
 
-  @SUB-716 @create_discount_percentage
+  @SUB-716 @create_discount_percentage @regression_
   Scenario: Create a discount in percentage
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :
@@ -121,22 +119,20 @@ Business Need: Create Sub Discount
             "amount":1
          },
          "itemIds":[
-            "item1234561",
-            "itemI2345678"
+            "1000038996"
          ],
-         "skus":["MO44"],
+         "skus":["---data:-:env_sku1---","---data:-:env_sku2---"],
 
          "categories":[
             "product category 1",
             "product category 2",
             "product category 3"
          ],
-         "frequency":{
-            "shippingFrequency":1,
-            "shippingFrequencyType":"daily",
-            "billingFrequency":3,
-            "billingFrequencyType":"daily"
+         "frequency": {
+            "frequency": 5,
+            "frequencyType": "Daily"
          },
+
           "itemQuantity": 2,
               "channel": "POS",
               "target": "PDP",
@@ -148,12 +144,12 @@ Business Need: Create Sub Discount
     """
     And I run post call
     Then I see response code 400
-
+    Then I see following value for property "message" :
+    """
+    "value" contains a conflict between exclusive peers [itemIds, skus]
     """
 
-    """
-
-  @SUB-716 @error_discount_in_amount_and_percentage
+  @SUB-716 @error_discount_in_amount_and_percentage @regression_
   Scenario: Verify that the discount can not be created in amount and percentage at the same time
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :
@@ -163,7 +159,7 @@ Business Need: Create Sub Discount
           "percentage":10,
           "amount": 20
           },
-            "skus":[]
+            "skus":["---data:-:env_sku1---"]
         }
     """
     And I run post call

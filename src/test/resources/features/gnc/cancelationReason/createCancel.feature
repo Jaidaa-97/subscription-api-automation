@@ -1,7 +1,7 @@
 @v2 @create_cancellation_reason
   Business Need: Create cancellation Reason
 
-    @create_success_scenario
+    @create_success_scenario @regression_
     Scenario: Success Scenario
       Given I have endpoint "/data-subscription/v1/cancelation-reasons"
       And I have following request payload :
@@ -57,7 +57,7 @@
 
       """
       And I run post call
-      Then I see response code 400
+      Then I see response code 200
       Then I see property value "All codes are duplicates" is present in the response property "message"
 
 

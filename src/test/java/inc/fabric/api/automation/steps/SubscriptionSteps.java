@@ -57,6 +57,16 @@ public class SubscriptionSteps {
         subscriptionPage.savePropertyValue(property,key);
     }
 
+    @When("I have saved post 15minutes datetime property as {string}")
+    public void iHaveSavedDateSchedules(String key) {
+        subscriptionPage.saveDatePropertyValue(key);
+    }
+
+    @When("I have saved static property {string} as {string}")
+    public void iHaveSavedStaticSchedules(String property, String key) {
+        subscriptionPage.saveStaticPropertyValue(property,key);
+    }
+
     @Then("^I verify \"([^\"]+)\" date updated is after \"([^\"]+)\" (weeks|days|months|years)$")
     public void iVerifyDateUpdatedIsAfterWeeks(String key, String afterNoOf, String type) {
         subscriptionPage.verifyDatesOf(key, afterNoOf, type);
@@ -75,6 +85,16 @@ public class SubscriptionSteps {
     @Given("^I have created( .*)? bulk subscription$")
     public void iHaveCreatedBulkSubscription(int number) {
         subscriptionPage.createBulkSubscription(number);
+    }
+
+    @Given("I have created sku")
+    public void iHaveCreatedSKU() {
+        subscriptionPage.createSKU();
+    }
+
+    @Given("I have created discontinue sku")
+    public void iHaveCreatedDisSKU() {
+        subscriptionPage.createDisSKU();
     }
 
     @And("I get the index of order for subscription {string} as {string}")

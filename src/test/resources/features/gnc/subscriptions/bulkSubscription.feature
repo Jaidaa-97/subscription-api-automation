@@ -12,7 +12,7 @@ Business Need: Create Bulk Subscription
 #                "customer": {
 #                    "customerReferenceId": "606f01f441b8fc0008529916",
 #                    "locale": "en_US",
-#                    "email": "customer@mail.com",
+#                    "email": "custom{RandomNumber::4}@gmail.com",
 #                    "contactNumber": "+92 3333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
@@ -158,7 +158,7 @@ Business Need: Create Bulk Subscription
 #                "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
 #                "customer": {
 #                    "locale": "en_US",
-#                    "email": "customer@mail.com",
+#                    "email": "custom{RandomNumber::4}@gmail.com",
 #                    "contactNumber": "+92 3333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
@@ -307,7 +307,7 @@ Business Need: Create Bulk Subscription
 #                "originOrderId": "6803-5058-41270",
 #                "customer": {
 #                    "customerReferenceId": "606f01f441b8fc0008529916",
-#                    "email": "customer@mail.com",
+#                    "email": "custom{RandomNumber::4}@gmail.com",
 #                    "contactNumber": "+92 3333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
@@ -1342,7 +1342,7 @@ Business Need: Create Bulk Subscription
 #    "customer": {
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
-#        "email": "customer@mail.com",
+#        "email": "custom{RandomNumber::4}@gmail.com",
 #        "contactNumber": "+92 3333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
@@ -1490,7 +1490,7 @@ Business Need: Create Bulk Subscription
 #    "customer": {
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
-#        "email": "customer@mail.com",
+#        "email": "custom{RandomNumber::4}@gmail.com",
 #        "firstName": "John",
 #        "lastName": "Doe"
 #    },
@@ -1569,7 +1569,7 @@ Business Need: Create Bulk Subscription
 #            "customer": {
 #                "customerReferenceId": "606f01f441b8fc0008529916",
 #                "locale": "en_US",
-#                "email": "customer@mail.com",
+#                "email": "custom{RandomNumber::4}@gmail.com",
 #                "contactNumber": "+92 3333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
@@ -1722,7 +1722,7 @@ Business Need: Create Bulk Subscription
 #    "customer": {
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
-#        "email": "customer@mail.com",
+#        "email": "custom{RandomNumber::4}@gmail.com",
 #        "contactNumber": "+92 3333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
@@ -1869,7 +1869,7 @@ Business Need: Create Bulk Subscription
 #    "customer": {
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
-#        "email": "customer@mail.com",
+#        "email": "custom{RandomNumber::4}@gmail.com",
 #        "contactNumber": "+92 3333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
@@ -3031,7 +3031,7 @@ Business Need: Create Bulk Subscription
             {
               "offer": {
                  "id": "---data:-:env_updateOfferCode---",
-                 "source": "PDP" 
+                 "source": "PDP"
                }
             }
         """
@@ -3526,7 +3526,8 @@ Business Need: Create Bulk Subscription
 
 #  @swap_incorrect_product
 #  Scenario: Product should not be swapped/updated in the subscription if the swapping product is not a part of swappable list of the product
-#    Given I have created bulk subscription
+#    Given I have
+#    d bulk subscription
 #    And I have saved property "data.subscriptions[0].id" as "subId1"
 #    And I have saved property "data.subscriptions[1].id" as "subId2"
 #      # Update sku

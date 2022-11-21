@@ -1,12 +1,13 @@
 @subscription_v2 @orchestration
 Business Need: Orchestration Response
 
-  @Success_Scenario
+  @Success_Scenario @regression_
   Scenario: Success Scenario
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -37,12 +38,13 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "SUCCESS" is present in the response property "data.order.status"
 
-  @Invalid_Code
+  @Invalid_Code @regression_
   Scenario: Enter Invalid code
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -67,14 +69,16 @@ Business Need: Orchestration Response
     """
     When I run post call
     Then I see response code 200
-    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
+    Then I see property value "Invalid errorCode or errorMsg" is present in the response property "data[0].status"
+#    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
 
   @Invalid_message
   Scenario: Enter Invalid message
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -90,7 +94,7 @@ Business Need: Orchestration Response
             "order":{
             "code": "ERROR",
             "orderId": "{SavedValue::orderId}",
-            "errorCode":72221,
+            "errorCode":999,
             "errorMsg":"sdfsdffsdfdf"
             }
         }
@@ -99,14 +103,16 @@ Business Need: Orchestration Response
     """
     When I run post call
     Then I see response code 200
-    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
+    Then I see property value "Invalid errorCode or errorMsg" is present in the response property "data[0].status"
+#    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
 
-  @Invalid_length_OrderId
+  @Invalid_length_OrderId @regression_
   Scenario: Enter Invalid length OrderId
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -133,12 +139,13 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "Argument passed in must be a single String of 12 bytes or a string of 24 hex characters" is present in the response property "data[0].error"
 
-  @Invalid_OrderId
+  @Invalid_OrderId @regression_
   Scenario: Enter Invalid OrderId
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -170,7 +177,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -206,12 +214,13 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Agent_login_failed
+  @Agent_login_failed @regression_
   Scenario: Agent login failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -305,15 +314,18 @@ Business Need: Orchestration Response
     """
     When I run post call
     Then I see response code 200
+    And I wait for 30 sec
     Then I see property value "CANCELED" is present in the response property "data[0].status"
     Then validate schema "/gnc/orchestration.json"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
     Then I see response code 200
+    And I wait for 30 sec
     Then I see property value "CANCELED" is present in the response property "data.order.status"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
     Then I see response code 200
+    And I wait for 30 sec
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
   @Aurus_payment_token_not_available
@@ -321,7 +333,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -431,7 +444,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -526,6 +540,7 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "CANCELED" is present in the response property "data[0].status"
+    And I wait for 10 sec
     Then validate schema "/gnc/orchestration.json"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
@@ -541,7 +556,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -637,6 +653,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "CANCELED" is present in the response property "data[0].status"
     Then validate schema "/gnc/orchestration.json"
+    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
     Then I see response code 200
@@ -651,7 +668,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -761,7 +779,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -872,7 +891,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -978,7 +998,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1088,7 +1109,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1197,8 +1219,9 @@ Business Need: Orchestration Response
   Scenario: Gift certificate is the only payment method available
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer." as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1308,7 +1331,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1418,7 +1442,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1528,7 +1553,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1638,7 +1664,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1748,7 +1775,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1858,7 +1886,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1891,7 +1920,8 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -1996,12 +2026,13 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Out_of_stuck
+  @Out_of_stuck @regression_
   Scenario: out of stuck
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -2022,9 +2053,9 @@ Business Need: Orchestration Response
                     "taxAmount": 10,
                     "currencyCode": "USD"
                 },
-                "sku": "SHOES10",
-                "quantity": 3,
-                "weight": 10,
+                "sku":"---data:-:env_sku2---",
+                "quantity": 2,
+                "weight": 10
             },
             "shipping": {
                 "shipmentCarrier": "USPS",
@@ -2034,10 +2065,6 @@ Business Need: Orchestration Response
                 "shippingAmount": 10,
                 "taxAmount": 1,
                 "currencyCode": "USD"
-            },
-            "offer": {
-                "id": "SUB-797386",
-                "source": "PDP"
             },
             "customAttributes": {
                 "storeId": "1234567890",
@@ -2080,12 +2107,13 @@ Business Need: Orchestration Response
     Then I see property value "RETRY" is present in the response property "data.orders[0].status"
     Then I see property value "SUBMITTED" is present in the response property "data.orders[1].status"
 
-  @Low_Inventory
+  @Low_Inventory @regression_
   Scenario: Low Inventory
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+    And I wait for 10 sec
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -2106,8 +2134,8 @@ Business Need: Orchestration Response
                     "taxAmount": 10,
                     "currencyCode": "USD"
                 },
-                "sku": "MOT3",
-                "quantity": 3,
+                "sku":"---data:-:env_sku2---",
+                "quantity": 2,
                 "weight": 10
             },
             "shipping": {
@@ -2118,10 +2146,6 @@ Business Need: Orchestration Response
                 "shippingAmount": 10,
                 "taxAmount": 1,
                 "currencyCode": "USD"
-            },
-            "offer": {
-                "id": "SUB-797386",
-                "source": "PDP"
             },
             "customAttributes": {
                 "storeId": "1234567890",

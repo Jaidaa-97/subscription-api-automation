@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import org.junit.Assert;
+import java.util.Random;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -14,7 +15,22 @@ public class CommonUtils {
     public static int getRandomNumber() {
         return (int) getRandomNumberInRange(1000, 50000) + (int) getRandomNumberInRange(51000, 90000);
     }
-
+    private static String[] words = new String[] { "abcdd", //$NON-NLS-1$
+            "posrt", //$NON-NLS-1$
+            "nogqi", //$NON-NLS-1$
+            "seaa", //$NON-NLS-1$
+            "takqima", //$NON-NLS-1$
+            "sanlct", //$NON-NLS-1$
+            "estpg" }; //$NON-NLS-1$
+    private static Random random = new Random();
+    public static String getRandomWord() {
+        return words[random.nextInt(words.length)];
+    }
+    public static String getRandomEmail() {
+        final int num = 10000;
+        String email = getRandomWord() + random.nextInt(num) + "@" + "random" + ".com"; //$NON-NLS-1$ //$NON-NLS-2$
+        return email.toLowerCase();
+    }
     public static int getRandomNumberFourDigit() {
         return (int) (int) getRandomNumberInRange(0000, 9999);
     }

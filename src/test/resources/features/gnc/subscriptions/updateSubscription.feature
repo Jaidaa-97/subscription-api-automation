@@ -1,13 +1,15 @@
 @subscription_v2 @v2
 Business Need: Update Subscription
 
-  @update_subscription
+  @update_subscription @regression_
   Scenario: Update customer details, shipping and billing address, payment details by updating subscription and verify
   that the orders also gets updated
     # Create subscription
     Given I have created bulk subscription
     And I have saved property "data.subscriptions[0].id" as "subId1"
     And I have saved property "data.subscriptions[1].id" as "subId2"
+#    When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "customerReferenceId"
+    When I have saved static property "custom{RandomNumber::4}@gmail.com" as "email"
     And I wait for 10 sec
     # Update customer details
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId1}"
@@ -16,10 +18,9 @@ Business Need: Update Subscription
                 {
                   "item":{},
                     "customer": {
-                      "customerReferenceId": "606f01f441b8fc0008557433",
                       "locale": "en_US",
-                      "email": "jj@mail.com",
-                      "contactNumber": "+91 574594335",
+                      "email": "{SavedValue::email}",
+                      "contactNumber": "91574594335",
                       "firstName": "James",
                       "middleName": "Patric",
                       "lastName": "Pics",
@@ -35,10 +36,9 @@ Business Need: Update Subscription
     When I run get call api
     Then I see response code 200
     Then I see property value "employee1" is present in the response property "data.subscription.customer.segment[0]"
-    Then I see property value "606f01f441b8fc0008557433" is present in the response property "data.subscription.customer.customerReferenceId"
     Then I see property value "en_US" is present in the response property "data.subscription.customer.locale"
-    Then I see property value "jj@mail.com" is present in the response property "data.subscription.customer.email"
-    Then I see property value "+91 574594335" is present in the response property "data.subscription.customer.contactNumber"
+    Then I see property value "{SavedValue::email}" is present in the response property "data.subscription.customer.email"
+    Then I see property value "91574594335" is present in the response property "data.subscription.customer.contactNumber"
     Then I see property value "James" is present in the response property "data.subscription.customer.firstName"
     Then I see property value "Pics" is present in the response property "data.subscription.customer.lastName"
     Then I see property value "123482y73" is present in the response property "data.subscription.customer.employeeId"
@@ -60,7 +60,7 @@ Business Need: Update Subscription
                           "street2": "Hindu sena marg"
                       },
                       "phone": {
-                          "number": "+91 3333709512"
+                          "number": "913333709512"
                       },
                       "city": "Pune",
                       "state": "MH",
@@ -78,7 +78,7 @@ Business Need: Update Subscription
                       "street2": "Hindu sena marg"
                   },
                   "phone": {
-                      "number": "+91 3333709512"
+                      "number": "913333709512"
                   },
                   "city": "Pune",
                   "state": "MH",
@@ -226,13 +226,13 @@ Business Need: Update Subscription
           """
                 {
                     "item":{
-                        "sku":"---data:-:env_sku3---"
+                        "sku":"---data:-:env_swapproduct---"
                     }
                 }
           """
     When I run patch call
     Then I see response code 200
-    And I see property value "---data:-:env_sku3---" is present in the response property "data.subscription.item.sku"
+    And I see property value "---data:-:env_swapproduct---" is present in the response property "data.subscription.item.sku"
 
   @swap_incorrect_product
   Scenario: Product should not be swapped/updated in the subscription if the swapping product is not a part of swappable list of the product
