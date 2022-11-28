@@ -26,92 +26,74 @@ Business Need: Create Customer
     Then I see response code 200
     Then I see property value "custom" is contains in the response property "data.email"
 #
-#  Scenario: Verify error response if we don't pass locale while creating customer
-#    Given I have endpoint "/data-subscription/v1/customer"
-#    And I have following request payload :
-#    """
-#    {
-#        "customerReferenceId": "606f01f441b8fc0008529916"
-#    }
-#    """
-#    When I run post call
-#    Then I see response code 400
-#    Then I see following value for property "message" :
-#    """
-#      "locale" is required
-#    """
+  Scenario: Verify error response if we don't pass locale while creating customer
+    Given I have endpoint "/data-subscription/v1/customer"
+    And I have following request payload :
+    """
+    {
+        "customerReferenceId": "606f01f441b8fc0008529916"
+    }
+    """
+    When I run post call
+    Then I see response code 400
+    Then I see following value for property "message" :
+    """
+      "locale" is required
+    """
 #
-#  Scenario: Verify error response if we don't pass email while creating customer
-#    Given I have endpoint "/data-subscription/v1/customer"
-#    And I have following request payload :
-#    """
-#    {
-#        "customerReferenceId": "606f01f441b8fc0008529916",
-#        "locale": "fr_CAB"
-#    }
-#    """
-#    When I run post call
-#    Then I see response code 400
-#    Then I see following value for property "message" :
-#    """
-#      "email" is required
-#    """
+  Scenario: Verify error response if we don't pass email while creating customer
+    Given I have endpoint "/data-subscription/v1/customer"
+    And I have following request payload :
+    """
+    {
+        "customerReferenceId": "606f01f441b8fc0008529916",
+        "locale": "fr_CAB"
+    }
+    """
+    When I run post call
+    Then I see response code 400
+    Then I see following value for property "message" :
+    """
+      "email" is required
+    """
 #
-#  Scenario: Verify error response if we don't pass firstName while creating customer
-#    Given I have endpoint "/data-subscription/v1/customer"
-#    And I have following request payload :
-#    """
-#    {
-#        "customerReferenceId": "606f01f441b8fc0008529916",
-#        "locale": "fr_CAB",
-#        "email": "customer@mail.com"
-#    }
-#    """
-#    When I run post call
-#    Then I see response code 400
-#    Then I see following value for property "message" :
-#    """
-#      "firstName" is required
-#    """
+  Scenario: Verify error response if we don't pass firstName while creating customer
+    Given I have endpoint "/data-subscription/v1/customer"
+    And I have following request payload :
+    """
+    {
+        "customerReferenceId": "606f01f441b8fc0008529916",
+        "locale": "fr_CAB",
+        "email": "custom{RandomNumber::4}@gmail.com",
+    }
+    """
+    When I run post call
+    Then I see response code 400
+    Then I see following value for property "message" :
+    """
+      "firstName" is required
+    """
 #
-#  Scenario: Verify error response if we don't pass lastName while creating customer
-#    Given I have endpoint "/data-subscription/v1/customer"
-#    And I have following request payload :
-#    """
-#    {
-#        "customerReferenceId": "606f01f441b8fc0008529916",
-#        "locale": "fr_CAB",
-#        "email": "custom{RandomNumber::4}@gmail.com",
-#        "firstName": "John"
-#    }
-#    """
-#    When I run post call
-#    Then I see response code 400
-#    Then I see following value for property "message" :
-#    """
-#      "lastName" is required
-#    """
+  Scenario: Verify error response if we don't pass lastName while creating customer
+    Given I have endpoint "/data-subscription/v1/customer"
+    And I have following request payload :
+    """
+    {
+        "customerReferenceId": "606f01f441b8fc0008529916",
+        "locale": "fr_CAB",
+        "email": "custom{RandomNumber::4}@gmail.com",
+        "firstName": "John"
+    }
+    """
+    When I run post call
+    Then I see response code 400
+    Then I see following value for property "message" :
+    """
+      "lastName" is required
+    """
 #
-#  Scenario: Verify error response if we don't pass lastName while creating customer
-#    Given I have endpoint "/data-subscription/v1/customer"
-#    And I have following request payload :
-#    """
-#    {
-#        "customerReferenceId": "606f01f441b8fc0008529916",
-#        "locale": "fr_CAB",
-#        "email": "custom{RandomNumber::4}@gmail.com",
-#        "firstName": "John"
-#    }
-#    """
-#    When I run post call
-#    Then I see response code 400
-#    Then I see following value for property "message" :
-#    """
-#      "lastName" is required
-#    """
-
   @regression_
-  Scenario: Create customer without passing  optional fields
+  Scenario: Create customer without passing optional fields such as segment, employeeId, middleName, communicationPreference, contactNumber
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
     """
@@ -203,7 +185,7 @@ Business Need: Create Customer
     {
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
-          "email": "customercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomer@mail.com",
+          "email": "customercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomer@gmail.com",
           "contactNumber": "+92 3333709568",
           "lastName": "John",
           "firstName": "Doe",
@@ -273,7 +255,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": 12,
+          "customerReferenceId": 12,
           "locale": "fr_CAB",
           "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
@@ -301,7 +283,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": 11,
           "email": "custom{RandomNumber::4}@gmail.com",
           "contactNumber": "+92 3333709568",
@@ -329,7 +311,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": 21,
           "contactNumber": "+92 3333709568",
@@ -357,7 +339,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": 234234,
@@ -385,7 +367,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",
@@ -413,7 +395,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",
@@ -441,7 +423,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",
@@ -469,7 +451,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",
@@ -497,7 +479,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",
@@ -525,7 +507,7 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-        "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": "asda@gmail.com",
           "contactNumber": "234234",

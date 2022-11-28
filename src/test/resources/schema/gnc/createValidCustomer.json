@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "customerReferenceId": {
+      "type": "string"
+    },
+    "locale": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "contactNumber": {
+      "type": "string"
+    },
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "middleName": {
+      "type": "string"
+    },
+    "segment": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "employeeId": {
+      "type": "string"
+    },
+    "communicationPreference": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "boolean"
+        },
+        "SMS": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "email",
+        "SMS"
+      ]
+    }
+  },
+  "required": [
+    "customerReferenceId",
+    "locale",
+    "email",
+    "contactNumber",
+    "firstName",
+    "lastName",
+    "middleName",
+    "segment",
+    "employeeId",
+    "communicationPreference"
+  ]
+}

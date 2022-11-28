@@ -1261,11 +1261,12 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
+                        "expiryDate": "2026-07-22T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 },
                 {
-                   "sku":"---data:-:env_sku---",
+                   "sku":"---data:-:env_sku1---",
                     "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -1297,6 +1298,7 @@ Business Need: Create Bulk Subscription
                       "currencyCode": "USD"
                     },
                     "expiry": {
+                        "expiryDate": "2022-11-26T00:00:00.199Z",
                         "billingCycles": 10
                     }
                 }
@@ -1774,3 +1776,704 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 400
     And I see property value "subscriptions not allowed on this sku" is present in the response property "data.errors[0].errorMessage"
+
+  @check_offset_days
+  Scenario: Check offset days for bulk subscription
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "orderId"
+    When I have saved static property "10" as "offsetDays"
+    And I have following request payload :
+      """
+      {
+            "channel": "POS",
+            "originOrderId": "{SavedValue::orderId}",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "contactNumber": "+92 3333709568",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee"],
+                "employeeId": "1"
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "weight": 10,
+                    "weightUnit": "lb",
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "tax": {
+                        "taxCode": "FR020000",
+                        "taxAmount": 10.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offsetDays": {SavedValue::offsetDays},
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    },
+                    "shipping": {
+                      "shipmentCarrier": "USPS",
+                      "shipmentMethod": "Ground",
+                      "shipmentInstructions": "",
+                      "taxCode": "SHP020000",
+                      "shippingAmount": 10.00,
+                      "taxAmount": 1.00,
+                      "currencyCode": "USD"
+                    },
+                    "expiry": {
+                        "billingCycles": 10
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "middleName": "",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST",
+                    "street2": ""
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "middleName": "",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST",
+                    "street2": ""
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                },
+                "paymentMethod": "visa",
+                "paymentKind": "CARD_PAYPAL"
+            }
+      }
+      """
+    When I run post call
+    Then I see response code 200
+    When I have saved property "data.subscriptions[0].id" as "subId"
+    And I wait for 15 sec
+    Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "{SavedValue::offsetDays}" is present in the response property "data.subscription.offsetDays.toString()"
+
+
+#  @verify_missing_email_locale_name:
+#  Scenario: Verify error message if customer don’t pass email, locale, firstName, lastName
+#    #missing locale
+#    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+#    And I have following request payload :
+#    """
+#          {
+#                "channel": "WEBSITE",
+#                "customer": {
+#                    "customerReferenceId": "606f01f441b8fc0008529916",
+#                    "email": "custom{RandomNumber::4}@gmail.com",
+#                    "contactNumber": "+92 3333709568",
+#                    "firstName": "John",
+#                    "lastName": "Doe",
+#                    "segment": ["employee"],
+#                    "employeeId": "1"
+#                },
+#                "items": [
+#                    {
+#                        "sku":"---data:-:env_sku1---",
+#                        "quantity": 2,
+#                        "weight": 10,
+#                        "weightUnit": "lb",
+#                        "itemPrice": {
+#                            "price": 100.00,
+#                            "currencyCode": "USD"
+#                        },
+#                        "tax": {
+#                            "taxCode": "FR020000",
+#                            "taxAmount": 10.00,
+#                            "currencyCode": "USD"
+#                        },
+#                        "plan": {
+#                            "id": "1000000002",
+#                            "frequency": 5,
+#                            "frequencyType": "Daily"
+#                        },
+#                        "offsetDays": 10,
+#                        "offer": {
+#                            "id": "---data:-:env_offercode---",
+#                            "source": "PDP"
+#                        },
+#                        "shipping": {
+#                          "shipmentCarrier": "USPS",
+#                          "shipmentMethod": "Ground",
+#                          "shipmentInstructions": "",
+#                          "taxCode": "SHP020000",
+#                          "shippingAmount": 10.00,
+#                          "taxAmount": 1.00,
+#                          "currencyCode": "USD"
+#                        },
+#                        "expiry": {
+#                            "expiryDate": "2026-07-22T00:00:00.199Z",
+#                            "billingCycles": 10
+#                        }
+#                    },
+#                    {
+#                        "sku":"---data:-:env_sku2---",
+#                        "quantity": 2,
+#                        "weight": 10,
+#                        "weightUnit": "lb",
+#                        "itemPrice": {
+#                            "price": 100.00,
+#                            "currencyCode": "USD"
+#                        },
+#                        "tax": {
+#                            "taxCode": "FR020000",
+#                            "taxAmount": 10.00,
+#                            "currencyCode": "USD"
+#                        },
+#                        "plan": {
+#                            "id": "1000000002",
+#                            "frequency": 5,
+#                            "frequencyType": "Daily"
+#                        },
+#                        "offsetDays": 10,
+#                        "offer": {
+#                            "id": "---data:-:env_offercode---",
+#                            "source": "PDP"
+#                        },
+#                        "shipping": {
+#                          "shipmentCarrier": "USPS",
+#                          "shipmentMethod": "Ground",
+#                          "shipmentInstructions": "",
+#                          "taxCode": "SHP020000",
+#                          "shippingAmount": 10.00,
+#                          "taxAmount": 1.00,
+#                          "currencyCode": "USD"
+#                        },
+#                        "expiry": {
+#                            "expiryDate": "2026-07-22T00:00:00.199Z",
+#                            "billingCycles": 10
+#                        }
+#                    }
+#
+#                ],
+#                "shipTo": {
+#                    "name": {
+#                        "firstName": "Roger",
+#                        "middleName": "",
+#                        "lastName": "Fang"
+#                    },
+#                    "streetAddress": {
+#                        "street1": "27 O ST",
+#                        "street2": ""
+#                    },
+#                    "phone": {
+#                        "number": "03323370957",
+#                        "kind": "mobile"
+#                    },
+#                    "city": "BOSTON MA",
+#                    "state": "MA",
+#                    "postalCode": "2127",
+#                    "country": "US"
+#                },
+#                "billTo": {
+#                    "name": {
+#                        "firstName": "Roger",
+#                        "middleName": "",
+#                        "lastName": "Fang"
+#                    },
+#                    "streetAddress": {
+#                        "street1": "27 O ST",
+#                        "street2": ""
+#                    },
+#                    "phone": {
+#                        "number": "012323370957",
+#                        "kind": "mobile"
+#                    },
+#                    "city": "BOSTON MA",
+#                    "state": "MA",
+#                    "postalCode": "2127",
+#                    "country": "US"
+#                },
+#                "paymentDetails": {
+#                    "paymentIdentifier": {
+#                        "cardIdentifier": "1234",
+#                        "expiryDate": "04/24"
+#                    },
+#                    "paymentMethod": "visa",
+#                    "paymentKind": "CARD_PAYPAL"
+#                }
+#          }
+#    """
+#      When I run post call
+#      Then I see response code 400
+#      Then I see following value for property "message" :
+#    """
+#        "customer.locale" is required
+#    """
+#    #missing email
+#    When I have following request payload :
+#    """
+#  {
+#    "channel": "WEBSITE",
+#    "customer": {
+#        "customerReferenceId": "606f01f441b8fc0008529954",
+#        "locale": "en_US",
+#        "contactNumber": "+92 3333709568",
+#        "firstName": "John",
+#        "lastName": "Doe",
+#        "segment": ["employee"],
+#        "employeeId": "1"
+#    },
+#    "items": [
+#        {
+#            "sku":"---data:-:env_sku1---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        },
+#        {
+#             "sku":"---data:-:env_sku2---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        }
+#
+#    ],
+#    "shipTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "03323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "billTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "012323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "paymentDetails": {
+#        "paymentIdentifier": {
+#            "cardIdentifier": "1234",
+#            "expiryDate": "04/24"
+#        },
+#        "paymentMethod": "visa",
+#        "paymentKind": "CARD_PAYPAL"
+#    }
+#}
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#        "customer.email" is required
+#    """
+#    #missing firstname
+#        Given I have following request payload :
+#    """
+#    {
+#    "channel": "WEBSITE",
+#    "customer": {
+#        "customerReferenceId": "606f01f441b8fc0008529954",
+#        "locale": "en_US",
+#        "email": "custom{RandomNumber::4}@gmail.com",
+#        "contactNumber": "+92 3333709568",
+#        "lastName": "Doe",
+#        "segment": ["employee"],
+#        "employeeId": "1"
+#    },
+#    "items": [
+#        {
+#             "sku":"---data:-:env_sku1---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        },
+#        {
+#             "sku":"---data:-:env_sku2---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        }
+#
+#    ],
+#    "shipTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "03323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "billTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "012323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "paymentDetails": {
+#        "paymentIdentifier": {
+#            "cardIdentifier": "1234",
+#            "expiryDate": "04/24"
+#        },
+#        "paymentMethod": "visa",
+#        "paymentKind": "CARD_PAYPAL"
+#    }
+#}
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#        "customer.firstName" is required
+#    """
+#    # missing lastName
+#    Given I have following request payload :
+#    """
+#    {
+#    "channel": "WEBSITE",
+#    "customer": {
+#        "customerReferenceId": "606f01f441b8fc0008529954",
+#        "locale": "en_US",
+#        "email": "custom{RandomNumber::4}@gmail.com",
+#        "contactNumber": "+92 3333709568",
+#        "firstName": "John",
+#        "segment": ["employee"],
+#        "employeeId": "1"
+#    },
+#    "items": [
+#        {
+#             "sku":"---data:-:env_sku1---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        },
+#        {
+#             "sku":"---data:-:env_sku2---",
+#            "quantity": 2,
+#            "weight": 10,
+#            "weightUnit": "lb",
+#            "itemPrice": {
+#                "price": 100.00,
+#                "currencyCode": "USD"
+#            },
+#            "tax": {
+#                "taxCode": "FR020000",
+#                "taxAmount": 10.00,
+#                "currencyCode": "USD"
+#            },
+#            "plan": {
+#                "frequency": 5,
+#                "frequencyType": "Daily"
+#            },
+#            "offsetDays": 10,
+#            "offer": {
+#                "id": "---data:-:env_offercode---",
+#                "source": "PDP"
+#            },
+#            "shipping": {
+#              "shipmentCarrier": "USPS",
+#              "shipmentMethod": "Ground",
+#              "shipmentInstructions": "",
+#              "taxCode": "SHP020000",
+#              "shippingAmount": 10.00,
+#              "taxAmount": 1.00,
+#              "currencyCode": "USD"
+#            },
+#            "expiry": {
+#                "expiryDate": "2026-07-22T00:00:00.199Z",
+#                "billingCycles": 10
+#            }
+#        }
+#
+#    ],
+#    "shipTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "03323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "billTo": {
+#        "name": {
+#            "firstName": "Roger",
+#            "middleName": "",
+#            "lastName": "Fang"
+#        },
+#        "streetAddress": {
+#            "street1": "27 O ST",
+#            "street2": ""
+#        },
+#        "phone": {
+#            "number": "012323370957",
+#            "kind": "mobile"
+#        },
+#        "city": "BOSTON MA",
+#        "state": "MA",
+#        "postalCode": "2127",
+#        "country": "US"
+#    },
+#    "paymentDetails": {
+#        "paymentIdentifier": {
+#            "cardIdentifier": "1234",
+#            "expiryDate": "04/24"
+#        },
+#        "paymentMethod": "visa",
+#        "paymentKind": "CARD_PAYPAL"
+#    }
+#}
+#    """
+#    When I run post call
+#    Then I see response code 400
+#    Then I see following value for property "message" :
+#    """
+#        "customer.lastName" is required
+#    """

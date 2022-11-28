@@ -28,7 +28,7 @@ Business Need: Create/Update Customer
           }
       """
       When I run post call
-      Then Customer should get created
+#      Then Customer should get created
       
       Scenario: Update customer details
         Given I have endpoint "/dev/v1/customer/622a0de7ae9e5129b8e796aa"
