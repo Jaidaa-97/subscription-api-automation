@@ -9,7 +9,7 @@ Business Need: Update Subscription
     And I have saved property "data.subscriptions[0].id" as "subId1"
     And I have saved property "data.subscriptions[1].id" as "subId2"
 #    When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "customerReferenceId"
-    When I have saved static property "custom{RandomNumber::4}@gmail.com" as "email"
+    When I have saved static property "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com" as "email"
     And I wait for 10 sec
     # Update customer details
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId1}"
@@ -215,7 +215,7 @@ Business Need: Update Subscription
     And I do not see property value "04/25" is present in the response property "data.order.paymentDetails.paymentIdentifier.expiryDate"
     And I do not see property value "rupay" is present in the response property "data.order.paymentDetails.paymentMethod"
 
-  @update_sku
+  @update_sku @regression_
   Scenario: Swap the product in subscription with another product which is present in the list of swappable
     Given I have created bulk subscription
     And I have saved property "data.subscriptions[0].id" as "subId1"
@@ -234,7 +234,7 @@ Business Need: Update Subscription
     Then I see response code 200
     And I see property value "---data:-:env_swapproduct---" is present in the response property "data.subscription.item.sku"
 
-  @swap_incorrect_product
+  @swap_incorrect_product @regression_
   Scenario: Product should not be swapped/updated in the subscription if the swapping product is not a part of swappable list of the product
     Given I have created bulk subscription
     And I have saved property "data.subscriptions[0].id" as "subId1"

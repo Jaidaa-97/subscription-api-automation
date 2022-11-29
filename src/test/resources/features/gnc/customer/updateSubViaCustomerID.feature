@@ -5,6 +5,7 @@
     Scenario: update shipping
       Given I have created 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
+      And I wait for 10 sec
       Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
       And I have following request payload :
       """
@@ -37,6 +38,7 @@
     Scenario: update billing
       Given I have created 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
+      And I wait for 10 sec
       Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
       And I have following request payload :
       """
@@ -65,7 +67,7 @@
       Then I see response code 200
 
 
-    @update_invalid_customer
+    @update_invalid_customer @regression_
     Scenario: update invalid customer
       Given I have endpoint "/data-subscription/v1/customers/625cdcc328b33700090799rt/subscriptions"
       And I have following request payload :

@@ -26,6 +26,7 @@ Business Need: Create Customer
     Then I see response code 200
     Then I see property value "custom" is contains in the response property "data.email"
 #
+  @verify_locale_on_create_customer @regression_
   Scenario: Verify error response if we don't pass locale while creating customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -41,6 +42,7 @@ Business Need: Create Customer
       "locale" is required
     """
 #
+  @verify_email_on_create_customer @regression_
   Scenario: Verify error response if we don't pass email while creating customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -57,6 +59,7 @@ Business Need: Create Customer
       "email" is required
     """
 #
+  @verify_first_name_on_create_customer @regression_
   Scenario: Verify error response if we don't pass firstName while creating customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -64,7 +67,7 @@ Business Need: Create Customer
     {
         "customerReferenceId": "606f01f441b8fc0008529916",
         "locale": "fr_CAB",
-        "email": "custom{RandomNumber::4}@gmail.com",
+        "email": "custom{RandomNumber::4}@gmail.com"
     }
     """
     When I run post call
@@ -74,6 +77,7 @@ Business Need: Create Customer
       "firstName" is required
     """
 #
+  @verify_last_name_on_create_customer @regression_
   Scenario: Verify error response if we don't pass lastName while creating customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -92,7 +96,7 @@ Business Need: Create Customer
       "lastName" is required
     """
 #
-  @regression_
+  @create_customer_without_optional_fields @regression_
   Scenario: Create customer without passing optional fields such as segment, employeeId, middleName, communicationPreference, contactNumber
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -109,7 +113,7 @@ Business Need: Create Customer
     Then I see response code 200
     Then I see property value "custom" is contains in the response property "data.email"
 
-  @regression_
+  @verify_max_length_for_customer_refId @regression_
   Scenario: Verify max length error for customerReferenceId
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -129,7 +133,7 @@ Business Need: Create Customer
         "customerReferenceId" length must be less than or equal to 50 characters long
       """
 
-  @regression_
+  @verify_max_length_first_name @regression_
   Scenario: Verify max length error message for firstName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -153,7 +157,7 @@ Business Need: Create Customer
         "firstName" length must be less than or equal to 150 characters long
       """
 
-  @regression_
+  @verify_max_length_last_name @regression_
   Scenario: Verify max length error message for lastName
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -177,7 +181,7 @@ Business Need: Create Customer
         "lastName" length must be less than or equal to 150 characters long
       """
 
-  @regression_
+  @verify_max_length_email @regression_
   Scenario: Verify max length error message for email
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -201,7 +205,7 @@ Business Need: Create Customer
         "email" must be a valid email
       """
 
-  @regression_
+  @verify_max_length_phone @regression_
   Scenario: Verify max length error message for phone
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -225,7 +229,7 @@ Business Need: Create Customer
         "contactNumber" length must be less than or equal to 50 characters long
       """
 
-  @regression_
+  @verify_max_length_segment @regression_
   Scenario: Verify max length error message for segment
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :

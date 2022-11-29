@@ -108,7 +108,7 @@ Business Need: Add Item To Order
     Then I see response code 200
     And validate schema "/gnc/addItemAsSubscription.json"
 
-  @add_item_to_order_not_exist
+  @add_item_to_order_not_exist @regression_
     Scenario: add item to order not exist
     Given I have endpoint "/data-subscription/v1/orders/625wer236998170009601d85/add-items"
     And I have following request payload :
@@ -153,7 +153,7 @@ Business Need: Add Item To Order
     When I run post call
     Then I see response code 400
 
-  @add_item_to_order_as_subscription_not_found
+  @add_item_to_order_as_subscription_not_found @regression_
   Scenario: add item to order as subscription not found
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"

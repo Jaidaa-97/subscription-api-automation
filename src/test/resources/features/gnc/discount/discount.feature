@@ -99,7 +99,7 @@ Business Need: Create Sub Discount
     Then I see response code 200
     Then I see property value 10 is present in the response property "data.discount.percentage"
 
-  @conflict_create_discount_with_sku_and_itemIDs
+  @conflict_create_discount_with_sku_and_itemIDs @regression_
   Scenario: conflict create discount with sku and itemIDs
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :

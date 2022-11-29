@@ -72,7 +72,7 @@ Business Need: Orchestration Response
     Then I see property value "Invalid errorCode or errorMsg" is present in the response property "data[0].status"
 #    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
 
-  @Invalid_message
+  @Invalid_message @regression_
   Scenario: Enter Invalid message
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -172,7 +172,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "NO Order Found" is present in the response property "data[0].error"
 
-  @Customer_Not_found
+  @Customer_Not_found @regression_
   Scenario: Customer Not Found
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -328,7 +328,7 @@ Business Need: Orchestration Response
     And I wait for 30 sec
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Aurus_payment_token_not_available
+  @Aurus_payment_token_not_available @regression_
   Scenario: Aurus payment token not available
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -439,7 +439,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Customer_wallet_has_no_saved_CC
+  @Customer_wallet_has_no_saved_CC @regression_
   Scenario: Customer wallet has no saved CC
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -551,7 +551,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Customer_walle_does_not_have_default_card
+  @Customer_walle_does_not_have_default_card @regression_
   Scenario: Customer walle does not have default card
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -663,12 +663,12 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Could_not_build_cart_or_shipment_is_empty
+  @Could_not_build_cart_or_shipment_is_empty @regression_
   Scenario: Could not build cart or shipment is empty
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    And I wait for 10 sec
+    And I wait for 20 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
@@ -774,7 +774,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Coud_not_build_cart_due_to_invalid_billing_address
+  @Coud_not_build_cart_due_to_invalid_billing_address @regression_
   Scenario: Coud not build cart due to invalid billing address
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -886,7 +886,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Coud_not_build_cart
+  @Coud_not_build_cart @regression_
   Scenario: Coud not build cart
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -993,12 +993,12 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Could_not_build_cart,_received_null_product_from_OG_POST
+  @Could_not_build_cart,_received_null_product_from_OG_POST @regression_
   Scenario: Could not build cart, received null product from OG POST
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    And I wait for 10 sec
+    And I wait for 20 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
     When I run get call api
     Then I see response code 200
@@ -1104,7 +1104,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Basket_is_empty
+  @Basket_is_empty @regression_
   Scenario: Basket is empty
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1215,7 +1215,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Gift_certificate_is_the_only_payment_method_available
+  @Gift_certificate_is_the_only_payment_method_available @regression_
   Scenario: Gift certificate is the only payment method available
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1326,7 +1326,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Invalid_payment_amount_during_order_placement.
+  @Invalid_payment_amount_during_order_placement. @regression_
   Scenario: Invalid payment amount during order placement.
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1437,7 +1437,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Payment_Auth_Failed
+  @Payment_Auth_Failed @regression_
   Scenario: Payment Auth Failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1548,7 +1548,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Payment_processor_issue
+  @Payment_processor_issue @regression_
   Scenario: Payment processor issue
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1659,7 +1659,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Payment_declined
+  @Payment_declined @regression_
   Scenario: Payment declined
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1770,7 +1770,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Order_creation_failed
+  @Order_creation_failed @regression_
   Scenario: Order creation failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1881,7 +1881,7 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Order_placement_failed
+  @Order_placement_failed @regression_
   Scenario: Order placement failed
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -1915,7 +1915,7 @@ Business Need: Orchestration Response
     Then I see property value "FAILED" is present in the response property "data[0].status"
     Then validate schema "/gnc/orchestration.json"
 
-  @Generic_error
+  @Generic_error @regression_
   Scenario: Generic error
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
@@ -2026,8 +2026,8 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
 
-  @Out_of_stuck @regression_
-  Scenario: out of stuck
+  @Out_of_stock @regression_
+  Scenario: out of stock
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"

@@ -807,7 +807,6 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "1000000002",
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
@@ -845,7 +844,6 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "1000000002",
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
@@ -1581,7 +1579,6 @@ Business Need: Create Bulk Subscription
                             "currencyCode": "USD"
                         },
                         "plan": {
-                            "id": "1000000002",
                             "frequency": 5,
                             "frequencyType": "Daily"
                         },
