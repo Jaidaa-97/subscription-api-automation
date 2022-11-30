@@ -1,7 +1,7 @@
 @v2 @Create_sub_discount
 Business Need: Create Sub Discount
 
-  @SUB-716 @createDiscount @getDiscountById @regression_
+  @SUB-716 @createDiscount @getDiscountById @regression_ @non_enterprise
   Scenario: Create a subscription discount || Get discount by its id
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :

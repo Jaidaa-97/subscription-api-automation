@@ -1,7 +1,7 @@
 @create_customer_v2 @v2
 Business Need: Create Customer
 
-  @create_customer @regression_
+  @create_customer @regression_ @non_enterprise
   Scenario: Create Customer
     Given I have endpoint "/data-subscription/v1/customer"
     And I have following request payload :
@@ -104,7 +104,7 @@ Business Need: Create Customer
     {
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
         "locale": "fr_CAB",
-        "email": "custom{RandomNumber::4}@gmail.com",
+        "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
         "firstName": "John",
         "lastName": "Pisal"
     }

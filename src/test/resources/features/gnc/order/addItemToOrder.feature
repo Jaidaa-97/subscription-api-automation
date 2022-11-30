@@ -53,7 +53,7 @@ Business Need: Add Item To Order
     When I run post call
     Then I see response code 200
 
-  @add_item_to_order_as_subscription @regression_
+  @add_item_to_order_as_subscription @regression_ @non_enterprise
   Scenario: add item to order as subscription
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"

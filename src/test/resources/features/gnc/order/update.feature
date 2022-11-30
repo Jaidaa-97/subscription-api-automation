@@ -1,6 +1,6 @@
 @v2 @update_order
 Business Need: Update order
-  @Update_Shipping_and_Billing_address @regression_
+  @Update_Shipping_and_Billing_address @regression_ @non_enterprise
   Scenario: Update Shipping and Billing address
     Given I have created 1 bulk subscription
     And I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -58,7 +58,7 @@ Business Need: Update order
     Then I see property value "Nirali" is present in the response property "data.order.shipTo.name.firstName"
     Then I see property value "Cust" is present in the response property "data.order.billTo.name.firstName"
 
-  @update_order_quantity @regression_
+  @update_order_quantity @regression_ @non_enterprise
   Scenario: Update order quantity
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
@@ -92,7 +92,7 @@ Business Need: Update order
     Then I see response code 200
     Then I see property value 100 is present in the response property "data.order.lineItems[0].item.quantity"
 
-  @Update_payment_details @regression_
+  @Update_payment_details @regression_ @non_enterprise
   Scenario:Update payment details
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
@@ -117,7 +117,7 @@ Business Need: Update order
     Then I see response code 200
     Then I see property value "1234" is present in the response property "data.order.paymentDetails.paymentIdentifier.cardIdentifier"
 
-  @Update_customer_attribute @regression_
+  @Update_customer_attribute @regression_ @non_enterprise
   Scenario: Update customer attribute
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
@@ -147,7 +147,7 @@ Business Need: Update order
     Then I see response code 200
     Then I see property value "60cb07fdc20387b000821c5c3" is present in the response property "data.order.lineItems[0].customAttributes.storeId"
 
-  @update_scheduledDate @regression_
+  @update_scheduledDate @regression_ @non_enterprise
   Scenario: update scheduledDate
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"

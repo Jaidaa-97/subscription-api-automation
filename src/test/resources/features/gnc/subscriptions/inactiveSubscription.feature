@@ -1,7 +1,7 @@
 @subscription_v2 @v2 @InactiveSubscription_Test
 Business Need: Inactive Subscription
   @v2_inactive_subscription
-  @inactivate_subscription @subscriptions_success @regression_
+  @inactivate_subscription @subscriptions_success @regression_ @non_enterprise
   Scenario: Deactivate subscription and all the future orders should be canceled.
     Given I have created bulk subscription
     And I wait for 10 sec

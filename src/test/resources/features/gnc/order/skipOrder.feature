@@ -1,7 +1,7 @@
 @v2 @skipOrder
 Business Need: Skip Order
   
-  @skipOrder @delivery_date @regression_
+  @skipOrder @delivery_date @regression_ @non_enterprise
   Scenario: Skip the order/Validate change of delivery date
     Given I have created 1 bulk subscription
     And I have saved property "data.subscriptions[0].customer.id" as "customerId"
@@ -20,7 +20,7 @@ Business Need: Skip Order
     Then I see response code 200
     Then I see property value "{Date::uuu-MM-dd:::d=10}" is contains in the response property "data.order.scheduledDate"
 
-  @invalid_order_id @regression_
+  @invalid_order_id @regression_ @non_enterprise
   Scenario: Invalid order id
     Given I have endpoint "/data-subscription/v1/orders/asdasdasd/skip"
     And I have following request payload :

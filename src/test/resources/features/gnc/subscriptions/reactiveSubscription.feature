@@ -1,7 +1,7 @@
 @subscription_v2 @v2 @ReactiveSubscription_Test
 Business Need: Reactive Subscription
   @v2_reactivate_subscription
-  @reactivate_subscription @subscriptions_success @regression_
+  @reactivate_subscription @subscriptions_success @regression_ @non_enterprise
   Scenario: Reactivate the subscription again and verify that new order gets created
     Given I have created bulk subscription
     And I wait for 10 sec

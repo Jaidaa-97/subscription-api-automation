@@ -1,6 +1,6 @@
 @SUB-716 @update_sub_discount
   Business Need: Update Sub discount
-    @update_discount_ @regression_
+    @update_discount_ @regression_ @non_enterprise
     Scenario: Update discount
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :

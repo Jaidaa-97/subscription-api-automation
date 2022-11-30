@@ -932,7 +932,7 @@ Business Need: Create Bulk Subscription
             "customer": {
                 "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee", "designer"]
@@ -1118,7 +1118,7 @@ Business Need: Create Bulk Subscription
             "customer": {
                 "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee", "designer"]

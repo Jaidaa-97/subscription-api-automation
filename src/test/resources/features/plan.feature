@@ -5,7 +5,7 @@ Business Need: Create Plan
     Given Delete subscriptions
     Given Delete plans
 
-  @create_plan @sanity
+  @create_plan @sanity @non_enterprise
   Scenario: Create Plan
     Given I have create plan endpoint
     And I have access token
@@ -504,7 +504,7 @@ Business Need: Create Plan
     Then I see only "ARCHIVED" plans in response
     Then I verify that plans are showing only for last 1 days
 
-  @get_plan_by_id @sanity
+  @get_plan_by_id @sanity @non_enterprise
   Scenario: Get the individual plan using it's id
     Given I have create plan endpoint
     And I have access token

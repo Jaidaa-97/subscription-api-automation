@@ -2101,11 +2101,54 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "RETRY" is present in the response property "data[0].status"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
-    Then I see property value "RETRY" is present in the response property "data.orders[0].status"
-    Then I see property value "SUBMITTED" is present in the response property "data.orders[1].status"
+    Then I see property value "SUBMITTED" is present in the response property "data.order.status"
+    Given I have endpoint "/data-subscription/v1/orchestration/response"
+    And I have following request payload :
+    """
+    [
+        {
+            "order":{
+            "code": "ERROR",
+            "orderId": "{SavedValue::orderId}",
+            "errorCode":321,
+            "errorMsg":"out of stuck",
+            "lineItemIds": [1]
+            }
+        }
+
+    ]
+    """
+    When I run post call
+    Then I see response code 200
+    Then I see property value "RETRY" is present in the response property "data[0].status"
+
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "SUBMITTED" is present in the response property "data.order.status"
+    Given I have endpoint "/data-subscription/v1/orchestration/response"
+    And I have following request payload :
+    """
+    [
+        {
+            "order":{
+            "code": "ERROR",
+            "orderId": "{SavedValue::orderId}",
+            "errorCode":321,
+            "errorMsg":"out of stuck",
+            "lineItemIds": [1]
+            }
+        }
+
+    ]
+    """
+    When I run post call
+    Then I see response code 200
+    Then I see property value "CANCELED" is present in the response property "data[0].status"
 
   @Low_Inventory @regression_
   Scenario: Low Inventory
@@ -2182,10 +2225,52 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "RETRY" is present in the response property "data[0].status"
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
+
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
     When I run get call api
     Then I see response code 200
-    Then I see property value "RETRY" is present in the response property "data.orders[0].status"
-    Then I see property value "SUBMITTED" is present in the response property "data.orders[1].status"
+    Then I see property value "SUBMITTED" is present in the response property "data.order.status"
+    Given I have endpoint "/data-subscription/v1/orchestration/response"
+    And I have following request payload :
+    """
+    [
+        {
+            "order":{
+            "code": "ERROR",
+            "orderId": "{SavedValue::orderId}",
+            "errorCode":123,
+            "errorMsg":"Low Inventory",
+            "lineItemIds": [1]
+            }
+        }
 
+    ]
+    """
+    When I run post call
+    Then I see response code 200
+    Then I see property value "RETRY" is present in the response property "data[0].status"
+
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/trigger-now"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "SUBMITTED" is present in the response property "data.order.status"
+    Given I have endpoint "/data-subscription/v1/orchestration/response"
+    And I have following request payload :
+    """
+    [
+        {
+            "order":{
+            "code": "ERROR",
+            "orderId": "{SavedValue::orderId}",
+            "errorCode":123,
+            "errorMsg":"Low Inventory",
+            "lineItemIds": [1]
+            }
+        }
+
+    ]
+    """
+    When I run post call
+    Then I see response code 200
+    Then I see property value "CANCELED" is present in the response property "data[0].status"
 

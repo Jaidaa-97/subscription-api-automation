@@ -1,7 +1,7 @@
 @v2 @deactivate_sub_discount
   Business Need: Deactivate Sub Discount
 
-  @deactivate_discount @regression_
+  @deactivate_discount @regression_ @non_enterprise
   Scenario: Deactivate Discount
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
     And I have following request payload :

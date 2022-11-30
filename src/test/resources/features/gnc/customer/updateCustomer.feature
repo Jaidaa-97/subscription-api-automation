@@ -2,7 +2,7 @@
   Business Need: Update Customer
 
 
-    @update_customer_details @regression_
+    @update_customer_details @regression_ @non_enterprise
     Scenario: Update Customer details
       Given I have created customer for gnc
       And I have saved property "data.id" as "customerID"

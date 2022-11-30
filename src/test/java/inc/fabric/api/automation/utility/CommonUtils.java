@@ -28,7 +28,7 @@ public class CommonUtils {
     }
     public static String getRandomEmail() {
         final int num = 10000;
-        String email = getRandomWord() + random.nextInt(num) + "@" + "random" + ".com"; //$NON-NLS-1$ //$NON-NLS-2$
+        String email = getRandomWord() + random.nextInt(num) + "-" + random.nextInt(num) + "@" + "random" + ".com"; //$NON-NLS-1$ //$NON-NLS-2$
         return email.toLowerCase();
     }
     public static int getRandomNumberFourDigit() {
