@@ -14,7 +14,7 @@ Business Need: Create Bulk Subscription
                 "customer": {
                 "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee", "designer"]
@@ -309,7 +309,7 @@ Business Need: Create Bulk Subscription
             "customer": {
                 "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -1670,7 +1670,7 @@ Business Need: Create Bulk Subscription
                 "customer": {
                     "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                     "locale": "en_US",
-                    "email": "customer{RandomNumber::4}@gmail.com",
+                    "email": "customer{RandomNumber::4}-{RandomNumber::4}@gmail.com",
                     "contactNumber": "+91 3333709568",
                     "firstName": "shubham",
                     "lastName": "Pisal",

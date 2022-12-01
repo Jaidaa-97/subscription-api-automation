@@ -32,6 +32,14 @@
       """
       And I run patch call
       Then I see response code 200
+      When I have saved property "data.subscriptions[0].id" as "subId"
+      Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
+      When I run get call api
+      Then I see response code 200
+      Then I see following value for property "data.subscription.shipTo.streetAddress.street1" :
+      """
+      kOREGAON PARK
+      """
 
 
     @update_billing @regression_
@@ -65,6 +73,15 @@
       """
       And I run patch call
       Then I see response code 200
+      When I have saved property "data.subscriptions[0].id" as "subId"
+      Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
+      When I run get call api
+      Then I see response code 200
+      Then I see following value for property "data.subscription.billTo.streetAddress.street1" :
+      """
+      kOREGAON PARK
+      """
+
 
 
     @update_invalid_customer @regression_

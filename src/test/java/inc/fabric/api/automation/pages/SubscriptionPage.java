@@ -201,7 +201,7 @@ public class SubscriptionPage extends BasePage {
         String payload = "{\n" +
                 "           \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "          \"locale\": \"fr_CAB\",\n" +
-                "          \"email\": \"customer"+CommonUtils.getRandomNumberFourDigit()+"@gmail.com\",\n"+
+                "          \"email\": \"customer"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"@gmail.com\",\n"+
                 "          \"contactNumber\": \"+92 3333709569\",\n" +
                 "          \"firstName\": \"Jitendra\",\n" +
                 "          \"lastName\": \"Pisal\",\n" +
