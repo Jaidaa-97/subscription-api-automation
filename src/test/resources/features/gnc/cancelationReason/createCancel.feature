@@ -8,12 +8,12 @@
       """
       [
            {
-             "code" : 23,
-              "reason": "cancelation reason. 23"
+             "code" : 9,
+              "reason": "cancelation reason. 9"
              },
             {
-              "code" : 24,
-               "reason": "cancelation reason. 24"
+              "code" : 10,
+               "reason": "cancelation reason. 10"
               }
       ]
       """
