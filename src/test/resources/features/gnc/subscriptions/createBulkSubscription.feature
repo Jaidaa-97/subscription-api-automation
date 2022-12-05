@@ -3,7 +3,8 @@ Business Need: Create Bulk Subscription
 
 
   @can_not_create_duplicate_subscription @regression_
-  Scenario: Duplicate subscription with same order id should not be created
+  Scenario: Duplicate subscription with same order id should not be
+  +reated
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "orderId"
     And I have following request payload :
@@ -14,7 +15,7 @@ Business Need: Create Bulk Subscription
                 "customer": {
                 "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}{RandomNumber::4}@gmail.com",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee", "designer"]
@@ -309,7 +310,7 @@ Business Need: Create Bulk Subscription
             "customer": {
                 "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
-                "email": "custom{RandomNumber::4}-{RandomNumber::4}@gmail.com",
+                "email": "custom{RandomNumber::4}{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
                 "firstName": "John",
                 "lastName": "Doe",
@@ -318,7 +319,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "id":"---data:-:env_item1---",
                     "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -352,7 +353,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "sku":"---data:-:env_sku2---",
+                    "id":"---data:-:env_item2---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
