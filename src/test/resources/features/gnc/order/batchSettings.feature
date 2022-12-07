@@ -14,14 +14,14 @@ Business Need: Update Batch Settings And Batching Orders
     And I have following request payload :
     """
       {
-          "consolidationTime": 8,
-          "timeFrame": 6
+          "consolidationTime": 9,
+          "timeFrame": 4
       }
     """
     When I run patch call
     Then I see response code 200
-    Then I see property value 8 is present in the response property "data.consolidationTime"
-    Then I see property value 6 is present in the response property "data.timeFrame"
+    Then I see property value 9 is present in the response property "data.consolidationTime"
+    Then I see property value 4 is present in the response property "data.timeFrame"
     And I wait for 10 sec
     # update again to verify change
     Given I have endpoint "/data-subscription/v1/batchingsetting/GNC"

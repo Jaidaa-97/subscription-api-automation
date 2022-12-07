@@ -38,7 +38,7 @@ Business Need: Create Product SKU With Pricing
     """
     When I run pricing post call
     Then I see response code 200
-    And I wait for 10 sec
+
 
 
 

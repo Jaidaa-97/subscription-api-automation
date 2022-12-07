@@ -427,7 +427,7 @@ Business Need: Create Bulk Subscription
        {
             "channel": "POS",
             "customer": {
-                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                "customerReferenceId":"{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
@@ -534,7 +534,7 @@ Business Need: Create Bulk Subscription
        {
             "channel": "POS",
             "customer": {
-                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                "customerReferenceId":"{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "custom{RandomNumber::4}@gmail.com",
                 "contactNumber": "+92 3333709568",
@@ -1400,7 +1400,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
 
-  @can_not_create_subscription_with_status @regression_
+  @partial_reponse_no_skuID @regression_
   Scenario: Subscription can not be create with status
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
@@ -2016,7 +2016,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "sku":"123142",
+                    "id":"---data:-:env_item3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2025,9 +2025,6 @@ Business Need: Create Bulk Subscription
                     "plan": {
                         "frequency": 5,
                         "frequencyType": "Daily"
-                    },
-                    "offer": {
-                        "id": "---data:-:env_offercode---"
                     }
                 }
             ],
@@ -2182,7 +2179,7 @@ Business Need: Create Bulk Subscription
       {
                 "channel": "POS",
                 "customer": {
-                    "customerReferenceId": "RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                    "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                     "locale": "en_US",
                     "email": "customer{RandomNumber::4}@gmail.com",
                     "contactNumber": "+91 3333709568",

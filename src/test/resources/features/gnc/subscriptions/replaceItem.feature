@@ -10,11 +10,11 @@ Business Need: Replace Item in Subscription
     """
               {
               "item": {
-                  "sku": "PROTEIN_60"
+              "sku": "---data:-:env_sku1---"
               },
               "replacementItem": {
                   "item": {
-                      "sku": "PROTEIN_SHAKE",
+                      "sku": "---data:-:env_swapproduct---",
                       "quantity": 2,
                       "weight": 10,
                       "weightUnit": "lb",
@@ -35,11 +35,11 @@ Business Need: Replace Item in Subscription
     """
               {
               "item": {
-                  "sku": "PROTEIN_SHAKE"
+                  "sku": "---data:-:env_swapproduct---"
               },
               "replacementItem": {
                   "item": {
-                      "sku": "PROTEIN_60",
+                      "sku": "---data:-:env_sku1---",
                       "quantity": 2,
                       "weight": 10,
                       "weightUnit": "lb",

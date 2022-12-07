@@ -121,7 +121,7 @@ Business Need: Update order
   Scenario: Update customer attribute
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerID"
-    And I wait for 15 sec
+    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerID}/orders"
     When I run get call api
     Then I see response code 200
