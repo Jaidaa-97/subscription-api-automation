@@ -161,7 +161,8 @@ Business Need: Create Plan
     And I have following request payload :
       """
       {
-        "frequency": 3
+        "frequency": 3,
+        "frequencyType": "Daily"
       }
       """
     When I run patch call
@@ -171,7 +172,8 @@ Business Need: Create Plan
     And I have following request payload :
       """
       {
-        "frequency": 5
+        "frequency": 5,
+        "frequencyType": "Monthly"
       }
       """
     When I run patch call
