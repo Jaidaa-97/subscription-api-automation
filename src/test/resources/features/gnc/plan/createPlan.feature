@@ -129,10 +129,10 @@ Business Need: Create Plan
 
   @get_plan_by_id @regression_
   Scenario: Get Plan by its id
-    Given I have endpoint "/data-subscription/v1/subscriptionDiscounts/---data:-:env_offercode---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
     When I run get call api
     Then I see response code 200
-    Then I see property value "---data:-:env_offercode---" is present in the response property "data.offerCode"
+    Then I see property value "---data:-:env_planid---" is present in the response property "data.id"
     Then I see property value "ACTIVE" is present in the response property "data.status"
 
   @create_discount_pass_invalid_id @regression_
@@ -218,3 +218,24 @@ Business Need: Create Plan
     When I run post call
     Then I see response code 400
     Then I see property value "Plan already exist" is present in the response property "message"
+
+  @check_frequency_and_type_after_updating_plan @regression_
+  Scenario: Check the frequency and frequency type after Updating them by updating the plan itself
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    And I have following request payload :
+      """
+      {
+        "frequency": "5",
+        "frequencyType": "Daily"
+      }
+      """
+    When I run patch call
+    Then I see response code 200
+    Then I see property value 5 is present in the response property "data.frequency"
+    Then I see property value "Daily" is present in the response property "data.frequencyType"
+
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value 5 is present in the response property "data.frequency"
+    Then I see property value "Daily" is present in the response property "data.frequencyType"
