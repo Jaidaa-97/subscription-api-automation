@@ -631,7 +631,6 @@ Business Need: Create Bulk Subscription
 
   @can_not_create_duplicate_subscription @regression_
   Scenario: Duplicate subscription with same order id should not be
-  +reated
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "orderId"
     And I have following request payload :
