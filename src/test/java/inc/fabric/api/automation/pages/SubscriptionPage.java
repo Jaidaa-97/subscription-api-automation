@@ -409,7 +409,7 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
                     "            \"quantity\": 2,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
@@ -429,7 +429,7 @@ public class SubscriptionPage extends BasePage {
                     "            },\n" +
              //       "            \"offsetDays\": 2,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\"\n" +
              //       "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
