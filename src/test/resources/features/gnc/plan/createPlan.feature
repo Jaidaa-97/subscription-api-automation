@@ -135,12 +135,16 @@ Business Need: Create Plan
     Then I see property value "---data:-:env_planid---" is present in the response property "data.id"
     Then I see property value "ACTIVE" is present in the response property "data.status"
 
-  @create_discount_pass_invalid_id @regression_
+  @create_Plan_pass_invalid_id @regression_
   Scenario: Pass invalid id
-    Given I have endpoint "/data-subscription/v1/subscriptionDiscounts/INVALIDSKU_"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planInvalidid---"
     When I run get call api
-    Then I see response code 404
-    Then I see property value "NOT_FOUND" is present in the response property "responseStatus"
+    Then I see response code 400
+    Then I see following value for property "message" :
+      """
+        PLAN_NOT_FOUND
+      """
+
 
   @updating_the_plan @regression_
   Scenario: Updating the plan
@@ -155,8 +159,8 @@ Business Need: Create Plan
     Then I see response code 200
     Then I see property value "update description" is present in the response property "data.description"
 
-  @we_can_just_update_the_frequency_for_plan @regression_
-  Scenario: We can just update the frequency for the plan
+  @we_can_just_update_the_frequency_and_frequencyType_for_plan @regression_
+  Scenario: We can just update the frequency and frequencyType for the plan
     Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
     And I have following request payload :
       """

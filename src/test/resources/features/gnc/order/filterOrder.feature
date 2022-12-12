@@ -34,3 +34,13 @@ Business Need: Filter order
     And I run get call api
     Then I see response code 200
     Then I see property value "shubham" is contains in the response property "data.orders[0].customer.fullName"
+
+  Scenario: Search for an Order by pass a valid date range
+    Given I have endpoint "/data-subscription/v1/orders?from=2022-12-15T14:48:28.285Z&to=2022-12-18T14:02:37.497Z"
+    And I run get call api
+    Then I see response code 200
+
+  Scenario: Search for an Order by pass invalid date range
+    Given I have endpoint "/data-subscription/v1/orders?from=2022-134552-15T14:48:28.285Z&to=2022-12-18T14:02:37.497Z"
+    And I run get call api
+    Then I see response code 200

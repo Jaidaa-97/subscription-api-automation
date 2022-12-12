@@ -31,11 +31,15 @@ Business Need: Filter plan
     Then I see property value "Yearly" is present in the response property "data.plans[0].frequencyType"
     Then I see property value "Monthly" is present in the response property "data.plans[0].frequencyType"
 
-  Scenario: Search for a plan by pass date range
-    Given I have endpoint "/data-subscription/v1/plan?createdAt=2022-11-14T11:38:59.076Z"
+  Scenario: Search for a plan by pass a valid date range
+    Given I have endpoint "/data-subscription/v1/plan?from=2022-10-18T08:48:28.285Z&to=2022-12-08T14:02:37.497Z"
     And I run get call api
     Then I see response code 200
-    Then I see property value "2022-11-14T11:38:59.076Z" is present in the response property "data.plans[0].createdAt"
+
+  Scenario: Search for a plan by pass invalid date range
+    Given I have endpoint "/data-subscription/v1/plan?from=2022-10345345-18T08:48:28.285Z&to=2022-12-08T14:02:37.497Z"
+    And I run get call api
+    Then I see response code 200
 
   Scenario: Search by status ACTIVE
     Given I have endpoint "/data-subscription/v1/plan?status=ACTIVE"
