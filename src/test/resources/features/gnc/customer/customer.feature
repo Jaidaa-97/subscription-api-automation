@@ -2,8 +2,32 @@
 Business Need: Create Customer
 
   @create_customer @regression_ @non_enterprise
-  Scenario: Create Customer
+  Scenario: Create Customer has an invalid url
     Given I have endpoint "/data-subscription/v1/customer"
+    And I have following request payload :
+    """
+      {
+        "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+        "locale": "fr_CAB",
+        "email": "custom{RandomNumber::4}@gmail.com",
+        "contactNumber": "+92 3333709568",
+        "firstName": "Customer1F",
+        "lastName": "Customer1L",
+        "middleName":"JJ",
+        "segment": [ "employee"],
+        "employeeId": "345",
+        "communicationPreference":{
+            "email":true,
+            "SMS":true
+        }
+      }
+    """
+    When I run post call
+    Then I see response code 403
+
+  @create_customer @regression_ @non_enterprise
+  Scenario: Create Customer
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
       {
@@ -25,7 +49,13 @@ Business Need: Create Customer
     When I run post call
     Then I see response code 200
     Then I see property value "custom" is contains in the response property "data.email"
-#
+
+  @get_customer @regression_
+  Scenario: Get customer has an invalid url
+    Given I have endpoint "/data-subscription/v1/customer?id=63735f3fb8a42900088635d6"
+    When I run get call api
+    Then I see response code 403
+
   @verify_locale_on_create_customer @regression_
   Scenario: Verify error response if we don't pass locale while creating customer
     Given I have endpoint "/data-subscription/v1/customer"
@@ -41,7 +71,17 @@ Business Need: Create Customer
     """
       "locale" is required
     """
-#
+
+  Scenario: Search for payment details by passing customer id
+    Given I have endpoint "/data-subscription/v1/paymentmethods?customerId=63735f3fb8a42900088635d6"
+    When I run get call api
+    Then I see response code 200
+    Then I see following value for property "message" :
+    """
+      Request processed successfully.
+    """
+
+
   @verify_email_on_create_customer @regression_
   Scenario: Verify error response if we don't pass email while creating customer
     Given I have endpoint "/data-subscription/v1/customer"

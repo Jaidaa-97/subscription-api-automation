@@ -57,7 +57,7 @@ Scenario: remove upsell Item
     And I have following request payload :
     """
     {
-    "lineItemIds": [1]
+    "lineItemIds": [2]
     }
     """
     When I run post call
@@ -81,7 +81,7 @@ Scenario: remove subscription item
             {
                "subscriptionId": "{SavedValue::subId}",
                "item": {
-                    "sku": "PROTEIN_1",
+                    "sku": "---data:-:env_sku1---",
                     "quantity": 3,
                     "weight": 10,
                     "weightUnit": "lb",

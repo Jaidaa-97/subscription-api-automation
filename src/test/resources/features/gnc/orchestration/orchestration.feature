@@ -38,39 +38,6 @@ Business Need: Orchestration Response
     Then I see response code 200
     Then I see property value "SUCCESS" is present in the response property "data.order.status"
 
-  @Success_Scenario_Without_Trigger_Order @regression_
-  Scenario: Success Scenario without Trigger Order
-    Given I have created 1 bulk subscription
-    When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    And I wait for 10 sec
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
-    When I run get call api
-    Then I see response code 200
-    When I have saved property "data.orders[0].id" as "orderId"
-    Given I have endpoint "/data-subscription/v1/orchestration/response"
-    And I have following request payload :
-    """
-[
-        {
-            "order":{
-            "code": "SUCCESS",
-            "orderId": "{SavedValue::orderId}"
-            }
-        }
-
-
-]
-    """
-    When I run post call
-    Then I see response code 200
-    Then I see property value "SUCCESS" is present in the response property "data[0].status"
-    Then validate schema "/gnc/orchestration.json"
-    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
-    When I run get call api
-    Then I see response code 200
-    Then I see property value "SUCCESS" is present in the response property "data.order.status"
-
   @Invalid_Code @regression_
   Scenario: Enter Invalid code
     Given I have created 1 bulk subscription
@@ -204,35 +171,6 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "NO Order Found" is present in the response property "data[0].error"
-  @Failed_Scenario_without_trigger_order @regression_
-  Scenario: failed without trigger order
-    Given I have created 1 bulk subscription
-    When I have saved property "data.subscriptions[0].id" as "subId"
-    When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    And I wait for 10 sec
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
-    When I run get call api
-    Then I see response code 200
-    When I have saved property "data.orders[0].id" as "orderId"
-    Given I have endpoint "/data-subscription/v1/orchestration/response"
-    And I have following request payload :
-    """
-    [
-        {
-            "order":{
-            "code": "ERROR",
-           "orderId": "{SavedValue::orderId}",
-            "errorCode":999,
-            "errorMsg":"Agent login failed"
-            }
-        }
-
-    ]
-    """
-    When I run post call
-    Then I see response code 200
-    Then I see property value "NO Order Found" is present in the response property "data[0].error"
-
 
   @Customer_Not_found @regression_
   Scenario: Customer Not Found
@@ -275,7 +213,6 @@ Business Need: Orchestration Response
     When I run get call api
     Then I see response code 200
     Then I see property value "INACTIVE" is present in the response property "data.subscription.status"
-
 
   @Agent_login_failed @regression_
   Scenario: Agent login failed

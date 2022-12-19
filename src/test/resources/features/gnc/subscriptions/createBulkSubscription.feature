@@ -1,8 +1,6 @@
 @subscription_v2 @v2 @Subscriptions_Create_Test
 Business Need: Create Bulk Subscription
 
-
-
   @CreateBulkSubscriptionWithoutPlanAndOffer
   Scenario: Create a bulk subscription without plan and offer
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
@@ -30,109 +28,6 @@ Business Need: Create Bulk Subscription
                     "itemPrice": {
                         "price": 100.00,
                         "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "billingCycles": 10
-                    }
-                }
-            ],
-            "shipTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "03323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": "2127",
-                "country": "US"
-            },
-            "billTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "012323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": "2127",
-                "country": "US"
-            },
-            "paymentDetails": {
-                "paymentIdentifier": {
-                    "cardIdentifier": "1234",
-                    "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
-            }
-      }
-    """
-    When I run post call
-    Then I see response code 400
-    And I see property value "items[0].plan" is contains in the response property "message"
-    And I see property value "is required" is contains in the response property "message"
-
-  @CreateBulkSubscriptionWithoutPlanAndWithOffer
-  Scenario: Create a bulk subscription without plan and offer
-    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
-    And I have following request payload :
-    """
-       {
-            "channel": "POS",
-            "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-            "customer": {
-                "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-                "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
-                "contactNumber": "+92 3333709568",
-                "firstName": "John",
-                "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
-            },
-            "items": [
-                {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 2,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "offer": {
-                        "id": "---data:-:env_offercode---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
@@ -524,7 +419,6 @@ Business Need: Create Bulk Subscription
     Then I see response code 400
     And I see property value "items[0].plan" is contains in the response property "message"
     And I see property value "contains a conflict between exclusive peers [id, frequencyType]" is contains in the response property "message"
-
 
   @CreateBulkSubscriptionWithPlanAndWithoutFrequencyAndFrequencyType
   Scenario: Create a subscription with plan id and frequency type, It should give 200 response
@@ -1143,6 +1037,387 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 200
+
+  @create_subscription_without_optional_fields @regression_
+  Scenario: Crate subscription with customerReferenceId only
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+    """
+          {
+            "channel": "POS",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "contactNumber": "+92 3333709568",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee"],
+                "employeeId": "1"
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 200
+
+  @create_subscription_without_optional_fields @regression_
+  Scenario: Create a subscription with offer code that created by passing COPILOT in the channel
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+      """
+          {
+            "channel": "COPILOT",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee", "designer"]
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 200
+
+  @create_subscription_without_optional_fields @regression_
+  Scenario: Crate subscription with customerId only
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+      """
+          {
+            "channel": "COPILOT",
+            "customerId": "639adc09e8e82800087f971c",
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 200
+
+  @create_subscription_without_optional_fields @regression_
+  Scenario: Crate subscription with Invalid customerId only
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+      """
+          {
+            "channel": "COPILOT",
+            "customerId": "639adc09e8e82800087f9876",
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 404
+    Then I see following value for property "message" :
+    """
+      Customer not found.
+    """
+
+  @create_subscription_without_optional_fields @regression_
+  Scenario: Create a Subscription with customerId and customerReferenceId as well
+    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
+    And I have following request payload :
+    """
+          {
+            "channel": "POS",
+            "customerId": "639adc09e8e82800087f971c",
+            "customer": {
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "locale": "en_US",
+                "email": "custom{RandomNumber::4}@gmail.com",
+                "contactNumber": "+92 3333709568",
+                "firstName": "John",
+                "lastName": "Doe",
+                "segment": ["employee"],
+                "employeeId": "1"
+            },
+            "items": [
+                {
+                    "sku":"---data:-:env_sku1---",
+                    "quantity": 2,
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode---"
+                    }
+                }
+            ],
+            "shipTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "03323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "billTo": {
+                "name": {
+                    "firstName": "Roger",
+                    "lastName": "Fang"
+                },
+                "streetAddress": {
+                    "street1": "27 O ST"
+                },
+                "phone": {
+                    "number": "012323370957",
+                    "kind": "mobile"
+                },
+                "city": "BOSTON MA",
+                "state": "MA",
+                "postalCode": "2127",
+                "country": "US"
+            },
+            "paymentDetails": {
+                "paymentIdentifier": {
+                    "cardIdentifier": "1234",
+                    "expiryDate": "04/24"
+                }
+            }
+        }
+      """
+    When I run post call
+    Then I see response code 400
+    Then I see following value for property "message" :
+    """
+      "value" contains a conflict between exclusive peers [customer, customerId]
+    """
+
+
+
 #    And validate schema "gnc/createSubscriptionWithoutOptionalfields.json"
 
 #  @can_not_create_subscription_if_expiryDate_in_past

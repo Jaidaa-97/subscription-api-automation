@@ -169,3 +169,43 @@ Business Need: Create Sub Discount
     "discount" contains a conflict between exclusive peers [percentage, amount]
     """
 
+  @regression_
+  Scenario: Create a discount by passing "COPILOT" in the channel
+    Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
+    And I have following request payload :
+    """
+          {
+          "validity": {
+              "startDate": "2022-12-19T10:06:38.120Z",
+              "endDate": "2030-04-04T10:18:49.120Z",
+              "applyOnOrders": [
+                  1,
+                  3,
+                  10
+              ]
+          },
+          "message": "terms and conditions of the offer",
+          "discount": {
+              "percentage": 2
+          },
+          "skus":["---data:-:env_sku1---"],
+          "categories": [
+              "product category 1",
+              "product category 2",
+              "product category 3"
+          ],
+          "frequency": {
+              "frequency": 5,
+              "frequencyType": "Daily"
+          },
+          "itemQuantity": 1,
+          "channel": "COPILOT",
+          "target": "PDP",
+          "customerSegment": [
+              "employee",
+              "designer"
+          ]
+          }
+    """
+    And I run post call
+    Then I see response code 200
