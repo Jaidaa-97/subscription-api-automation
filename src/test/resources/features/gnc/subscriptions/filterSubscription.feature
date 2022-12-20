@@ -70,3 +70,33 @@
       And I run get call api
       Then I see response code 200
       Then I see property value "639194ae04dd2900082e7d14" is present in the response property "data.subscriptions[0].plan.id"
+
+    Scenario: Search subscription by passing partial value from the beginning
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=63a1"
+      And I run get call api
+      Then I see response code 200
+
+    Scenario: Search subscription by passing partial value from the middle
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=47976000"
+      And I run get call api
+      Then I see response code 200
+
+    Scenario: Search subscription by passing partial value from the middle
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=47976000"
+      And I run get call api
+      Then I see response code 200
+
+    Scenario: Search subscription by passing partial value from the end
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=1bc5e3"
+      And I run get call api
+      Then I see response code 200
+
+    Scenario: Search subscription by passing invalid partial value
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=1bc45455e3"
+      And I run get call api
+      Then I see response code 200
+
+    Scenario: Search subscription by passing partial value with another filter
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=1bc&customerName=shubham Pisal"
+      And I run get call api
+      Then I see response code 200
