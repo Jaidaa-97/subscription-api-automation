@@ -9,6 +9,15 @@
       Then I see response code 200
       Then I see property value "{SavedValue::subId}" is present in the response property "data.subscriptions[0].id"
 
+    Scenario: Search subscription by passing partial value from the beginning
+      Given I have created 1 bulk subscription
+      When I have saved property "data.subscriptions[0].id" as "subId"
+      And search subscription by "first" 3 letters and I have "{SavedValue::subId}"
+      And I wait for 10 sec
+      And I run get call api
+      Then I see response code 200
+      Then I see property value "{SavedValue::subId}" is present in the response property "data.subscriptions[0].id"
+
     Scenario: Search subscription where status is ACTIVE
       Given I have endpoint "/data-subscription/v1/subscriptions?limit=10&status=ACTIVE"
       And I run get call api

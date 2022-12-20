@@ -22,6 +22,9 @@ public class CommonPage {
         this.basePage = basePage;
     }
 
+    public static void iHaveEndpoint(String url) {
+    }
+
     public void verifyPropertyValueIn(boolean doNotCheck, String propertyValue, boolean isContains, String property) {
         propertyValue = propertyValue.trim();
 

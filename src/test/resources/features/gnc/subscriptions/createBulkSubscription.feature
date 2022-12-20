@@ -1039,7 +1039,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
 
   @create_subscription_without_optional_fields @regression_
-  Scenario: Crate subscription with customerReferenceId only
+  Scenario: Create subscription with customerReferenceId only
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
     """

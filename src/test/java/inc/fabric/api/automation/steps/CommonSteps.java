@@ -217,4 +217,19 @@ public class CommonSteps extends BasePage {
     public void iWaitForSec(int sec) throws InterruptedException {
         Thread.sleep(sec * 1000);
     }
+
+    @And("search subscription by {string} {int} letters and I have {string}")
+    public void searchSubscriptionByFirstLettersAndIHaveValue(String place, int letters, String  value  ) {
+        String url = "/data-subscription/v1/subscriptions?limit=10&search=";
+        if(place.equals("first") == true){
+            url += value.substring(0, letters);
+        }
+        else if(place.equals("middle") == true){
+            url += value.substring((value.length() / 2 ), letters);
+        }
+        else{
+            url += value.substring((value.length() + 1) - letters,value.length() );
+        }
+        commonPage.getEndPoint(url);
+    }
 }
