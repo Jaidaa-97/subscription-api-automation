@@ -8,10 +8,13 @@ import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.specification.RequestSpecification;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 import static io.restassured.RestAssured.given;
 
@@ -61,6 +64,22 @@ public class CommonPage {
         }
     }
 
+    public boolean verifyDateValue(String startDate, String endDate, String propertyValue) throws ParseException {
+        TimeZone tz = TimeZone.getTimeZone("Asia/Calcutta");
+        Calendar cal = Calendar.getInstance(tz);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        sdf.setCalendar(cal);
+        cal.setTime(sdf.parse(startDate));
+        Date fromDate = cal.getTime();
+        cal.setTime(sdf.parse(endDate));
+        Date toDate = cal.getTime();
+        cal.setTime(sdf.parse(propertyValue));
+        Date date2 = cal.getTime();
+        if (date2.compareTo(fromDate) == 0 || date2.compareTo(toDate) == 0) {
+            return true;
+        }
+        return false;
+    }
     public void verifyPropertyValueIn(boolean doNotCheck, int propertyValue, String property) {
         if (doNotCheck){
             Assert.assertNotEquals(propertyValue, (int) basePage.getResponse().then().extract().path(property));

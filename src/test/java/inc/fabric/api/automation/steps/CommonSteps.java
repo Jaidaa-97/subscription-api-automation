@@ -19,6 +19,7 @@ import io.restassured.specification.RequestSpecification;
 import org.junit.Assert;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -231,5 +232,10 @@ public class CommonSteps extends BasePage {
             url += value.substring((value.length() + 1) - letters,value.length() );
         }
         commonPage.getEndPoint(url);
+    }
+
+    @And("I see property value is between \"([^\"]+)\" and \"([^\"]+)\" in the response property \"([^\"]+)\"$")
+    public void iSeePropertyValueIsBetweenAndInTheResponseProperty(String startDate, String endDate, String propertyValue) throws ParseException {
+        commonPage.verifyDateValue(startDate,endDate,propertyValue);
     }
 }

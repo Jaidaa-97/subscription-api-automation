@@ -81,3 +81,14 @@
       """
         Request processed successfully.
       """
+
+   Scenario: Search by passing from and to date
+     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?from={Date::uuu-MM-dd:::M=-1}T08:06:11.345Z&to={Date::uuu-MM-dd:::M=-1}T08:06:11.345Z"
+     When I run get call api
+     Then I see response code 200
+     Then I have saved property "data.discounts[0].createdAt" as "createdAt"
+     Then I see following value for property "message" :
+      """
+        Request processed successfully.
+      """
+     And I see property value is between "{Date::uuu-MM-dd:::M=-1}T13:59:38.285Z" and "{Date::uuu-MM-dd:::d=0}T13:59:38.285Z" in the response property "{SavedValue::createdAt}"
