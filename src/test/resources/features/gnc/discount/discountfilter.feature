@@ -52,14 +52,13 @@
      And I see property value "63393c2c4a3f7e00091b6aad" is contains in the response property "data.discounts[0].id"
 
    Scenario: Search by passing part of the discountId
-     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=63393c2"
+     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=6335"
      When I run get call api
      Then I see response code 200
      Then I see following value for property "message" :
       """
         Request processed successfully.
       """
-     And I see property value "63393c2c4a3f7e00091b6aad" is contains in the response property "data.discounts[0].id"
 
    Scenario: Search by passing the offer code
      Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=63393c2c4a3f7e00091b6aad"
@@ -74,14 +73,11 @@
       """
      And I see property value "{SavedValue::offerCode}" is contains in the response property "data.discounts[0].offerCode"
 
-   Scenario: Search by passing part of offer code
-     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=6426"
+   Scenario: Search by passing part of the offerCode
+     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=SUB-60"
      When I run get call api
      Then I see response code 200
-     Then I have saved property "data.discounts[0].offerCode" as "offerCode"
      Then I see following value for property "message" :
       """
         Request processed successfully.
       """
-     And I see property value "{SavedValue::offerCode}" is contains in the response property "data.discounts[0].offerCode"
-
