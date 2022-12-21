@@ -52,9 +52,9 @@ Business Need: Create Customer
 
   @get_customer @regression_
   Scenario: Get customer has an invalid url
-    Given I have endpoint "/data-subscription/v1/customers/63a163abb4797600081bc61a"
+    Given I have endpoint "/data-subscription/v1/customer?id=63735f3fb8a42900088635d6"
     When I run get call api
-    Then I see response code 200
+    Then I see response code 403
 
   @verify_locale_on_create_customer @regression_
   Scenario: Verify error response if we don't pass locale while creating customer
@@ -74,15 +74,6 @@ Business Need: Create Customer
 
   Scenario: Search for payment details by passing customer id
     Given I have endpoint "/data-subscription/v1/paymentmethods?customerId=63735f3fb8a42900088635d6"
-    When I run get call api
-    Then I see response code 200
-    Then I see following value for property "message" :
-    """
-      Request processed successfully.
-    """
-
-  Scenario: Search for payment details for all customers
-    Given I have endpoint "/data-subscription/v1/paymentmethods"
     When I run get call api
     Then I see response code 200
     Then I see following value for property "message" :
