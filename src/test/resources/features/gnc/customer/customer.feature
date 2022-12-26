@@ -58,7 +58,7 @@ Business Need: Create Customer
 
   @verify_locale_on_create_customer @regression_
   Scenario: Verify error response if we don't pass locale while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -84,7 +84,7 @@ Business Need: Create Customer
 
   @verify_email_on_create_customer @regression_
   Scenario: Verify error response if we don't pass email while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -98,10 +98,10 @@ Business Need: Create Customer
     """
       "email" is required
     """
-#
+
   @verify_first_name_on_create_customer @regression_
   Scenario: Verify error response if we don't pass firstName while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -119,7 +119,7 @@ Business Need: Create Customer
 #
   @verify_last_name_on_create_customer @regression_
   Scenario: Verify error response if we don't pass lastName while creating customer
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -138,7 +138,7 @@ Business Need: Create Customer
 #
   @create_customer_without_optional_fields @regression_
   Scenario: Create customer without passing optional fields such as segment, employeeId, middleName, communicationPreference, contactNumber
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -155,7 +155,7 @@ Business Need: Create Customer
 
   @verify_max_length_for_customer_refId @regression_
   Scenario: Verify max length error for customerReferenceId
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
       {
@@ -175,7 +175,7 @@ Business Need: Create Customer
 
   @verify_max_length_first_name @regression_
   Scenario: Verify max length error message for firstName
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -199,7 +199,7 @@ Business Need: Create Customer
 
   @verify_max_length_last_name @regression_
   Scenario: Verify max length error message for lastName
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -223,7 +223,7 @@ Business Need: Create Customer
 
   @verify_max_length_email @regression_
   Scenario: Verify max length error message for email
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -247,7 +247,7 @@ Business Need: Create Customer
 
   @verify_max_length_phone @regression_
   Scenario: Verify max length error message for phone
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -271,7 +271,7 @@ Business Need: Create Customer
 
   @verify_max_length_segment @regression_
   Scenario: Verify max length error message for segment
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -295,7 +295,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of customerReferenceId
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -323,7 +323,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of locale
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -351,7 +351,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of email
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -379,7 +379,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of contactNumber
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -407,7 +407,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of firstName
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -435,7 +435,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of lastName
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -463,7 +463,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of middleName
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -491,7 +491,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of segment
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -519,7 +519,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of employeeId
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
@@ -547,7 +547,7 @@ Business Need: Create Customer
 
   @data_error @regression_
   Scenario: verify schema error message for invalid data type of communicationPreference
-    Given I have endpoint "/data-subscription/v1/customer"
+    Given I have endpoint "/data-subscription/v1/customers"
     And I have following request payload :
     """
     {
