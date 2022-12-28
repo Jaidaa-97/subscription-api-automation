@@ -54,16 +54,9 @@
       Then I see property value "customerFirstName" is present in the response property "data.subscriptions[0].customer.firstName"
 
     Scenario: Search subscription by customer ID
-      Given I have endpoint "/data-subscription/v1/subscriptions?limit=10&customerID=639b3396b5c86a0008e2927a"
+      Given I have endpoint "/data-subscription/v1/subscriptions?search=639b3396b5c86a0008e2927a"
       And I run get call api
       Then I see response code 200
-      Then I see property value "639b3396b5c86a0008e2927a" is present in the response property "data.subscriptions[0].customer.id"
-
-    Scenario: Search subscription by customer Reference Id
-      Given I have endpoint "/data-subscription/v1/subscriptions?limit=10&customerReferenceId=cs43576875t676767D32342CC3"
-      And I run get call api
-      Then I see response code 200
-      Then I see property value "cs43576875t676767D32342CC3" is present in the response property "data.subscriptions[0].customer.customerReferenceId"
 
     Scenario: Search subscription by planid
       Given I have endpoint "/data-subscription/v1/subscriptions?limit=10&search=639194ae04dd2900082e7d14"
