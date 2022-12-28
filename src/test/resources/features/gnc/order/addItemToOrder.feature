@@ -71,7 +71,7 @@ Business Need: Add Item To Order
         {
            "subscriptionId": "{SavedValue::subId}",
            "item": {
-                "sku": "---data:-:env_sku2---",
+                "sku": "---data:-:env_sku1---",
                 "quantity": 2,
                 "weight": 10,
                 "weightUnit": "lb",
