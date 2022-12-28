@@ -21,7 +21,7 @@ Business Need: Filter plan
     Given I have endpoint "/data-subscription/v1/plan?createdAt=2022-11-14T11:38:59.076Z"
     And I run get call api
     Then I see response code 200
-    Then I see property value "2022-11-14T11:38:59.076Z" is present in the response property "data.plans[0].createdAt"
+#    Then I see property value "2022-11-14T11:38:59.076Z" is present in the response property "data.plans[0].createdAt"
 
   Scenario: Search by status
     Given I have endpoint "/data-subscription/v1/plan?status=ACTIVE"
