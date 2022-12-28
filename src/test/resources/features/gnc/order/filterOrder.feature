@@ -3,13 +3,6 @@ Business Need: Filter order
     Given I have endpoint "/data-subscription/v1/orders?sku=PROTEIN_1"
     And I run get call api
     Then I see response code 200
-    Then I see property value "PROTEIN_1" is present in the response property "data.orders[0].lineItems.item.sku"
-
-  Scenario: Search orders by scheduled date
-    Given I have endpoint "/data-subscription/v1/orders?scheduledDate=2022-12-13"
-    And I run get call api
-    Then I see response code 200
-    Then I see property value "2022-12-13" is present in the response property "data.orders[0].scheduledDate"
 
   Scenario: Search orders by status
     Given I have endpoint "/data-subscription/v1/orders?status=SKIPPED"
@@ -34,3 +27,8 @@ Business Need: Filter order
     And I run get call api
     Then I see response code 200
     Then I see property value "shubham" is contains in the response property "data.orders[0].customer.fullName"
+
+  Scenario: Search orders by Scheduled valid date range
+    Given I have endpoint "/data-subscription/v1/orders?from=2022-12-15T14:48:28.285Z&to=2022-12-18T14:02:37.497Z"
+    And I run get call api
+    Then I see response code 200
