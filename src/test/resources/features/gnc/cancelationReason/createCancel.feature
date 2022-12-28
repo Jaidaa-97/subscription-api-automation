@@ -57,7 +57,7 @@
 
       """
       And I run post call
-      Then I see response code 200
+      Then I see response code 400
       Then I see property value "All codes are duplicates" is present in the response property "message"
 
 
