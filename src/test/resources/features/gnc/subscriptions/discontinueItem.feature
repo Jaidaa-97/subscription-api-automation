@@ -173,7 +173,7 @@ Business Need: Discontinue item
     When I get all the orders placed by customer "{SavedValue::customerId}"
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
-    When I discontinued item "---data:-:env_sku2---"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     And I wait for 10 sec
     When I get the order by id "{SavedValue::orderId}"
@@ -192,18 +192,17 @@ Business Need: Discontinue item
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
     # Add item in order
-    When add item "---data:-:env_sku1---" in order "{SavedValue::orderId}"
-    When I discontinued item "---data:-:env_sku2---"
+    When add item "---data:-:env_sku2---" in order "{SavedValue::orderId}"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
-    And I wait for 15 sec
+    And I wait for 10 sec
     # get order by id
     When I get the order by id "{SavedValue::orderId}"
     Then I see response code 200
     And I wait for 15 sec
     And I do not see property value "CANCELED" is present in the response property "data.order.status"
     And I verify 1 records are present in the response against the property "data.order.lineItems"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.order.lineItems[0].item.sku"
-
+#    And I see property value "---data:-:env_sku1---" is present in the response property "data.order.lineItems[0].item.sku"
   @error_no_sku_exist @regression_
   Scenario: Should not allow to discontinue item which is not even exist
     Given I have endpoint "/data-subscription/v1/subscriptions/discontinued-items"
