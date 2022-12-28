@@ -127,6 +127,27 @@ Business Need: Create Plan
     Then I see response code 200
     Then I see property value "ACTIVE" is present in the response property "data.status"
 
+  @create_plan_with_notAllowed_sku @regression_
+  Scenario: Creating a plan with a nor allowed  SKU
+    Given I have endpoint "/data-subscription/v1/plan"
+    And I have following request payload :
+    """
+    {
+    "items": [
+        {
+            "sku": "---data:-:env_notAvailableSubscription---"
+        }
+    ],
+    "name": "plan{RandomNumber::4}_---data:-:env_notAvailableSubscription---",
+    "description": "test plan description",
+    "frequency": "5",
+    "frequencyType": "Daily"
+    }
+    """
+    When I run post call
+    Then I see response code 200
+    Then I see property value "ACTIVE" is present in the response property "data.status"
+
   @get_plan_by_id @regression_
   Scenario: Get Plan by its id
     Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
