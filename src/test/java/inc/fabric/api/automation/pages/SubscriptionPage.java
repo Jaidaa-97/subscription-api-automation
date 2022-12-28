@@ -197,7 +197,7 @@ public class SubscriptionPage extends BasePage {
     }
 
     public void createCustomer() {
-        commonPage.getEndPoint("/data-subscription/v1/customer");
+        commonPage.getEndPoint("/data-subscription/v1/customers");
         String payload = "{\n" +
                 "           \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "          \"locale\": \"fr_CAB\",\n" +
