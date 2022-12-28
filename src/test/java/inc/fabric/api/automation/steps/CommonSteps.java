@@ -5,10 +5,12 @@ import com.google.gson.JsonObject;
 import inc.fabric.api.automation.config.ScenarioController;
 import inc.fabric.api.automation.pages.BasePage;
 import inc.fabric.api.automation.pages.CommonPage;
+import inc.fabric.api.automation.pages.SubscriptionPage;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -29,10 +31,13 @@ import static io.restassured.RestAssured.given;
 public class CommonSteps extends BasePage {
     public CommonPage commonPage;
     public BasePage basePage;
+    public SubscriptionPage SubscriptionPage;
 
-    public CommonSteps(CommonPage commonPage, BasePage basePage) {
+    public CommonSteps(CommonPage commonPage, BasePage basePage,SubscriptionPage subPage) {
         this.commonPage = commonPage;
         this.basePage = basePage;
+        this.SubscriptionPage = subPage;
+
     }
 
     @Before(order = 0)
@@ -40,8 +45,8 @@ public class CommonSteps extends BasePage {
         ScenarioController.setScenario(scenario);
         ScenarioController.printInitialLogs();
         this.scenario = scenario;
+        SubscriptionPage.checkInitalReq();
     }
-
     @After(order = 0)
     public void unRegisterSetup() throws IOException {
         ScenarioController.printFinalLogs();

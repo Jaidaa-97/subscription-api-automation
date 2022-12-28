@@ -2284,13 +2284,10 @@ Business Need: Create Bulk Subscription
                     "plan": {
                         "frequency": 5,
                         "frequencyType": "Daily"
-                    },
-                    "offer": {
-                        "id": "---data:-:env_offercode---"
                     }
                 },
                 {
-                    "id":"---data:-:env_item3---",
+                    "sku":"---data:-:env_notAvailableSubscription---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,

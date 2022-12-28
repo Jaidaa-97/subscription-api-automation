@@ -5,8 +5,11 @@ import com.google.gson.JsonObject;
 import inc.fabric.api.automation.contstants.APIConstants;
 import inc.fabric.api.automation.utility.CommonUtils;
 import inc.fabric.api.automation.utility.FileHandler;
+import inc.fabric.api.automation.utility.RestHttp;
+import io.restassured.specification.RequestSpecification;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
+import org.junit.Before;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -17,6 +20,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import java.time.Instant;
+
+import static io.restassured.RestAssured.given;
 
 public class SubscriptionPage extends BasePage {
     private String subEndPoint;
@@ -219,16 +224,35 @@ public class SubscriptionPage extends BasePage {
     }
 
     public void createSKU(){
+            commonPage.getPimEndPoint("/api-pim-external/product");
+            String payload = "{\n" +
+                    "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku4") + "\",\n" +
+                    "   \"itemType\": \"Item\",\n" +
+                    "   \"title\": \"test\",\n" +
+                    "    \"attributes\": {\n" +
+                    "       \"isSubscription\": \"true\",\n" +
+                    "       \"isDiscontinued\": \"false\",\n" +
+                    "       \"skuSwap\": [\n" +
+                    "           \"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_swapproduct") + "\"\n" +
+                    "       ]\n" +
+                    "       }\n" +
+                    "      }";
+            commonPage.requestPayload(payload);
+            commonPage.runPimPostCall();
+            basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
+    public void createSKUWithArgs(String sku,boolean isSubscription, boolean isDiscontinued){
         commonPage.getPimEndPoint("/api-pim-external/product");
         String payload = "{\n" +
-                "   \"productSku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku4")+"\",\n" +
+                "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku) + "\",\n" +
                 "   \"itemType\": \"Item\",\n" +
                 "   \"title\": \"test\",\n" +
                 "    \"attributes\": {\n" +
-                "       \"isSubscription\": \"true\",\n" +
-                "       \"isDiscontinued\": \"false\",\n" +
+                "       \"isSubscription\": \""+isSubscription+"\",\n" +
+                "       \"isDiscontinued\": \""+isDiscontinued+"\",\n" +
                 "       \"skuSwap\": [\n" +
-                "           \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_swapproduct")+"\"\n" +
+                "           \"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_swapproduct") + "\"\n" +
                 "       ]\n" +
                 "       }\n" +
                 "      }";
@@ -237,6 +261,83 @@ public class SubscriptionPage extends BasePage {
         basePage.getResponse().then().assertThat().statusCode(200);
     }
 
+    public void createDiscount(String sku){
+        commonPage.getEndPoint("/data-subscription/v1/subscriptionDiscount");
+        String payload = "{\n  " +
+                "   \"validity\": {\n    " +
+                "   \"startDate\": \"2022-12-29T10:35:49.120Z\",\n" +
+                "   \"endDate\": \"2030-04-04T10:18:49.120Z\",\n    " +
+                "   \"applyOnOrders\": [\n      2,\n      3,\n      10\n    ]\n  },\n  " +
+                "   \"message\": \"terms and conditions of the offer\",\n  " +
+                "   \"discount\": {\n    " +
+                "   \"amount\": 1\n  },\n  " +
+                "   \"skus\": [\n    \"---data:-:env_sku1---\"\n   ],\n  " +
+                "   \"categories\": [\n    \"product category 1\",\n    \"product category 2\",\n    \"product category 3\"\n  ],\n  " +
+                "   \"frequency\": {\n    \"frequency\": 5,\n    \"frequencyType\": \"Daily\"\n  },\n  " +
+                "   \"itemQuantity\": 2,\n  " +
+                "   \"channel\": \"POS\",\n  " +
+                "   \"target\": \"PDP\",\n  " +
+                "   \"customerSegment\": [\n    \"employee\",\n    \"designer\"\n  ]\n}";
+
+        commonPage.requestPayload(payload);
+        commonPage.runPimPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+    }
+
+    public boolean getSKU(String sku) {
+            commonPage.getPimEndPoint("/api-pim-external/product/" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku));
+//        commonPage.runPimGettCall();
+            RequestSpecification requestSpecification;
+            requestSpecification = given().relaxedHTTPSValidation();
+            requestSpecification.header("Authorization", basePage.getAccessToken());
+            requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase() + "_XAPIKEY"));
+            requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+            String response = RestHttp.getCall(basePage.getEndPoint(), requestSpecification).then().extract().path("productSku").toString();
+            return response.equals(FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku4"));
+    }
+    public void checkInitalReq(){
+        commonPage.getPimEndPoint("/api-pim-external/product");
+        String payload = "{\n" +
+                "   \"productSku\":\"PROTEIN_32132\",\n" +
+                "   \"itemType\": \"Item\",\n" +
+                "   \"title\": \"test\",\n" +
+                "    \"attributes\": {\n" +
+                "       \"isSubscription\": \"true\",\n" +
+                "       \"isDiscontinued\": \"false\",\n" +
+                "       \"skuSwap\": [\n" +
+                "           \"PROTEIN_32132\" \n" +
+                "       ]\n" +
+                "       }\n" +
+                "      }";
+        commonPage.requestPayload(payload);
+        commonPage.runPimPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+        createDiscount("PROTEIN_32132");
+        boolean checkSku = getSKU("_sku1");
+        if (!checkSku) {
+            createSKUWithArgs("_sku1",true,false);
+        }
+        checkSku = getSKU("_sku2");
+        if (!checkSku) {
+            createSKUWithArgs("_sku2",true,false);
+        }
+        checkSku = getSKU("_sku3");
+        if (!checkSku) {
+            createSKUWithArgs("_sku3",true,false);
+        }
+        checkSku = getSKU("_sku4");
+        if (!checkSku) {
+            createSKUWithArgs("_sku4",true,false);
+        }
+        checkSku = getSKU("_discontinuedSKU");
+        if (!checkSku) {
+            createSKUWithArgs("_discontinuedSKU",true,false);
+        }
+        checkSku = getSKU("_notAvailableSubscription");
+        if (!checkSku) {
+            createSKUWithArgs("_notAvailableSubscription",false,false);
+        }
+    }
     public void createDisSKU(){
         commonPage.getPimEndPoint("/api-pim-external/product");
         String payload = "{\n" +

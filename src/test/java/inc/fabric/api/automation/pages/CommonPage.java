@@ -151,6 +151,14 @@ public class CommonPage {
         requestSpecification.header("x-site-context", basePage.get_xSiteContext());
         basePage.setResponse(RestHttp.postCall(basePage.getEndPoint(), basePage.getBody(), requestSpecification));
     }
+    public void runPimGettCall() {
+        RequestSpecification requestSpecification;
+        requestSpecification = given().relaxedHTTPSValidation();
+        requestSpecification.header("Authorization", basePage.getAccessToken());
+        requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase()+"_XAPIKEY"));
+        requestSpecification.header("x-site-context", basePage.get_xSiteContext());
+        basePage.setResponse(RestHttp.getCall(basePage.getEndPoint(), requestSpecification));
+    }
 
     public void runPricingPostCall() {
         RequestSpecification requestSpecification;
