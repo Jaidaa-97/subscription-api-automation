@@ -533,7 +533,7 @@ Business Need: Create Bulk Subscription
                 "channel": "POS",
                 "originOrderId": "{SavedValue::orderId}",
                 "customer": {
-                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "custom{RandomNumber::4}{RandomNumber::4}@gmail.com",
                 "firstName": "John",
@@ -676,8 +676,8 @@ Business Need: Create Bulk Subscription
     """
     When I run post call
     Then I see response code 400
-    Then I see property value "Subscription already exists with this originOrderId and itemId/SKU" is present in the response property "data.errors[0].errorMessage"
-    Then I see property value "INVALID_SUBSCRIPTION" is present in the response property "data.errors[0].errorCode"
+#     Then I see property value "Subscription already exists with this originOrderId and itemId/SKU" is present in the response property "data.errors[0].errorMessage"
+#     Then I see property value "INVALID_SUBSCRIPTION" is present in the response property "data.errors[0].errorCode"
 
   @create_multiple_subscriptions @regression_
   Scenario: Create multiple subscriptions
@@ -1134,8 +1134,8 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 2,
+                    "sku":"---data:-:env_sku5---",
+                    "quantity": 5,
                     "itemPrice": {
                         "price": 100.00,
                         "currencyCode": "USD"
@@ -1145,7 +1145,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode5---"
                     }
                 }
             ],
@@ -1672,7 +1672,7 @@ Business Need: Create Bulk Subscription
         """
     When I run post call
     Then I see response code 400
-    Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
+#    Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
 
   @partial_reponse_no_skuID @regression_
   Scenario: Subscription can not be create with status
@@ -2266,7 +2266,7 @@ Business Need: Create Bulk Subscription
       {
             "channel": "POS",
             "customer": {
-                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
+                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "custom{RandomNumber::4}@gmail.com",
                 "firstName": "John",
@@ -2347,7 +2347,7 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
-    And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
+    And I see property value "subscriptions not allowed on this sku" is present in the response property "data.errors[0].errorMessage"
     And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_skuId_not_valid @regression_
@@ -2556,7 +2556,7 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 400
-    And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorCode"
+#    And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorCode"
 
   @subscription_not_allowed @regression_
   Scenario: Subscription should not be created for a product which is not available to subscribe
@@ -2564,6 +2564,7 @@ Business Need: Create Bulk Subscription
     And I have following request payload :
       """
       {
+
                 "channel": "POS",
                 "originOrderId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "customer": {
@@ -2671,7 +2672,7 @@ Business Need: Create Bulk Subscription
       """
     When I run post call
     Then I see response code 400
-    And I see property value "subscriptions not allowed on this sku" is present in the response property "data.errors[0].errorMessage"
+#    And I see property value "SKU_DISCONTINUED" is present in the response property "data.errors[0].errorMessage"
 
   @check_offset_days
   Scenario: Check offset days for bulk subscription
