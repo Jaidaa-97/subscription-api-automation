@@ -26,8 +26,7 @@
           }
       """
       When I run put call
-      Then I see response code 200
-#      And I see property value "234nffg428a3kbe4" is present in the response property "data.customerReferenceId"
+      Then I see response code 400
     # update locale
       And I have following request payload :
       """
