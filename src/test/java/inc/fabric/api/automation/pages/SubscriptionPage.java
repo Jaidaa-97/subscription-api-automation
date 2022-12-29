@@ -7,10 +7,13 @@ import inc.fabric.api.automation.utility.CommonUtils;
 import inc.fabric.api.automation.utility.FileHandler;
 import inc.fabric.api.automation.utility.RestHttp;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
 import org.junit.Before;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -259,9 +262,30 @@ public class SubscriptionPage extends BasePage {
         commonPage.requestPayload(payload);
         commonPage.runPimPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
-    }
+        String productSku = basePage.getResponse().then().extract().path("productSku").toString();
+        String productId = basePage.getResponse().then().extract().path("itemId").toString();
 
-    public void createDiscount(String sku){
+        skuInsertPrice(productId,productSku);
+        String Offercode= createDiscount(productSku);
+        updatePropertiesFile(sku,productSku,productId,Offercode);
+    }
+    public void updatePropertiesFile(String sku,String productSku,String productId,String Offercode){
+        try {
+            String fileName="src/test/resources/properties/data.properties";
+            PropertiesConfiguration config = new PropertiesConfiguration(fileName);
+            config.setProperty(CommonUtils.getEnv().toLowerCase() + sku, productSku);
+            if(sku.contains("_sku")){
+                String itemId = sku.replace("_sku", "_item");
+                config.setProperty(CommonUtils.getEnv().toLowerCase() + itemId, productId);
+                String offercode = sku.replace("_sku", "_offercode");
+                config.setProperty(CommonUtils.getEnv().toLowerCase() + offercode, Offercode);
+            }
+            config.save();
+        } catch (ConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String createDiscount(String productSku){
         commonPage.getEndPoint("/data-subscription/v1/subscriptionDiscount");
         String payload = "{\n  " +
                 "   \"validity\": {\n    " +
@@ -271,7 +295,7 @@ public class SubscriptionPage extends BasePage {
                 "   \"message\": \"terms and conditions of the offer\",\n  " +
                 "   \"discount\": {\n    " +
                 "   \"amount\": 1\n  },\n  " +
-                "   \"skus\": [\n    \"---data:-:env_sku1---\"\n   ],\n  " +
+                "   \"skus\":[\"" + productSku + "\"],\n" +
                 "   \"categories\": [\n    \"product category 1\",\n    \"product category 2\",\n    \"product category 3\"\n  ],\n  " +
                 "   \"frequency\": {\n    \"frequency\": 5,\n    \"frequencyType\": \"Daily\"\n  },\n  " +
                 "   \"itemQuantity\": 2,\n  " +
@@ -282,37 +306,22 @@ public class SubscriptionPage extends BasePage {
         commonPage.requestPayload(payload);
         commonPage.runPimPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
+        String offerCode = basePage.getResponse().then().extract().path("data.offerCode").toString();
+        return offerCode;
     }
-
     public boolean getSKU(String sku) {
             commonPage.getPimEndPoint("/api-pim-external/product/" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku));
-//        commonPage.runPimGettCall();
             RequestSpecification requestSpecification;
             requestSpecification = given().relaxedHTTPSValidation();
             requestSpecification.header("Authorization", basePage.getAccessToken());
             requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase() + "_XAPIKEY"));
             requestSpecification.header("x-site-context", basePage.get_xSiteContext());
             String response = RestHttp.getCall(basePage.getEndPoint(), requestSpecification).then().extract().path("productSku").toString();
-            return response.equals(FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku4"));
+            return response.equals(FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku));
     }
+
     public void checkInitalReq(){
-        commonPage.getPimEndPoint("/api-pim-external/product");
-        String payload = "{\n" +
-                "   \"productSku\":\"PROTEIN_32132\",\n" +
-                "   \"itemType\": \"Item\",\n" +
-                "   \"title\": \"test\",\n" +
-                "    \"attributes\": {\n" +
-                "       \"isSubscription\": \"true\",\n" +
-                "       \"isDiscontinued\": \"false\",\n" +
-                "       \"skuSwap\": [\n" +
-                "           \"PROTEIN_32132\" \n" +
-                "       ]\n" +
-                "       }\n" +
-                "      }";
-        commonPage.requestPayload(payload);
-        commonPage.runPimPostCall();
-        basePage.getResponse().then().assertThat().statusCode(200);
-        createDiscount("PROTEIN_32132");
+       // createSKUWithArgs("_sku1",true,false);
         boolean checkSku = getSKU("_sku1");
         if (!checkSku) {
             createSKUWithArgs("_sku1",true,false);
@@ -331,12 +340,40 @@ public class SubscriptionPage extends BasePage {
         }
         checkSku = getSKU("_discontinuedSKU");
         if (!checkSku) {
-            createSKUWithArgs("_discontinuedSKU",true,false);
+            createSKUWithArgs("_discontinuedSKU",true,true);
         }
         checkSku = getSKU("_notAvailableSubscription");
         if (!checkSku) {
             createSKUWithArgs("_notAvailableSubscription",false,false);
         }
+    }
+    public  void skuInsertPrice(String itemId, String sku){
+        commonPage.getPricingEndPoint("/api-price/price/bulk-insert");
+        String payload = "[\n  " +
+                "   {\n    \"priceListId\": 100000,\n    " +
+                "   \"itemId\":\"" + itemId + "\",\n" +
+                "   \"itemSku\":\"" + sku + "\",\n" +
+                "   \"offers\": [\n      " +
+                    "   {\n        \"kind\": 12,\n        " +
+                    "   \"channel\": 12,\n        " +
+                    "   \"startDate\": \"2022-12-30T13:14:33.009Z\",\n        " +
+                    "   \"endDate\": \"2028-01-11T02:59:51.459Z\",\n        " +
+                    "   \"price\": {\n          " +
+                        "   \"base\": 25,\n          " +
+                        "   \"sale\": 20,\n          " +
+                        "   \"cost\": 14,\n          " +
+                        "   \"currency\": \"USD\"\n        " +
+                        "   },\n        " +
+                    "   \"additionalAttributes\": [\n          " +
+                    "   {}\n        " +
+                    "   ]\n      " +
+                    "   }\n    " +
+                    "   ]\n  " +
+                "   }" +
+                "   \n]";
+        commonPage.requestPayload(payload);
+        commonPage.runPricingPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
     }
     public void createDisSKU(){
         commonPage.getPimEndPoint("/api-pim-external/product");
@@ -356,7 +393,6 @@ public class SubscriptionPage extends BasePage {
         commonPage.runPimPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
     }
-
     public void createBulkSubscription(int noOfSubscriptions) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/bulk");
         String payload = "{\n" +
@@ -392,7 +428,7 @@ public class SubscriptionPage extends BasePage {
                 "                    },\n" +
 //                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\"\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode1")+"\"\n" +
 //                "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
@@ -530,7 +566,7 @@ public class SubscriptionPage extends BasePage {
                     "            },\n" +
              //       "            \"offsetDays\": 2,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode")+"\"\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode1")+"\"\n" +
              //       "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
@@ -605,7 +641,6 @@ public class SubscriptionPage extends BasePage {
         commonPage.runPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
     }
-
     public void getIndexOfSubscriptionInOrder(String subscription, String key) {
         ArrayList list = (ArrayList<T>) (basePage.getResponse().then().extract().path("data.orders"));
         int size = list.size();

@@ -41,7 +41,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -79,7 +79,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -187,7 +187,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -226,7 +226,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -336,7 +336,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -375,7 +375,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -484,7 +484,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -521,7 +521,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -630,7 +630,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -667,7 +667,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -776,7 +776,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -813,7 +813,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -926,7 +926,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -963,7 +963,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -1073,7 +1073,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -1110,7 +1110,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -1371,7 +1371,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -1409,7 +1409,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -1507,7 +1507,7 @@ Business Need: Create Bulk Subscription
 #                "frequencyType": "Daily"
 #            },
 #            "offer": {
-#                "id": "---data:-:env_offercode---"
+#                "id": "---data:-:env_offercode1---"
 #            }
 #        }
 #    ],
@@ -1598,7 +1598,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -1637,7 +1637,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -1751,7 +1751,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -1789,7 +1789,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -1898,7 +1898,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -2048,7 +2048,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2085,7 +2085,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2207,7 +2207,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2360,7 +2360,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2397,7 +2397,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2509,7 +2509,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2546,7 +2546,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2658,7 +2658,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2695,7 +2695,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -3313,7 +3313,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -3429,7 +3429,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -3583,7 +3583,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
+                        "id": "---data:-:env_offercode1---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -3753,7 +3753,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
+                        "id": "---data:-:env_offercode1---",
                         "source": "PDP"
                     },
                     "shipping": {

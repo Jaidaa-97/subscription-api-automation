@@ -134,7 +134,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
@@ -240,7 +240,7 @@ Business Need: Create Bulk Subscription
                         "frequency": "5"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
@@ -346,7 +346,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
@@ -451,7 +451,7 @@ Business Need: Create Bulk Subscription
                         "id": "---data:-:env_planid---"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
@@ -553,7 +553,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -628,7 +628,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -717,7 +717,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -857,7 +857,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -989,7 +989,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -1068,7 +1068,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -1363,7 +1363,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -1457,7 +1457,7 @@ Business Need: Create Bulk Subscription
 #                "frequencyType": "Daily"
 #            },
 #            "offer": {
-#                "id": "---data:-:env_offercode---"
+#                "id": "---data:-:env_offercode1---"
 #            },
 #            "shipping": {
 #              "shipmentCarrier": "USPS",
@@ -1714,7 +1714,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
+                        "id": "---data:-:env_offercode1---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1751,7 +1751,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode---",
+                        "id": "---data:-:env_offercode1---",
                         "source": "PDP"
                     },
                     "shipping": {
@@ -1867,7 +1867,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -2038,7 +2038,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 },
                 {
@@ -2053,7 +2053,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -2185,7 +2185,7 @@ Business Need: Create Bulk Subscription
 #                    },
 #                    "offsetDays": 10,
 #                    "offer": {
-#                        "id": "---data:-:env_offercode---",
+#                        "id": "---data:-:env_offercode1---",
 #                        "source": "PDP"
 #                    },
 #                    "shipping": {
@@ -2375,7 +2375,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 },
                 {
@@ -2390,7 +2390,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 }
             ],
@@ -2480,7 +2480,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "---data:-:env_offercode---",
+                            "id": "---data:-:env_offercode1---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -2596,7 +2596,7 @@ Business Need: Create Bulk Subscription
                         },
                         "offsetDays": 10,
                         "offer": {
-                            "id": "---data:-:env_offercode---",
+                            "id": "---data:-:env_offercode1---",
                             "source": "PDP"
                         },
                         "shipping": {
@@ -2712,7 +2712,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": {SavedValue::offsetDays},
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -2825,7 +2825,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -2863,7 +2863,7 @@ Business Need: Create Bulk Subscription
 #                        },
 #                        "offsetDays": 10,
 #                        "offer": {
-#                            "id": "---data:-:env_offercode---",
+#                            "id": "---data:-:env_offercode1---",
 #                            "source": "PDP"
 #                        },
 #                        "shipping": {
@@ -2971,7 +2971,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3008,7 +3008,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3116,7 +3116,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3153,7 +3153,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3261,7 +3261,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3298,7 +3298,7 @@ Business Need: Create Bulk Subscription
 #            },
 #            "offsetDays": 10,
 #            "offer": {
-#                "id": "---data:-:env_offercode---",
+#                "id": "---data:-:env_offercode1---",
 #                "source": "PDP"
 #            },
 #            "shipping": {
@@ -3403,7 +3403,7 @@ Business Need: Create Bulk Subscription
                         "id": "---data:-:env_planid---"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "tax": {
                         "taxCode": "FR020000",

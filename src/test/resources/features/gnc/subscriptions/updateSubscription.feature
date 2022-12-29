@@ -289,7 +289,7 @@ Business Need: Update Subscription
                         "id": "---data:-:env_planid---"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
