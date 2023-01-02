@@ -289,7 +289,7 @@ public class SubscriptionPage extends BasePage {
         commonPage.getEndPoint("/data-subscription/v1/subscriptionDiscount");
         String payload = "{\n  " +
                 "   \"validity\": {\n    " +
-                "   \"startDate\": \"2022-12-29T10:35:49.120Z\",\n" +
+                "   \"startDate\": \"2023-01-04T10:35:49.120Z\",\n" +
                 "   \"endDate\": \"2030-04-04T10:18:49.120Z\",\n    " +
                 "   \"applyOnOrders\": [\n      2,\n      3,\n      10\n    ]\n  },\n  " +
                 "   \"message\": \"terms and conditions of the offer\",\n  " +
@@ -356,7 +356,7 @@ public class SubscriptionPage extends BasePage {
                 "   \"offers\": [\n      " +
                     "   {\n        \"kind\": 12,\n        " +
                     "   \"channel\": 12,\n        " +
-                    "   \"startDate\": \"2022-12-30T13:14:33.009Z\",\n        " +
+                    "   \"startDate\": \"2023-01-04T13:14:33.009Z\",\n        " +
                     "   \"endDate\": \"2028-01-11T02:59:51.459Z\",\n        " +
                     "   \"price\": {\n          " +
                         "   \"base\": 25,\n          " +
@@ -655,12 +655,10 @@ public class SubscriptionPage extends BasePage {
         }
         savedValues.put(key,String.valueOf(index));
     }
-
     public void saveOrderId(String index, String key) {
         String orderId = basePage.getResponse().then().extract().path("data.orders["+index+"].id");
         savedValues.put(key,orderId);
     }
-
     public void removeLineItemFromOrder(int lineItem, String orderId) {
         commonPage.getEndPoint("/data-subscription/v1/orders/"+orderId+"/remove-items");
         String payload = "{\n" +
@@ -669,12 +667,10 @@ public class SubscriptionPage extends BasePage {
         commonPage.requestPayload(payload);
         commonPage.runPostCall();
     }
-
     public void getSubscriptionById(String subId) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/"+subId+"");
         commonPage.runGetCall(false,null);
     }
-
     public void discontinueItem(String sku) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/discontinued-items");
         String payload = "{\n" +
@@ -683,7 +679,6 @@ public class SubscriptionPage extends BasePage {
         commonPage.requestPayload(payload);
         commonPage.runPostCall();
     }
-
     public void getAllSubscriptionOfSKU(String sku) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions?limit=10&offset=0&sku="+sku+"");
         commonPage.runGetCall(false,null);
