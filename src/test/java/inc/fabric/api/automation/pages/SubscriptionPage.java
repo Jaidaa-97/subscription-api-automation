@@ -265,8 +265,18 @@ public class SubscriptionPage extends BasePage {
         String productSku = basePage.getResponse().then().extract().path("productSku").toString();
         String productId = basePage.getResponse().then().extract().path("itemId").toString();
 
-        skuInsertPrice(productId,productSku);
-        String Offercode= createDiscount(productSku);
+        if(!sku.contains("_skuWOprice")) {
+            skuInsertPrice(productId, productSku);
+        }
+        String Offercode = "";
+        if(!sku.contains("_sku5")) {
+            Offercode= createDiscount(productSku, "COPILOT");
+        }
+        else{
+            Offercode= createDiscount(productSku, "POS");
+        }
+
+        //CREATE_PLAN()
         updatePropertiesFile(sku,productSku,productId,Offercode);
     }
     public void updatePropertiesFile(String sku,String productSku,String productId,String Offercode){
@@ -285,11 +295,11 @@ public class SubscriptionPage extends BasePage {
             throw new RuntimeException(e);
         }
     }
-    public String createDiscount(String productSku){
+    public String createDiscount(String productSku, String channel){
         commonPage.getEndPoint("/data-subscription/v1/subscriptionDiscount");
         String payload = "{\n  " +
                 "   \"validity\": {\n    " +
-                "   \"startDate\": \"2023-01-04T10:35:49.120Z\",\n" +
+                "   \"startDate\": \"2023-01-03T11:50:48.718Z\",\n" +
                 "   \"endDate\": \"2030-04-04T10:18:49.120Z\",\n    " +
                 "   \"applyOnOrders\": [\n      2,\n      3,\n      10\n    ]\n  },\n  " +
                 "   \"message\": \"terms and conditions of the offer\",\n  " +
@@ -299,7 +309,7 @@ public class SubscriptionPage extends BasePage {
                 "   \"categories\": [\n    \"product category 1\",\n    \"product category 2\",\n    \"product category 3\"\n  ],\n  " +
                 "   \"frequency\": {\n    \"frequency\": 5,\n    \"frequencyType\": \"Daily\"\n  },\n  " +
                 "   \"itemQuantity\": 2,\n  " +
-                "   \"channel\": \"POS\",\n  " +
+                "   \"channel\": \""+channel+"\",\n  " +
                 "   \"target\": \"PDP\",\n  " +
                 "   \"customerSegment\": [\n    \"employee\",\n    \"designer\"\n  ]\n}";
 
@@ -323,11 +333,11 @@ public class SubscriptionPage extends BasePage {
             else {
                 return false;
             }
+
     }
 
     public void checkInitalReq(){
        // createSKUWithArgs("_sku1",true,false);
-
         boolean checkSku = getSKU("_sku1");
         if (!checkSku) {
             createSKUWithArgs("_sku1",true,false);
@@ -352,6 +362,11 @@ public class SubscriptionPage extends BasePage {
         if (!checkSku) {
             createSKUWithArgs("_notAvailableSubscription",false,false);
         }
+        //_skuWOprice
+        checkSku = getSKU("_skuWOprice");
+        if (!checkSku) {
+            createSKUWithArgs("_notAvailableSubscription",false,false);
+        }
     }
     public  void skuInsertPrice(String itemId, String sku){
         commonPage.getPricingEndPoint("/api-price/price/bulk-insert");
@@ -362,7 +377,7 @@ public class SubscriptionPage extends BasePage {
                 "   \"offers\": [\n      " +
                     "   {\n        \"kind\": 12,\n        " +
                     "   \"channel\": 12,\n        " +
-                    "   \"startDate\": \"2023-01-04T13:14:33.009Z\",\n        " +
+                    "   \"startDate\": \"2022-12-30T13:14:33.009Z\",\n        " +
                     "   \"endDate\": \"2028-01-11T02:59:51.459Z\",\n        " +
                     "   \"price\": {\n          " +
                         "   \"base\": 25,\n          " +
@@ -398,6 +413,9 @@ public class SubscriptionPage extends BasePage {
         commonPage.requestPayload(payload);
         commonPage.runPimPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
+    }
+    public void createPlan(){
+
     }
     public void createBulkSubscription(int noOfSubscriptions) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/bulk");
