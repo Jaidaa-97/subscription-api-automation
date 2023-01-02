@@ -316,12 +316,18 @@ public class SubscriptionPage extends BasePage {
             requestSpecification.header("Authorization", basePage.getAccessToken());
             requestSpecification.header("x-api-key", FileHandler.readPropertyFile("environment.properties", CommonUtils.getEnv().toUpperCase() + "_XAPIKEY"));
             requestSpecification.header("x-site-context", basePage.get_xSiteContext());
-            String response = RestHttp.getCall(basePage.getEndPoint(), requestSpecification).then().extract().path("productSku").toString();
-            return response.equals(FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku));
+            String response = RestHttp.getCall(basePage.getEndPoint(), requestSpecification).then().extract().path("productSku");
+            if(response != null){
+                return response.equals(FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + sku));
+            }
+            else {
+                return false;
+            }
     }
 
     public void checkInitalReq(){
        // createSKUWithArgs("_sku1",true,false);
+
         boolean checkSku = getSKU("_sku1");
         if (!checkSku) {
             createSKUWithArgs("_sku1",true,false);
