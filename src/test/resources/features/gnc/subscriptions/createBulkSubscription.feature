@@ -129,7 +129,7 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "---data:-:env_planid---",
+                        "id": "---data:-:env_planId1---",
                         "frequency": 5,
                         "frequencyType": "Daily"
                     },
@@ -236,7 +236,7 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "---data:-:env_planid---",
+                        "id": "---data:-:env_planId1---",
                         "frequency": "5"
                     },
                     "offer": {
@@ -342,7 +342,7 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "---data:-:env_planid---",
+                        "id": "---data:-:env_planId1---",
                         "frequencyType": "Daily"
                     },
                     "offer": {
@@ -421,105 +421,105 @@ Business Need: Create Bulk Subscription
     And I see property value "contains a conflict between exclusive peers [id, frequencyType]" is contains in the response property "message"
 
   @CreateBulkSubscriptionWithPlanAndWithoutFrequencyAndFrequencyType
-  Scenario: Create a subscription with plan id and frequency type, It should give 200 response
+  Scenario: Create a subscription with plan id and without frequency and frequency type, It should give 200 response
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
-    """
-       {
-            "channel": "POS",
-            "customer": {
-                "customerReferenceId":"{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
-                "locale": "en_US",
-                "email": "custom{RandomNumber::4}@gmail.com",
-                "contactNumber": "+92 3333709568",
-                "firstName": "John",
-                "lastName": "Doe",
-                "segment": ["employee"],
-                "employeeId": "1"
-            },
-            "items": [
-                {
-                    "sku":"---data:-:env_sku1---",
-                    "quantity": 2,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "id": "---data:-:env_planid---"
-                    },
-                    "offer": {
-                        "id": "---data:-:env_offercode1---"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "billingCycles": 10
+     """
+           {
+                "channel": "POS",
+                "customer": {
+                    "customerReferenceId":"{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
+                    "locale": "en_US",
+                    "email": "custom{RandomNumber::4}@gmail.com",
+                    "contactNumber": "+92 3333709568",
+                    "firstName": "John",
+                    "lastName": "Doe",
+                    "segment": ["employee"],
+                    "employeeId": "1"
+                },
+                "items": [
+                    {
+                        "sku":"---data:-:env_sku1---",
+                        "quantity": 2,
+                        "weight": 10,
+                        "weightUnit": "lb",
+                        "itemPrice": {
+                            "price": 100.00,
+                            "currencyCode": "USD"
+                        },
+                        "plan": {
+                            "id": "---data:-:env_planId1---"
+                        },
+                        "offer": {
+                            "id": "---data:-:env_offercode1---"
+                        },
+                        "tax": {
+                            "taxCode": "FR020000",
+                            "taxAmount": 10.00,
+                            "currencyCode": "USD"
+                        },
+                        "shipping": {
+                          "shipmentCarrier": "USPS",
+                          "shipmentMethod": "Ground",
+                          "shipmentInstructions": "",
+                          "taxCode": "SHP020000",
+                          "shippingAmount": 10.00,
+                          "taxAmount": 1.00,
+                          "currencyCode": "USD"
+                        },
+                        "expiry": {
+                            "billingCycles": 10
+                        }
                     }
+                ],
+                "shipTo": {
+                    "name": {
+                        "firstName": "Roger",
+                        "middleName": "",
+                        "lastName": "Fang"
+                    },
+                    "streetAddress": {
+                        "street1": "27 O ST",
+                        "street2": ""
+                    },
+                    "phone": {
+                        "number": "03323370957",
+                        "kind": "mobile"
+                    },
+                    "city": "BOSTON MA",
+                    "state": "MA",
+                    "postalCode": "2127",
+                    "country": "US"
+                },
+                "billTo": {
+                    "name": {
+                        "firstName": "Roger",
+                        "middleName": "",
+                        "lastName": "Fang"
+                    },
+                    "streetAddress": {
+                        "street1": "27 O ST",
+                        "street2": ""
+                    },
+                    "phone": {
+                        "number": "012323370957",
+                        "kind": "mobile"
+                    },
+                    "city": "BOSTON MA",
+                    "state": "MA",
+                    "postalCode": "2127",
+                    "country": "US"
+                },
+                "paymentDetails": {
+                    "paymentIdentifier": {
+                        "cardIdentifier": "1234",
+                        "expiryDate": "04/24"
+                    },
+                    "paymentMethod": "visa",
+                    "paymentKind": "CARD_PAYPAL"
                 }
-            ],
-            "shipTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "03323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": "2127",
-                "country": "US"
-            },
-            "billTo": {
-                "name": {
-                    "firstName": "Roger",
-                    "middleName": "",
-                    "lastName": "Fang"
-                },
-                "streetAddress": {
-                    "street1": "27 O ST",
-                    "street2": ""
-                },
-                "phone": {
-                    "number": "012323370957",
-                    "kind": "mobile"
-                },
-                "city": "BOSTON MA",
-                "state": "MA",
-                "postalCode": "2127",
-                "country": "US"
-            },
-            "paymentDetails": {
-                "paymentIdentifier": {
-                    "cardIdentifier": "1234",
-                    "expiryDate": "04/24"
-                },
-                "paymentMethod": "visa",
-                "paymentKind": "CARD_PAYPAL"
-            }
-      }
-    """
+          }
+     """
     When I run post call
     Then I see response code 200
 
@@ -549,8 +549,7 @@ Business Need: Create Bulk Subscription
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "frequency": 5,
-                        "frequencyType": "Daily"
+                         "id": "---data:-:env_planId1---"
                     },
                     "offer": {
                         "id": "---data:-:env_offercode1---"
@@ -2011,8 +2010,7 @@ Business Need: Create Bulk Subscription
     And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_invalid_offer_id @regression_
-  Scenario: 3
-
+  Scenario:Verify partial response invalid offer code
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """
@@ -2110,154 +2108,6 @@ Business Need: Create Bulk Subscription
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
     Then I see property value "PROTEIN_1" is present in the response property "data.errors[0].item.sku"
 
-  @partial_response_expiryDate_past
-#  Scenario: Verify partial response when one of the expiry date of a subscription is in the past
-#    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
-#    And I have following request payload :
-#      """
-#      {
-#            "channel": "POS",
-#
-#            "customer": {
-#                "customerReferenceId": "606f01f441b8fc0008529954",
-#                "locale": "en_US",
-#                "email": "custom{RandomNumber::4}@gmail.com",
-#                "contactNumber": "+92 3333709568",
-#                "firstName": "John",
-#                "lastName": "Doe",
-#                "segment": ["employee"],
-#                "employeeId": "1"
-#            },
-#            "items": [
-#                {
-#                    "sku":"---data:-:env_sku2---",
-#                    "quantity": 2,
-#                    "weight": 10,
-#                    "weightUnit": "lb",
-#                    "itemPrice": {
-#                        "price": 100.00,
-#                        "currencyCode": "USD"
-#                    },
-#                    "tax": {
-#                        "taxCode": "FR020000",
-#                        "taxAmount": 10.00,
-#                        "currencyCode": "USD"
-#                    },
-#                    "plan": {
-#                        "frequency": 5,
-#                        "frequencyType": "Daily"
-#                    },
-#
-#                    "offer": {
-#                        "id": "---data:-:env_offercode2---"
-#
-#                    },
-#                    "shipping": {
-#                      "shipmentCarrier": "USPS",
-#                      "shipmentMethod": "Ground",
-#                      "shipmentInstructions": "",
-#                      "taxCode": "SHP020000",
-#                      "shippingAmount": 10.00,
-#                      "taxAmount": 1.00,
-#                      "currencyCode": "USD"
-#                    },
-#                    "expiry": {
-#                        "expiryDate": "2026-07-22T00:00:00.199Z",
-#                        "billingCycles": 10
-#                    }
-#                },
-#                {
-#                   "sku":"---data:-:env_sku1---",
-#                    "quantity": 2,
-#                    "weight": 10,
-#                    "weightUnit": "lb",
-#                    "itemPrice": {
-#                        "price": 100.00,
-#                        "currencyCode": "USD"
-#                    },
-#                    "tax": {
-#                        "taxCode": "FR020000",
-#                        "taxAmount": 10.00,
-#                        "currencyCode": "USD"
-#                    },
-#                    "plan": {
-#                        "frequency": 5,
-#                        "frequencyType": "Daily"
-#                    },
-#                    "offsetDays": 10,
-#                    "offer": {
-#                        "id": "---data:-:env_offercode1---",
-#                        "source": "PDP"
-#                    },
-#                    "shipping": {
-#                      "shipmentCarrier": "USPS",
-#                      "shipmentMethod": "Ground",
-#                      "shipmentInstructions": "",
-#                      "taxCode": "SHP020000",
-#                      "shippingAmount": 10.00,
-#                      "taxAmount": 1.00,
-#                      "currencyCode": "USD"
-#                    },
-#                    "expiry": {
-#                        "expiryDate": "2022-11-26T00:00:00.199Z",
-#                        "billingCycles": 10
-#                    }
-#                }
-#
-#            ],
-#            "shipTo": {
-#                "name": {
-#                    "firstName": "Roger",
-#                    "middleName": "",
-#                    "lastName": "Fang"
-#                },
-#                "streetAddress": {
-#                    "street1": "27 O ST",
-#                    "street2": ""
-#                },
-#                "phone": {
-#                    "number": "03323370957",
-#                    "kind": "mobile"
-#                },
-#                "city": "BOSTON MA",
-#                "state": "MA",
-#                "postalCode": "2127",
-#                "country": "US"
-#            },
-#            "billTo": {
-#                "name": {
-#                    "firstName": "Roger",
-#                    "middleName": "",
-#                    "lastName": "Fang"
-#                },
-#                "streetAddress": {
-#                    "street1": "27 O ST",
-#                    "street2": ""
-#                },
-#                "phone": {
-#                    "number": "012323370957",
-#                    "kind": "mobile"
-#                },
-#                "city": "BOSTON MA",
-#                "state": "MA",
-#                "postalCode": "2127",
-#                "country": "US"
-#            },
-#            "paymentDetails": {
-#                "paymentIdentifier": {
-#                    "cardIdentifier": "1234",
-#                    "expiryDate": "04/24"
-#                },
-#                "paymentMethod": "visa",
-#                "paymentKind": "CARD_PAYPAL"
-#            }
-#      }
-#      """
-#    When I run post call
-#    Then I see response code 200
-#    And I see property value "Request processed with partial success" is present in the response property "message"
-#    And I see property value "expiryDate cannot be in past" is present in the response property "data.errors[0].errorMessage"
-#    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_skuId_not_allowed_to_subscription @regression_
   Scenario: Verify partial response when skuId is not allowed for subscription
@@ -3401,7 +3251,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 5,
                     "plan": {
-                        "id": "---data:-:env_planid---"
+                        "id": "---data:-:env_planId1---"
                     },
                     "offer": {
                         "id": "---data:-:env_offercode1---"
