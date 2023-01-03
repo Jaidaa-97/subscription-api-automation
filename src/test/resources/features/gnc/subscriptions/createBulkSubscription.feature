@@ -1841,7 +1841,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku2---",
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1852,7 +1852,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode2---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 },
                 {
@@ -1916,7 +1916,7 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 200
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
       # Invalid offer code
     And I have following request payload :
       """
@@ -1932,7 +1932,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku2---",
+                    "sku":"---data:-:env_sku1---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1943,7 +1943,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode2---"
+                        "id": "---data:-:env_offercode1---"
                     }
                 },
                 {
@@ -2008,10 +2008,11 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_invalid_offer_id @regression_
-  Scenario: Partial Response if one of the subscription has invalid offer id
+  Scenario: 3
+
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
       """

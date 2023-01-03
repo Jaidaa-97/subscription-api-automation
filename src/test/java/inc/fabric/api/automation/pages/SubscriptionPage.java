@@ -11,9 +11,8 @@ import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
 import org.apache.poi.ss.formula.functions.T;
 import org.junit.Assert;
-import org.junit.Before;
-
-import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Date;
 
 import java.time.Instant;
 
@@ -275,11 +275,12 @@ public class SubscriptionPage extends BasePage {
         else{
             Offercode= createDiscount(productSku, "POS");
         }
-
+        String planId = "";
+        planId = createPlan(productSku);
         //CREATE_PLAN()
-        updatePropertiesFile(sku,productSku,productId,Offercode);
+        updatePropertiesFile(sku,productSku,productId,Offercode,planId);
     }
-    public void updatePropertiesFile(String sku,String productSku,String productId,String Offercode){
+    public void updatePropertiesFile(String sku, String productSku, String productId, String Offercode, String planId){
         try {
             String fileName="src/test/resources/properties/data.properties";
             PropertiesConfiguration config = new PropertiesConfiguration(fileName);
@@ -289,6 +290,8 @@ public class SubscriptionPage extends BasePage {
                 config.setProperty(CommonUtils.getEnv().toLowerCase() + itemId, productId);
                 String offercode = sku.replace("_sku", "_offercode");
                 config.setProperty(CommonUtils.getEnv().toLowerCase() + offercode, Offercode);
+                String planID = sku.replace("_sku", "_planId");
+                config.setProperty(CommonUtils.getEnv().toLowerCase() + planID, planId);
             }
             config.save();
         } catch (ConfigurationException e) {
@@ -297,9 +300,13 @@ public class SubscriptionPage extends BasePage {
     }
     public String createDiscount(String productSku, String channel){
         commonPage.getEndPoint("/data-subscription/v1/subscriptionDiscount");
+        TimeZone.setDefault( TimeZone.getTimeZone("UTC"));
+        Date startDate = new Date(System.currentTimeMillis() + 60000);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String  strDate = formatter.format(startDate);
         String payload = "{\n  " +
                 "   \"validity\": {\n    " +
-                "   \"startDate\": \"2023-01-03T11:50:48.718Z\",\n" +
+                "   \"startDate\": \"" + strDate + "\",\n" +
                 "   \"endDate\": \"2030-04-04T10:18:49.120Z\",\n    " +
                 "   \"applyOnOrders\": [\n      2,\n      3,\n      10\n    ]\n  },\n  " +
                 "   \"message\": \"terms and conditions of the offer\",\n  " +
@@ -370,15 +377,19 @@ public class SubscriptionPage extends BasePage {
     }
     public  void skuInsertPrice(String itemId, String sku){
         commonPage.getPricingEndPoint("/api-price/price/bulk-insert");
+        TimeZone.setDefault( TimeZone.getTimeZone("UTC"));
+        Date startDate = new Date(System.currentTimeMillis() + 60000);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+        String  strDate = formatter.format(startDate);
         String payload = "[\n  " +
                 "   {\n    \"priceListId\": 100000,\n    " +
                 "   \"itemId\":\"" + itemId + "\",\n" +
                 "   \"itemSku\":\"" + sku + "\",\n" +
                 "   \"offers\": [\n      " +
-                    "   {\n        \"kind\": 12,\n        " +
-                    "   \"channel\": 12,\n        " +
-                    "   \"startDate\": \"2022-12-30T13:14:33.009Z\",\n        " +
-                    "   \"endDate\": \"2028-01-11T02:59:51.459Z\",\n        " +
+                "   {\n        \"kind\": 12,\n        " +
+                "   \"channel\": 12,\n        " +
+                "   \"startDate\": \"" + strDate + "\",\n" +
+                    "   \"endDate\": \"2028-01-11T02:59:51.459Z\",\n" +
                     "   \"price\": {\n          " +
                         "   \"base\": 25,\n          " +
                         "   \"sale\": 20,\n          " +
@@ -414,8 +425,25 @@ public class SubscriptionPage extends BasePage {
         commonPage.runPimPostCall();
         basePage.getResponse().then().assertThat().statusCode(200);
     }
-    public void createPlan(){
+    public String createPlan(String productSku){
+        commonPage.getEndPoint("/data-subscription/v1/plan");
+        String payload = "{\n  " +
+                "   \"items\": [\n" +
+                "      {\n" +
+                "          \"sku\":\"" + productSku + "\" \n" +
+                "       }\n" +
+                "    \n" +
+                "   ],\n" +
+                "   \"name\": \" "+ CommonUtils.getRandomNumberFourDigit()+ "\",\n    " +
+                "   \"description\": \"description\",\n  " +
+                "   \"frequency\": 5,\n" +
+                "    \"frequencyType\": \"Daily\" } \n ";
 
+                commonPage.requestPayload(payload);
+        commonPage.runPimPostCall();
+        basePage.getResponse().then().assertThat().statusCode(200);
+        String planId = basePage.getResponse().then().extract().path("data.id").toString();
+        return planId;
     }
     public void createBulkSubscription(int noOfSubscriptions) {
         commonPage.getEndPoint("/data-subscription/v1/subscriptions/bulk");
@@ -570,7 +598,7 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
+                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
                     "            \"quantity\": 2,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
@@ -590,7 +618,7 @@ public class SubscriptionPage extends BasePage {
                     "            },\n" +
              //       "            \"offsetDays\": 2,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode1")+"\"\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
              //       "                \"source\": \"PDP\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
