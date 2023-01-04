@@ -252,8 +252,8 @@ public class SubscriptionPage extends BasePage {
                 "   \"itemType\": \"Item\",\n" +
                 "   \"title\": \"test\",\n" +
                 "    \"attributes\": {\n" +
-                "       \"isSubscription\": \""+isSubscription+"\",\n" +
-                "       \"isDiscontinued\": \""+isDiscontinued+"\",\n" +
+                "       \"isSubscription\": "+isSubscription+",\n" +
+                "       \"isDiscontinued\": "+isDiscontinued+",\n" +
                 "       \"skuSwap\": [\n" +
                 "           \"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_swapproduct") + "\"\n" +
                 "       ]\n" +
@@ -269,11 +269,11 @@ public class SubscriptionPage extends BasePage {
             skuInsertPrice(productId, productSku);
         }
         String Offercode = "";
-        if(!sku.contains("_sku5")) {
-            Offercode= createDiscount(productSku, "COPILOT");
+        if(!sku.contains("_sku2")) {
+            Offercode= createDiscount(productSku, "POS");
         }
         else{
-            Offercode= createDiscount(productSku, "POS");
+            Offercode= createDiscount(productSku, "COPILOT");
         }
         String planId = "";
         planId = createPlan(productSku);
@@ -478,7 +478,6 @@ public class SubscriptionPage extends BasePage {
                 "                        \"frequency\": 5,\n" +
                 "                        \"frequencyType\": \"Daily\"\n" +
                 "                    },\n" +
-//                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
                 "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode1")+"\"\n" +
 //                "                        \"source\": \"PDP\"\n" +
