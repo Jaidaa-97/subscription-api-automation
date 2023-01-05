@@ -91,7 +91,7 @@ Business Need: Discontinue item
     When I get all the orders placed by customer "{SavedValue::customerId}"
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
-    When I discontinued item "---data:-:env_sku2---"
+    When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     And I wait for 10 sec
     When I get the order by id "{SavedValue::orderId}"
@@ -112,14 +112,12 @@ Business Need: Discontinue item
     # Add item in order
     When add item "---data:-:env_sku1---" in order "{SavedValue::orderId}"
     When I discontinued item "---data:-:env_sku2---"
-    Then I see response code 200
-    And I wait for 15 sec
+    Then I see response code 404
     # get order by id
     When I get the order by id "{SavedValue::orderId}"
     Then I see response code 200
-    And I wait for 15 sec
     And I do not see property value "CANCELED" is present in the response property "data.order.status"
-    And I verify 1 records are present in the response against the property "data.order.lineItems"
+    And I verify 2 records are present in the response against the property "data.order.lineItems"
     And I see property value "---data:-:env_sku1---" is present in the response property "data.order.lineItems[0].item.sku"
 
   @error_no_sku_exist @regression_
@@ -134,89 +132,6 @@ Business Need: Discontinue item
     When I run post call
     Then I see response code 404
 
-#    When I have saved property "data.offerCode" as "offerCode"
-##    Given I have created 1 bulk subscription
-#    Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
-#    And I have following request payload :
-#      """
-#          {
-#            "channel": "POS",
-#            "customer": {
-#                "customerReferenceId": "{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}{RandomNumber::4}",
-#                "locale": "en_US",
-#                "email": "custom{RandomNumber::4}@gmail.com",
-#                "firstName": "John",
-#                "lastName": "Doe",
-#                "segment": ["employee", "designer"]
-#            },
-#            "items": [
-#                {
-#                    "sku":"{SavedValue::productSku}",
-#                    "quantity": 2,
-#                    "itemPrice": {
-#                        "price": 100.00,
-#                        "currencyCode": "USD"
-#                    },
-#                    "plan": {
-#                        "frequency": 5,
-#                        "frequencyType": "Daily"
-#                    },
-#                    "offer": {
-#                        "id": "{SavedValue::offerCode}"
-#                    }
-#                }
-#            ],
-#            "shipTo": {
-#                "name": {
-#                    "firstName": "Roger",
-#                    "lastName": "Fang"
-#                },
-#                "streetAddress": {
-#                    "street1": "27 O ST"
-#                },
-#                "phone": {
-#                    "number": "01113370957",
-#                    "kind": "mobile"
-#                },
-#                "city": "BOSTON MA",
-#                "state": "MA",
-#                "postalCode": "2127",
-#                "country": "US"
-#            },
-#            "billTo": {
-#                "name": {
-#                    "firstName": "Roger",
-#                    "lastName": "Fang"
-#                },
-#                "streetAddress": {
-#                    "street1": "27 O ST"
-#                },
-#                "phone": {
-#                    "number": "012323370957",
-#                    "kind": "mobile"
-#                },
-#                "city": "BOSTON MA",
-#                "state": "MA",
-#                "postalCode": "2127",
-#                "country": "US"
-#            },
-#            "paymentDetails": {
-#                "paymentIdentifier": {
-#                    "cardIdentifier": "1234",
-#                    "expiryDate": "04/24"
-#                }
-#            }
-#        }
-#      """
-#    When I run post call
-#    And I wait for 30 sec
-#    Then I see response code 200
-#    When I discontinued item "{SavedValue::productSku}"
-#    Then I see response code 200
-#    When I get all the subscription of an item "{SavedValue::productSku}"
-#    Then I see response code 200
-#    And I see all the subscription of discontinued item gets deactivated
-#    <<<<<<< Updated upstream
 
   @cancel_order_discontinued_item @after_regression_
   Scenario: All future Order should get cancel for order having only 1 lineItem if the sku/item is discontinued
@@ -248,7 +163,7 @@ Business Need: Discontinue item
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
     # Add item in order
-    When add item "---data:-:env_sku2---" in order "{SavedValue::orderId}"
+    When add item "---data:-:env_sku3---" in order "{SavedValue::orderId}"
     When I discontinued item "---data:-:env_sku1---"
     Then I see response code 200
     And I wait for 10 sec
@@ -258,7 +173,8 @@ Business Need: Discontinue item
     And I wait for 15 sec
     And I do not see property value "CANCELED" is present in the response property "data.order.status"
     And I verify 1 records are present in the response against the property "data.order.lineItems"
-#    And I see property value "---data:-:env_sku1---" is present in the response property "data.order.lineItems[0].item.sku"
+    And I see property value "---data:-:env_sku3---" is present in the response property "data.order.lineItems[0].item.sku"
+
   @error_no_sku_exist @regression_
   Scenario: Should not allow to discontinue item which is not even exist
     Given I have endpoint "/data-subscription/v1/subscriptions/discontinued-items"
