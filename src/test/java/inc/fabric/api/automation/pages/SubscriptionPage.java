@@ -496,7 +496,7 @@ public class SubscriptionPage extends BasePage {
                 "                    }\n" +
                 "                },\n" +
                 "                {\n" +
-                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                "                    \"sku\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku3")+"\",\n" +
                 "                    \"quantity\": 2,\n" +
                 "                    \"weight\": 10,\n" +
                 "                    \"weightUnit\": \"lb\",\n" +
@@ -515,7 +515,7 @@ public class SubscriptionPage extends BasePage {
                 "                    },\n" +
 //                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
-                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
+                "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode3")+"\"\n" +
 //                "                        \"source\": \"PDP\"\n" +
                 "                    },\n" +
                 "                    \"shipping\": {\n" +
@@ -597,7 +597,7 @@ public class SubscriptionPage extends BasePage {
                     "    },\n" +
                     "    \"items\": [\n" +
                     "        {\n" +
-                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku2")+"\",\n" +
+                    "            \"sku\":\""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_sku1")+"\",\n" +
                     "            \"quantity\": 2,\n" +
                     "            \"weight\": 10,\n" +
                     "            \"weightUnit\": \"lb\",\n" +
@@ -611,14 +611,11 @@ public class SubscriptionPage extends BasePage {
                     "                \"currencyCode\": \"USD\"\n" +
                     "            },\n" +
                     "            \"plan\": {\n" +
-//                    "                \"id\": \"637359fe13c6ba00087a5c0f\",\n" +
                     "                \"frequency\": 5,\n" +
                     "                \"frequencyType\": \"Daily\"\n" +
                     "            },\n" +
-             //       "            \"offsetDays\": 2,\n" +
                     "            \"offer\": {\n" +
-                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode2")+"\"\n" +
-             //       "                \"source\": \"PDP\"\n" +
+                    "                \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode1")+"\"\n" +
                     "            },\n" +
                     "            \"shipping\": {\n" +
                     "              \"shipmentCarrier\": \"USPS\",\n" +
