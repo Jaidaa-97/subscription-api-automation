@@ -53,6 +53,7 @@ Scenario: remove upsell Item
         """
     When I run post call
     Then I see response code 200
+    And validate schema "/gnc/addItemAsSubscription.json"
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}/remove-items"
     And I have following request payload :
     """

@@ -4,7 +4,7 @@ Business Need: Create Product SKU With Pricing
   @create_sku @regression_
   Scenario: Create Product SKU
     Given I have created sku
-    Then I see property value "---data:-:env_sku4---" is present in the response property "productSku"
+    Then I see property value "---data:-:env_sku1---" is present in the response property "productSku"
     When I have saved property "productSku" as "productSku"
     When I have saved property "itemId.toString()" as "itemId"
     When I have saved post 15minutes datetime property as "dateTime"

@@ -52,6 +52,7 @@ Business Need: Add Item To Order
     """
     When I run post call
     Then I see response code 200
+    And validate schema "/gnc/addItemAsSubscription.json"
 
   @add_item_to_order_as_subscription @regression_ @non_enterprise
   Scenario: add item to order as subscription
@@ -69,8 +70,8 @@ Business Need: Add Item To Order
     {
     "lineItems": [
         {
-           "subscriptionId": "{SavedValue::subId}",
-           "item": {
+            "subscriptionId": "{SavedValue::subId}",
+            "item": {
                 "sku": "---data:-:env_sku1---",
                 "quantity": 2,
                 "weight": 10,
@@ -95,13 +96,13 @@ Business Need: Add Item To Order
                 "currencyCode": "USD"
             },
             "customAttributes": {
-                "storeId": "1234567890",
-                "associateId": "jitu",
-                "trackingUrl": "http://google.com"
+                "storeId": "60cb07fc20387b000821c5c3",
+                "associateId": 1,
+                "trackingUrl": "609436d21baded0008945b05"
             }
         }
     ]
-    }
+}
 
     """
     When I run post call

@@ -2126,7 +2126,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku2---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2196,7 +2196,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "subscriptions not allowed on this sku" is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku2---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_skuId_not_valid @regression_
   Scenario: Verify partial response when skuId is not valid

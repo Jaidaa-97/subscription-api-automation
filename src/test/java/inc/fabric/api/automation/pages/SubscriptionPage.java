@@ -229,7 +229,7 @@ public class SubscriptionPage extends BasePage {
     public void createSKU(){
             commonPage.getPimEndPoint("/api-pim-external/product");
             String payload = "{\n" +
-                    "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku") + "\",\n" +
+                    "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku1") + "\",\n" +
                     "   \"itemType\": \"Item\",\n" +
                     "   \"title\": \"test\",\n" +
                     "    \"attributes\": {\n" +

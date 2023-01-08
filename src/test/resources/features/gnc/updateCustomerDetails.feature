@@ -153,7 +153,7 @@ Business Need: Update Customer details
       When I have saved property "data.subscriptions[0].id" as "subId"
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
       And I wait for 10 sec
-      Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
+      Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
       When I run get call api
       Then I see response code 200
       When I have saved property "data.orders[0].id" as "orderId"
@@ -181,7 +181,7 @@ Business Need: Update Customer details
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     And I wait for 10 sec
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
     When I have saved property "data.orders[0].id" as "orderId"
@@ -291,7 +291,7 @@ Business Need: Update Customer details
       Given I have created 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
       And I wait for 10 sec
-      Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
+      Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
       When I run get call api
       Then I see response code 200
       And I have saved property "data.orders[0].id" as "orderId"
@@ -343,7 +343,7 @@ Business Need: Update Customer details
     Given I have created 1 bulk subscription
      When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     And I wait for 10 sec
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
@@ -404,7 +404,7 @@ Business Need: Update Customer details
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
     And I wait for 10 sec
-    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders?offset=t"
+    Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200
     And I have saved property "data.orders[0].id" as "orderId"
