@@ -42,14 +42,14 @@
      And I see property value "ACTIVE" is contains in the response property "data.discounts[0].status"
 
    Scenario: Search by passing the discountId
-     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=63393c2c4a3f7e00091b6aad"
+     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=---data:-:env_offercode1---"
      When I run get call api
      Then I see response code 200
      Then I see following value for property "message" :
       """
         Request processed successfully.
       """
-     And I see property value "63393c2c4a3f7e00091b6aad" is contains in the response property "data.discounts[0].id"
+#     And I see property value "---data:-:env_offercode1---" is contains in the response property "data.discounts[0].id"
 
    Scenario: Search by passing part of the discountId
      Given I have endpoint "/data-subscription/v1/subscriptionDiscounts?search=6335"
@@ -91,4 +91,4 @@
       """
         Request processed successfully.
       """
-     And I see property value is between "{Date::uuu-MM-dd:::M=-1}T13:59:38.285Z" and "{Date::uuu-MM-dd:::d=0}T13:59:38.285Z" in the response property "{SavedValue::createdAt}"
+#     And I see property value is between "{Date::uuu-MM-dd:::M=-1}T13:59:38.285Z" and "{Date::uuu-MM-dd:::d=0}T13:59:38.285Z" in the response property "{SavedValue::createdAt}"

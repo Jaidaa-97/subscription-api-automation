@@ -28,7 +28,7 @@ Business Need: Replace Item in Subscription
         """
     When I run post call
     Then I see response code 200
-    And I wait for 30 sec
+    And I wait for 10 sec
     # sawp again
     Given I have endpoint "/data-subscription/v1/subscriptions/replace-items"
     And I have following request payload :

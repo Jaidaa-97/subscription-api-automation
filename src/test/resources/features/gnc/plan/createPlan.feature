@@ -24,21 +24,16 @@ Business Need: Create Plan
 
   @create_plan_with_sku_without_price @regression_
   Scenario: Creating a plan with SKU that hasn't price
-    Given I have created sku
-    Then I see property value "---data:-:env_sku4---" is present in the response property "productSku"
-    When I have saved property "productSku" as "productSku"
-    When I have saved property "itemId.toString()" as "itemId"
-    When I have saved post 15minutes datetime property as "dateTime"
     Given I have endpoint "/data-subscription/v1/plan"
     And I have following request payload :
     """
     {
     "items": [
         {
-            "sku": "{SavedValue::productSku}"
+            "sku": "---data:-:env_swapproduct---"
         }
     ],
-    "name": "plan{RandomNumber::4}_{SavedValue::productSku}",
+    "name": "plan{RandomNumber::4}_---data:-:env_swapproduct---",
     "description": "test plan description",
     "frequency": "5",
     "frequencyType": "Daily"
@@ -48,59 +43,23 @@ Business Need: Create Plan
     Then I see response code 200
     Then I see property value "ACTIVE" is present in the response property "data.status"
 
+
   @create_plan_with_sku_not_allowed @regression_
   Scenario: Creating a plan with SKU that is not allowed to be subscribed
-    When I have saved static property "SKU_{RandomNumber::4}" as "productSku"
-    Given I have created not allowed to be subscribed sku"{SavedValue::productSku}"
-    Then I see property value "{SavedValue::productSku}" is present in the response property "productSku"
-    When I have saved property "productSku" as "productSku"
-    When I have saved property "itemId.toString()" as "itemId"
-    When I have saved post 15minutes datetime property as "dateTime"
-    Given I have pricing endpoint "/api-price/price/bulk-insert"
-    And I have following request payload :
-    """
-    [
-      {
-      "priceListId": 100000,
-      "itemId": {SavedValue::itemId},
-      "itemSku": "{SavedValue::productSku}",
-        "offers": [
-          {
-            "kind": 12,
-            "channel": 12,
-            "startDate": "{SavedValue::dateTime}",
-            "endDate": "2028-01-11T02:59:51.459Z",
-            "price": {
-              "base": 80,
-              "sale": 70,
-              "cost": 60,
-              "currency": "USD"
-            },
-            "additionalAttributes": [
-            {}
-            ]
-          }
-        ]
-      }
-    ]
-    """
-    When I run pricing post call
-    Then I see response code 200
-    And I wait for 10 sec
     Given I have endpoint "/data-subscription/v1/plan"
     And I have following request payload :
     """
-    {
-    "items": [
-        {
-            "sku": "{SavedValue::productSku}"
-        }
-    ],
-    "name": "plan_{SavedValue::productSku}",
-    "description": "test plan description",
-    "frequency": "5",
-    "frequencyType": "Daily"
-    }
+      {
+          "items": [
+              {
+                  "sku":"---data:-:env_notAvailableSubscription---"
+              }
+          ],
+          "name": "plan_{RandomNumber::4}",
+          "description": "description",
+          "frequency": "5",
+          "frequencyType": "Daily"
+      }
     """
     When I run post call
     Then I see response code 200
@@ -150,10 +109,29 @@ Business Need: Create Plan
 
   @get_plan_by_id @regression_
   Scenario: Get Plan by its id
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan"
+    And I have following request payload :
+    """
+    {
+    "items": [
+        {
+            "sku": "---data:-:env_sku1---"
+        }
+    ],
+    "name": "plan{RandomNumber::4}_---data:-:env_sku1---",
+    "description": "test plan description",
+    "frequency": "5",
+    "frequencyType": "Daily"
+    }
+    """
+    When I run post call
+    Then I see response code 200
+    Given I have saved property "data.id" as "planId"
+    Then I see property value "ACTIVE" is present in the response property "data.status"
+    Given I have endpoint "/data-subscription/v1/plan/{SavedValue::planId}"
     When I run get call api
     Then I see response code 200
-    Then I see property value "---data:-:env_planid---" is present in the response property "data.id"
+    Then I see property value "{SavedValue::planId}" is present in the response property "data.id"
     Then I see property value "ACTIVE" is present in the response property "data.status"
 
   @create_discount_pass_invalid_id @regression_
@@ -165,7 +143,7 @@ Business Need: Create Plan
 
   @updating_the_plan @regression_
   Scenario: Updating the plan
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -178,7 +156,7 @@ Business Need: Create Plan
 
   @we_can_just_update_the_frequency_for_plan @regression_
   Scenario: We can just update the frequency for the plan
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -188,7 +166,7 @@ Business Need: Create Plan
     When I run patch call
     Then I see response code 200
     Then I see property value 3 is present in the response property "data.frequency"
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -242,7 +220,7 @@ Business Need: Create Plan
 
   @check_frequency_and_type_after_updating_plan @regression_
   Scenario: Check the frequency and frequency type after Updating them by updating the plan itself
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -255,7 +233,7 @@ Business Need: Create Plan
     Then I see property value 5 is present in the response property "data.frequency"
     Then I see property value "Daily" is present in the response property "data.frequencyType"
 
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     When I run get call api
     Then I see response code 200
     Then I see property value 5 is present in the response property "data.frequency"
@@ -263,7 +241,7 @@ Business Need: Create Plan
 
   @check_frequency_on_upcoming_orders
   Scenario: Check the frequency and frequency type for the upcoming orders after updating the frequency and frequency type
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -307,7 +285,7 @@ Business Need: Create Plan
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "---data:-:env_planid---"
+                        "id": "---data:-:env_planId1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -380,7 +358,7 @@ Business Need: Create Plan
     Then I see property value 3 is present in the response property "data.subscription.plan.frequency"
     Then I see property value "Weekly" is present in the response property "data.subscription.plan.frequencyType"
     #revert it back to 5 daily frequency
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -395,7 +373,7 @@ Business Need: Create Plan
 
   @check_scheduled_date_on_upcoming_orders
   Scenario: Check the scheduled date for the upcoming orders after updating the frequency and frequency type
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {
@@ -439,7 +417,7 @@ Business Need: Create Plan
                         "currencyCode": "USD"
                     },
                     "plan": {
-                        "id": "---data:-:env_planid---"
+                        "id": "---data:-:env_planId1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -514,7 +492,7 @@ Business Need: Create Plan
     When I have saved property "data.orders[0].id" as "orderId"
     Then I see property value "{Date::uuu-MM-dd:::d=21}" is contains in the response property "data.orders[0].scheduledDate"
     #revert it back to 5 daily frequency
-    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planid---"
+    Given I have endpoint "/data-subscription/v1/plan/---data:-:env_planId1---"
     And I have following request payload :
       """
       {

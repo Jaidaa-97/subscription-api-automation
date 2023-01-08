@@ -229,7 +229,7 @@ public class SubscriptionPage extends BasePage {
     public void createSKU(){
             commonPage.getPimEndPoint("/api-pim-external/product");
             String payload = "{\n" +
-                    "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku4") + "\",\n" +
+                    "   \"productSku\":\"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_sku") + "\",\n" +
                     "   \"itemType\": \"Item\",\n" +
                     "   \"title\": \"test\",\n" +
                     "    \"attributes\": {\n" +
@@ -357,9 +357,10 @@ public class SubscriptionPage extends BasePage {
         if (!checkSku) {
             createSKUWithArgs("_sku3",true,false);
         }
-        checkSku = getSKU("_sku4");
+        //_skuWOprice
+        checkSku = getSKU("_skuWOprice");
         if (!checkSku) {
-            createSKUWithArgs("_sku4",true,false);
+            createSKUWithArgs("_skuWOprice",true,false);
         }
         checkSku = getSKU("_discontinuedSKU");
         if (!checkSku) {
@@ -369,11 +370,7 @@ public class SubscriptionPage extends BasePage {
         if (!checkSku) {
             createSKUWithArgs("_notAvailableSubscription",false,false);
         }
-        //_skuWOprice
-        checkSku = getSKU("_skuWOprice");
-        if (!checkSku) {
-            createSKUWithArgs("_notAvailableSubscription",false,false);
-        }
+
     }
     public  void skuInsertPrice(String itemId, String sku){
         commonPage.getPricingEndPoint("/api-price/price/bulk-insert");
