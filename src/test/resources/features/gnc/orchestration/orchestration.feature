@@ -208,6 +208,7 @@ Business Need: Orchestration Response
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
     Then I see response code 200
+    And I wait for 30 sec
     Then I see property value "CANCELED" is present in the response property "data.order.status"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api

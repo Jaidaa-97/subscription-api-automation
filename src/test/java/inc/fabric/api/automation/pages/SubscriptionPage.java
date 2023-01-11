@@ -233,8 +233,8 @@ public class SubscriptionPage extends BasePage {
                     "   \"itemType\": \"Item\",\n" +
                     "   \"title\": \"test\",\n" +
                     "    \"attributes\": {\n" +
-                    "       \"isSubscription\": \"true\",\n" +
-                    "       \"isDiscontinued\": \"false\",\n" +
+                    "       \"isSubscription\": true,\n" +
+                    "       \"isDiscontinued\": false,\n" +
                     "       \"skuSwap\": [\n" +
                     "           \"" + FileHandler.readPropertyFile("data.properties", CommonUtils.getEnv().toLowerCase() + "_swapproduct") + "\"\n" +
                     "       ]\n" +
@@ -510,7 +510,6 @@ public class SubscriptionPage extends BasePage {
                 "                        \"frequency\": 5,\n" +
                 "                        \"frequencyType\": \"Daily\"\n" +
                 "                    },\n" +
-//                "                    \"offsetDays\": 10,\n" +
                 "                    \"offer\": {\n" +
                 "                        \"id\": \""+FileHandler.readPropertyFile("data.properties",CommonUtils.getEnv().toLowerCase()+"_offercode3")+"\"\n" +
 //                "                        \"source\": \"PDP\"\n" +

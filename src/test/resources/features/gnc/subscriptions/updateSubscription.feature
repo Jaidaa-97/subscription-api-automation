@@ -6,6 +6,7 @@ Business Need: Update Subscription
   that the orders also gets updated
     # Create subscription
     Given I have created bulk subscription
+
     And I have saved property "data.subscriptions[0].id" as "subId1"
     And I have saved property "data.subscriptions[1].id" as "subId2"
 #    When I have saved static property "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}" as "customerReferenceId"

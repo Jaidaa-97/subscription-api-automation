@@ -698,6 +698,40 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
+                    "sku":"---data:-:env_sku3---",
+                    "quantity": 2,
+                    "weight": 10,
+                    "weightUnit": "lb",
+                    "itemPrice": {
+                        "price": 100.00,
+                        "currencyCode": "USD"
+                    },
+                    "tax": {
+                        "taxCode": "FR020000",
+                        "taxAmount": 10.00,
+                        "currencyCode": "USD"
+                    },
+                    "plan": {
+                        "frequency": 5,
+                        "frequencyType": "Daily"
+                    },
+                    "offer": {
+                        "id": "---data:-:env_offercode3---"
+                    },
+                    "shipping": {
+                      "shipmentCarrier": "USPS",
+                      "shipmentMethod": "Ground",
+                      "shipmentInstructions": "",
+                      "taxCode": "SHP020000",
+                      "shippingAmount": 10.00,
+                      "taxAmount": 1.00,
+                      "currencyCode": "USD"
+                    },
+                    "expiry": {
+                        "billingCycles": 10
+                    }
+                },
+                {
                     "sku":"---data:-:env_sku1---",
                     "quantity": 2,
                     "weight": 10,
@@ -717,40 +751,6 @@ Business Need: Create Bulk Subscription
                     },
                     "offer": {
                         "id": "---data:-:env_offercode1---"
-                    },
-                    "shipping": {
-                      "shipmentCarrier": "USPS",
-                      "shipmentMethod": "Ground",
-                      "shipmentInstructions": "",
-                      "taxCode": "SHP020000",
-                      "shippingAmount": 10.00,
-                      "taxAmount": 1.00,
-                      "currencyCode": "USD"
-                    },
-                    "expiry": {
-                        "billingCycles": 10
-                    }
-                },
-                {
-                    "sku":"---data:-:env_sku2---",
-                    "quantity": 2,
-                    "weight": 10,
-                    "weightUnit": "lb",
-                    "itemPrice": {
-                        "price": 100.00,
-                        "currencyCode": "USD"
-                    },
-                    "tax": {
-                        "taxCode": "FR020000",
-                        "taxAmount": 10.00,
-                        "currencyCode": "USD"
-                    },
-                    "plan": {
-                        "frequency": 5,
-                        "frequencyType": "Daily"
-                    },
-                    "offer": {
-                        "id": "---data:-:env_offercode2---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -838,7 +838,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "id":"---data:-:env_item1---",
+                    "id":"---data:-:env_item3---",
                     "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -856,7 +856,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -977,7 +977,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -988,7 +988,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 }
             ],
@@ -1056,7 +1056,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1067,7 +1067,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 }
             ],
@@ -1203,7 +1203,7 @@ Business Need: Create Bulk Subscription
             "customerId": "639adc09e8e82800087f971c",
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1840,7 +1840,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1851,7 +1851,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 },
                 {
@@ -1915,7 +1915,7 @@ Business Need: Create Bulk Subscription
     When I run post call
     Then I see response code 200
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku3---" is present in the response property "data.subscriptions[0].item.sku"
       # Invalid offer code
     And I have following request payload :
       """
@@ -1931,7 +1931,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -1942,11 +1942,11 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 },
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2007,7 +2007,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "offer code is not valid" is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku3---" is present in the response property "data.subscriptions[0].item.sku"
 
   @partial_response_invalid_offer_id @regression_
   Scenario:Verify partial response invalid offer code
@@ -2026,7 +2026,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2037,11 +2037,11 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 },
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2104,9 +2104,9 @@ Business Need: Create Bulk Subscription
       """
           Request processed with partial success
       """
-    Then I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
+    Then I see property value "---data:-:env_sku3---" is present in the response property "data.subscriptions[0].item.sku"
     Then I see property value "INVALID_OFFERCODE" is present in the response property "data.errors[0].errorCode"
-    Then I see property value "---data:-:env_sku1---" is present in the response property "data.errors[0].item.sku"
+    Then I see property value "---data:-:env_sku3---" is present in the response property "data.errors[0].item.sku"
 
 
   @partial_response_skuId_not_allowed_to_subscription @regression_
@@ -2215,7 +2215,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "itemPrice": {
                         "price": 100.00,
@@ -2226,7 +2226,7 @@ Business Need: Create Bulk Subscription
                         "frequencyType": "Daily"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     }
                 },
                 {
@@ -2291,7 +2291,7 @@ Business Need: Create Bulk Subscription
     Then I see response code 200
     And I see property value "Request processed with partial success" is present in the response property "message"
     And I see property value "Product with the SKU ID does not exist." is present in the response property "data.errors[0].errorMessage"
-    And I see property value "---data:-:env_sku1---" is present in the response property "data.subscriptions[0].item.sku"
+    And I see property value "---data:-:env_sku3---" is present in the response property "data.subscriptions[0].item.sku"
 
   @no_subscription_discontinued_sku @regression_
   Scenario: Subscription should not be created for discontinued sku
@@ -2544,7 +2544,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2563,7 +2563,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": {SavedValue::offsetDays},
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",
@@ -2655,7 +2655,7 @@ Business Need: Create Bulk Subscription
             },
             "items": [
                 {
-                    "sku":"---data:-:env_sku1---",
+                    "sku":"---data:-:env_sku3---",
                     "quantity": 2,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -2665,10 +2665,10 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 5,
                     "plan": {
-                        "id": "---data:-:env_planId1---"
+                        "id": "---data:-:env_planId3---"
                     },
                     "offer": {
-                        "id": "---data:-:env_offercode1---"
+                        "id": "---data:-:env_offercode3---"
                     },
                     "tax": {
                         "taxCode": "FR020000",
