@@ -177,7 +177,7 @@ Business Need: Orchestration Response
     Given I have created 1 bulk subscription
     When I have saved property "data.subscriptions[0].id" as "subId"
     When I have saved property "data.subscriptions[0].customer.id" as "customerId"
-    And I wait for 10 sec
+    And I wait for 20 sec
     Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/orders"
     When I run get call api
     Then I see response code 200

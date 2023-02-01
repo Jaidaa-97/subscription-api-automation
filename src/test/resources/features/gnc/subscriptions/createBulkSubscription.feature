@@ -872,7 +872,7 @@ Business Need: Create Bulk Subscription
                     }
                 },
                 {
-                    "id":"---data:-:env_item2---",
+                    "id":"---data:-:env_item1---",
                     "quantity": 1,
                     "weight": 10,
                     "weightUnit": "lb",
@@ -891,7 +891,7 @@ Business Need: Create Bulk Subscription
                     },
                     "offsetDays": 10,
                     "offer": {
-                        "id": "---data:-:env_offercode2---"
+                        "id": "---data:-:env_offercode1---"
                     },
                     "shipping": {
                       "shipmentCarrier": "USPS",

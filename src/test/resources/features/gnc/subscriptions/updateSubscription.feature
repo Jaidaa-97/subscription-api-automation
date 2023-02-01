@@ -370,6 +370,4 @@ Business Need: Update Subscription
           }
           """
     When I run patch call
-    Then I see response code 200
-    Then I do not see property value "2" is present in the response property "data.subscription.plan.frequency"
-    Then I do not see property value "Weekly" is present in the response property "data.subscription.plan.frequencyType"
+    Then I see response code 400

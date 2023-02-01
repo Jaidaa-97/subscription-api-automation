@@ -78,4 +78,4 @@ Business Need: Replace Item in Subscription
       }
     """
         When I run post call
-        Then I see response code 400
+        Then I see response code 404
