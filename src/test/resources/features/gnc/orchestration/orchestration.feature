@@ -70,7 +70,11 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "Invalid errorCode or errorMsg" is present in the response property "data[0].status"
-#    Then I see property value "Cannot destructure property 'status' of '(intermediate value)' as it is null." is present in the response property "data[0].error"
+    Then validate schema "/gnc/orchestration.json"
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "CANCELED" is present in the response property "data.order.status"
 
   @Invalid_message @regression_
   Scenario: Enter Invalid message
@@ -208,8 +212,8 @@ Business Need: Orchestration Response
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
     Then I see response code 200
-    And I wait for 30 sec
-    Then I see property value "CANCELED" is present in the response property "data.order.status"
+    And I wait for 20 sec
+    Then I see property value "FAILED" is present in the response property "data.order.status"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
     Then I see response code 200
@@ -321,7 +325,7 @@ Business Need: Orchestration Response
     Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
     When I run get call api
     Then I see response code 200
-    And I wait for 30 sec
+    And I wait for 20 sec
     Then I see property value "CANCELED" is present in the response property "data.order.status"
     Given I have endpoint "/data-subscription/v1/subscriptions/{SavedValue::subId}"
     When I run get call api
@@ -2108,6 +2112,11 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "CANCELED" is present in the response property "data[0].status"
+    Then validate schema "/gnc/orchestration.json"
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "CANCELED" is present in the response property "data.order.status"
 
   @Low_Inventory @regression_
   Scenario: Low Inventory

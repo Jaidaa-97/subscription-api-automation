@@ -14,7 +14,7 @@ Business Need: Get Subscription
                 "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "customer{RandomNumber::4}@gmail.com",
-                "contactNumber": "+91 3333709568",
+                "contactNumber": "453534543544",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee"],
@@ -152,7 +152,7 @@ Business Need: Get Subscription
     Then I see response code 200
     And I see property value "en_US" is present in the response property "data.subscription.customer.locale"
 #    And I see property value "{SavedValue::customerEmail}" is present in the response property "data.subscription.customer.email"
-    And I see property value "+91 3333709568" is present in the response property "data.subscription.customer.contactNumber"
+    And I see property value "453534543544" is present in the response property "data.subscription.customer.contactNumber"
     And I see property value "John" is present in the response property "data.subscription.customer.firstName"
     And I see property value "Doe" is present in the response property "data.subscription.customer.lastName"
     And I see property value "employee" is present in the response property "data.subscription.customer.segment[0]"

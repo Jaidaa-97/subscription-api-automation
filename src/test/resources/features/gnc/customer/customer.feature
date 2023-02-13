@@ -10,7 +10,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
         "locale": "fr_CAB",
         "email": "custom{RandomNumber::4}@gmail.com",
-        "contactNumber": "+92 3333709568",
+        "contactNumber": "913333709568",
         "firstName": "Customer1F",
         "lastName": "Customer1L",
         "middleName":"JJ",
@@ -34,7 +34,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
         "locale": "fr_CAB",
         "email": "custom{RandomNumber::4}@gmail.com",
-        "contactNumber": "+92 3333709568",
+        "contactNumber": "913333709568",
         "firstName": "Customer1F",
         "lastName": "Customer1L",
         "middleName":"JJ",
@@ -182,7 +182,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "custom{RandomNumber::4}@gmail.com",
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "firstName": "JohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohn",
           "lastName": "Doe",
           "middleName":"JJ",
@@ -206,7 +206,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "custom{RandomNumber::4}@gmail.com",
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "lastName": "JohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohnJohn",
           "firstName": "Doe",
           "middleName":"JJ",
@@ -230,7 +230,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "customercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomercustomer@gmail.com",
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "lastName": "John",
           "firstName": "Doe",
           "middleName":"JJ",
@@ -254,7 +254,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "omer@mail.com",
-          "contactNumber": "+92 333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568",
+          "contactNumber": "91333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568333370956833337095683333709568",
           "lastName": "John",
           "firstName": "Doe",
           "middleName":"JJ",
@@ -266,7 +266,7 @@ Business Need: Create Customer
     Then I see response code 400
     Then I see following value for property "message" :
       """
-        "contactNumber" length must be less than or equal to 50 characters long
+        "contactNumber" length must be less than or equal to 15 characters long
       """
 
   @verify_max_length_segment @regression_
@@ -278,7 +278,7 @@ Business Need: Create Customer
         "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": "fr_CAB",
           "email": "cmer@mail.com",
-          "contactNumber": "+92 234342342424",
+          "contactNumber": "913333709568",
           "lastName": "John",
           "firstName": "Doe",
           "middleName":"JJ",
@@ -302,7 +302,7 @@ Business Need: Create Customer
           "customerReferenceId": 12,
           "locale": "fr_CAB",
           "email": "custom{RandomNumber::4}@gmail.com",
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "firstName": "John",
           "lastName": "Doe",
           "middleName":"JJ",
@@ -327,10 +327,10 @@ Business Need: Create Customer
     And I have following request payload :
     """
     {
-          "customerReferenceId": "dzdc434345",
+          "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
           "locale": 11,
           "email": "custom{RandomNumber::4}@gmail.com",
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "firstName": "John",
           "lastName": "Doe",
           "middleName":"JJ",
@@ -358,7 +358,7 @@ Business Need: Create Customer
           "customerReferenceId": "dzdc434345",
           "locale": "fr_fab",
           "email": 21,
-          "contactNumber": "+92 3333709568",
+          "contactNumber": "913333709568",
           "firstName": "John",
           "lastName": "Doe",
           "middleName":"JJ",

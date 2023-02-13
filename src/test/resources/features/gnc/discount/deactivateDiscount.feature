@@ -1,6 +1,5 @@
 @v2 @deactivate_sub_discount
   Business Need: Deactivate Sub Discount
-
   @deactivate_discount @regression_ @non_enterprise
   Scenario: Deactivate Discount
     Given I have endpoint "/data-subscription/v1/subscriptionDiscount"
@@ -21,7 +20,7 @@
           "amount":1
        },
        "skus":[
-          "PROTEIN_20"
+          "---data:-:env_sku1---"
        ],
        "categories":[
           "product category 1"
@@ -88,7 +87,7 @@
       }
     """
     And I run post call
-    Then I see response code 200
+    Then I see response code 400
     Given I have endpoint "/data-subscription/v1/subscriptionDiscounts/deactivate/622748997a95140009cf1ad9"
     And I run patch call
     Then I see response code 404

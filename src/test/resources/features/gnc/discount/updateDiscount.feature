@@ -71,13 +71,13 @@
     """
                 {
                   "skus":[
-              "PROTEIN_20"
+              "PROTEIN_90"
               ]
                 }
         """
     When I run put call
     Then I see response code 200
-    Then I see property value "PROTEIN_20" is present in the response property "data.skus[0]"
+    Then I see property value "PROTEIN_90" is present in the response property "data.skus[0]"
         # Update categories
     And I have following request payload :
     """

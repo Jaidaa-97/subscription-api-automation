@@ -13,7 +13,7 @@ Business Need: Create Bulk Subscription
 #                    "customerReferenceId": "606f01f441b8fc0008529916",
 #                    "locale": "en_US",
 #                    "email": "custom{RandomNumber::4}@gmail.com",
-#                    "contactNumber": "+92 3333709568",
+#                    "contactNumber": "913333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
 #                    "segment": ["employee"],
@@ -159,7 +159,7 @@ Business Need: Create Bulk Subscription
 #                "customer": {
 #                    "locale": "en_US",
 #                    "email": "custom{RandomNumber::4}@gmail.com",
-#                    "contactNumber": "+92 3333709568",
+#                    "contactNumber": "913333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
 #                    "segment": ["employee"],
@@ -308,7 +308,7 @@ Business Need: Create Bulk Subscription
 #                "customer": {
 #                    "customerReferenceId": "606f01f441b8fc0008529916",
 #                    "email": "custom{RandomNumber::4}@gmail.com",
-#                    "contactNumber": "+92 3333709568",
+#                    "contactNumber": "913333709568",
 #                    "firstName": "John",
 #                    "lastName": "Doe",
 #                    "segment": ["employee"],
@@ -457,7 +457,7 @@ Business Need: Create Bulk Subscription
 #    "customer": {
 #        "customerReferenceId": "606f01f441b8fc0008529954",
 #        "locale": "en_US",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
 #        "segment": ["employee"],
@@ -604,7 +604,7 @@ Business Need: Create Bulk Subscription
 #        "customerReferenceId": "606f01f441b8fc0008529954",
 #        "locale": "en_US",
 #        "email": "jitendra.pisal@mail.com",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "lastName": "Doe",
 #        "segment": ["employee"],
 #        "employeeId": "1"
@@ -750,7 +750,7 @@ Business Need: Create Bulk Subscription
 #        "customerReferenceId": "606f01f441b8fc0008529954",
 #        "locale": "en_US",
 #        "email": "jitendra.pisal@mail.com",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "firstName": "John",
 #        "segment": ["employee"],
 #        "employeeId": "1"
@@ -899,7 +899,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -1046,7 +1046,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -1193,7 +1193,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -1343,7 +1343,7 @@ Business Need: Create Bulk Subscription
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
 #        "email": "custom{RandomNumber::4}@gmail.com",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
 #        "segment": ["employee"],
@@ -1570,7 +1570,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529916",
 #                "locale": "en_US",
 #                "email": "custom{RandomNumber::4}@gmail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -1723,7 +1723,7 @@ Business Need: Create Bulk Subscription
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
 #        "email": "custom{RandomNumber::4}@gmail.com",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
 #        "segment": ["employee"],
@@ -1870,7 +1870,7 @@ Business Need: Create Bulk Subscription
 #        "customerReferenceId": "606f01f441b8fc0008529916",
 #        "locale": "en_US",
 #        "email": "custom{RandomNumber::4}@gmail.com",
-#        "contactNumber": "+92 3333709568",
+#        "contactNumber": "913333709568",
 #        "firstName": "John",
 #        "lastName": "Doe",
 #        "segment": ["employee"],
@@ -2021,7 +2021,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+91 3333709568",
+#                "contactNumber": "453534543544",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -2161,7 +2161,7 @@ Business Need: Create Bulk Subscription
 #    Then I see response code 200
 #    And I see property value "en_US" is present in the response property "data.subscription.customer.locale"
 #    And I see property value "jitendra.pisal@mail.com" is present in the response property "data.subscription.customer.email"
-#    And I see property value "+91 3333709568" is present in the response property "data.subscription.customer.contactNumber"
+#    And I see property value "453534543544" is present in the response property "data.subscription.customer.contactNumber"
 #    And I see property value "John" is present in the response property "data.subscription.customer.firstName"
 #    And I see property value "Doe" is present in the response property "data.subscription.customer.lastName"
 #    And I see property value "employee" is present in the response property "data.subscription.customer.segment[0]"
@@ -2180,7 +2180,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -2333,7 +2333,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -2482,7 +2482,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -2631,7 +2631,7 @@ Business Need: Create Bulk Subscription
 #                "customerReferenceId": "606f01f441b8fc0008529954",
 #                "locale": "en_US",
 #                "email": "jitendra.pisal@mail.com",
-#                "contactNumber": "+92 3333709568",
+#                "contactNumber": "913333709568",
 #                "firstName": "John",
 #                "lastName": "Doe",
 #                "segment": ["employee"],
@@ -2830,7 +2830,7 @@ Business Need: Create Bulk Subscription
                       "street2": "Hindu sena marg"
                   },
                   "phone": {
-                      "number": "+91 3333709512"
+                      "number": "913333709568"
                   },
                   "city": "Pune",
                   "state": "MH",
@@ -2956,7 +2956,7 @@ Business Need: Create Bulk Subscription
                       "street2": "Hindu sena marg"
                   },
                   "phone": {
-                      "number": "+91 3333709512"
+                      "number": "913333709568"
                   },
                   "city": "Pune",
                   "state": "MH",
@@ -3117,7 +3117,7 @@ Business Need: Create Bulk Subscription
 #                          "street2": "Hindu sena marg"
 #                      },
 #                      "phone": {
-#                          "number": "+91 3333709512"
+#                          "number": "913333709568"
 #                      },
 #                      "city": "Pune",
 #                      "state": "MH",
@@ -3135,7 +3135,7 @@ Business Need: Create Bulk Subscription
 #                      "street2": "Hindu sena marg"
 #                  },
 #                  "phone": {
-#                      "number": "+91 3333709512"
+#                      "number": "913333709568"
 #                  },
 #                  "city": "Pune",
 #                  "state": "MH",
@@ -3285,7 +3285,7 @@ Business Need: Create Bulk Subscription
 #                    "customerReferenceId": "c2st83",
 #                    "locale": "en_US",
 #                    "email": "shubham@mail.com",
-#                    "contactNumber": "+91 3333709568",
+#                    "contactNumber": "453534543544",
 #                    "firstName": "shubham",
 #                    "lastName": "Pisal",
 #                    "segment": ["employee"],
@@ -3401,7 +3401,7 @@ Business Need: Create Bulk Subscription
 #                    "customerReferenceId": "c2st83",
 #                    "locale": "en_US",
 #                    "email": "shubham@mail.com",
-#                    "contactNumber": "+91 3333709568",
+#                    "contactNumber": "453534543544",
 #                    "firstName": "shubham",
 #                    "lastName": "Pisal",
 #                    "segment": ["employee"],
@@ -3556,7 +3556,7 @@ Business Need: Create Bulk Subscription
                 "customerReferenceId": "606f01f441b8f{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
+                "contactNumber": "913333709568",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee"],
@@ -3726,7 +3726,7 @@ Business Need: Create Bulk Subscription
                 "customerReferenceId": "606f01f441b8f{RandomNumber::4}{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "jitendra.pisal@mail.com",
-                "contactNumber": "+92 3333709568",
+                "contactNumber": "913333709568",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee"],

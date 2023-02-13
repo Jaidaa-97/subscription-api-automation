@@ -3,7 +3,7 @@
 
     @update_shipping @regression_
     Scenario: update shipping
-      Given I have created 1 bulk subscription
+      Given I have crea ted 1 bulk subscription
       When I have saved property "data.subscriptions[0].customer.id" as "customerId"
       And I wait for 10 sec
       Given I have endpoint "/data-subscription/v1/customers/{SavedValue::customerId}/subscriptions"
@@ -21,7 +21,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "913333709512"
+                    "number": "45353454354412"
                 },
                 "city": "Pune",
                 "state": "MH",
@@ -62,7 +62,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "913333709512"
+                    "number": "45353454354412"
                 },
                 "city": "Pune",
                 "state": "MH",
@@ -101,7 +101,7 @@
                     "street2": "Hindu sena marg"
                 },
                 "phone": {
-                    "number": "913333709512"
+                    "number": "45353454354412"
                 },
                 "city": "Pune",
                 "state": "MH",

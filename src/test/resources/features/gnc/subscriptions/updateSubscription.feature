@@ -61,7 +61,7 @@ Business Need: Update Subscription
                           "street2": "Hindu sena marg"
                       },
                       "phone": {
-                          "number": "913333709512"
+                          "number": "45353454354412"
                       },
                       "city": "Pune",
                       "state": "MH",
@@ -79,7 +79,7 @@ Business Need: Update Subscription
                       "street2": "Hindu sena marg"
                   },
                   "phone": {
-                      "number": "913333709512"
+                      "number": "45353454354412"
                   },
                   "city": "Pune",
                   "state": "MH",
@@ -265,7 +265,7 @@ Business Need: Update Subscription
                 "customerReferenceId": "{RandomNumber::4}-{RandomNumber::4}-{RandomNumber::4}",
                 "locale": "en_US",
                 "email": "custom{RandomNumber::4}{RandomNumber::4}@gmail.com",
-                "contactNumber": "+92 3333709568",
+                "contactNumber": "913333709568",
                 "firstName": "John",
                 "lastName": "Doe",
                 "segment": ["employee"],

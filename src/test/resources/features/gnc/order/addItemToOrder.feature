@@ -56,7 +56,7 @@ Business Need: Add Item To Order
 
   @add_item_to_order_as_subscription @regression_ @non_enterprise
   Scenario: add item to order as subscription
-#    Given I have created 1 bulk subscription
+  Given I have created 1 bulk subscription
     Given I have endpoint "/data-subscription/v1/subscriptions/bulk"
     And I have following request payload :
      """

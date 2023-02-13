@@ -210,7 +210,7 @@ public class SubscriptionPage extends BasePage {
                 "           \"customerReferenceId\": \"606f01f441b8fc0"+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                 "          \"locale\": \"fr_CAB\",\n" +
                 "          \"email\": \"customer"+CommonUtils.getRandomNumberFourDigit()+"-"+CommonUtils.getRandomNumberFourDigit()+"@gmail.com\",\n"+
-                "          \"contactNumber\": \"+92 3333709569\",\n" +
+                "          \"contactNumber\": \"913333709568\",\n" +
                 "          \"firstName\": \"Jitendra\",\n" +
                 "          \"lastName\": \"Pisal\",\n" +
                 "          \"middleName\":\"Dilip\",\n" +
@@ -585,7 +585,7 @@ public class SubscriptionPage extends BasePage {
                     "        \"customerReferenceId\": \"606f01f441b8fc00"+CommonUtils.getRandomNumberFourDigit()+CommonUtils.getRandomNumberFourDigit()+"\",\n" +
                     "        \"locale\": \"en_US\",\n" +
                     "        \"email\": \""+CommonUtils.getRandomEmail()+"\",\n" +
-                    "        \"contactNumber\": \"+91 3333709568\",\n" +
+                    "        \"contactNumber\": \"453534543544\",\n" +
                     "        \"firstName\": \"shubham\",\n" +
                     "        \"lastName\": \"Pisal\",\n" +
                     "        \"segment\": [\"employee\"],\n" +
