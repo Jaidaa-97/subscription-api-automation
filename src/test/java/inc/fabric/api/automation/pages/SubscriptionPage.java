@@ -366,6 +366,10 @@ public class SubscriptionPage extends BasePage {
         if (!checkSku) {
             createSKUWithArgs("_discontinuedSKU",true,true);
         }
+        checkSku = getSKU("_swapproduct");
+        if (!checkSku) {
+            createSKUWithArgs("_swapproduct",true,false);
+        }
         checkSku = getSKU("_notAvailableSubscription");
         if (!checkSku) {
             createSKUWithArgs("_notAvailableSubscription",false,false);

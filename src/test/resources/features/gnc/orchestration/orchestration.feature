@@ -2199,4 +2199,8 @@ Business Need: Orchestration Response
     When I run post call
     Then I see response code 200
     Then I see property value "CANCELED" is present in the response property "data[0].status"
-
+    Then validate schema "/gnc/orchestration.json"
+    Given I have endpoint "/data-subscription/v1/orders/{SavedValue::orderId}"
+    When I run get call api
+    Then I see response code 200
+    Then I see property value "CANCELED" is present in the response property "data.order.status"
